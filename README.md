@@ -1,1 +1,3 @@
-# inter-testing-feedback-2018
+# Interpolated testing and feedback
+
+October 2018
