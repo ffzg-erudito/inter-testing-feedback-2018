@@ -1,0 +1,3 @@
+text/*
+!text/*.tex
+!text/*.pdf
