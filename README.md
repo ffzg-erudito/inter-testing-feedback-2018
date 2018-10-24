@@ -2,4 +2,6 @@
 
 October 2018
 
-# Ovo samo testiram clonanje i commitanje iz anaconda prompta
+
+This repository contains python scripts and ancillary files for running an experiment designed for investigating the forward testing effect.
+
