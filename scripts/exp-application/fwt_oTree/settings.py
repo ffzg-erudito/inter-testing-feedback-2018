@@ -13,6 +13,12 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
+        'name': 'forward_testing',
+        'display_name': "FWT",
+        'num_demo_participants': 3,
+        'app_sequence': ['fwt']
+    },
+    {
         'name': 'public_goods',
         'display_name': "Public Goods",
         'num_demo_participants': 3,
