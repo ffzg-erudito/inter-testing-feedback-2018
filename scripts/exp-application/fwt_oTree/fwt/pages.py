@@ -27,15 +27,29 @@ class timer_start(Page):
         # user has 5 minutes to complete as many pages as possible
         self.participant.vars['timer_start'] = time.time()
     
+    
+    
+
+
+# PRACTICE TEXT AND QUESTION PAGES
 class practice_text(Page):
     def before_next_page(self):
         # user has 5 minutes to complete as many pages as possible
         self.participant.vars['reading_time_estimate'] = time.time() - self.participant.vars['timer_start']
 
+class practice_q1(Page):
+    form_model = 'player'
+    form_fields = ['practice_q1']
+
+class practice_q2(Page):
+    form_model = 'player'
+    form_fields = ['practice_q2']
+    
+class practice_q3(Page):
+    form_model = 'player'
+    form_fields = ['practice_q3']
 
 
-class practice_test(Page):
-    pass
 
 
 
@@ -45,7 +59,6 @@ class text_1(Page):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
         minutes = math.ceil(estimate / 60)
         return minutes * 60
-    
     
 
 class activity_1(Page):
@@ -105,7 +118,9 @@ page_sequence = [
     instructions,
     timer_start,
     practice_text,
-    practice_test,
+    practice_q1,
+    practice_q2,
+    practice_q3,
     text_1,
     activity_1,
     text_2,
