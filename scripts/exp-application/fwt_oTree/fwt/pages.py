@@ -57,28 +57,155 @@ class practice_q3(Page):
 
 
 # SECTION DEFINING TEXT PAGES AND ACTIVITIES
+    
+# First text section
 class text_1(Page):
     def get_timeout_seconds(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
         minutes = math.ceil(estimate / 60)
         return minutes * 60
     
-
-class activity_1(Page):
-    template_name = 'fwt/content_test_1.html'
+# PAGES FOR ACTIVITIES AFTER FIRST SECTION
+class activity1_task1(Page):
+    template_name = 'fwt/content_test1_q1.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test_1.html'
+#        template_name = 'fwt/content_test1_q1.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test_1.html'
+#        template_name = 'fwt/general_test1_q1.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test_1.html'
+#        template_name = 'fwt/math_test1_q1.html'
 #    else:
 #        template_name = 'fwt/text_1.html'
           
     pass
 
+class activity1_task2(Page):
+    template_name = 'fwt/content_test1_q2.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q2.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q2.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q2.html'
 
+          
+    pass
+
+
+class activity1_task3(Page):
+    template_name = 'fwt/content_test1_q3.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q3.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q3.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q3.html'
+
+          
+    pass
+
+
+class activity1_task4(Page):
+    template_name = 'fwt/content_test1_q4.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q4.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q4.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q4.html'
+
+          
+    pass
+
+
+class activity1_task5(Page):
+    template_name = 'fwt/content_test1_q5.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q5.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q5.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q5.html'
+
+          
+    pass
+
+
+class activity1_task6(Page):
+    template_name = 'fwt/content_test1_q6.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q6.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q6.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q6.html'
+
+          
+    pass
+
+
+class activity1_task7(Page):
+    template_name = 'fwt/content_test1_q7.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q7.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q7.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q7.html'
+
+          
+    pass
+
+
+class activity1_task8(Page):
+    template_name = 'fwt/content_test1_q8.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q8.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q8.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q8.html'
+
+    pass
+
+
+class activity1_task9(Page):
+    template_name = 'fwt/content_test1_q9.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q9.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q9.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q9.html'
+
+    pass
+
+
+class activity1_task10(Page):
+    template_name = 'fwt/content_test1_q10.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test1_q10.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test1_q10.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test1_q10.html'
+
+    pass
+
+
+
+
+# SECOND TEXT SECTION
 class text_2(Page):
     def get_timeout_seconds(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
@@ -86,21 +213,149 @@ class text_2(Page):
         return minutes * 60
 
 
-class activity_2(Page):
-    template_name = 'fwt/content_test_2.html'
+
+
+# PAGES FOR ACTIVITIES AFTER SECOND SECTION
+class activity2_task1(Page):
+    template_name = 'fwt/content_test2_q1.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test_2.html'
+#        template_name = 'fwt/content_test2_q1.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test_2.html'
+#        template_name = 'fwt/general_test2_q1.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test_2.html'
+#        template_name = 'fwt/math_test2_q1.html'
 #    else:
 #        template_name = 'fwt/text_2.html'
-    
+          
+    pass
+
+class activity2_task2(Page):
+    template_name = 'fwt/content_test2_q2.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q2.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q2.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q2.html'
+
+          
     pass
 
 
+class activity2_task3(Page):
+    template_name = 'fwt/content_test2_q3.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q3.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q3.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q3.html'
+
+          
+    pass
+
+
+class activity2_task4(Page):
+    template_name = 'fwt/content_test2_q4.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q4.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q4.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q4.html'
+
+          
+    pass
+
+
+class activity2_task5(Page):
+    template_name = 'fwt/content_test2_q5.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q5.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q5.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q5.html'
+
+          
+    pass
+
+
+class activity2_task6(Page):
+    template_name = 'fwt/content_test2_q6.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q6.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q6.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q6.html'
+
+          
+    pass
+
+
+class activity2_task7(Page):
+    template_name = 'fwt/content_test2_q7.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q7.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q7.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q7.html'
+
+          
+    pass
+
+
+class activity2_task8(Page):
+    template_name = 'fwt/content_test2_q8.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q8.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q8.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q8.html'
+
+    pass
+
+
+class activity2_task9(Page):
+    template_name = 'fwt/content_test2_q9.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_test2_q9.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q9.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q9.html'
+
+    pass
+
+
+class activity2_task10(Page):
+    template_name = 'fwt/content_test2_q10.html'
+#    exp_sit = switch()
+#    if exp_sit == 1:
+#        template_name = 'fwt/content_testv_q10.html'
+#    elif exp_sit == 2:
+#        template_name = 'fwt/general_test2_q10.html'
+#    elif exp_sit == 3:
+#        template_name = 'fwt/math_test2_q10.html'
+
+    pass
+
+
+
+
+# THIRD AND FINAL TEXT SECTION
 class text_3(Page):
     def get_timeout_seconds(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
@@ -108,18 +363,55 @@ class text_3(Page):
         return minutes * 60
 
 
-class activity_3(Page):
-    template_name = 'fwt/content_test_3.html'
+# PAGES FOR ACTIVITIES AFTER THIRD AND FINAL TEXT SECTION
+class content_test3_q1(Page):
+    pass
+
+class content_test3_q2(Page):          
     pass
 
 
+class content_test3_q3(Page):
+    pass
+
+
+class content_test3_q4(Page):
+    pass
+
+
+class content_test3_q5(Page):
+    pass
+
+
+class content_test3_q6(Page):    
+    pass
+
+
+class content_test3_q7(Page):
+    pass
+
+
+class content_test3_q8(Page):
+    pass
+
+
+class content_test3_q9(Page):
+    pass
+
+
+class content_test3_q10(Page):
+    pass
+
+
+
+# GOODBYE PAGE
 class end_page(Page):
     pass
 
 
 # here define sequences depending on experimental situation
 
-#exp_sit = switch()
+#exp_sit = switch() - if exp_sit 1-3, then choose this sequence
 page_sequence = [
     enter_id,
     instructions,
@@ -129,10 +421,64 @@ page_sequence = [
     practice_q2,
     practice_q3,
     text_1,
-    activity_1,
+#    activity1_task1,
+#    activity1_task2,
+#    activity1_task3,
+#    activity1_task4,
+#    activity1_task5,
+#    activity1_task6,
+#    activity1_task7,
+#    activity1_task8,
+#    activity1_task9,
+#    activity1_task10,
     text_2,
-    activity_2,
+#    activity2_task1,
+#    activity2_task2,
+#    activity2_task3,
+#    activity2_task4,
+#    activity2_task5,
+#    activity2_task6,
+#    activity2_task7,
+#    activity2_task8,
+#    activity2_task9,
+#    activity2_task10,
     text_3,
-    activity_3,
+#    content_test3_q1,
+#    content_test3_q2,
+#    content_test3_q3,
+#    content_test3_q4,
+#    content_test3_q5,
+#    content_test3_q6,
+#    content_test3_q7,
+#    content_test3_q8,
+#    content_test3_q9,
+#    content_test3_q10,
+    end_page
+    ]
+# else choose this sequence
+
+page_sequence = [
+    enter_id,
+    instructions,
+    timer_start,
+    practice_text,
+    practice_q1,
+    practice_q2,
+    practice_q3,
+    text_1,
+    text_1,
+    text_2,
+    text_2,
+    text_3,
+    content_test3_q1,
+    content_test3_q2,
+    content_test3_q3,
+    content_test3_q4,
+    content_test3_q5,
+    content_test3_q6,
+    content_test3_q7,
+    content_test3_q8,
+    content_test3_q9,
+    content_test3_q10,
     end_page
     ]
