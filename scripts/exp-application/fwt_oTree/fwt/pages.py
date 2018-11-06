@@ -18,14 +18,17 @@ class enter_id(Page):
     form_model = 'player'
     form_fields = ['id']
 
+
 class instructions(Page):
     pass
+
 
 class timer_start(Page):
 
     def before_next_page(self):
         # user has 5 minutes to complete as many pages as possible
         self.participant.vars['timer_start'] = time.time()
+
     
 class practice_text(Page):
     def before_next_page(self):
@@ -69,6 +72,7 @@ class text_2(Page):
         minutes = math.ceil(estimate / 60)
         return minutes * 60
 
+
 class activity_2(Page):
     template_name = 'fwt/content_test_2.html'
 #    exp_sit = switch()
@@ -90,12 +94,15 @@ class text_3(Page):
         minutes = math.ceil(estimate / 60)
         return minutes * 60
 
+
 class activity_3(Page):
     template_name = 'fwt/content_test_3.html'
     pass
 
+
 class end_page(Page):
     pass
+
 
 # here define sequences depending on experimental situation
 
