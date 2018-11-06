@@ -16,7 +16,7 @@ def switch(x):
 
 class enter_id(Page):
     form_model = 'player'
-    form_fields = ['id']
+    form_fields = ['identity']
 
 
 class instructions(Page):
@@ -53,6 +53,11 @@ class practice_q3(Page):
     form_fields = ['practice_q3']
 
 
+
+
+# GET READY PAGE
+class get_ready(Page): 
+    pass
 
 
 
@@ -413,13 +418,14 @@ class end_page(Page):
 
 #exp_sit = switch() - if exp_sit 1-3, then choose this sequence
 page_sequence = [
-    enter_id,
-    instructions,
+#    enter_id,
+#    instructions,
     timer_start,
     practice_text,
-    practice_q1,
-    practice_q2,
-    practice_q3,
+#    practice_q1,
+#    practice_q2,
+#    practice_q3,
+#    get_ready,
     text_1,
 #    activity1_task1,
 #    activity1_task2,
@@ -455,30 +461,32 @@ page_sequence = [
 #    content_test3_q10,
     end_page
     ]
+
+
 # else choose this sequence
 
-page_sequence = [
-    enter_id,
-    instructions,
-    timer_start,
-    practice_text,
-    practice_q1,
-    practice_q2,
-    practice_q3,
-    text_1,
-    text_1,
-    text_2,
-    text_2,
-    text_3,
-    content_test3_q1,
-    content_test3_q2,
-    content_test3_q3,
-    content_test3_q4,
-    content_test3_q5,
-    content_test3_q6,
-    content_test3_q7,
-    content_test3_q8,
-    content_test3_q9,
-    content_test3_q10,
-    end_page
-    ]
+#page_sequence = [
+#    enter_id,
+#    instructions,
+#    timer_start,
+#    practice_text,
+#    practice_q1,
+#    practice_q2,
+#    practice_q3,
+#    text_1,
+#    text_1,
+#    text_2,
+#    text_2,
+#    text_3,
+#    content_test3_q1,
+#    content_test3_q2,
+#    content_test3_q3,
+#    content_test3_q4,
+#    content_test3_q5,
+#    content_test3_q6,
+#    content_test3_q7,
+#    content_test3_q8,
+#    content_test3_q9,
+#    content_test3_q10,
+#    end_page
+#    ]

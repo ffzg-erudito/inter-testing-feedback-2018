@@ -26,26 +26,26 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    id = models.StringField(label="prva dva slova imena oca, zadnja dva slova imena majke, i zadnja dva broja mobitela:")
+    identity = models.StringField(label="prva dva slova imena oca, zadnja dva slova imena majke, i zadnja dva broja mobitela:")
     practice_q1 = models.IntegerField(
             choices = [
-                    [1, '']
-                    [2, '']
-                    [3, '']
+                    [1, ''],
+                    [2, ''],
+                    [3, ''],
                     [4, '']], 
             widget = widgets.RadioSelect)
     practice_q2 = models.IntegerField(
             choices = [
-                    [1, '']
-                    [2, '']
-                    [3, '']
+                    [1, ''],
+                    [2, ''],
+                    [3, ''],
                     [4, '']], 
             widget = widgets.RadioSelect)
     practice_q3 = models.IntegerField(
             choices = [
-                    [1, '']
-                    [2, '']
-                    [3, '']
+                    [1, ''],
+                    [2, ''],
+                    [3, ''],
                     [4, '']], 
             widget = widgets.RadioSelect)
     
