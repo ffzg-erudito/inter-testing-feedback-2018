@@ -1,9 +1,87 @@
 ﻿Ekološke značajke korova
 
-Neovisno o klimatskim, zemljišnim i biotskim čimbenicima, širenje, rast i razvoj korova uvelike su povezani s čovjekovim djelovanjem na poljoprivredne površine. Korovi su se na poljoprivrednim površinama pojavili još u prapovijesno doba, tj. u počecima poljoprivrede. Njihova je, dakle, pojava vezana za stvaranje antroposfere (dijela okoliša koji su ljudi naselili i izmijenili te prilagodili sebi) i agrosfere, što se, prema nekim pretpostavkama, zbilo u mlađe kameno doba. Korovi se na poljoprivrednim površinama ne pojavljuju kao pojedine vrste već kao biljne zajednice (fitocenoze) svoje vrste. Izmjenom usjeva, promjenom godišnjih doba i pod utjecajem agrotehničkih zahvata, te se fitocenoze do određene mjere mijenjaju, pa se ne može govoriti o čvrstim zajednicama (cenozama) između kulturnih biljaka i korova, pogotovo ako se u cenozu uvedu nove kulturne biljke i primjerena im agrotehnika.
-Dominacija ove ili one vrste korova često je određena sustavom obrade tla. U nekim slučajevima, prema prisutnosti pojedinih vrsta korova može se procijeniti plodnost tla, osobito neki njezini parametri, poput količine minerala i drugih kemijskih spojeva. Korovi su prilagođeni najrazličitijim klimatskim uvjetima. Neki se pojavljuju u gotovo nemogućim životnim uvjetima, a drugi su u tom pogledu visoko zahtjevni. Većina korova može se susresti na tlima koja se jako razlikuju po svojim fizikalnim značajkama, vlažnosti i plodnosti u širem smislu. Pokatkad se misli da je tlo koje omogućuje intenzivan razvitak korova izrazito plodno. Međutim, ne mora uvijek biti tako jer karakter razvitka korovske flore nije određen samo plodnošću tla, već i nizom drugih čimbenika. 
-U uvjetima intenzivne poljoprivrede opaža se i prilagođenost korova okolnoj sredini u ovisnosti o stupnju intenzifikacije. Ovisno o sustavu godišnje izmjene usjeva (plodoredu), obradi tla, vrsti gnojiva i drugim zahvatima, mijenja se i biljni (floristički) sastav korova. Korovi osobito različito reagiraju na pojedina biljna hraniva. Po tom obilježju oni se dijele na dušičnopozitivne (bijela loboda, kiseličasti dvornik), dušičnonegativne (mišjakinja, poljska koljenika), fosforopozitivne (kiseličasti dvornik), fosforonegativne (poljska koljenika, poljska repica), kalijpozitivne (bijela loboda, kiseličasti dvornika) i kalijnegativne (poljska repica, poljska koljenika). Pri nedostatku nekog elementa razvitak se nekih korova usporava, a za druge se stvaraju povoljniji uvjeti, pa oni lako potiskuju svoje konkurente, tj. pod utjecajem fertilizacije može se promijeniti botanički sastav korovske vegetacije.
-Analogne promjene zbivaju se pri uvođenju novih tipova plodoreda, kada se najjače šire korovi prilagođeni kulturama zastupljenima u plodoredu. Pojedini zahvati osnovne obrade tla također mogu bitnije izmijeniti floristički sastav korova. Značajne izmjene korovske vegetacije najviše nastaju pod utjecajem herbicida. I dok s jedne strane osjetljivi korovi iščezavaju, s druge se strane pojavljuju i šire otporne vrste korova. Stoga daljnje usavršavanje metoda borbe protiv korova treba temeljiti, među ostalim, na poznavanju ekoloških uvjeta njihova razvitka, primjerice sastava tla.
-Kulturne biljke i korovi na istoj proizvodnoj površini u načelu su u kompeticijskom odnosu za biofaktore (primjerice hranu i vodu). No, osim tih glavnih odnosa, ima i drugih. Prije svega to je pozitivan ili negativan utjecaj koji jedna vrsta ima na drugu (odnosno, pozitivna ili negativna alelopatija), premda se ne mora uvijek raditi o alelopatiji, već i o kompeticiji za bioelemente i stimulaciji bioelementima. Dakako, ima mnogo primjera i negativnih alelopatijskih odnosa između korova i kulturnih biljaka, ali je činjenica i to da su mnogi od njih još neotkriveni i nedovoljno proučeni. Primjerice, između lana i korovā podlanka te kiseličastog dvornika postoje negativni alelopatijski odnosi. Poljski osjak i poljski slak djeluju nepovoljno na više kulturnih biljaka, dok konjska kiselica djeluje nepovoljno na lucernu, muhar na kukuruz; crna pomoćnica, divlja salata, obični stolisnik, obični koštan i poljski osjak usporavaju klijanje sjemena rotkvice, maka itd. Neke, pak, kulturne biljke, primjerice kulturne krstašice i suncokret, djeluju nepovoljno na neke korove, primjerice svračicu i ambroziju. Slično se ponaša i lucerna. Sjeme repe tvori tvari koje usporavaju rast kukolja. Negativna alelopatija pojavljuje se i među samim korovima. Tako izlučevine korijena i podzemnog dijela stabljike (rizoma) piramidalnog sirka inhibiraju rast korova oštrodlakavog šćira i zelenog muhara. Pri klijanju sjemena javlja se i alelopatsko djelovanje jednih korovskih vrsta na druge. Primjer za to je vlasastodlakava grahorica, koja pri klijanju inhibitorno djeluje na klijanje sjemena i rast pjegastog dvornika, poljske repice, kukolja, poljskog slaka, različka, poljske gorušice, bezmirisne kamilice i običnog šupljozuba.
-Međusobno pozitivno alelopatsko djelovanje kulturnih biljaka i korova svakako je rjeđe. Klijanje poljske gorušice stimulirano je klijanjem sjemena prosa, pšenice, zobi, kukuruza, grahorice i heljde. Poljska ljubica i raž u povoljnom su odnosu. Raž djeluje povoljno na korov kukolja, a krumpir na vrste loboda (Chenopodium). Ustanovljeno je da mlade korovske biljke sadrže više inhibitornih tvari od starijih. Općenito, alelopatija je važna pojava u prirodi, pa stoga u sklopu bioloških metoda borbe protiv korova alelopatski odnosi između kulturnih biljaka i korova moraju naći odgovarajuće mjesto.
+Neovisno o klimatskim, zemljišnim i biotskim čimbenicima, širenje,
+rast i razvoj korova uvelike su povezani s čovjekovim djelovanjem na
+poljoprivredne površine. Korovi su se na poljoprivrednim površinama
+pojavili još u prapovijesno doba, tj. u počecima poljoprivrede. Njihova
+je, dakle, pojava vezana za stvaranje antroposfere (dijela okoliša
+koji su ljudi naselili i izmijenili te prilagodili sebi) i agrosfere,
+što se, prema nekim pretpostavkama, zbilo u mlađe kameno doba. Korovi
+se na poljoprivrednim površinama ne pojavljuju kao pojedine vrste već
+kao biljne zajednice (fitocenoze) svoje vrste. Izmjenom usjeva, promjenom
+godišnjih doba i pod utjecajem agrotehničkih zahvata, te se fitocenoze do
+određene mjere mijenjaju, pa se ne može govoriti o čvrstim zajednicama
+(cenozama) između kulturnih biljaka i korova, pogotovo ako se u cenozu
+uvedu nove kulturne biljke i primjerena im agrotehnika.
 
+Dominacija ove ili one vrste korova često je određena sustavom obrade tla. U
+nekim slučajevima, prema prisutnosti pojedinih vrsta korova može se
+procijeniti plodnost tla, osobito neki njezini parametri, poput količine
+minerala i drugih kemijskih spojeva. Korovi su prilagođeni najrazličitijim
+klimatskim uvjetima. Neki se pojavljuju u gotovo nemogućim životnim
+uvjetima, a drugi su u tom pogledu visoko zahtjevni. Većina korova može se
+susresti na tlima koja se jako razlikuju po svojim fizikalnim značajkama,
+vlažnosti i plodnosti u širem smislu. Pokatkad se misli da je tlo koje
+omogućuje intenzivan razvitak korova izrazito plodno. Međutim, ne mora
+uvijek biti tako jer karakter razvitka korovske flore nije određen samo
+plodnošću tla, već i nizom drugih čimbenika.
+
+U uvjetima intenzivne poljoprivrede opaža se i prilagođenost korova okolnoj
+sredini u ovisnosti o stupnju intenzifikacije. Ovisno o sustavu godišnje
+izmjene usjeva (plodoredu), obradi tla, vrsti gnojiva i drugim zahvatima,
+mijenja se i biljni (floristički) sastav korova. Korovi osobito različito
+reagiraju na pojedina biljna hraniva. Po tom obilježju oni se dijele na
+dušičnopozitivne (bijela loboda, kiseličasti dvornik), dušičnonegativne
+(mišjakinja, poljska koljenika), fosforopozitivne (kiseličasti dvornik),
+fosforonegativne (poljska koljenika, poljska repica), kalijpozitivne
+(bijela loboda, kiseličasti dvornika) i kalijnegativne (poljska repica,
+poljska koljenika). Pri nedostatku nekog elementa razvitak se nekih korova
+usporava, a za druge se stvaraju povoljniji uvjeti, pa oni lako potiskuju
+svoje konkurente, tj. pod utjecajem fertilizacije može se promijeniti
+botanički sastav korovske vegetacije.
+
+Analogne promjene zbivaju se pri uvođenju novih tipova plodoreda,
+kada se najjače šire korovi prilagođeni kulturama zastupljenima u
+plodoredu. Pojedini zahvati osnovne obrade tla također mogu bitnije
+izmijeniti floristički sastav korova. Značajne izmjene korovske vegetacije
+najviše nastaju pod utjecajem herbicida. I dok s jedne strane osjetljivi
+korovi iščezavaju, s druge se strane pojavljuju i šire otporne vrste
+korova. Stoga daljnje usavršavanje metoda borbe protiv korova treba
+temeljiti, među ostalim, na poznavanju ekoloških uvjeta njihova razvitka,
+primjerice sastava tla.
+
+Kulturne biljke i korovi na istoj proizvodnoj površini u načelu su
+u kompeticijskom odnosu za biofaktore (primjerice hranu i vodu). No,
+osim tih glavnih odnosa, ima i drugih. Prije svega to je pozitivan ili
+negativan utjecaj koji jedna vrsta ima na drugu (odnosno, pozitivna ili
+negativna alelopatija), premda se ne mora uvijek raditi o alelopatiji,
+već i o kompeticiji za bioelemente i stimulaciji bioelementima. Dakako,
+ima mnogo primjera i negativnih alelopatijskih odnosa između korova
+i kulturnih biljaka, ali je činjenica i to da su mnogi od njih još
+neotkriveni i nedovoljno proučeni. Primjerice, između lana i korovā
+podlanka te kiseličastog dvornika postoje negativni alelopatijski
+odnosi. Poljski osjak i poljski slak djeluju nepovoljno na više
+kulturnih biljaka, dok konjska kiselica djeluje nepovoljno na lucernu,
+muhar na kukuruz; crna pomoćnica, divlja salata, obični stolisnik,
+obični koštan i poljski osjak usporavaju klijanje sjemena rotkvice,
+maka itd. Neke, pak, kulturne biljke, primjerice kulturne krstašice
+i suncokret, djeluju nepovoljno na neke korove, primjerice svračicu
+i ambroziju. Slično se ponaša i lucerna. Sjeme repe tvori tvari koje
+usporavaju rast kukolja. Negativna alelopatija pojavljuje se i među samim
+korovima. Tako izlučevine korijena i podzemnog dijela stabljike (rizoma)
+piramidalnog sirka inhibiraju rast korova oštrodlakavog šćira i zelenog
+muhara. Pri klijanju sjemena javlja se i alelopatsko djelovanje jednih
+korovskih vrsta na druge. Primjer za to je vlasastodlakava grahorica,
+koja pri klijanju inhibitorno djeluje na klijanje sjemena i rast pjegastog
+dvornika, poljske repice, kukolja, poljskog slaka, različka, poljske
+gorušice, bezmirisne kamilice i običnog šupljozuba.
+
+Međusobno pozitivno alelopatsko djelovanje kulturnih biljaka i korova svakako
+je rjeđe. Klijanje poljske gorušice stimulirano je klijanjem sjemena
+prosa, pšenice, zobi, kukuruza, grahorice i heljde. Poljska ljubica i raž
+u povoljnom su odnosu. Raž djeluje povoljno na korov kukolja, a krumpir
+na vrste loboda (Chenopodium). Ustanovljeno je da mlade korovske biljke
+sadrže više inhibitornih tvari od starijih. Općenito, alelopatija je
+važna pojava u prirodi, pa stoga u sklopu bioloških metoda borbe protiv
+korova alelopatski odnosi između kulturnih biljaka i korova moraju naći
+odgovarajuće mjesto.
