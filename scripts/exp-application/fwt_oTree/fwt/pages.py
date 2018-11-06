@@ -5,7 +5,7 @@ import time
 import math
 
 # this function outputs an integer in the range from 1 to 4 which
-# represents a particular 
+# represents a particular experimental situation
 def switch(x):
     return {
         'a': 1,
