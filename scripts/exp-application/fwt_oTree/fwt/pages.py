@@ -19,16 +19,18 @@ def switch(x):
 
 # FIRST PAGE
 class enter_id(Page):
+    template_name = 'fwt/auxiliary/enter_id.html'
     form_model = 'player'
     form_fields = ['identity']
 
 
 class instructions(Page):
+    template_name = 'fwt/auxiliary/instructions.html'
     pass
 
 
 class timer_start(Page):
-
+    template_name = 'fwt/auxiliary/timer_start.html'
     def before_next_page(self):
         # user has 5 minutes to complete as many pages as possible
         self.participant.vars['timer_start'] = time.time()
@@ -40,19 +42,23 @@ class timer_start(Page):
 
 # PRACTICE TEXT AND QUESTION PAGES
 class practice_text(Page):
+    template_name = 'fwt/texts/practice_text.html'
     def before_next_page(self):
         # user has 5 minutes to complete as many pages as possible
         self.participant.vars['reading_time_estimate'] = time.time() - self.participant.vars['timer_start']
 
-class practice_q1(Page):
+class practice_q1(Page):    
+    template_name = 'fwt/practice/q1.html'
     form_model = 'player'
     form_fields = ['practice_q1']
 
 class practice_q2(Page):
+    template_name = 'fwt/practice/q2.html'
     form_model = 'player'
     form_fields = ['practice_q2']
     
 class practice_q3(Page):
+    template_name = 'fwt/practice/q2.html'
     form_model = 'player'
     form_fields = ['practice_q3']
 
@@ -60,7 +66,8 @@ class practice_q3(Page):
 
 
 # GET READY PAGE
-class get_ready(Page): 
+class get_ready(Page):
+    template_name = 'fwt/auxiliary/get_ready.html'
     pass
 
 
@@ -69,6 +76,7 @@ class get_ready(Page):
     
 # First text section
 class text_1(Page):
+    template_name = 'fwt/texts/text_1.html'
     def get_timeout_seconds(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
         minutes = math.ceil(estimate / 60)
@@ -219,6 +227,7 @@ class activity1_task10(Page):
 
 # SECOND TEXT SECTION
 class text_2(Page):
+    template_name = 'fwt/texts/text_2.html'
     def get_timeout_seconds(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
         minutes = math.ceil(estimate / 60)
@@ -367,8 +376,13 @@ class activity2_task10(Page):
 
 
 
+
+
+
+
 # THIRD AND FINAL TEXT SECTION
 class text_3(Page):
+    template_name = 'fwt/texts/text_3.html'
     def get_timeout_seconds(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
         minutes = math.ceil(estimate / 60)
@@ -456,6 +470,7 @@ page_sequence = [
 #    activity1_task8,
 #    activity1_task9,
 #    activity1_task10,
+#    get_ready,
     text_2,
 #    activity2_task1,
 #    activity2_task2,
@@ -467,6 +482,7 @@ page_sequence = [
 #    activity2_task8,
 #    activity2_task9,
 #    activity2_task10,
+#    get_ready
     text_3,
 #    content_test3_q1,
 #    content_test3_q2,
