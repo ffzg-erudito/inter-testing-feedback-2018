@@ -14,6 +14,10 @@ def switch(x):
         'd': 4
     }[x]
 
+
+
+
+# FIRST PAGE
 class enter_id(Page):
     form_model = 'player'
     form_fields = ['identity']
@@ -72,140 +76,143 @@ class text_1(Page):
     
 # PAGES FOR ACTIVITIES AFTER FIRST SECTION
 class activity1_task1(Page):
-    template_name = 'fwt/content_test1_q1.html'
+    template_name = 'fwt/content/test1/q1.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q1.html'
+#        template_name = 'fwt/content/test1/q1.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q1.html'
+#        template_name = 'fwt/general/test1/q1.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q1.html'
+#        template_name = 'fwt/math/test1/q1.html'
 #    else:
 #        template_name = 'fwt/text_1.html'
           
     pass
 
 class activity1_task2(Page):
-    template_name = 'fwt/content_test1_q2.html'
+    template_name = 'fwt/content/test1/q2.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q2.html'
+#        template_name = 'fwt/content/test1/q2.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q2.html'
+#        template_name = 'fwt/general/test1/q2.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q2.html'
+#        template_name = 'fwt/math/test1/q2.html'
 
           
     pass
 
 
 class activity1_task3(Page):
-    template_name = 'fwt/content_test1_q3.html'
+    template_name = 'fwt/content/test1/q3.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q3.html'
+#        template_name = 'fwt/content/test1/q3.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q3.html'
+#        template_name = 'fwt/general/test1/q3.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q3.html'
+#        template_name = 'fwt/math/test1/q3.html'
 
           
     pass
 
 
 class activity1_task4(Page):
-    template_name = 'fwt/content_test1_q4.html'
+    template_name = 'fwt/content/test1/q4.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q4.html'
+#        template_name = 'fwt/content/test1/q4.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q4.html'
+#        template_name = 'fwt/general/test1/q4.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q4.html'
+#        template_name = 'fwt/math/test1/q4.html'
 
           
     pass
 
 
 class activity1_task5(Page):
-    template_name = 'fwt/content_test1_q5.html'
+    template_name = 'fwt/content/test1/q5.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q5.html'
+#        template_name = 'fwt/content/test1/q5.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q5.html'
+#        template_name = 'fwt/general/test1/q5.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q5.html'
+#        template_name = 'fwt/math/test1/q5.html'
 
           
     pass
 
 
 class activity1_task6(Page):
-    template_name = 'fwt/content_test1_q6.html'
+    template_name = 'fwt/content/test1/q6.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q6.html'
+#        template_name = 'fwt/content/test1/q6.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q6.html'
+#        template_name = 'fwt/general/test1/q6.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q6.html'
+#        template_name = 'fwt/math/test1/q6.html'
 
           
     pass
 
 
 class activity1_task7(Page):
-    template_name = 'fwt/content_test1_q7.html'
+    template_name = 'fwt/content/test1/q7.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q7.html'
+#        template_name = 'fwt/content/test1/q7.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q7.html'
+#        template_name = 'fwt/general/test1/q7.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q7.html'
+#        template_name = 'fwt/math/test1/q7.html'
 
           
     pass
 
 
 class activity1_task8(Page):
-    template_name = 'fwt/content_test1_q8.html'
+    template_name = 'fwt/content/test1/q8.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q8.html'
+#        template_name = 'fwt/content/test1/q8.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q8.html'
+#        template_name = 'fwt/general/test1/q8.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q8.html'
+#        template_name = 'fwt/math/test1/q8.html'
 
     pass
 
 
 class activity1_task9(Page):
-    template_name = 'fwt/content_test1_q9.html'
+    template_name = 'fwt/content/test1/q9.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q9.html'
+#        template_name = 'fwt/content/test1/q9.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q9.html'
+#        template_name = 'fwt/general/test1/q9.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q9.html'
+#        template_name = 'fwt/math/test1/q9.html'
 
     pass
 
 
 class activity1_task10(Page):
-    template_name = 'fwt/content_test1_q10.html'
+    template_name = 'fwt/content/test1/q10.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test1_q10.html'
+#        template_name = 'fwt/content/test1/q10.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test1_q10.html'
+#        template_name = 'fwt/general/test1/q10.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test1_q10.html'
+#        template_name = 'fwt/math/test1/q10.html'
 
     pass
+
+
+
 
 
 
@@ -222,138 +229,138 @@ class text_2(Page):
 
 # PAGES FOR ACTIVITIES AFTER SECOND SECTION
 class activity2_task1(Page):
-    template_name = 'fwt/content_test2_q1.html'
+    template_name = 'fwt/content/test2/q1.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q1.html'
+#        template_name = 'fwt/content/test2/q1.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q1.html'
+#        template_name = 'fwt/general/test2/q1.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q1.html'
+#        template_name = 'fwt/math/test2/q1.html'
 #    else:
 #        template_name = 'fwt/text_2.html'
           
     pass
 
 class activity2_task2(Page):
-    template_name = 'fwt/content_test2_q2.html'
+    template_name = 'fwt/content/test2/q2.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q2.html'
+#        template_name = 'fwt/content/test2/q2.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q2.html'
+#        template_name = 'fwt/general/test2/q2.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q2.html'
+#        template_name = 'fwt/math/test2/q2.html'
 
           
     pass
 
 
 class activity2_task3(Page):
-    template_name = 'fwt/content_test2_q3.html'
+    template_name = 'fwt/content/test2/q3.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q3.html'
+#        template_name = 'fwt/content/test2/q3.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q3.html'
+#        template_name = 'fwt/general/test2/q3.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q3.html'
+#        template_name = 'fwt/math/test2/q3.html'
 
           
     pass
 
 
 class activity2_task4(Page):
-    template_name = 'fwt/content_test2_q4.html'
+    template_name = 'fwt/content/test2/q4.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q4.html'
+#        template_name = 'fwt/content/test2/q4.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q4.html'
+#        template_name = 'fwt/general/test2/q4.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q4.html'
+#        template_name = 'fwt/math/test2/q4.html'
 
           
     pass
 
 
 class activity2_task5(Page):
-    template_name = 'fwt/content_test2_q5.html'
+    template_name = 'fwt/content/test2/q5.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q5.html'
+#        template_name = 'fwt/content/test2/q5.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q5.html'
+#        template_name = 'fwt/general/test2/q5.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q5.html'
+#        template_name = 'fwt/math/test2/q5.html'
 
           
     pass
 
 
 class activity2_task6(Page):
-    template_name = 'fwt/content_test2_q6.html'
+    template_name = 'fwt/content/test2/q6.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q6.html'
+#        template_name = 'fwt/content/test2/q6.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q6.html'
+#        template_name = 'fwt/general/test2/q6.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q6.html'
+#        template_name = 'fwt/math/test2/q6.html'
 
           
     pass
 
 
 class activity2_task7(Page):
-    template_name = 'fwt/content_test2_q7.html'
+    template_name = 'fwt/content/test2/q7.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q7.html'
+#        template_name = 'fwt/content/test2/q7.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q7.html'
+#        template_name = 'fwt/general/test2/q7.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q7.html'
+#        template_name = 'fwt/math/test2/q7.html'
 
           
     pass
 
 
 class activity2_task8(Page):
-    template_name = 'fwt/content_test2_q8.html'
+    template_name = 'fwt/content/test2/q8.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q8.html'
+#        template_name = 'fwt/content/test2/q8.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q8.html'
+#        template_name = 'fwt/general/test2/q8.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q8.html'
+#        template_name = 'fwt/math/test2/q8.html'
 
     pass
 
 
 class activity2_task9(Page):
-    template_name = 'fwt/content_test2_q9.html'
+    template_name = 'fwt/content/test2/q9.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_test2_q9.html'
+#        template_name = 'fwt/content/test2/q9.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q9.html'
+#        template_name = 'fwt/general/test2/q9.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q9.html'
+#        template_name = 'fwt/math/test2/q9.html'
 
     pass
 
 
 class activity2_task10(Page):
-    template_name = 'fwt/content_test2_q10.html'
+    template_name = 'fwt/content/test2/q10.html'
 #    exp_sit = switch()
 #    if exp_sit == 1:
-#        template_name = 'fwt/content_testv_q10.html'
+#        template_name = 'fwt/content/test2/q10.html'
 #    elif exp_sit == 2:
-#        template_name = 'fwt/general_test2_q10.html'
+#        template_name = 'fwt/general/test2/q10.html'
 #    elif exp_sit == 3:
-#        template_name = 'fwt/math_test2_q10.html'
+#        template_name = 'fwt/math/test2/q10.html'
 
     pass
 
@@ -370,41 +377,53 @@ class text_3(Page):
 
 # PAGES FOR ACTIVITIES AFTER THIRD AND FINAL TEXT SECTION
 class content_test3_q1(Page):
+    template_name = 'fwt/final/q1.html'
+
     pass
 
-class content_test3_q2(Page):          
+class content_test3_q2(Page):
+    template_name = 'fwt/final/q2.html'          
     pass
 
 
 class content_test3_q3(Page):
+    template_name = 'fwt/final/q3.html'          
+
     pass
 
 
 class content_test3_q4(Page):
+    template_name = 'fwt/final/q4.html'
     pass
 
 
 class content_test3_q5(Page):
+    template_name = 'fwt/final/q5.html'
     pass
 
 
-class content_test3_q6(Page):    
+class content_test3_q6(Page): 
+    template_name = 'fwt/final/q6.html'
     pass
 
 
 class content_test3_q7(Page):
+    template_name = 'fwt/final/q7.html'
     pass
 
 
 class content_test3_q8(Page):
+    template_name = 'fwt/final/q8.html'
     pass
 
 
 class content_test3_q9(Page):
+    template_name = 'fwt/final/q9.html'
     pass
 
 
 class content_test3_q10(Page):
+    template_name = 'fwt/final/q10.html'
     pass
 
 
@@ -422,7 +441,7 @@ page_sequence = [
 #    instructions,
     timer_start,
     practice_text,
-#    practice_q1,
+    practice_q1,
 #    practice_q2,
 #    practice_q3,
 #    get_ready,
