@@ -35,8 +35,7 @@ for item in items:
     questionImport.update({qnr: {'question': question,
                                  'options': options}})
 
-outFile = open(os.path.join('exp-application', 'fwt_oTree', 'fwt',
-                            'out.py'), 'w')
+outFile = open(os.path.join('fwt_oTree', 'fwt', 'out.py'), 'w')
 
 iModelScript = iter(modelScript)
 for line in iModelScript:
