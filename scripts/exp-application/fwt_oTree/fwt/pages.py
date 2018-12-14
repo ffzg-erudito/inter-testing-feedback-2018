@@ -51,6 +51,10 @@ class practice_q1(Page):
     template_name = 'fwt/practice/q1.html'
     form_model = 'player'
     form_fields = ['practice_q1']
+    
+    def before_next_page(self):
+        self.player.feedback(self.player.practice_q1)
+        print(self.player.practice_q1)
 
 class practice_q2(Page):
     template_name = 'fwt/practice/q2.html'
