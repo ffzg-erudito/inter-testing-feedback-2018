@@ -25,7 +25,7 @@ class Group(BaseGroup):
     pass
 
 
-# PITANJA DODAJEMO TAKO DA UNESEMO LABEL!
+# Pitanja dodajemo tako da unesemo "label" kao prvi argument models.IntegerField-u!
 
 class Player(BasePlayer):
     identity = models.StringField(label = 'prva dva slova imena oca, zadnja dva slova imena majke, i zadnja dva broja mobitela:')
