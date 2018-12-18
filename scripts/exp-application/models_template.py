@@ -44,28 +44,31 @@ class Player(BasePlayer):
                     [3, '73% ukupnog atmosferskog tlaka'],
                     [4, '87% ukupnog atmosferskog tlaka']],
             widget = widgets.RadioSelect)
-    practice_q2 = models.IntegerField(
+    practice_q2 = models.IntegerField(label = """Ovisno o promjeni nadmorske visine,
+ odnos veličine parcijalnog tlaka kisika u atmosferi i veličine parcijalnog tlaka
+ kisika u alveolama pluća je:""",
             choices = [
-                    [1, ''],
-                    [2, ''],
-                    [3, ''],
-                    [4, '']],
+                    [1, 'proporcionalan'],
+                    [2, 'eksponencijalan'],
+                    [3, 'konstantan'],
+                    [4, 'neproporcionalan']],
             widget = widgets.RadioSelect)
-    practice_q3 = models.IntegerField(
+    practice_q3 = models.IntegerField(label = """Smanjenje parcijalnog tlaka kisika
+ u zraku može biti posljedica:""",
             choices = [
-                    [1, ''],
-                    [2, ''],
-                    [3, ''],
-                    [4, '']],
+                    [1, 'povećanja proporcije vodene pare'],
+                    [2, 'povećanja nadmorske visine'],
+                    [3, 'pojačane respiracijske aktivnosti'],
+                    [4, 'smanjenja proporcije vodene pare']],
             widget = widgets.RadioSelect)
-    practice_q4 = models.IntegerField(
+    practice_q4 = models.IntegerField(label = """S porastom nadmorske visine, izmjena
+ ugljikovog dioksida između alveola i plućnih kapilara je:""",
             choices = [
-                    [1, ''],
-                    [2, ''],
-                    [3, ''],
-                    [4, '']],
+                    [1, 'povećana'],
+                    [2, 'smanjena'],
+                    [3, 'konstantna'],
+                    [4, 'razmjerna količini vodene pare u alveolama']],
             widget = widgets.RadioSelect)
-    
 
     # test1 content questions
     test1_q1 = models.IntegerField(
