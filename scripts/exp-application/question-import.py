@@ -44,7 +44,7 @@ for line in iModelScript:
         qKey = qKey[0][0] + '.' + qKey[0][1] + '.'
 
         newLine = line +\
-        f"label = '{questionImport.get(qKey).get('question')}'" + '\n'
+        f"label = '{questionImport.get(qKey).get('question')}'," + '\n'
         newLine = re.sub('\n', '', newLine, 1)
         line = newLine
 
