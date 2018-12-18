@@ -58,6 +58,14 @@ class Player(BasePlayer):
                     [3, ''],
                     [4, '']],
             widget = widgets.RadioSelect)
+    practice_q4 = models.IntegerField(
+            choices = [
+                    [1, ''],
+                    [2, ''],
+                    [3, ''],
+                    [4, '']],
+            widget = widgets.RadioSelect)
+    
 
     # test1 content questions
     test1_q1 = models.IntegerField(
