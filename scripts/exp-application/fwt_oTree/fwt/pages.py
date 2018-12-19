@@ -62,11 +62,14 @@ class practice_q2(Page):
     form_fields = ['practice_q2']
     
 class practice_q3(Page):
-    template_name = 'fwt/practice/q2.html'
+    template_name = 'fwt/practice/q3.html'
     form_model = 'player'
     form_fields = ['practice_q3']
 
-
+class practice_q4(Page):
+    template_name = 'fwt/practice/q4.html'
+    form_model = 'player'
+    form_fields = ['practice_q4']
 
 
 # GET READY PAGE
@@ -89,6 +92,8 @@ class text_1(Page):
 # PAGES FOR ACTIVITIES AFTER FIRST SECTION
 class activity1_task1(Page):
     template_name = 'fwt/content/test1/q1.html'
+    form_model = 'player'
+    form_fields = ['test1_q1']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q1.html'
@@ -103,6 +108,8 @@ class activity1_task1(Page):
 
 class activity1_task2(Page):
     template_name = 'fwt/content/test1/q2.html'
+    form_model = 'player'
+    form_fields = ['test1_q2']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q2.html'
@@ -117,6 +124,8 @@ class activity1_task2(Page):
 
 class activity1_task3(Page):
     template_name = 'fwt/content/test1/q3.html'
+    form_model = 'player'
+    form_fields = ['test1_q3']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q3.html'
@@ -131,6 +140,8 @@ class activity1_task3(Page):
 
 class activity1_task4(Page):
     template_name = 'fwt/content/test1/q4.html'
+    form_model = 'player'
+    form_fields = ['test1_q4']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q4.html'
@@ -145,6 +156,8 @@ class activity1_task4(Page):
 
 class activity1_task5(Page):
     template_name = 'fwt/content/test1/q5.html'
+    form_model = 'player'
+    form_fields = ['test1_q5']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q5.html'
@@ -159,6 +172,8 @@ class activity1_task5(Page):
 
 class activity1_task6(Page):
     template_name = 'fwt/content/test1/q6.html'
+    form_model = 'player'
+    form_fields = ['test1_q6']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q6.html'
@@ -173,6 +188,8 @@ class activity1_task6(Page):
 
 class activity1_task7(Page):
     template_name = 'fwt/content/test1/q7.html'
+    form_model = 'player'
+    form_fields = ['test1_q7']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q7.html'
@@ -187,6 +204,8 @@ class activity1_task7(Page):
 
 class activity1_task8(Page):
     template_name = 'fwt/content/test1/q8.html'
+    form_model = 'player'
+    form_fields = ['test1_q8']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q8.html'
@@ -200,6 +219,8 @@ class activity1_task8(Page):
 
 class activity1_task9(Page):
     template_name = 'fwt/content/test1/q9.html'
+    form_model = 'player'
+    form_fields = ['test1_q9']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q9.html'
@@ -213,6 +234,8 @@ class activity1_task9(Page):
 
 class activity1_task10(Page):
     template_name = 'fwt/content/test1/q10.html'
+    form_model = 'player'
+    form_fields = ['test1_q10']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test1/q10.html'
@@ -243,6 +266,8 @@ class text_2(Page):
 # PAGES FOR ACTIVITIES AFTER SECOND SECTION
 class activity2_task1(Page):
     template_name = 'fwt/content/test2/q1.html'
+    form_model = 'player'
+    form_fields = ['test2_q1']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q1.html'
@@ -257,6 +282,8 @@ class activity2_task1(Page):
 
 class activity2_task2(Page):
     template_name = 'fwt/content/test2/q2.html'
+    form_model = 'player'
+    form_fields = ['test2_q2']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q2.html'
@@ -271,6 +298,8 @@ class activity2_task2(Page):
 
 class activity2_task3(Page):
     template_name = 'fwt/content/test2/q3.html'
+    form_model = 'player'
+    form_fields = ['test2_q3']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q3.html'
@@ -285,6 +314,8 @@ class activity2_task3(Page):
 
 class activity2_task4(Page):
     template_name = 'fwt/content/test2/q4.html'
+    form_model = 'player'
+    form_fields = ['test2_q4']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q4.html'
@@ -299,6 +330,8 @@ class activity2_task4(Page):
 
 class activity2_task5(Page):
     template_name = 'fwt/content/test2/q5.html'
+    form_model = 'player'
+    form_fields = ['test2_q5']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q5.html'
@@ -313,6 +346,8 @@ class activity2_task5(Page):
 
 class activity2_task6(Page):
     template_name = 'fwt/content/test2/q6.html'
+    form_model = 'player'
+    form_fields = ['test2_q6']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q6.html'
@@ -327,6 +362,8 @@ class activity2_task6(Page):
 
 class activity2_task7(Page):
     template_name = 'fwt/content/test2/q7.html'
+    form_model = 'player'
+    form_fields = ['test2_q7']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q7.html'
@@ -341,6 +378,8 @@ class activity2_task7(Page):
 
 class activity2_task8(Page):
     template_name = 'fwt/content/test2/q8.html'
+    form_model = 'player'
+    form_fields = ['test2_q8']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q8.html'
@@ -354,6 +393,8 @@ class activity2_task8(Page):
 
 class activity2_task9(Page):
     template_name = 'fwt/content/test2/q9.html'
+    form_model = 'player'
+    form_fields = ['test2_q9']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q9.html'
@@ -367,6 +408,8 @@ class activity2_task9(Page):
 
 class activity2_task10(Page):
     template_name = 'fwt/content/test2/q10.html'
+    form_model = 'player'
+    form_fields = ['test2_q10']
 #    exp_sit = switch()
 #    if exp_sit == 1:
 #        template_name = 'fwt/content/test2/q10.html'
@@ -396,52 +439,72 @@ class text_3(Page):
 # PAGES FOR ACTIVITIES AFTER THIRD AND FINAL TEXT SECTION
 class content_test3_q1(Page):
     template_name = 'fwt/final/q1.html'
+    form_model = 'player'
+    form_fields = ['test3_q1']
 
     pass
 
 class content_test3_q2(Page):
-    template_name = 'fwt/final/q2.html'          
+    template_name = 'fwt/final/q2.html'
+    form_model = 'player'
+    form_fields = ['test3_q2']          
     pass
 
 
 class content_test3_q3(Page):
-    template_name = 'fwt/final/q3.html'          
+    template_name = 'fwt/final/q3.html' 
+    form_model = 'player'
+    form_fields = ['test3_q3']         
 
     pass
 
 
 class content_test3_q4(Page):
     template_name = 'fwt/final/q4.html'
+    form_model = 'player'
+    form_fields = ['test3_q4']
     pass
 
 
 class content_test3_q5(Page):
     template_name = 'fwt/final/q5.html'
+    form_model = 'player'
+    form_fields = ['test3_q5']
     pass
 
 
 class content_test3_q6(Page): 
     template_name = 'fwt/final/q6.html'
+    form_model = 'player'
+    form_fields = ['test3_q6']
     pass
 
 
 class content_test3_q7(Page):
     template_name = 'fwt/final/q7.html'
+    form_model = 'player'
+    form_fields = ['test3_q7']
     pass
 
 
 class content_test3_q8(Page):
     template_name = 'fwt/final/q8.html'
+    form_model = 'player'
+    form_fields = ['test3_q8']
     pass
 
 
 class content_test3_q9(Page):
     template_name = 'fwt/final/q9.html'
+    form_model = 'player'
+    form_fields = ['test3_q9']
     pass
 
 
 class content_test3_q10(Page):
     template_name = 'fwt/final/q10.html'
+    form_model = 'player'
+    form_fields = ['test3_q10']
     pass
 
 
@@ -455,14 +518,15 @@ class end_page(Page):
 
 #exp_sit = switch() - if exp_sit 1-3, then choose this sequence
 page_sequence = [
-#    enter_id,
+    enter_id,
 #    instructions,
     timer_start,
     practice_text,
     practice_q1,
     practice_q2,
     practice_q3,
-#    get_ready,
+    practice_q4,
+    get_ready,
     text_1,
     activity1_task1,
     activity1_task2,
@@ -474,7 +538,7 @@ page_sequence = [
     activity1_task8,
     activity1_task9,
     activity1_task10,
-#    get_ready,
+    get_ready,
     text_2,
     activity2_task1,
     activity2_task2,
@@ -486,7 +550,7 @@ page_sequence = [
     activity2_task8,
     activity2_task9,
     activity2_task10,
-#    get_ready
+    get_ready,
     text_3,
     content_test3_q1,
     content_test3_q2,
