@@ -19,7 +19,7 @@ class Constants(BaseConstants):
     name_in_url = 'quiz'
     players_per_group = None
 
-    with open('quiz/quiz.csv') as questions_file:
+    with open('quiz/quiz_2.csv') as questions_file:
         questions = list(csv.DictReader(questions_file))
 
     num_rounds = len(questions)
