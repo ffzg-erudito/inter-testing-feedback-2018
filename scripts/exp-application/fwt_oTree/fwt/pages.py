@@ -511,7 +511,9 @@ class content_test3_q10(Page):
 
 # GOODBYE PAGE
 class end_page(Page):
+    template_name = 'fwt/auxilliary/end_page.html'
     pass
+    
 
 
 # here define sequences depending on experimental situation

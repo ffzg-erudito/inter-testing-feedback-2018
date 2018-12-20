@@ -9,7 +9,10 @@ import re
 import csv
 
 # set paths
-questionsPath = "C:\\Users\\matpa\\inter-testing-feedback-2018\\scripts\\exp-application\\questions\\pitanja-korovi-nepovezani-intruzori-py.txt"
+os.chdir('C:\\Users\Matej\inter-testing-feedback-2018\scripts\exp-application\questions')
+
+questionsPath = 'pitanja-korovi-nepovezani-intruzori-py.txt'
+
 
 # read files
 with open(questionsPath, 'r', encoding='utf8') as infile:
@@ -36,18 +39,26 @@ for item in items:
     questionImport.update({qnr: {'question': question,
                                  'options': options}})
 
-
     
-with open('quiz.csv', 'w') as questions_file:
-    questions_writer = csv.writer(questions_file, delimiter = ',', quotechar = '"', quoting=csv.QUOTE_MINIMAL)
     
+solution = [3, 5, 4, 4, 2, 4, 4, 5, 2, 4, 3, 5, 4, 2, 5, 2, 3, 4, 2, 4, 5, 5, 2, 5, 2, 2, 4, 2, 5, 2]
+with open('quiz.csv', 'w', newline = '', encoding='utf-8') as questions_file:
+    questions_writer = csv.writer(questions_file, delimiter = ',', quoting=csv.QUOTE_MINIMAL)
+    header = ['id', 'question', 'choice1', 'choice2', 'choice3', 'choice4', 'solution']
+    questions_writer.writerow(header)
+    
+    data = []
+    index_to_solution = 0
     for item in items:
         row = re.split('\n', item)
-        row_0 = row[0].split('. ')
-        row[0] = row_0[0]
-        row.insert(1, row_0[1])
-        for element in row:
-            element = element.split('. ').Last()
-
-
-outFile.close()
+        row[0] = row[0].split(' ', 1)       
+        row.insert(1, row[0][1])
+        row[0] = index_to_solution + 1
+        index = 2
+        for element in row[2:]:
+            row[index] = element[11:]
+            index += 1
+        row.append(row[solution[index_to_solution]])
+        data.append(row)
+        index_to_solution += 1
+    questions_writer.writerows(data)

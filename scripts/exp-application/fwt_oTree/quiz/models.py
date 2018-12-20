@@ -14,21 +14,30 @@ is determined by the number of questions in the CSV.
 See the comment below about how to randomize the order of pages.
 """
 
+#def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
+#    csv_reader = csv.reader(utf8_data, dialect = dialect, **kwargs)
+#    for row in csv_reader:
+#        yield [unicode(cell, 'utf-8') for cell in row]
+#        
+#        
 
 class Constants(BaseConstants):
     name_in_url = 'quiz'
     players_per_group = None
 
-    with open('quiz/quiz.csv') as questions_file:
+    with open('quiz/quiz_2.csv', encoding = 'utf-8') as questions_file:
         questions = list(csv.DictReader(questions_file))
+        test1_questions = questions[:10]
+        test2_questions = questions[10:20]
+        test3_questions = questions[20:]
 
-    num_rounds = len(questions)
+    num_rounds = 10
 
 
 class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
-            self.session.vars['questions'] = Constants.questions.copy()
+            self.session.vars['questions'] = Constants.test1_questions.copy()
             ## ALTERNATIVE DESIGN:
             ## to randomize the order of the questions, you could instead do:
 
@@ -39,6 +48,10 @@ class Subsession(BaseSubsession):
             ## and to randomize differently for each participant, you could use
             ## the random.sample technique, but assign into participant.vars
             ## instead of session.vars.
+        elif self.round_number == 2:
+            self.session.vars['questions'] = Constants.test2_questions.copy()
+        elif self.round_number == 3:
+            self.session.vars['questions'] = Constants.test3_questions.copy()
 
         for p in self.get_players():
             question_data = p.current_question()
