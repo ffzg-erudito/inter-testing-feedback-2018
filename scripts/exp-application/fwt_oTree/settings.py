@@ -1,4 +1,5 @@
 from os import environ
+import random
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
@@ -10,6 +11,16 @@ SESSION_CONFIG_DEFAULTS = {
     'participation_fee': 0.00,
     'doc': "",
 }
+
+situation = [['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
+       ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
+       ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3'],
+       ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3'],
+       ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3'],
+       ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3']]
+print(random.choice(situation))
+
+
 
 SESSION_CONFIGS = [
     {
@@ -43,7 +54,7 @@ SESSION_CONFIGS = [
     {
         'name': 'demonstracija',
         'num_demo_participants': 1,
-        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
+        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'], #when all is implemented, replace list with 'situation'
     },
 ]
 # see the end of this file for the inactive session configs
