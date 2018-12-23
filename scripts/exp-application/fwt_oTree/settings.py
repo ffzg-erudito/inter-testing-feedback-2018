@@ -24,35 +24,7 @@ print(random.choice(situation))
 
 SESSION_CONFIGS = [
     {
-        'name': 'forward_testing',
-        'display_name': "FWT",
-        'num_demo_participants': 3,
-        'app_sequence': ['fwt']
-    },
-    {
-        'name': 'public_goods',
-        'display_name': "Public Goods",
-        'num_demo_participants': 3,
-        'app_sequence': ['public_goods', 'payment_info'],
-    },
-    {
-        'name': 'guess_two_thirds',
-        'display_name': "Guess 2/3 of the Average",
-        'num_demo_participants': 3,
-        'app_sequence': ['guess_two_thirds', 'payment_info'],
-    },
-    {
-        'name': 'survey',
-        'num_demo_participants': 1,
-        'app_sequence': ['survey', 'payment_info'],
-    },
-    {
-        'name': 'quiz',
-        'num_demo_participants': 1,
-        'app_sequence': ['quiz'],
-    },
-    {
-        'name': 'demonstracija',
+        'name': 'fwt',
         'num_demo_participants': 1,
         'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'], #when all is implemented, replace list with 'situation'
     },
