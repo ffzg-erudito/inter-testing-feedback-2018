@@ -18,24 +18,25 @@ See the comment below about how to randomize the order of pages.
 #    csv_reader = csv.reader(utf8_data, dialect = dialect, **kwargs)
 #    for row in csv_reader:
 #        yield [unicode(cell, 'utf-8') for cell in row]
-#        
-#        
+#     
+
+#with open('C:/Users/Matej/inter-testing-feedback-2018/scripts/exp-application/fwt_oTree/fwt_practice/test0.csv', encoding = 'utf8') as questions_file:
+#    practice_questions = list(csv.DictReader(questions_file))
 
 class Constants(BaseConstants):
-    name_in_url = 'quiz'
+    name_in_url = 'test1'
     players_per_group = None
 
-    with open('quiz/quiz.csv') as questions_file:
-        questions = list(csv.DictReader(questions_file))
+    with open('fwt_test1/test1.csv', encoding = 'utf8') as questions_file:
+        test1_questions = list(csv.DictReader(questions_file))
 
-    num_rounds = len(questions)
-    questions_per_test = 10
-
+    num_rounds = len(test1_questions)
+    
 
 class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
-            self.session.vars['questions'] = Constants.questions.copy()
+            self.session.vars['test1_questions'] = Constants.test1_questions.copy()
             ## ALTERNATIVE DESIGN:
             ## to randomize the order of the questions, you could instead do:
 
@@ -64,9 +65,14 @@ class Player(BasePlayer):
     solution = models.StringField()
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
+    feedback = models.StringField()
 
     def current_question(self):
-        return self.session.vars['questions'][self.round_number - 1]
+        return self.session.vars['test1_questions'][self.round_number - 1]
 
     def check_correct(self):
         self.is_correct = (self.submitted_answer == self.solution)
+        if self.is_correct:
+            self.feedback = "Točno"
+        else:
+            self.feedback = "Netočno" 

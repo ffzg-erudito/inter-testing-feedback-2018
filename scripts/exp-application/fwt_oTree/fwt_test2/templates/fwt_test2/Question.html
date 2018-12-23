@@ -2,13 +2,13 @@
 {% load otree %}
 
 {% block title %}
-    Pitanje {{ player.round_number }} od {{ Constants.questions_per_test }}
+    Pitanje {{ player.round_number }} od {{ Constants.num_rounds }}
 {% endblock %}
 
 {% block content %}
 
     {% formfield player.submitted_answer label=player.question %}
 
-    {% next_button %}
+    <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
 
 {% endblock %}

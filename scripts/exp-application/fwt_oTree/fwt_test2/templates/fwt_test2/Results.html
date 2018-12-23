@@ -8,7 +8,7 @@
 {% block content %}
 
     <p>
-        Točno ste odgovorili na {{ questions_correct }} od {{ Constants.questions_per_test }}
+        Točno ste odgovorili na {{ questions_correct }} od {{ Constants.num_rounds }}
         pitanja.
     </p>
 
@@ -24,13 +24,15 @@
                 <td>{{ p.question }}</td>
                 <td>{{ p.submitted_answer }}</td>
                 <td>{{ p.solution }}</td>
-                <td>{{ p.is_correct }}</td>
+                <td>{{ p.feedback }}</td>
             </tr>
         {% endfor %}
     </table>
 
 
-    {% next_button %}
+    <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
+    
+    
 {% endblock %}
 
 

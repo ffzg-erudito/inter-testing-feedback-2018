@@ -40,6 +40,11 @@ SESSION_CONFIGS = [
         'num_demo_participants': 1,
         'app_sequence': ['quiz'],
     },
+    {
+        'name': 'demonstracija',
+        'num_demo_participants': 1,
+        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
+    },
 ]
 # see the end of this file for the inactive session configs
 

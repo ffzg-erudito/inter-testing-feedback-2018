@@ -22,20 +22,19 @@ See the comment below about how to randomize the order of pages.
 #        
 
 class Constants(BaseConstants):
-    name_in_url = 'quiz'
+    name_in_url = 'test2'
     players_per_group = None
 
-    with open('quiz/quiz.csv') as questions_file:
-        questions = list(csv.DictReader(questions_file))
+    with open('fwt_test2/test2.csv', encoding = 'utf8') as questions_file:
+        test2_questions = list(csv.DictReader(questions_file))
 
-    num_rounds = len(questions)
-    questions_per_test = 10
+    num_rounds = len(test2_questions)
 
 
 class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
-            self.session.vars['questions'] = Constants.questions.copy()
+            self.session.vars['test2_questions'] = Constants.test2_questions.copy()
             ## ALTERNATIVE DESIGN:
             ## to randomize the order of the questions, you could instead do:
 
@@ -64,9 +63,15 @@ class Player(BasePlayer):
     solution = models.StringField()
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
+    feedback = models.StringField()
 
     def current_question(self):
-        return self.session.vars['questions'][self.round_number - 1]
+        return self.session.vars['test2_questions'][self.round_number - 1]
 
     def check_correct(self):
         self.is_correct = (self.submitted_answer == self.solution)
+        if self.is_correct:
+            self.feedback = "Točno"
+        else:
+            self.feedback = "Netočno" 
+
