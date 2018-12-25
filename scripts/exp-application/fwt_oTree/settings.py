@@ -12,13 +12,15 @@ SESSION_CONFIG_DEFAULTS = {
     'doc': "",
 }
 
-situation = [['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
-       ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
-       ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3'],
-       ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3'],
-       ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3'],
-       ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3']]
-print(random.choice(situation))
+#situation = [['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
+#       ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
+#       ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3'],
+#       ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3'],
+#       ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3'],
+#       ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3']]
+#print(random.choice(situation))
+
+situation = ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3']
 
 
 
@@ -26,7 +28,7 @@ SESSION_CONFIGS = [
     {
         'name': 'fwt',
         'num_demo_participants': 1,
-        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'], #when all is implemented, replace list with 'situation'
+        'app_sequence': situation, #when all is implemented, replace list with 'situation'
     },
 ]
 # see the end of this file for the inactive session configs

@@ -1,6 +1,7 @@
 from ._builtin import Page, WaitPage
 from .models import Constants
 import time
+import pandas
 
 
 class Question(Page):
