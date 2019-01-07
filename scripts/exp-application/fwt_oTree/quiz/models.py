@@ -14,6 +14,12 @@ is determined by the number of questions in the CSV.
 See the comment below about how to randomize the order of pages.
 """
 
+#def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
+#    csv_reader = csv.reader(utf8_data, dialect = dialect, **kwargs)
+#    for row in csv_reader:
+#        yield [unicode(cell, 'utf-8') for cell in row]
+#        
+#        
 
 class Constants(BaseConstants):
     name_in_url = 'quiz'
@@ -23,6 +29,7 @@ class Constants(BaseConstants):
         questions = list(csv.DictReader(questions_file))
 
     num_rounds = len(questions)
+    questions_per_test = 10
 
 
 class Subsession(BaseSubsession):

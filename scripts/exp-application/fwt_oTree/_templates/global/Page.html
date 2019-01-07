@@ -3,7 +3,21 @@
 
 {% block global_styles  %}
     <link rel="stylesheet" type="text/css" href="{% static 'global/theme.css' %}" />
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
 {% endblock %}
 
 {% block global_scripts  %}
+    <script>
+        $(function () {
+            $('.otree-timer__time-left').on('update.countdown', function (event) {
+                if (event.offset.totalSeconds === 30) {
+                    $('.otree-timer').show();
+                }
+            });
+        });
+    </script>
 {% endblock %}

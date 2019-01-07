@@ -43,6 +43,12 @@ class Player(BasePlayer):
                     [3, '73% ukupnog atmosferskog tlaka'],
                     [4, '87% ukupnog atmosferskog tlaka']],
             widget = widgets.RadioSelect)
+    
+    
+
+    
+    
+    
     practice_q2 = models.IntegerField(label = """Ovisno o promjeni nadmorske visine,
  odnos veličine parcijalnog tlaka kisika u atmosferi i veličine parcijalnog tlaka
  kisika u alveolama pluća je:""",
@@ -284,3 +290,17 @@ class Player(BasePlayer):
                     [3, 'širenje sjemena isključivo u proljeće'],
                     [4, 'klijanje usko vezano uz rast druge biljke']],
             widget = widgets.RadioSelect)
+    
+#    question_id = models.IntegerField()
+#    question = models.StringField()
+#    solution = models.StringField()
+#    submitted_answer = models.StringField(widget=widgets.RadioSelect)
+#    is_correct = models.BooleanField()
+#
+#    def current_question(self):
+#        return self.session.vars['questions'][self.round_number - 1]
+#
+#    def check_correct(self):
+#        self.is_correct = (self.submitted_answer == self.solution)
+
+    
