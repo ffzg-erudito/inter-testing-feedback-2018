@@ -29,6 +29,8 @@ class Question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
+        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
+        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
         
 
 

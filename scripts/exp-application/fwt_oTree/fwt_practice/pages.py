@@ -1,7 +1,7 @@
 from ._builtin import Page, WaitPage
 from .models import Constants
 import time
-import pandas
+from pandas import DataFrame
 
 
 class Question(Page):
@@ -19,7 +19,8 @@ class Question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        
+        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
+        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
 
 class timer_start(Page):
     def is_displayed(self):

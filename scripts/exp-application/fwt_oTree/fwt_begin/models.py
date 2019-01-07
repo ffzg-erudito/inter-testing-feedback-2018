@@ -4,10 +4,10 @@ from otree.api import (
 )
 
 
-author = 'Your name here'
+author = 'Matej Pavlić'
 
 doc = """
-Your app description
+This app asks the participant to make a personal ID.
 """
 
 

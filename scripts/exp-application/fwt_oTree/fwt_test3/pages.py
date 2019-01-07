@@ -32,13 +32,20 @@ class Question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
+        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
+        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
         
 
 class Results(Page):
+
+    
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
     def vars_for_template(self):
+        for x in self.participant.vars:
+            print(x, self.participant.vars[x])
+            
         player_in_all_rounds = self.player.in_all_rounds()
         return {
             'player_in_all_rounds': player_in_all_rounds,

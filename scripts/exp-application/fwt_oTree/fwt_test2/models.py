@@ -71,7 +71,7 @@ class Player(BasePlayer):
     def check_correct(self):
         self.is_correct = (self.submitted_answer == self.solution)
         if self.is_correct:
-            self.feedback = "Točno"
+            self.feedback = u'\u2713'
         else:
-            self.feedback = "Netočno" 
+            self.feedback = u'\u2717' 
 

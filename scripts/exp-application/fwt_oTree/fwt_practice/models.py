@@ -67,6 +67,7 @@ class Player(BasePlayer):
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
     feedback = models.StringField()
+    participant_vars_dump = models.StringField()
 
     def current_question(self):
         return self.session.vars['practice_questions'][self.round_number - 1]
@@ -74,6 +75,6 @@ class Player(BasePlayer):
     def check_correct(self):
         self.is_correct = (self.submitted_answer == self.solution)
         if self.is_correct:
-            self.feedback = "Točno"
+            self.feedback = u'\u2713'
         else:
-            self.feedback = "Netočno"     
+            self.feedback = u'\u2717' 

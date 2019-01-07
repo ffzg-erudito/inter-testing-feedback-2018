@@ -7,7 +7,7 @@ class enter_id(Page):
     form_model = 'player'
     form_fields = ['identity']
     def before_next_page(self):
-        self.participant.vars['identity'] = self.form_fields
+        self.participant.vars['identity'] = self.player.identity
 
 
 class instructions(Page):
