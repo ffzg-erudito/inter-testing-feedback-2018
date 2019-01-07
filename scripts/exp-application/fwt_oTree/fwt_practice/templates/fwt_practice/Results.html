@@ -1,6 +1,19 @@
 {% extends "global/Page.html" %}
 {% load otree %}
 
+{% block scripts %}
+
+    <!-- define a script -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#res td.feedback:contains('\u2717')").parent().css('background-color','#fd7878');
+        });
+    </script>
+
+{% endblock %}
+
+
+
 {% block title %}
     Rezultat
 {% endblock %}
@@ -12,19 +25,19 @@
         pitanja.
     </p>
 
-    <table class="table">
+    <table id="res" class="table">
         <tr>
-            <th>Pitanje</th>
-            <th>Vaš odgovor</th>
-            <th>Točan odgovor</th>
-            <th style="text-align:center">Točnost odgovora</th>
+            <th style="vertical-align:middle">Pitanje</th>
+            <th style="vertical-align:middle">Vaš odgovor</th>
+            <th style="vertical-align:middle">Točan odgovor</th>
+            <th style="text-align:center;vertical-align:middle">Točnost odgovora</th>
         </tr>
         {% for p in player_in_all_rounds %}
-            <tr>
-                <td>{{ p.question }}</td>
-                <td>{{ p.submitted_answer }}</td>
-                <td>{{ p.solution }}</td>
-                <td align="center">{{ p.feedback }}</td>
+            <tr id="player">
+                <td style="vertical-align:middle">{{ p.question }}</td>
+                <td style="vertical-align:middle">{{ p.submitted_answer }}</td>
+                <td style="vertical-align:middle">{{ p.solution }}</td>
+                <td class="feedback" style="vertical-align:middle" align="center">{{ p.feedback }}</td>
             </tr>
         {% endfor %}
     </table>
