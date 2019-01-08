@@ -1,6 +1,18 @@
 {% extends "global/Page.html" %}
 {% load otree %}
 
+{% block styles %}
+
+    <style>
+        #next {
+            display: none;
+        }
+        
+    </style>
+
+{% endblock %}
+
+
 {% block scripts %}
 
     <!-- define a script -->
@@ -8,7 +20,13 @@
         $(document).ready(function(){
             $("#res td.feedback:contains('\u2717')").parent().css('background-color','#fd7878');
         });
+        
+        $(document).ready(function(){
+            setTimeout(function(){ $("#next").show()}, 60000);
+        });
     </script>
+
+
 
 {% endblock %}
 
@@ -43,7 +61,7 @@
     </table>
 
 
-    <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
+    <button id="next" style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
 
 
 {% endblock %}
