@@ -1,6 +1,5 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 import csv
 
@@ -74,4 +73,3 @@ class Player(BasePlayer):
             self.feedback = u'\u2713'
         else:
             self.feedback = u'\u2717' 
-

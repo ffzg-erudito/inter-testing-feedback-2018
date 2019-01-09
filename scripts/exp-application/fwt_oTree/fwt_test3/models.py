@@ -1,6 +1,5 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 import csv
 
@@ -31,7 +30,6 @@ class Constants(BaseConstants):
     num_rounds = len(test3_questions)
     
     
-
 class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:

@@ -38,7 +38,8 @@ class Question(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds
+        return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+
 
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
@@ -53,8 +54,4 @@ class get_ready(Page):
         return self.round_number == Constants.num_rounds
 
 
-page_sequence = [
-    text_2,
-    Question,
-    get_ready
-]
+page_sequence = [text_2, Question, Results, get_ready]

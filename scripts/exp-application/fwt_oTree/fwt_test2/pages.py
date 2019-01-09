@@ -1,6 +1,4 @@
-from otree.api import Currency as c, currency_range
-
-from ._builtin import Page, WaitPage
+from ._builtin import Page
 from .models import Constants
 import math
 
@@ -41,7 +39,8 @@ class Question(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds
+        return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+
 
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
@@ -50,17 +49,9 @@ class Results(Page):
             'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
         }
 
-
-
-
 class get_ready(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
 
 
-page_sequence = [
-    text_2,
-    Question,
-    Results,
-    get_ready
-]
+page_sequence = [text_2, Question, Results, get_ready]

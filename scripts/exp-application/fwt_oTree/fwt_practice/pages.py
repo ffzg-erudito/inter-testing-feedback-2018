@@ -41,7 +41,8 @@ class practice_text(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return self.round_number == Constants.num_rounds
+        return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+
 
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
@@ -50,10 +51,9 @@ class Results(Page):
             'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
         }
 
+class get_ready(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
 
-page_sequence = [
-    timer_start,
-    practice_text,
-    Question,
-    Results
-]
+
+page_sequence = [timer_start, practice_text, Question, Results, get_ready]
