@@ -21,7 +21,8 @@ SESSION_CONFIG_DEFAULTS = {
 #       ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3']]
 #print(random.choice(situation))
 
-situation = ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3']
+# situation = ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3']
+situation = ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3']
 
 
 
