@@ -1,4 +1,4 @@
-from ._builtin import Page, WaitPage
+from ._builtin import Page
 from .models import Constants
 import time
 from pandas import DataFrame

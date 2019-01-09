@@ -1,4 +1,5 @@
 from os import environ
+import sys
 import random
 
 
@@ -18,9 +19,6 @@ situations = [['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3
 
 #       ,['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3'],
 situation = random.choice(situations)
-print(situation)
-
-
 
 
 SESSION_CONFIGS = [
