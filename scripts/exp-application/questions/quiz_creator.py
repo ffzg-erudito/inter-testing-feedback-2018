@@ -9,9 +9,9 @@ import re
 import csv
 
 # set paths
-os.chdir('C:\\Users\Matej\inter-testing-feedback-2018\scripts\exp-application\questions')
+os.chdir('C:\\Users\matpa\inter-testing-feedback-2018\scripts\exp-application\questions')
 
-questionsPath = 'pitanja-korovi-nepovezani-intruzori-py.txt'
+questionsPath = 'pitanja-korovi-nepovezani-intruzori.py.txt'
 
 
 # read files
@@ -42,6 +42,7 @@ for item in items:
     
     
 solution = [3, 4, 4, 3, 3, 5, 4, 4, 2, 4, 4, 5, 2, 4, 3, 5, 4, 2, 5, 2, 3, 4, 2, 4, 5, 5, 2, 5, 2, 2, 4, 2, 5, 2]
+
 with open('quiz.csv', 'w', newline = '', encoding='utf-8') as questions_file:
     questions_writer = csv.writer(questions_file, delimiter = ',', quoting=csv.QUOTE_MINIMAL)
     header = ['id', 'question', 'choice1', 'choice2', 'choice3', 'choice4', 'solution']

@@ -1,23 +1,23 @@
 ﻿    0.1. Tlak kisika uvijek iznosi manje od:
         a. 10% ukupnog atmosferskog tlaka
-	b. 21% ukupnog atmosferskog tlaka
-	c. 73% ukupnog atmosferskog tlaka
-	d. 87% ukupnog atmosferskog tlaka
+    	b. 21% ukupnog atmosferskog tlaka
+    	c. 73% ukupnog atmosferskog tlaka
+    	d. 87% ukupnog atmosferskog tlaka
     0.2. Atmosferski tlak na razini mora iznosi:
         a. 150 mm Hg
-	b. 532 mm Hg
-	c. 760 mm Hg
-	d. 843 mm Hg
+    	b. 532 mm Hg
+    	c. 760 mm Hg
+    	d. 843 mm Hg
     0.3. Do smanjenja koncentracije kisika u alveolama dolazi zbog toga što ga razrjeđuju:
         a. ugljični dioksid i vodik
-	b. dušik i vodena para
-	c. ugljični dioksid i vodena para
-	d. dušik i ugljični dioksid
+    	b. dušik i vodena para
+    	c. ugljični dioksid i vodena para
+    	d. dušik i ugljični dioksid
     0.4. Kad je u zraku mnogo vodene pare, parcijalni tlak kisika može:
         a. pasti za 20 mm Hg
-	b. pasti za 10 mm Hg
-	c. porasti za 10 mm Hg
-	d. porasti za 20 mm Hg
+    	b. pasti za 10 mm Hg
+    	c. porasti za 10 mm Hg
+    	d. porasti za 20 mm Hg
 
     1.1. Koliko se drvenastih i zeljastih biljaka smatra korovima (zaokružite najbližu vrijednost)?
         a. više od 2500
@@ -81,7 +81,7 @@
         c. korijen
         d. rizom
     2.3. U odnosu na mlađe korovske biljke, starije korovske biljke:
-        a. imaju jači alelopatijski učinak
+        a. imaju jači alelopatski učinak
         b. sadrže više fitotoksina
         c. sadrže manje inhibitornih tvari
         d. pokazuju veću plastičnost
