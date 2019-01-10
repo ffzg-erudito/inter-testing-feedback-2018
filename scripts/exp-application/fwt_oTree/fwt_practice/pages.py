@@ -1,10 +1,13 @@
 from ._builtin import Page
 from .models import Constants
-import time
-from pandas import DataFrame
+import time 
+import math
 
 
 class Question(Page):
+    def is_displayed(self):
+        return self.session.config['name'] == 'fwt'
+
     form_model = 'player'
     form_fields = ['submitted_answer']
 
@@ -41,7 +44,10 @@ class practice_text(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+        if self.session.config['name'] == 'fwt':
+            return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+        else:
+            return False
 
 
     def vars_for_template(self):
@@ -54,6 +60,35 @@ class Results(Page):
 class get_ready(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
+    
+    
+    def vars_for_template(self):
+        is_experiment = (self.session.config['name'] == 'fwt') 
+        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
+        minutes = math.ceil(estimate / 60)
+        
+        if minutes == 1:
+            koliko_min = " minutu"
+        elif minutes > 4:
+            koliko_min = " minuta"
+        else:
+            koliko_min = " minute"
+            
+        next_message = "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu istraživanja."
+
+        
+        practice_message = ["Sljedeći prikaz sadrži nešto duži tekst.",
+                            "Sada Vam je vrijeme čitanja ograničeno na otprilike %s %s. \
+                            Vaš zadatak je čitati tekst na jednak način i jednakom brzinom kao prethodni!" % (minutes, koliko_min),
+                            "30 sekundi prije isteka vremena, na lijevoj strani ekrana prikazat će se\
+                            okvir unutar kojega će se odbrojavati vrijeme do kraja.", 
+                            "Pritisnite 'Dalje' kako biste nastavili s čitanjem drugog teksta."]
+        
+        
+        if self.session.config['name'] == 'fwt':
+            return {'is_exp': is_experiment, 'message': next_message}
+        else:
+            return {'is_exp': is_experiment, 'message': practice_message}
 
 
 page_sequence = [timer_start, practice_text, Question, Results, get_ready]

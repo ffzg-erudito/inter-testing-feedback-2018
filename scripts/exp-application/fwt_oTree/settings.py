@@ -29,7 +29,7 @@ SESSION_CONFIGS = [
     {
         'name': 'proba',
         'num_demo_participants': 1,
-        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test3']
+        'app_sequence': ['fwt_practice', 'fwt_test1']
     }
 ]
 # see the end of this file for the inactive session configs

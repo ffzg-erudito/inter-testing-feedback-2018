@@ -7,10 +7,22 @@
 
 {% block content %}
 
-    Pritisnite 'Dalje' kako biste nastavili sa sljedećim tekstom.
 
-
-
+    {% if is_exp %}
+        <p>
+            {{ instruction }}
+        </p>
+    {% else %}
+        <h1>
+            <p align="center">
+                {{ message }}
+            </p>
+        </h1> 
+    {% endif %}
+    
+    <br>
+    <br>
+    <br>
 
     {% formfields %}
 

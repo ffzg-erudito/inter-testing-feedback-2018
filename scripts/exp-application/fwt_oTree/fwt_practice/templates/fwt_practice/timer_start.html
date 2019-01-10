@@ -2,11 +2,36 @@
 {% load otree %}
 
 {% block title %}
-    Pritisnite "Dalje" kada ste spremni započeti s čitanjem teksta za vježbu.
+    
 {% endblock %}
 
 {% block content %}
     
+    <div style="text-align: justify; text-justify: inter-word">
+        <p>Prikaz nakon ovoga sadržava kratki tekst.</p>
+        
+        <p style="word-wrap: break-word; width: 580px">
+            Vaš zadatak je pročitati taj tekst jednom, koncentrirano i s razumijevanjem,
+            brzinom koja Vam dolazi prirodno i koja Vam omogućava praćenje sadržaja teksta.
+        </p>
+        
+        <p style="word-wrap: break-word ; width: 361px">
+            Kada ga pročitate jednom, tj. kada dođete do kraja, 
+            pritisnite tipku "Dalje" koja se nalazi pri dnu teksta.
+    
+        <br>
+        <br>
+        <br>    
+    
+        <p>Kada ste spremni započeti s čitanjem teksta, pritisnite tipku "Dalje".</p>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    
+    {% formfields %}
+
     <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
 
 {% endblock %}

@@ -16,6 +16,8 @@ class text_1(Page):
 
 
 class Question(Page):
+    def is_displayed(self):
+        return self.session.config['name'] == 'fwt'
     form_model = 'player'
     form_fields = ['submitted_answer']
 
@@ -37,7 +39,10 @@ class Question(Page):
 
 class Results(Page):
     def is_displayed(self):
-        return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+        if self.session.config['name'] == 'fwt':
+            return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+        else:
+            return False
 
 
     def vars_for_template(self):
@@ -52,6 +57,17 @@ class Results(Page):
 class get_ready(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
+    
+    def vars_for_template(self):
+        session_type = self.session.config['name']
+        is_experiment = (self.session.config['name'] == 'fwt') 
+        instruction = "This is the instruction, in case the experiment is taking place"
+        next_message = "Pritisnite 'Dalje' kako biste nastavili sa sljedećim tekstom."
+        exit_message = "Kraj!"
+        if session_type == 'fwt':
+            return {'is_exp': is_experiment, 'message': next_message, 'instruction': instruction}
+        else:
+            return {'is_exp': is_experiment, 'message': exit_message}
 
 
 page_sequence = [text_1, Question, Results, get_ready]

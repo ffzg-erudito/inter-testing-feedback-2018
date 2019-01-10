@@ -7,11 +7,36 @@
 
 {% block content %}
 
-    Pritisnite 'Dalje' kako biste nastavili s prvim tekstom u glavnom dijelu istraživanja.
-
-
-
-
+    {% if is_exp is False %}
+    
+        <div style="text-align: justify; text-justify: inter-word">
+            <p>{{ message.0 }}</p>
+            
+            <p style="word-wrap: break-word; width: 517px">
+                {{ message.1}} 
+            </p>
+            
+            <p style="word-wrap: break-word ; width: 448px">
+                {{ message.2 }}
+            </p>
+            
+            <br>
+            <br>
+            <br>
+        
+            <p>{{ message.3 }}</p>
+        </div>
+        
+    {% else %}
+    
+        <p>{{ message }}</p>
+        
+    {% endif %}
+    
+    <br>
+    <br>
+    <br>    
+    
     {% formfields %}
 
     <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
