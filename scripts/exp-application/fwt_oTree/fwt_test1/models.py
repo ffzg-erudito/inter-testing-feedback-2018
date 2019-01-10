@@ -3,7 +3,7 @@ from otree.api import (
 )
 import csv
 
-author = 'Your name here'
+author = 'Matej Pavlić'
 
 doc = """
 A quiz app that reads its questions from a spreadsheet
@@ -13,14 +13,6 @@ is determined by the number of questions in the CSV.
 See the comment below about how to randomize the order of pages.
 """
 
-#def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
-#    csv_reader = csv.reader(utf8_data, dialect = dialect, **kwargs)
-#    for row in csv_reader:
-#        yield [unicode(cell, 'utf-8') for cell in row]
-#     
-
-#with open('C:/Users/Matej/inter-testing-feedback-2018/scripts/exp-application/fwt_oTree/fwt_practice/test0.csv', encoding = 'utf8') as questions_file:
-#    practice_questions = list(csv.DictReader(questions_file))
 
 class Constants(BaseConstants):
     name_in_url = 'test1'
@@ -74,4 +66,4 @@ class Player(BasePlayer):
         if self.is_correct:
             self.feedback = u'\u2713'
         else:
-            self.feedback = u'\u2717' 
+            self.feedback = u'\u2717'

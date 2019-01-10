@@ -2,7 +2,9 @@ from ._builtin import Page
 from .models import Constants
 import math
 
-## First text section
+
+
+## FIRST TEXT SECTION
 class text_1(Page):
     def is_displayed(self):
         return self.round_number == 1
@@ -33,11 +35,10 @@ class Question(Page):
         
 
 
-
-
 class Results(Page):
     def is_displayed(self):
         return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+
 
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
@@ -45,6 +46,7 @@ class Results(Page):
             'player_in_all_rounds': player_in_all_rounds,
             'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
         }
+
 
 
 class get_ready(Page):

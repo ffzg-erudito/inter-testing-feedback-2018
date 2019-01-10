@@ -3,7 +3,7 @@ from otree.api import (
 )
 import csv
 
-author = 'Your name here'
+author = 'Matej Pavlić'
 
 doc = """
 A quiz app that reads its questions from a spreadsheet
@@ -12,13 +12,7 @@ There is 1 question per page; the number of pages in the game
 is determined by the number of questions in the CSV.
 See the comment below about how to randomize the order of pages.
 """
-
-#def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
-#    csv_reader = csv.reader(utf8_data, dialect = dialect, **kwargs)
-#    for row in csv_reader:
-#        yield [unicode(cell, 'utf-8') for cell in row]
-#        
-#        
+     
 
 class Constants(BaseConstants):
     name_in_url = 'test3'

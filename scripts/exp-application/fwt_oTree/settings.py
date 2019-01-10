@@ -24,8 +24,13 @@ SESSION_CONFIGS = [
     {
         'name': 'fwt',
         'num_demo_participants': 1,
-        'app_sequence': situation, #when all is implemented, replace list with 'situation'
+        'app_sequence': situation #when all is implemented, replace list with 'situation'
     },
+    {
+        'name': 'proba',
+        'num_demo_participants': 1,
+        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test3']
+    }
 ]
 # see the end of this file for the inactive session configs
 

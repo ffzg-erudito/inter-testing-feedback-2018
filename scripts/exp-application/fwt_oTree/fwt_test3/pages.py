@@ -35,8 +35,6 @@ class Question(Page):
         
 
 
-
-
 class Results(Page):
     def is_displayed(self):
         return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
@@ -48,6 +46,8 @@ class Results(Page):
             'player_in_all_rounds': player_in_all_rounds,
             'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
         }
+        
+        
         
 class end_page(Page):
     def is_displayed(self):
