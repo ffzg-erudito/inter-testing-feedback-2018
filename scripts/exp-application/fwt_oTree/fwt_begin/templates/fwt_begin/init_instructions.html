@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Početna uputa
+{% endblock %}
+
+{% block content %}
+    
+    <div style="text-align: justify; text-justify: inter-word">
+    
+        <br>
+    
+        <p>U prvom dijelu postupka upoznat ćete se s predstojećim zadacima.</p>
+        
+        <p style="word-wrap: break-word; width: 470px">
+            Upute umetnute između pojedinih stranica objasnit će dijelove zadatka te će Vas
+            voditi kroz njega.
+        </p>
+    
+        <br>
+        <br>
+        <br>    
+    
+        <p>Kada ste spremni započeti s upoznavanjem zadatka, pritisnite tipku "Dalje".</p>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    
+    {% formfields %}
+
+    <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
+
+{% endblock %}

@@ -2,7 +2,7 @@
 {% load otree %}
 
 {% block title %}
-
+    Vježba je završena!
 {% endblock %}
 
 {% block content %}
@@ -10,6 +10,9 @@
     {% if is_exp is False %}
     
         <div style="text-align: justify; text-justify: inter-word">
+        
+            <br>
+            
             <p>{{ message.0 }}</p>
             
             <p style="word-wrap: break-word; width: 517px">
@@ -29,7 +32,28 @@
         
     {% else %}
     
-        <p>{{ message }}</p>
+        <div style="text-align: justify; text-justify: inter-word">
+        
+            <br>
+            
+            <p style="word-wrap: break-word; width: 517px">
+                {{ message.0 }}
+            </p>
+            
+            <p style="word-wrap: break-word; width: 517px">
+                {{ message.1}} 
+            </p>
+            
+            <p style="word-wrap: break-word ; width: 517px">
+                {{ message.2 }}
+            </p>
+            
+            <br>
+            <br>
+            <br>
+        
+            <p>{{ message.3 }}</p>
+        </div>
         
     {% endif %}
     

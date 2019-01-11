@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Zadnji dio: Povratna informacija
+{% endblock %}
+
+{% block content %}
+    
+    <div style="text-align: justify; text-justify: inter-word">
+    
+        <br>
+        
+        <p style="word-wrap: break-word; width: 462px">Zadnji prikaz sadrži povratnu informaciju o točnosti Vaših odgovora na prethodna pitanja.</p>
+        
+        <p style="word-wrap: break-word; width: 462px">
+            Tablica sadrži u prvom stupcu pitanje, u drugom točan odgovor, u trećem Vaš odgovor,
+            i u zadnjem ocjenu točnosti Vašeg odgovora.
+        </p>
+        
+        <p style="word-wrap: break-word ; width: 462px">
+            Dobro proučite povratne informacije. Nakon 20 sekundi, prikazat će se tipka "Dalje",
+            te ćete moći pritiskom na nju pokrenuti nastavak postupka.
+        </p>
+    
+        <br>
+        <br>
+        <br>    
+    
+        <p>Kada ste spremni započeti s čitanjem teksta, pritisnite tipku "Dalje".</p>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    
+    {% formfields %}
+
+    <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
+
+{% endblock %}

@@ -13,18 +13,30 @@ SESSION_CONFIG_DEFAULTS = {
     'doc': "",
 }
 
-situations = [['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
-       ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3']]
+activities = ['rereading', 'general_knowledge', 'general_knowledge_feedback', 'content', 'content_feedback']
+activity = random.choice(activities)
 
-#       ,['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3'],
-situation = random.choice(situations)
+# set feedback
+if activity is 'general_knowledge_feedback' or 'content_feedback':
+    feedback = True   
+else:
+    feedback = False
+    
+# set app_sequence, i.e. situation
+if activity is 'rereading':
+    situation = ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3']
+elif activity is 'content' or 'content_feedback':
+    situation = ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3']
+else:
+    situation = ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3']
 
 
 SESSION_CONFIGS = [
     {
         'name': 'fwt',
         'num_demo_participants': 1,
-        'app_sequence': situation #when all is implemented, replace list with 'situation'
+        'app_sequence': situation,
+        'feedback': feedback
     },
     {
         'name': 'proba',
