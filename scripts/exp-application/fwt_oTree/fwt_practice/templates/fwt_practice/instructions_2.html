@@ -2,7 +2,7 @@
 {% load otree %}
 
 {% block title %}
-    Zadnji dio: Povratna informacija
+    Treći dio zadatka: Povratna informacija
 {% endblock %}
 
 {% block content %}
@@ -11,23 +11,25 @@
     
         <br>
         
-        <p style="word-wrap: break-word; width: 462px">Zadnji prikaz sadrži povratnu informaciju o točnosti Vaših odgovora na prethodna pitanja.</p>
+        <p style="word-wrap: break-word; width: 462px">
+            {{ message.0 }}
+        </p>
         
         <p style="word-wrap: break-word; width: 462px">
-            Tablica sadrži u prvom stupcu pitanje, u drugom točan odgovor, u trećem Vaš odgovor,
-            i u zadnjem ocjenu točnosti Vašeg odgovora.
+            {{ message.1 }}
         </p>
         
         <p style="word-wrap: break-word ; width: 462px">
-            Dobro proučite povratne informacije. Nakon 20 sekundi, prikazat će se tipka "Dalje",
-            te ćete moći pritiskom na nju pokrenuti nastavak postupka.
+            {{ message.2}}
         </p>
     
         <br>
         <br>
         <br>    
     
-        <p>Kada ste spremni započeti s čitanjem teksta, pritisnite tipku "Dalje".</p>
+        <p>
+            {{ message.3 }}
+        </p>
     </div>
     
     <br>

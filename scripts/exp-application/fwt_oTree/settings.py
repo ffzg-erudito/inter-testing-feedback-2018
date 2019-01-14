@@ -22,21 +22,33 @@ if activity is 'general_knowledge_feedback' or 'content_feedback':
 else:
     feedback = False
     
-# set app_sequence, i.e. situation
-if activity is 'rereading':
-    situation = ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3']
-elif activity is 'content' or 'content_feedback':
-    situation = ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3']
-else:
-    situation = ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3']
+## set app_sequence, i.e. situation
+#if activity is 'rereading':
+#    situation = ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3']
+#elif activity is 'content' or 'content_feedback':
+#    situation = ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3']
+#else:
+#    situation = ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3']
 
 
 SESSION_CONFIGS = [
     {
-        'name': 'fwt',
+        'name': '1',
         'num_demo_participants': 1,
-        'app_sequence': situation,
-        'feedback': feedback
+        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_test1', 'fwt_test2', 'fwt_test3'],
+        'questions': True
+    },
+    {
+        'name': '2',
+        'num_demo_participants': 1,
+        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_gk1', 'fwt_gk2', 'fwt_test3'],
+        'questions': True
+    },
+    {
+        'name': '3',
+        'num_demo_participants': 1,
+        'app_sequence': ['fwt_begin', 'fwt_practice', 'fwt_reread1', 'fwt_reread2', 'fwt_test3'],
+        'questions': False
     },
     {
         'name': 'proba',

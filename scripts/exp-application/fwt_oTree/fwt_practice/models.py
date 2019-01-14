@@ -27,16 +27,25 @@ class Constants(BaseConstants):
     name_in_url = 'practice'
     players_per_group = None
 
-    with open('fwt_practice/test0.csv', encoding = 'utf8') as questions_file:
-        practice_questions = list(csv.DictReader(questions_file))
+    with open('fwt_practice/test0_c.csv', encoding = 'utf8') as questions_file:
+        practice_questions_c = list(csv.DictReader(questions_file))
+    with open('fwt_practice/test0_gk.csv', encoding = 'utf8') as questions_file:
+        practice_questions_gk = list(csv.DictReader(questions_file))
 
-    num_rounds = len(practice_questions)
+    num_rounds = len(practice_questions_c) # both practice question lists have the same length
 
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        if self.round_number == 1:
-            self.session.vars['practice_questions'] = Constants.practice_questions.copy()
+        if (self.round_number == 1) & (self.session.config['name'] is not '3'):
+            rereading = False
+            if self.session.config['name'] == '1':
+                self.session.vars['practice_questions'] = Constants.practice_questions_c.copy()
+            elif self.session.config['name'] == '2':
+                self.session.vars['practice_questions'] = Constants.practice_questions_gk.copy()
+        else:
+            rereading = True
+
             ## ALTERNATIVE DESIGN:
             ## to randomize the order of the questions, you could instead do:
 
@@ -47,12 +56,12 @@ class Subsession(BaseSubsession):
             ## and to randomize differently for each participant, you could use
             ## the random.sample technique, but assign into participant.vars
             ## instead of session.vars.
-
-        for p in self.get_players():
-            question_data = p.current_question()
-            p.question_id = int(question_data['id'])
-            p.question = question_data['question']
-            p.solution = question_data['solution']
+        if not rereading:
+            for p in self.get_players():
+                question_data = p.current_question()
+                p.question_id = int(question_data['id'])
+                p.question = question_data['question']
+                p.solution = question_data['solution']
 
 
 class Group(BaseGroup):
@@ -70,6 +79,7 @@ class Player(BasePlayer):
 
     def current_question(self):
         return self.session.vars['practice_questions'][self.round_number - 1]
+
 
     def check_correct(self):
         self.is_correct = (self.submitted_answer == self.solution)
