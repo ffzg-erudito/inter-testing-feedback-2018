@@ -79,7 +79,7 @@ class instructions_1(Page):
 
 class Question(Page):
     def is_displayed(self):
-        return self.session.config['name'] in ['1', '2']
+        return (self.session.config['name'] in ['1', '2']) & (self.round_number < 5)
 
     form_model = 'player'
     form_fields = ['submitted_answer']
@@ -98,6 +98,9 @@ class Question(Page):
         self.participant.vars[str(self.player.question_id)] = self.player.is_correct
         print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
         
+    def vars_for_template(self):
+        num_questions = 4
+        return {'num_questions': num_questions}
 
 
 
@@ -141,7 +144,9 @@ class Results(Page):
         
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
+        num_questions = 4
         return {
+            'num_questions': num_questions,
             'player_in_all_rounds': player_in_all_rounds,
             'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
         }

@@ -59,12 +59,11 @@ class get_ready(Page):
         return self.round_number == Constants.num_rounds
     
     def vars_for_template(self):
-        session_type = self.session.config['name']
-        is_experiment = (self.session.config['name'] == 'fwt') 
+        is_experiment = (self.session.config['name'] is '1') 
         instruction = "This is the instruction, in case the experiment is taking place"
         next_message = "Pritisnite 'Dalje' kako biste nastavili sa sljedećim tekstom."
         exit_message = "Kraj!"
-        if session_type == 'fwt':
+        if is_experiment:
             return {'is_exp': is_experiment, 'message': next_message, 'instruction': instruction}
         else:
             return {'is_exp': is_experiment, 'message': exit_message}

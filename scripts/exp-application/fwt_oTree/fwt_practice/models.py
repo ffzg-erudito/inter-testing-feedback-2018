@@ -37,7 +37,6 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-            
         if (self.round_number == 1):
             # the content testing and rereading group are going to be familiarized with the content questions
             if self.session.config['name'] in ['1', '3']:
@@ -77,7 +76,7 @@ class Player(BasePlayer):
 
     def current_question(self):
         if self.session.config['name'] in ['1', '2']:
-            return self.session.vars['practice_questions'][self.round_number - 1]
+            return self.session.vars['practice_questions'][self.round_number - 5]
         else:
             return self.session.vars['practice_questions'][self.round_number - 5]
 

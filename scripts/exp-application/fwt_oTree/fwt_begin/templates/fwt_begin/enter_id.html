@@ -2,13 +2,23 @@
 {% load otree %}
 
 {% block title %}
-    Unesite prva dva slova imena oca, zadnja dva slova imena majke, i zadnja dva broja mobitela.
+    Unesite osnovne podatke
 {% endblock %}
 
 {% block content %}
 
-    {% formfields %}
-
+    {% formfield player.participant_code %}
+    
+    <br>
+    
+    {% formfield player.dob %}
+    
+    <br>
+    
+    {% formfield player.spol %}
+    
+    <br>
+    
     <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
 
 {% endblock %}

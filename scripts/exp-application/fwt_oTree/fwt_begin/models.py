@@ -2,7 +2,6 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
     )
 
-
 author = 'Matej Pavlić'
 
 doc = """
@@ -26,4 +25,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    identity = models.StringField(label = 'prva dva slova imena oca, zadnja dva slova imena majke, i zadnja dva broja mobitela:')
+    participant_code = models.StringField(label = 'Šifra: prva dva slova imena oca, zadnja dva slova imena majke, i zadnje dvije znamenke u broju mobitela:')
+    dob = models.IntegerField()
+    spol = models.StringField(widget = widgets.RadioSelect)
