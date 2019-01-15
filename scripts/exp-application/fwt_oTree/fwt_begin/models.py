@@ -28,4 +28,3 @@ class Player(BasePlayer):
     participant_code = models.StringField(label = 'Šifra: unesite prva dva slova imena oca, zadnja dva slova imena majke, i zadnje dvije znamenke u broju mobitela:')
     dob = models.IntegerField()
     spol = models.StringField(widget = widgets.RadioSelect)
-    predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, label = 'Procijenite svoje znanje o korovima na ljestvici od 1 do 7:')

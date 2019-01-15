@@ -7,14 +7,13 @@ import re
 # participant has to enter ID - to be implemented: check whether ID conforms to required format
 class enter_id(Page):
     form_model = 'player'
-    form_fields = ['participant_code', 'dob', 'spol', 'predznanje']
+    form_fields = ['participant_code', 'dob', 'spol']
     
     def before_next_page(self):
         self.participant.vars['participant_code'] = self.player.participant_code.upper()
         print(self.participant.vars['participant_code'])
         self.participant.vars['dob'] = self.player.dob
         self.participant.vars['spol'] = self.player.spol
-        self.participant.vars['predznanje'] = self.player.predznanje
         
         if self.session.config['name'] in ['1','2']:
             self.participant.vars['give_feedback'] = random.choice([True, False])
@@ -26,8 +25,6 @@ class enter_id(Page):
     def spol_choices(self):
         return ['Ž', 'M']
     
-    def predznanje_choices(self):
-        return [1, 2, 3, 4, 5, 6, 7]
     
     def error_message(self, values):
         pattern = re.compile('^[a-zA-Z]{4}[0-9]{2}$')

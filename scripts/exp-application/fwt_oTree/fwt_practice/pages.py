@@ -26,8 +26,14 @@ class practice_text(Page):
         
         
 class instructions_1(Page):
+    form_model = 'player'
+    form_fields = ['predznanje']
+    
     def is_displayed(self):
         return self.round_number == 1
+    
+    def predznanje_choices(self):
+        return [1, 2, 3, 4, 5, 6, 7]
     
     def vars_for_template(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
@@ -46,7 +52,7 @@ class instructions_1(Page):
                        Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz\
                        sljedećeg pitanja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta o korovima. Nakon prvog, a onda i nakon drugog teksta,\
                        također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika.',
                        'U ovoj vježbi odgovorit ćete na četiri pitanja vezana za sadržaj prethodnog teksta.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
@@ -55,7 +61,7 @@ class instructions_1(Page):
                        Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz\
                        sljedećeg pitanja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta o korovima. Nakon prvog, a onda i nakon drugog teksta,\
                        također ćete odgovarati na pitanja općeg znanja koja će biti jednakog oblika.',
                        'U ovoj vježbi odgovorit ćete na četiri pitanja općeg znanja.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
@@ -65,7 +71,7 @@ class instructions_1(Page):
                        način i jednakom brzinom kao i prvi put jer ćete imati dovoljno vremena!' % (minutes, koliko_min),
                        '30 sekundi prije isteka vremena, na lijevoj strani ekrana prikazat će se\
                        okvir unutar kojega će se odbrojavati vrijeme do kraja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon\
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta o korovima. Nakon prvog, a onda i nakon\
                        drugog teksta, također ćete ponovno čitati netom pročitani tekst.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
                
@@ -73,6 +79,10 @@ class instructions_1(Page):
             'rereading': (self.session.config['name'] == '3'),
             'message': message
         }
+        
+        def before_next_page(self):
+            self.participant.vars['predznanje'] = self.player.predznanje
+
 
 
 
