@@ -1,11 +1,11 @@
 id,question,choice1,choice2,choice3,choice4,solution
-11,Dio okoliša koji su ljudi naselili i prilagodili sebi naziva se:,antropofitocenoza,antroposfera,agrosfera,antrotop,antroposfera
-12,Podzemni dio stabiljke zove se:,rudela,gomolj,korijen,rizom,rizom
-13,"U odnosu na mlađe korovske biljke, starije korovske biljke:",imaju jači alelopatski učinak,sadrže više fitotoksina,sadrže manje inhibitornih tvari,pokazuju veću plastičnost,sadrže manje inhibitornih tvari
-14,Suncokret nepovoljno djeluje na rast:,ambrozije,cikorije,koštana,pirike,ambrozije
-15,Pojava korova vezana je uz stvaranje:,agrosfere i agrofitocenoze,antroposfere i astenosfere,ekosfere i fitocenoze,antroposfere i agrosfere,antroposfere i agrosfere
-16,"Na poljoprivrednim zemljištima, biljni sastav korova mijenja se:",ovisno o sustavu godišnje izmjene usjeva i obradi tla,ovisno o obradi tla i kolebanju ekoloških čimbenika,ovisno o njegovom potencijalu za proliferaciju,neovisno o poljoprivrednim zahvatima,ovisno o sustavu godišnje izmjene usjeva i obradi tla
-17,Utjecaj koji jedna vrsta ima na rast i razvitak druge vrste naziva se:,anuliranje,alelopatija,fitopatija,anualnost,alelopatija
-18,Korovi su se na poljoprivrednim površinama pojavili,"u mlađe kameno doba, pri stvaranju prvih agrofitocenoza","u starije kameno doba, pri stvaranju antroposfere","u mlađe kameno doba, pri stvaranju agrosfere","u starije kameno doba, pri stvaranju prvih fitocenoza","u mlađe kameno doba, pri stvaranju agrosfere"
-19,Plodored se odnosi na:,sustav godišnje izmjene usjeva,način gnojenja kultura u svrhu restrikcije rasta i razvoja korova,uzgoj biljaka pri kojem je karakteristično okopavanje,broj jedinki zasađenih u jednom redu,sustav godišnje izmjene usjeva
-20,Koji korov može pozitivno djelovati na raž?,troskot,trputac,poljska ljubica,slakoperka,poljska ljubica
+1,Dio okoliša koji su ljudi naselili i prilagodili sebi naziva se:,antropofitocenoza,antroposfera,agrosfera,antrotop[a],antroposfera
+2,Podzemni dio stabiljke zove se:,cenoza,gomolj,korijen,rizom,rizom
+3,"U odnosu na mlađe korovske biljke, starije korovske biljke:",imaju jači alelopatski učinak,sadrže više fitotoksina,sadrže manje inhibitornih tvari,pokazuju veću plastičnost,sadrže manje inhibitornih tvari
+4,Suncokret nepovoljno djeluje na rast:,ambrozije,trputca,troskota,slakoperke,ambrozije
+5,Pojava korova vezana je uz stvaranje:,agrofitocenoze,astenosfere,ekosfere,antroposfere,antroposfere
+6,"Na poljoprivrednim zemljištima, biljni sastav korova mijenja se:",ovisno o sustavu godišnje izmjene usjeva i obradi tla,ovisno o obradi tla i kolebanju ekoloških čimbenika,ovisno o njegovom potencijalu za proliferaciju,neovisno o poljoprivrednim zahvatima,ovisno o sustavu godišnje izmjene usjeva i obradi tla
+7,Utjecaj koji jedna vrsta ima na rast i razvitak druge vrste naziva se:,anuliranje,alelopatija,fitopatija,anualnost,alelopatija
+8,Korovi su se na poljoprivrednim površinama pojavili,"u mlađe kameno doba, pri stvaranju prvih agrofitocenoza","u starije kameno doba, pri stvaranju antroposfere","u mlađe kameno doba, pri stvaranju agrosfere","u starije kameno doba, pri stvaranju prvih fitocenoza","u mlađe kameno doba, pri stvaranju agrosfere"
+9,Plodored se odnosi na:,sustav godišnje izmjene usjeva,način gnojenja kultura u svrhu restrikcije rasta i razvoja korova,uzgoj biljaka pri kojem je karakteristično okopavanje,broj jedinki zasađenih u jednom redu,sustav godišnje izmjene usjeva
+10,Koji korov može pozitivno djelovati na raž?,štir,trputac,poljska ljubica,kužnjak,poljska ljubica

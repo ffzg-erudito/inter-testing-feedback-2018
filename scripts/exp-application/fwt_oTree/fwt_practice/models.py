@@ -32,19 +32,19 @@ class Constants(BaseConstants):
     with open('fwt_practice/test0_gk.csv', encoding = 'utf8') as questions_file:
         practice_questions_gk = list(csv.DictReader(questions_file))
 
-    num_rounds = len(practice_questions_c) # both practice question lists have the same length
-
+    num_rounds = len(practice_questions_c) * 2 # both practice question lists have the same length
+    num_rounds_for_rereaders = 4
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        if (self.round_number == 1) & (self.session.config['name'] is not '3'):
-            rereading = False
-            if self.session.config['name'] == '1':
+            
+        if (self.round_number == 1):
+            # the content testing and rereading group are going to be familiarized with the content questions
+            if self.session.config['name'] in ['1', '3']:
                 self.session.vars['practice_questions'] = Constants.practice_questions_c.copy()
             elif self.session.config['name'] == '2':
                 self.session.vars['practice_questions'] = Constants.practice_questions_gk.copy()
-        else:
-            rereading = True
+                
 
             ## ALTERNATIVE DESIGN:
             ## to randomize the order of the questions, you could instead do:
@@ -56,12 +56,11 @@ class Subsession(BaseSubsession):
             ## and to randomize differently for each participant, you could use
             ## the random.sample technique, but assign into participant.vars
             ## instead of session.vars.
-        if not rereading:
-            for p in self.get_players():
-                question_data = p.current_question()
-                p.question_id = int(question_data['id'])
-                p.question = question_data['question']
-                p.solution = question_data['solution']
+        for p in self.get_players():
+            question_data = p.current_question()
+            p.question_id = int(question_data['id'])
+            p.question = question_data['question']
+            p.solution = question_data['solution']
 
 
 class Group(BaseGroup):
@@ -75,10 +74,13 @@ class Player(BasePlayer):
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
     feedback = models.StringField()
-    participant_vars_dump = models.StringField()
 
     def current_question(self):
-        return self.session.vars['practice_questions'][self.round_number - 1]
+        if self.session.config['name'] in ['1', '2']:
+            return self.session.vars['practice_questions'][self.round_number - 1]
+        else:
+            return self.session.vars['practice_questions'][self.round_number - 5]
+
 
 
     def check_correct(self):

@@ -2,34 +2,56 @@
 {% load otree %}
 
 {% block title %}
-    Zadnji dio postupka
+    {{ title }}
 {% endblock %}
 
 {% block content %}
     
-    <div style="text-align: justify; text-justify: inter-word">
     
-        <br>
-    
-        <p style="word-wrap: break-word; width: 580px">
-            {{ message.0 }}
-        </p>
+    {% if rereading is True %}
+        <div style="text-align: justify; text-justify: inter-word">
         
-        <p style="word-wrap: break-word; width: 580px">
-            {{ message.1}}
-        </p>
+            <br>
         
-        <p style="word-wrap: break-word ; width: 361px">
-            {{ message.2 }}
-        </p>
+            <p style="word-wrap: break-word; width: 580px">
+                {{ message.0 }}
+            </p>
+            
+            
+            <p style="word-wrap: break-word; width: 580px">
+                {{ message.1}}
+            </p>
+         
+            <br>
+            <br>
+            <br>    
+        
+            <p>
+                {{ message.2 }}
+            </p>
+        </div>
+        
+    {% else %}
+        
+        <div style="text-align: justify; text-justify: inter-word">
+            
+            <br>
+        
+            <p style="word-wrap: break-word; width: 580px">
+                {{ message.0 }}
+            </p>
+            
+            <br>
+            <br>
+            <br>    
+        
+            <p>
+                {{ message.1 }}
+            </p>
+        </div>
     
-        <br>
-        <br>
-        <br>    
-    
-        <p>Kada ste spremni započeti, pritisnite tipku "Dalje".</p>
-    </div>
-    
+    {% endif %}
+        
     <br>
     <br>
     <br>

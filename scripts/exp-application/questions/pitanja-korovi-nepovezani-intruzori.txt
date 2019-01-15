@@ -1,0 +1,152 @@
+﻿    1.1. Koliko se drvenastih i zeljastih biljaka smatra korovima (zaokružite najbližu vrijednost)?
+        a. više od 2500
+        b. više od 3000
+        c. više od 3500
+        d. više od 4000
+    1.2. Na urbanim prostorima se pojavljuju korovima srodne:
+        a. rudimentarne biljke
+        b. runalne biljke
+        c. repaste biljke
+        d. ruderalne biljke
+    1.3. Za korove je karakteristično da imaju:
+        a. učinkovit korijenski, ali ne i nadzemni sustav
+        b. učinkovit nadzemni sustav, ali ne i korijenski
+        c. učinkovit korijenski i nadzemni sustav
+        d. neučinkovit i korijenski i nadzemni sustav
+    1.4. Hoće li se biljka nazvati korovom ili ne, ovisi o:
+        a. stupnju u kojem crpi resurse od kulturne biljke
+        b. njenoj rasprostranjenosti na nekom području
+        c. tome je li biljka cilj uzgoja
+        d. njenom potencijalu za proliferaciju
+    1.5. Korovi uglavnom pripadaju u skupinu:
+        a. autotrofnih biljaka
+        b. semitrofnih biljaka
+        c. heterotrofnih biljaka
+        d. autosomnih biljaka
+    1.6. Dio okoliša koji su ljudi prilagodili za poljoprivrednu proizvodnju naziva se:
+        a. agrocenoza
+        b. agrodom
+        c. agrosfera
+        d. agrotop
+    1.7. Talofite su:
+        a. parazitske biljke
+        b. gljive
+        c. alge
+        d. drvenaste biljke
+    1.8. Korovi mogu biti korisni u:
+        a. proizvodnji umjetnih gnojiva
+        b. proizvodnji celuloznih vlakana
+        c. proizvodnji antihistaminika
+        d. proizvodnji prirodnih boja
+    1.9. Agrofitocenoze su:
+        a. biljne zajednice korova i kulturnih biljaka
+        b. zajednice kulturnih biljaka i sisavaca koji nastanjuju poljoprivredne površine
+        c. zajednice raznovrsnih kulturnih biljaka
+        d. zajednice raznovrsnih korova na poljoprivrednim površinama
+    1.10. Koja od navedenih biljaka je istovremeno i korov i kulturna biljka?
+        a. crna zob
+        b. bijela gorušica
+        c. cikorija
+        d. ječam
+    
+    2.1. Dio okoliša koji su ljudi naselili i prilagodili sebi naziva se:
+        a. antropofitocenoza
+        b. antroposfera
+        c. agrosfera
+        d. antrotop[a]
+    2.2. Podzemni dio stabiljke zove se:
+        a. cenoza
+        b. gomolj
+        c. korijen
+        d. rizom
+    2.3. U odnosu na mlađe korovske biljke, starije korovske biljke:
+        a. imaju jači alelopatski učinak
+        b. sadrže više fitotoksina
+        c. sadrže manje inhibitornih tvari
+        d. pokazuju veću plastičnost
+    2.4. Suncokret nepovoljno djeluje na rast:
+        a. ambrozije
+        b. trputca
+        c. troskota
+        d. slakoperke
+    2.5. Pojava korova vezana je uz stvaranje:
+        a. agrofitocenoze
+        b. astenosfere
+        c. ekosfere
+        d. antroposfere
+    2.6. Na poljoprivrednim zemljištima, biljni sastav korova mijenja se:
+        a. ovisno o sustavu godišnje izmjene usjeva i obradi tla
+        b. ovisno o obradi tla i kolebanju ekoloških čimbenika
+        c. ovisno o njegovom potencijalu za proliferaciju
+        d. neovisno o poljoprivrednim zahvatima
+    2.7. Utjecaj koji jedna vrsta ima na rast i razvitak druge vrste naziva se:
+        a. anuliranje
+        b. alelopatija
+        c. fitopatija
+        d. anualnost
+    2.8. Korovi su se na poljoprivrednim površinama pojavili
+        a. u mlađe kameno doba, pri stvaranju prvih agrofitocenoza
+        b. u starije kameno doba, pri stvaranju antroposfere
+        c. u mlađe kameno doba, pri stvaranju agrosfere
+        d. u starije kameno doba, pri stvaranju prvih fitocenoza
+    2.9. Plodored se odnosi na:
+        a. sustav godišnje izmjene usjeva
+        b. način gnojenja kultura u svrhu restrikcije rasta i razvoja korova
+        c. uzgoj biljaka pri kojem je karakteristično okopavanje
+        d. broj jedinki zasađenih u jednom redu
+    2.10. Koji korov može pozitivno djelovati na raž?
+        a. štir
+        b. trputac
+        c. poljska ljubica
+        d. kužnjak
+    
+    3.1. Veća otpornost prema nepovoljnim biotskim čimbenicima odnosi se prvenstveno na otpornost prema:
+        a. toksičnim tvarima
+        b. parazitskim biljkama
+        c. virusima i bakterijama
+        d. bolestima i štetnicima
+    3.2. Poljoprivredno stanište u kojem raste neka biljka zove se:
+        a. agrobiosfera
+        b. agrosfera
+        c. biotop
+        d. agrobiotop
+    3.3. Neki korovi biološku reprodukciju u nepovoljnim uvjetima osiguravaju putem:
+        a. neotenije
+        b. biofaktora
+        c. polipatije
+        d. neofilije
+    3.4. Veći stupanj domestikacije korova dovodi do:
+        a. pozitivnog alelopatskog djelovanja
+        b. bržeg širenja sjemenja
+        c. promjene ploidije korova
+        d. smanjenja dormantnosti
+    3.5. Veći, bujniji i varijabilniji korovi imaju karakteristiku:
+        a. poliploidije
+        b. neotenije
+        c. dormantnosti
+        d. fertilizacije
+    3.6. Neotenija korova za posljedicu ima:
+        a. povećanu plastičnost
+        b. brzo sazrijevanje
+        c. prilagodbu kulturnim biljkama
+        d. stvaranje velikog broja sjemenki
+    3.7. Velika otpornost sjemenki korova na štetne eksterne utjecjaje proizlazi iz:
+        a. malih dimenzija sjemena
+        b. male mase sjemena
+        c. čvrste sjemene ljuske
+        d. kalijpozitivnosti sjemena
+    3.8. Pojam poliploidija se odnosi na:
+        a. broj setova kromosoma
+        b. broj zigotnih stanica
+        c. broj alelopatskih odnosa
+        d. broj izdanaka koji tvore stabljiku
+    3.9. Veću otpornost prema ekstremnim abiotskim utjecajima korovi mogu zahvaliti:
+        a. svom florističkom sastavu
+        b. pretežnoj diploidnosti i bujnosti
+        c. strukturi korijena i razgranatosti stabljike
+        d. većoj vitalnosti i većoj heterozigotnosti
+    3.10. Dormantnost je karakteristika korova koja se odnosi na:
+        a. mogućnost odgođenog klijanja
+        b. prilagodbu kulturnim biljkama
+        c. širenje sjemena isključivo u proljeće
+        d. klijanje usko vezano uz rast druge biljke
