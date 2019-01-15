@@ -156,19 +156,21 @@ class instructions_3(Page):
     def vars_for_template(self):
         if self.session.config['name'] in ['1', '2']:
             rereading = False
-            message = ['Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj\
-                       sva tri pročitana teksta. Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor\
-                       koji smatrate točnim te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti\
-                       prikaz sljedećeg pitanja.',
+            message = ['U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
+                       također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika.\
+                       Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
+                       teksta. Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
+                       te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
                        'Pritisnite tipku "Dalje" kako biste dobili završnu uputu.']
-            
         else:
             rereading = True
-            message = ['Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj\
-                       sva tri pročitana teksta. Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor\
-                       koji smatrate točnim te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti\
-                       prikaz sljedećeg pitanja.',
-                       'Sada ćete odgovorit na četiri pitanja vezana za sadržaj prethodnog teksta.',
+            message = ['U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon\
+                       drugog teksta, također ćete ponovno čitati netom pročitani tekst. Nakon čitanja trećeg teksta,\
+                       odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana teksta. Pitanja su tipa\
+                       višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim te ga potvrdite pritiskom\
+                       na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
+                       'Sada ćete odgovoriti na četiri pitanja vezana za sadržaj prethodnog teksta kako biste se\
+                       upoznali s oblikom pitanja u završnom testu.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
             
             # because whether giving feedback determines the number of "parts" of a single taks, here, depending
@@ -229,7 +231,20 @@ class get_ready(Page):
         return self.round_number == Constants.num_rounds
     
     def vars_for_template(self):
-        is_experiment = (self.session.config['name'] == 'fwt') 
+        is_experiment = (self.session.config['name'] is not 'proba')
+#        if self.session.config['name'] is '1':
+#            is_content = True
+#            is_gk = False
+#            is_rereading = False
+#        elif self.session.config['name'] is '2':
+#            is_content = False
+#            is_gk = True
+#            is_rereading = False
+#        else:
+#            is_content = False
+#            is_gk = False
+#            is_rereading = True
+            
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
         minutes = math.ceil(estimate / 60)
         
@@ -241,41 +256,41 @@ class get_ready(Page):
             koliko_min = " minute"
             
         if (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == True):
-            message_feedback = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta.\
-                            Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
-                            s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
-                            koja će obuhvaćati sadržaj sva tri pročitana teksta.',
-                            'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
-                            način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
-                            30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
-                            kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
-                            'Vrijeme za proučavanje povratne informacije produženo je na 1 minutu.\
-                            Molimo Vas, proučite povratne informacije o Vašoj točnosti jer ćete nakon čitanja trećeg teksta\
-                            rješavati završni test koji će se odnositi na sva tri teksta.',
-                            'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
-                            "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
+            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta.\
+                        Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
+                        s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
+                        koja će obuhvaćati sadržaj sva tri pročitana teksta.',
+                        'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
+                        način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
+                        30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
+                        kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
+                        'Vrijeme za proučavanje povratne informacije produženo je na 1 minutu. Molimo Vas, proučite\
+                        povratne informacije o Vašoj točnosti jer ćete nakon čitanja trećeg teksta rješavati završni\
+                        test koji će se odnositi na sva tri teksta.',
+                        'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
+                        "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
             
         elif (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == False):
-            message_no_feedback = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta.\
-                            Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
-                            s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
-                            koja će obuhvaćati sadržaj sva tri pročitana teksta.',
-                            'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
-                            način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
-                            30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
-                            kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
-                            'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
-                            "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
+            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta.\
+                        Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
+                        s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
+                        koja će obuhvaćati sadržaj sva tri pročitana teksta.',
+                        'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
+                        način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
+                        30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
+                        kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
+                        'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
+                        "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
         else:
-            message_rereading = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta. Nakon prvog,\
-                            a onda i nakon drugog teksta, ponovno ćete čitati netom pročitani tekst, a nakon zadnjeg\
-                            ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri pročitana teksta.',
-                            'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
-                            način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
-                            30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
-                            kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
-                            'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
-                            "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
+            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta. Nakon prvog,\
+                        a onda i nakon drugog teksta, ponovno ćete čitati netom pročitani tekst, a nakon zadnjeg\
+                        ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri pročitana teksta.',
+                        'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
+                        način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
+                        30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
+                        kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
+                        'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
+                        "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
                 
 
         practice_message = ["Sljedeći prikaz sadrži nešto duži tekst.",
@@ -286,10 +301,12 @@ class get_ready(Page):
                             "Pritisnite 'Dalje' kako biste nastavili s čitanjem drugog teksta."]
         
         
-        if self.session.config['name'] in ['1', '2', '3']:
-            return {'is_exp': is_experiment, 'message': next_message}
-        else:
+        if self.session.config['name'] == 'proba':
             return {'is_exp': is_experiment, 'message': practice_message}
+        else:
+            return {'is_exp': is_experiment, 
+                    'feedback': self.participant.vars['give_feedback'],
+                    'message': message}             
 
 
 

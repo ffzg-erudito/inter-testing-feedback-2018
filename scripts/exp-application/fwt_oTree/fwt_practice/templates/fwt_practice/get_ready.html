@@ -33,33 +33,71 @@
             <br>
             <br>
         
-            <p>{{ message.4 }}</p>
+            <p>
+                {{ message.4 }}
+            </p>
+            
         </div>
+        
         
     {% else %}
     
-        <div style="text-align: justify; text-justify: inter-word">
+        {% if feedback is True %}
+            <div style="text-align: justify; text-justify: inter-word">
+            
+                <br>
+                
+                <p style="word-wrap: break-word; width: 517px">
+                    {{ message.0 }}
+                </p>
+                
+                <p style="word-wrap: break-word; width: 517px">
+                    {{ message.1}} 
+                </p>
+                
+                <p style="word-wrap: break-word ; width: 517px">
+                    {{ message.2 }}
+                </p>
+                
+                <p style="word-wrap: break-word ; width: 517px">
+                    {{ message.3 }}
+                </p>
+                
+                <br>
+                <br>
+                <br>
+            
+                <p>{{ message.4 }}</p>
+            </div>
+            
+            
+            
+        {% else %}
         
-            <br>
+            <div style="text-align: justify; text-justify: inter-word">
             
-            <p style="word-wrap: break-word; width: 517px">
-                {{ message.0 }}
-            </p>
+                <br>
+                
+                <p style="word-wrap: break-word; width: 517px">
+                    {{ message.0 }}
+                </p>
+                
+                <p style="word-wrap: break-word; width: 517px">
+                    {{ message.1}} 
+                </p>
+                
+                <p style="word-wrap: break-word ; width: 517px">
+                    {{ message.2 }}
+                </p>
+                
+                <br>
+                <br>
+                <br>
             
-            <p style="word-wrap: break-word; width: 517px">
-                {{ message.1}} 
-            </p>
+                <p>{{ message.3 }}</p>
+            </div>
             
-            <p style="word-wrap: break-word ; width: 517px">
-                {{ message.2 }}
-            </p>
-            
-            <br>
-            <br>
-            <br>
-        
-            <p>{{ message.3 }}</p>
-        </div>
+        {% endif %}
         
     {% endif %}
     

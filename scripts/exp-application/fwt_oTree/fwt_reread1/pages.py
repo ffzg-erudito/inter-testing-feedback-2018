@@ -26,7 +26,7 @@ class get_ready(Page):
     
     def vars_for_template(self):
         session_type = self.session.config['name']
-        is_experiment = (self.session.config['name'] == 'fwt') 
+        is_experiment = (self.session.config['name'] in ['1', '2', '3']) 
         instruction = "This is the instruction, in case the experiment is taking place"
         next_message = "Pritisnite 'Dalje' kako biste nastavili sa sljedećim tekstom."
         exit_message = "Kraj!"
