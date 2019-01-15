@@ -5,7 +5,7 @@ from otree.api import (
 author = 'Matej Pavlić'
 
 doc = """
-This app asks the participant to make a personal ID.
+This app asks the participant to make a personal ID, and to submit basic personal information
 """
 
 
@@ -25,6 +25,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    participant_code = models.StringField(label = 'Šifra: prva dva slova imena oca, zadnja dva slova imena majke, i zadnje dvije znamenke u broju mobitela:')
+    participant_code = models.StringField(label = 'Šifra: unesite prva dva slova imena oca, zadnja dva slova imena majke, i zadnje dvije znamenke u broju mobitela:')
     dob = models.IntegerField()
     spol = models.StringField(widget = widgets.RadioSelect)
+    predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, label = 'Procijenite svoje znanje o korovima na ljestvici od 1 do 7:')
