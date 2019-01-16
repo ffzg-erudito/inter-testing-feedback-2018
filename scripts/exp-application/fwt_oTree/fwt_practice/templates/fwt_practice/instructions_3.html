@@ -17,18 +17,21 @@
                 {{ message.0 }}
             </p>
             
-            
             <p style="word-wrap: break-word; width: 517px">
                 {{ message.1}}
             </p>
-         
-            <br>
+            
+            <p style="word-wrap: break-word; width: 517px">
+                {{ message.2}}
+            </p>
+            
             <br>
             <br>    
         
             <p>
-                {{ message.2 }}
+                {{ message.3 }}
             </p>
+            
         </div>
         
     {% else %}
@@ -41,23 +44,24 @@
                 {{ message.0 }}
             </p>
             
-            <br>
+            <p style="word-wrap: break-word; width: 517px">
+                {{ message.1 }}
+            </p>
+            
             <br>
             <br>    
         
             <p>
-                {{ message.1 }}
+                {{ message.2 }}
             </p>
+            
         </div>
     
     {% endif %}
         
     <br>
     <br>
-    <br>
     
-    {% formfields %}
-
     <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
 
 {% endblock %}

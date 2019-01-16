@@ -1,0 +1,100 @@
+﻿    3.1. Veća otpornost prema nepovoljnim biotskim čimbenicima odnosi se prvenstveno na otpornost prema:
+        a. toksičnim tvarima
+        b. parazitskim biljkama
+        c. virusima i bakterijama
+        d. bolestima i štetnicima
+    3.2. Poljoprivredno stanište u kojem raste neka biljka zove se:
+        a. agrobiosfera
+        b. agrosfera
+        c. biotop
+        d. agrobiotop
+    3.3. Neki korovi biološku reprodukciju u nepovoljnim uvjetima osiguravaju putem:
+        a. neotenije
+        b. biofaktora
+        c. polipatije
+        d. neofilije
+    3.4. Veći stupanj domestikacije korova dovodi do:
+        a. pozitivnog alelopatskog djelovanja
+        b. bržeg širenja sjemenja
+        c. promjene ploidije korova
+        d. smanjenja dormantnosti
+    3.5. Veći, bujniji i varijabilniji korovi imaju karakteristiku:
+        a. poliploidije
+        b. neotenije
+        c. dormantnosti
+        d. fertilizacije
+    3.6. Neotenija korova za posljedicu ima:
+        a. povećanu plastičnost
+        b. brzo sazrijevanje
+        c. prilagodbu kulturnim biljkama
+        d. stvaranje velikog broja sjemenki
+    3.7. Velika otpornost sjemenki korova na štetne eksterne utjecjaje proizlazi iz:
+        a. malih dimenzija sjemena
+        b. male mase sjemena
+        c. čvrste sjemene ljuske
+        d. kalijpozitivnosti sjemena
+    3.8. Pojam poliploidija se odnosi na:
+        a. broj setova kromosoma
+        b. broj zigotnih stanica
+        c. broj alelopatskih odnosa
+        d. broj izdanaka koji tvore stabljiku
+    3.9. Veću otpornost prema ekstremnim abiotskim utjecajima korovi mogu zahvaliti:
+        a. svom florističkom sastavu
+        b. pretežnoj diploidnosti i bujnosti
+        c. strukturi korijena i razgranatosti stabljike
+        d. većoj vitalnosti i većoj heterozigotnosti
+    3.10. Dormantnost je karakteristika korova koja se odnosi na:
+        a. mogućnost odgođenog klijanja
+        b. prilagodbu kulturnim biljkama
+        c. širenje sjemena isključivo u proljeće
+        d. klijanje usko vezano uz rast druge biljke
+    3.11. Koji korov najbolje klija na temperaturi od 27°C:
+        a. ptičja trava
+        b. poljska gorušica
+        c. čičak
+        d. pjegasti dvornik
+    3.12. Od navedenih korovskih vrsta odaberite onu koja je isključivo poliploidna:
+        a. obični maslačak
+        b. vlasastodlakava grahorica
+        c. divlja heljda
+        d. planinska mirisavka
+    3.13. Za suzbijanje rasta korova te njihovo uništavanje, potrebno je poznavati:
+        a. njihov floristički sastav
+        b. njihov fazni razvitak
+        c. optimalnu vlažnost tla
+        d. period zadržavanja vode u lišću
+    3.14. Fruktifikacija je:
+        a. povećanje koncentracije fruktoze u plodu:
+        b. proces promjene biljnog sastava korova
+        c. ispunjenje ekoloških uvjeta za klijanje
+        d. posljednji stadij razvoja ploda
+    3.15. Rastezljivo klijanje sjemena korovi imaju primarno zahvaljujući:
+        a. maloj veličini sjemena
+        b. karakteristikama ljuske sjemena
+        c. fosforopozitivnosti sjemena
+        d. količini vode u sjemenu
+    3.16. Suzbijanje korova može biti otežano zbog:
+        a. produžene vegetacije u odnosu na kulturne biljke
+        b. simbiotskog odnosa s kulturnim biljkama
+        c. piramidalnog oblika podzemnog dijela stabljike
+        d. skraćene vegetacije korova u odnosu na kulturne biljke
+    3.17. Korov koji proizvodi najviše sjemena je:
+        a. kiseličasti dvornik
+        b. rana livadarka
+        c. zubača
+        d. bunika
+    3.18. Sjemenke kojeg među navedenim korovima mogu najduže sačuvati životnu sposobnost:
+        a. konjska kiselica
+        b. poljska koljenika
+        c. pepeljuga
+        d. njivska palamida
+    3.19. Suvremeni zahtjevi u suzbijanju korova moraju:
+        a. se temeljiti na poznavanju kompeticijskih odnosa s kulturama
+        b. u potpunosti osigurati očuvanje postojeće strukture tla
+        c. biti potpuno u skladu s biološkim značajkama korova
+        d. biti potpuno suprotni vegetacijskom ciklusu korova
+    3.20. Neoteniju potiče:
+        a. količina hraniva u tlu
+        b. količina svjetlosti
+        c. dominacija korova u odnosu na kulture
+        d. kompeticijski odnos s kulturnom biljkom

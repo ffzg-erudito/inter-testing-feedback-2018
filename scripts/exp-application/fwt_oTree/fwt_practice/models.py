@@ -73,7 +73,7 @@ class Player(BasePlayer):
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
     feedback = models.StringField()
-    predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, label = 'Procijenite svoje znanje o korovima na ljestvici od 1 do 7:')
+    predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, label = 'Molimo Vas da procijenite svoje znanje o korovima na ljestvici od 1 do 7:')
 
 
     def current_question(self):

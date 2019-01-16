@@ -16,8 +16,6 @@ class text_1(Page):
 
 
 class Question(Page):
-    def is_displayed(self):
-        return self.session.config['name'] == 'fwt'
     form_model = 'player'
     form_fields = ['submitted_answer']
 
@@ -39,11 +37,7 @@ class Question(Page):
 
 class Results(Page):
     def is_displayed(self):
-        if self.session.config['name'] == 'fwt':
-            return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
-        else:
-            return False
-
+        return (self.participant.vars['give_feedback']) & (self.round_number == Constants.num_rounds)
 
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()

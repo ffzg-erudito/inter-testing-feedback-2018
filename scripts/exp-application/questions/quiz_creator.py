@@ -11,7 +11,7 @@ import csv
 # set paths
 os.chdir('C:\\Users\matpa\inter-testing-feedback-2018\scripts\exp-application\questions')
 
-questionsPath = 'pitanja-korovi-nepovezani-intruzori.txt'
+questionsPath = 'pitanja-korovi-nepovezani-intruzori-3.0.txt'
 
 
 # read files
@@ -41,7 +41,10 @@ for item in items:
 
     
     
-solution = [3, 5, 4, 4, 2, 4, 4, 5, 2, 4, 3, 5, 4, 2, 5, 2, 3, 4, 2, 4, 5, 5, 2, 5, 2, 2, 4, 2, 5, 2]
+# solution = [3, 5, 4, 4, 2, 4, 4, 5, 2, 4, 3, 5, 4, 2, 5, 2, 3, 4, 2, 4, 5, 5, 2, 5, 2, 2, 4, 2, 5, 2] - za prvi, drugi i treći dio s po 10 pitanja
+
+    # za 3. dio s 20 pitanja:
+solution = [5, 5, 2, 5, 2, 2, 4, 2, 5, 2, 5, 2, 3, 4, 3, 5, 5, 2, 4, 5]
 
 with open('quiz.csv', 'w', newline = '', encoding='utf-8') as questions_file:
     questions_writer = csv.writer(questions_file, delimiter = ',', quoting=csv.QUOTE_MINIMAL)

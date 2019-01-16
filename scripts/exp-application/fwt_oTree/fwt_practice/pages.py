@@ -26,14 +26,9 @@ class practice_text(Page):
         
         
 class instructions_1(Page):
-    form_model = 'player'
-    form_fields = ['predznanje']
     
     def is_displayed(self):
         return self.round_number == 1
-    
-    def predznanje_choices(self):
-        return [1, 2, 3, 4, 5, 6, 7]
     
     def vars_for_template(self):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
@@ -52,7 +47,7 @@ class instructions_1(Page):
                        Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz\
                        sljedećeg pitanja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta o korovima. Nakon prvog, a onda i nakon drugog teksta,\
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
                        također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika.',
                        'U ovoj vježbi odgovorit ćete na četiri pitanja vezana za sadržaj prethodnog teksta.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
@@ -61,7 +56,7 @@ class instructions_1(Page):
                        Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz\
                        sljedećeg pitanja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta o korovima. Nakon prvog, a onda i nakon drugog teksta,\
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
                        također ćete odgovarati na pitanja općeg znanja koja će biti jednakog oblika.',
                        'U ovoj vježbi odgovorit ćete na četiri pitanja općeg znanja.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
@@ -71,7 +66,7 @@ class instructions_1(Page):
                        način i jednakom brzinom kao i prvi put jer ćete imati dovoljno vremena!' % (minutes, koliko_min),
                        '30 sekundi prije isteka vremena, na lijevoj strani ekrana prikazat će se\
                        okvir unutar kojega će se odbrojavati vrijeme do kraja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta o korovima. Nakon prvog, a onda i nakon\
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon\
                        drugog teksta, također ćete ponovno čitati netom pročitani tekst.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
                
@@ -79,10 +74,6 @@ class instructions_1(Page):
             'rereading': (self.session.config['name'] == '3'),
             'message': message
         }
-        
-        def before_next_page(self):
-            self.participant.vars['predznanje'] = self.player.predznanje
-
 
 
 
@@ -132,9 +123,10 @@ class instructions_2(Page):
     
     def vars_for_template(self):
         message = ['Treći dio sadrži povratnu informaciju o točnosti Vaših odgovora na prethodna pitanja.\
-                   Tablica sadrži u prvom stupcu pitanje, u drugom Vaš odgovor, u trećem točan odgovor,\
-                   i u zadnjem ocjenu točnosti Vašeg odgovora.',
-                   'Dobro proučite povratne informacije. Nakon 20 sekundi, prikazat će se tipka "Dalje",\
+                   Tablica u prvom stupcu sadrži pitanje, u drugom Vaš odgovor, u trećem točan odgovor,\
+                   i u zadnjem ocjenu točnosti Vašeg odgovora. Crvenom bojom označena su pitanja na koja\
+                   niste točno odgovorili.',
+                   'Dobro proučite povratne informacije. Nakon 10 sekundi, prikazat će se tipka "Dalje",\
                    te ćete moći pritiskom na nju pokrenuti nastavak postupka.',
                    'Pritisnite tipku "Dalje" kako biste vidjeli povratne informacije.']
                
@@ -172,18 +164,19 @@ class instructions_3(Page):
         if self.session.config['name'] in ['1', '2']:
             rereading = False
             message = ['U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
-                       također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika.\
-                       Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
+                       također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika\
+                       kao ova na koja ste upravo odgovarali.',
+                       'Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
                        teksta. Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
                        'Pritisnite tipku "Dalje" kako biste dobili završnu uputu.']
         else:
             rereading = True
             message = ['U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon\
-                       drugog teksta, također ćete ponovno čitati netom pročitani tekst. Nakon čitanja trećeg teksta,\
-                       odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana teksta. Pitanja su tipa\
-                       višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim te ga potvrdite pritiskom\
-                       na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
+                       drugog teksta, također ćete ponovno čitati netom pročitani tekst.',
+                       'Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
+                       teksta. Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim te ga\
+                       potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
                        'Sada ćete odgovoriti na četiri pitanja vezana za sadržaj prethodnog teksta kako biste se\
                        upoznali s oblikom pitanja u završnom testu.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
@@ -242,8 +235,14 @@ class Question_rereading(Page):
 
 
 class get_ready(Page):
+    form_model = 'player'
+    form_fields = ['predznanje']
+    
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
+    
+    def predznanje_choices(self):
+        return [1, 2, 3, 4, 5, 6, 7]
     
     def vars_for_template(self):
         is_experiment = (self.session.config['name'] is not 'proba')
@@ -263,6 +262,7 @@ class get_ready(Page):
         estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
         minutes = math.ceil(estimate / 60)
         
+        
         if minutes == 1:
             koliko_min = " minutu"
         elif minutes > 4:
@@ -271,7 +271,7 @@ class get_ready(Page):
             koliko_min = " minute"
             
         if (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == True):
-            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta.\
+            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima.\
                         Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
                         s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
                         koja će obuhvaćati sadržaj sva tri pročitana teksta.',
@@ -283,10 +283,10 @@ class get_ready(Page):
                         povratne informacije o Vašoj točnosti jer ćete nakon čitanja trećeg teksta rješavati završni\
                         test koji će se odnositi na sva tri teksta.',
                         'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
-                        "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
+                        "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
             
         elif (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == False):
-            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta.\
+            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima.\
                         Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
                         s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
                         koja će obuhvaćati sadržaj sva tri pročitana teksta.',
@@ -295,9 +295,9 @@ class get_ready(Page):
                         30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
                         kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
                         'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
-                        "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
+                        "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
         else:
-            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz ukupno tri teksta. Nakon prvog,\
+            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima. Nakon prvog,\
                         a onda i nakon drugog teksta, ponovno ćete čitati netom pročitani tekst, a nakon zadnjeg\
                         ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri pročitana teksta.',
                         'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
@@ -305,7 +305,7 @@ class get_ready(Page):
                         30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
                         kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
                         'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
-                        "Pritisnite 'Dalje' kako biste nastavili s čitanjem prvog teksta u glavnom dijelu postupka."]
+                        "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
                 
 
         practice_message = ["Sljedeći prikaz sadrži nešto duži tekst.",
@@ -313,7 +313,7 @@ class get_ready(Page):
                             Vaš zadatak je čitati tekst na jednak način i jednakom brzinom kao prethodni!" % (minutes, koliko_min),
                             "30 sekundi prije isteka vremena, na lijevoj strani ekrana prikazat će se\
                             okvir unutar kojega će se odbrojavati vrijeme do kraja.", 
-                            "Pritisnite 'Dalje' kako biste nastavili s čitanjem drugog teksta."]
+                            "Pritisnite 'Dalje' kako biste počeli čitati drugi tekst."]
         
         
         if self.session.config['name'] == 'proba':
@@ -323,6 +323,8 @@ class get_ready(Page):
                     'feedback': self.participant.vars['give_feedback'],
                     'message': message}             
 
+    def before_next_page(self):
+        self.participant.vars['predznanje'] = self.player.predznanje
 
 
 
