@@ -75,14 +75,11 @@ class Player(BasePlayer):
     feedback = models.StringField()
     predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, label = 'Molimo Vas da procijenite svoje znanje o korovima na ljestvici od 1 do 7:')
 
-
     def current_question(self):
         if self.session.config['name'] in ['1', '2']:
             return self.session.vars['practice_questions'][self.round_number - 5]
         else:
             return self.session.vars['practice_questions'][self.round_number - 5]
-
-
 
     def check_correct(self):
         self.is_correct = (self.submitted_answer == self.solution)

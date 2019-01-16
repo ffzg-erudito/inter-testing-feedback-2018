@@ -26,5 +26,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     participant_code = models.StringField(label = 'Šifra: unesite prva dva slova imena oca, zadnja dva slova imena majke, i zadnje dvije znamenke u broju mobitela:')
-    dob = models.IntegerField()
+    dob = models.IntegerField(min=14, max=40)
     spol = models.StringField(widget = widgets.RadioSelect)

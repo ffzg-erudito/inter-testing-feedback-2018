@@ -57,6 +57,7 @@ class Player(BasePlayer):
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
     feedback = models.StringField()
+#    participant_code = self.participant.vars['participant_code']
 
     def current_question(self):
         return self.session.vars['test3_questions'][self.round_number - 1]

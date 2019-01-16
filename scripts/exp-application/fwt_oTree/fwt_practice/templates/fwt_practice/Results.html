@@ -8,6 +8,10 @@
             display: none;
         }
         
+        
+        #feedback {
+            display: none;
+        }
     </style>
 
 {% endblock %}
@@ -26,6 +30,16 @@
         });
     </script>
     
+<!--
+    <script type="text/javascript">
+        $("#res tr.player").each(function () {
+            var submitted = $("#submitted");
+            var solution = $("#solution");
+            if (submitted.text() != solution.text()) {
+                $("#submitted").parent().css('background-color','#fd7878');
+            }
+        });
+    </script> -->
     
 
 {% endblock %}
@@ -48,14 +62,14 @@
             <th style="vertical-align:middle">Pitanje</th>
             <th style="vertical-align:middle">Vaš odgovor</th>
             <th style="vertical-align:middle">Točan odgovor</th>
-            <th style="text-align:center;vertical-align:middle">Točnost odgovora</th>
+            <th id="feedback" style="text-align:center;vertical-align:middle">Točnost odgovora</th>
         </tr>
         {% for p in player_in_all_rounds %}
-            <tr id="player">
+            <tr class="player">
                 <td style="vertical-align:middle">{{ p.question }}</td>
-                <td style="vertical-align:middle">{{ p.submitted_answer }}</td>
-                <td style="vertical-align:middle">{{ p.solution }}</td>
-                <td class="feedback" style="vertical-align:middle" align="center">{{ p.feedback }}</td>
+                <td id="submitted" style="vertical-align:middle">{{ p.submitted_answer }}</td>
+                <td id="solution" style="vertical-align:middle">{{ p.solution }}</td>
+                <td id="feedback" class="feedback" style="vertical-align:middle" align="center">{{ p.feedback }}</td>
             </tr>
         {% endfor %}
     </table>
