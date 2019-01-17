@@ -171,7 +171,8 @@ class instructions_3(Page):
                        također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika\
                        kao ova na koja ste upravo odgovarali.',
                        'Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
-                       teksta. Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
+                       teksta. ',
+                       'Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
                        'Pritisnite tipku "Dalje" kako biste dobili završnu uputu.']
         elif self.session.config['name'] is '2':
@@ -180,7 +181,8 @@ class instructions_3(Page):
                        također ćete odgovarati na pitanja općeg znanja koja će biti jednakog oblika kao ova na koja ste\
                        upravo odgovarali.',
                        'Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
-                       teksta. Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
+                       teksta. ',
+                       'Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
                        'Pritisnite tipku "Dalje" kako biste dobili završnu uputu.']
         else:
@@ -188,10 +190,11 @@ class instructions_3(Page):
             message = ['U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon što jednom pročitate prvi tekst, \
                        zadatak će Vam biti pročitati ga još jednom. Isto tako ćete dva puta pročitati i drugi tekst.',
                        'Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
-                       teksta. Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim te ga\
+                       teksta. ',
+                       'Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim te ga\
                        potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
-                       'Sada ćete odgovoriti na nekoliko pitanja vezana za sadržaj prethodnog teksta kako biste se\
-                       upoznali s oblikom pitanja u završnom testu.',
+                       'Sada ćete odgovoriti na nekoliko pitanja vezanih za sadržaj prethodnog teksta kako biste se\
+                       upoznali s oblikom pitanja u završnom dijelu.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
             
             # because whether giving feedback determines the number of "parts" of a single taks, here, depending
@@ -199,9 +202,9 @@ class instructions_3(Page):
             # final part of the instructions
             
         if self.participant.vars['give_feedback'] is True:
-            instr_3_title = 'Četvrti, završni dio'
+            instr_3_title = 'Završni dio'
         else:
-            instr_3_title = 'Treći, završni dio'
+            instr_3_title = 'Završni dio'
         
         return {
             'message': message,
@@ -286,8 +289,9 @@ class get_ready(Page):
         if (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == True):
             message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima.\
                         Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
-                        s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
-                        koja će obuhvaćati sadržaj sva tri pročitana teksta.',
+                        s kojima ste se upravo upoznali, ',
+                        'a nakon zadnjeg teksta ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri\
+                        pročitana teksta.',
                         'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
                         način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
                         30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
@@ -304,8 +308,9 @@ class get_ready(Page):
         elif (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == False):
             message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima.\
                         Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
-                        s kojima ste se upravo upoznali, a nakon zadnjeg teksta ćete odgovarati na pitanja\
-                        koja će obuhvaćati sadržaj sva tri pročitana teksta.',
+                        s kojima ste se upravo upoznali, ',
+                        'a nakon zadnjeg teksta ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri\
+                        pročitana teksta.',
                         'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
                         način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
                         30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
@@ -313,15 +318,17 @@ class get_ready(Page):
                         'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
                         "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
         else:
-            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima. Nakon prvog,\
-                        a onda i nakon drugog teksta, ponovno ćete čitati netom pročitani tekst, a nakon zadnjeg\
-                        ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri pročitana teksta.',
-                        'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
-                        način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
-                        30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
-                        kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
-                        'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
-                        "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
+            message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima. Nakon što jednom\
+                       pročitate prvi tekst, zadatak će Vam biti pročitati ga još jednom. Isto tako ćete dva puta pročitati\
+                       i drugi tekst, ',
+                       'a nakon zadnjeg teksta ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri\
+                       pročitana teksta.',
+                       'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
+                       način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
+                       30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
+                       kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
+                       'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
+                       "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
                 
 
         practice_message = ["Sljedeći prikaz sadrži nešto duži tekst.",

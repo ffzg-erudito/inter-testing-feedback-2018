@@ -1,6 +1,14 @@
 {% extends "global/Page.html" %}
 {% load otree %}
 
+{% block styles %}
+    <style>
+        .important {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
 {% block title %}
     {{ title }}
 {% endblock %}
@@ -18,18 +26,18 @@
             </p>
             
             <p style="word-wrap: break-word; width: 517px">
-                {{ message.1}}
+                <span class="important">{{ message.1}}</span>{{ message.2}}
             </p>
             
             <p style="word-wrap: break-word; width: 517px">
-                {{ message.2}}
+                {{ message.3}}
             </p>
             
             <br>
             <br>    
         
             <p>
-                {{ message.3 }}
+                {{ message.4 }}
             </p>
             
         </div>
@@ -45,14 +53,14 @@
             </p>
             
             <p style="word-wrap: break-word; width: 517px">
-                {{ message.1 }}
+                <span class="important">{{ message.1}}</span>{{ message.2}}
             </p>
             
             <br>
             <br>    
         
             <p>
-                {{ message.2 }}
+                {{ message.3 }}
             </p>
             
         </div>

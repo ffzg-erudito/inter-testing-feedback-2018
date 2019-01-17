@@ -14,6 +14,7 @@
 
 {% block title %}
     <!--Pitanje {{ player.round_number }} od {{ num_questions }}-->
+    {% if player.round_number == 1 %}<h4>Molimo Vas, odgovorite na nekoliko pitanja.</h4><br>{% endif %}
 {% endblock %}
 
 {% block content %}
