@@ -1,8 +1,19 @@
 {% extends "global/Page.html" %}
 {% load otree %}
 
+{% block styles %}
+
+    <style>
+        .col-form-label {
+            font-weight: bold;
+        }
+        
+    </style>
+    
+{% endblock %}
+
 {% block title %}
-    Pitanje {{ player.round_number }} od {{ Constants.num_rounds }}
+    <!--Pitanje {{ player.round_number }} od {{ Constants.num_rounds }}-->
 {% endblock %}
 
 {% block content %}

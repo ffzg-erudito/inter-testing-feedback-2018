@@ -39,6 +39,8 @@ class Results(Page):
     def is_displayed(self):
         return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
 
+    def get_timeout_seconds(self):
+        return 60
 
     def vars_for_template(self):
         player_in_all_rounds = self.player.in_all_rounds()
