@@ -47,8 +47,10 @@ class instructions_1(Page):
                        Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz\
                        sljedećeg pitanja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
-                       također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika.',
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon što pročitate prvi tekst,\
+                       zadatak će Vam biti odgovoriti na nekoliko pitanja vezanih za sadržaj tog teksta koja će\
+                       biti jednakog oblika. Isto tako ćete, nakon čitanja drugog teksta, odgovarati na pitanja\
+                       vezana za sadržaj tog drugog teksta. Nakon toga ćete čitati treći tekst.',
                        'Sada Vas molimo da odgovorite na nekoliko pitanja vezanih za sadržaj prethodnog teksta.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
         elif self.session.config['name'] == '2':
@@ -56,8 +58,10 @@ class instructions_1(Page):
                        Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
                        te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz\
                        sljedećeg pitanja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
-                       također ćete odgovarati na pitanja općeg znanja koja će biti jednakog oblika.',
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon što pročitate prvi tekst,\
+                       zadatak će Vam biti odgovoriti na nekoliko pitanja općeg znanja koja će biti jednakog\
+                       oblika. Isto tako ćete, nakon čitanja drugog teksta, odgovarati na pitanja općeg znanja.\
+                       Nakon toga ćete čitati treći tekst.',
                        'Sada Vas molimo da odgovorite na nekoliko pitanja općeg znanja.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
         elif self.session.config['name'] == '3':
@@ -66,9 +70,9 @@ class instructions_1(Page):
                        način i jednakom brzinom kao i prvi put jer ćete imati dovoljno vremena!' % (minutes, koliko_min),
                        '30 sekundi prije isteka vremena, na lijevoj strani ekrana prikazat će se\
                        okvir unutar kojega će se odbrojavati vrijeme do kraja.',
-                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon što jednom pročitate prvi\
-                       tekst, zadatak će Vam biti pročitati ga još jednom. Isto tako ćete dva puta pročitati\
-                       i drugi tekst.',
+                       'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon što pročitate prvi tekst,\
+                       zadatak će Vam biti pročitati ga još jednom. Isto tako ćete, nakon čitanja drugog teksta,\
+                       još jednom pročitati taj drugi tekst. Nakon toga ćete čitati treći tekst.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
                
         return {

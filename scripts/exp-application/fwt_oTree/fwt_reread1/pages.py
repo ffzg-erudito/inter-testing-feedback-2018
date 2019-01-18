@@ -13,7 +13,8 @@ class text_1(Page):
 
 
 class inter(Page):
-    pass
+    def get_timeout_seconds(self):
+        return 20
 
 
 class text_1_rep(Page):

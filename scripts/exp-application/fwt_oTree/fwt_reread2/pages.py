@@ -12,6 +12,11 @@ class text_2(Page):
         return minutes * 60
 
 
+class inter(Page):
+    def get_timeout_seconds(self):
+        return 20
+
+
 class text_2_rep(Page):
     template_name = 'fwt_reread2/text_2.html'
     def get_timeout_seconds(self):
@@ -36,4 +41,4 @@ class get_ready(Page):
             return {'is_exp': is_experiment, 'message': exit_message}
 
 
-page_sequence = [text_2, text_2_rep, get_ready]
+page_sequence = [text_2, inter, text_2_rep, get_ready]
