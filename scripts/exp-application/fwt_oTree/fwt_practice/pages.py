@@ -49,7 +49,7 @@ class instructions_1(Page):
                        sljedećeg pitanja.',
                        'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
                        također ćete odgovarati na pitanja vezana za sadržaj pročitanog teksta koja će biti jednakog oblika.',
-                       'Sada ćete odgovoriti na nekoliko pitanja vezanih za sadržaj prethodnog teksta.',
+                       'Sada Vas molimo da odgovorite na nekoliko pitanja vezanih za sadržaj prethodnog teksta.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
         elif self.session.config['name'] == '2':
             message = ['Vaš sljedeći zadatak je odgovoriti na nekoliko pitanja općeg znanja.\
@@ -58,7 +58,7 @@ class instructions_1(Page):
                        sljedećeg pitanja.',
                        'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon prvog, a onda i nakon drugog teksta,\
                        također ćete odgovarati na pitanja općeg znanja koja će biti jednakog oblika.',
-                       'Sada ćete odgovoriti na nekoliko pitanja općeg znanja.',
+                       'Sada Vas molimo da odgovorite na nekoliko pitanja općeg znanja.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
         elif self.session.config['name'] == '3':
             message = ['Vaš sljedeći zadatak je još jednom pročitati tekst koji ste upravo pročitali.\
@@ -193,7 +193,7 @@ class instructions_3(Page):
                        teksta. ',
                        'Pitanja su tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim te ga\
                        potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
-                       'Sada ćete odgovoriti na nekoliko pitanja vezanih za sadržaj prethodnog teksta kako biste se\
+                       'Sada Vas molimo da odgovorite na nekoliko pitanja vezanih za sadržaj prethodnog teksta kako biste se\
                        upoznali s oblikom pitanja u završnom dijelu.',
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
             
