@@ -306,7 +306,8 @@ class get_ready(Page):
                         će automatski pokrenuti nastavak postupka. Ukupno, dakle, imate 1 minutu za proučavanje povratne\
                         informacije. Molimo Vas, proučite povratne informacije o Vašoj točnosti jer ćete nakon čitanja\
                         trećeg teksta odgovarati na pitanja koja će se odnositi na sva tri teksta.',
-                        'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
+                        'Molimo Vas da zadatke rješavate najbolje što možete. Daljnjih specifičnih uputa neće biti.\
+                        Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
                         "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
             
         elif (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == False):
@@ -319,7 +320,8 @@ class get_ready(Page):
                         način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
                         30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
                         kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
-                        'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
+                        'Molimo Vas da zadatke rješavate najbolje što možete. Daljnjih specifičnih uputa neće biti.\
+                        Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
                         "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
         else:
             message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima. Nakon što jednom\
@@ -331,7 +333,8 @@ class get_ready(Page):
                        način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
                        30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
                        kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
-                       'Daljnjih specifičnih uputa neće biti. Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
+                       'Molimo Vas da zadatke rješavate najbolje što možete. Daljnjih specifičnih uputa neće biti.\
+                       Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
                        "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
                 
 
