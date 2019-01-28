@@ -117,6 +117,11 @@ class practice_text_rep(Page):
     def get_timeout_seconds(self):
             estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
             minutes = math.ceil(estimate / 60)
+            if minutes < 5:
+                minutes = 5
+            elif minutes > 8:
+                minutes = 8
+            
             return minutes * 60
     
     
