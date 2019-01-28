@@ -2,6 +2,7 @@ from ._builtin import Page
 from .models import Constants
 import time 
 import math
+import os, sys
 
 
 class timer_instructions_0(Page):
@@ -31,7 +32,41 @@ class instructions_1(Page):
         return self.round_number == 1
     
     def vars_for_template(self):
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
+        
+        # text filenames
+        practice_text_filename = 'practice_text.txt'
+        text_1_filename = 'text_1.txt'
+        text_2_filename = 'text_2.txt'
+        text_3_filename = 'text_3.txt'
+        
+        # text file paths
+        practice_text_path = os.path.join('C:\\Users\\Matej', 'inter-testing-feedback-2018', 'texts', practice_text_filename)
+        text_1_path = os.path.join('C:\\Users\\Matej', 'inter-testing-feedback-2018', 'texts', text_1_filename)
+        text_2_path = os.path.join('C:\\Users\\Matej', 'inter-testing-feedback-2018', 'texts', text_2_filename)
+        text_3_path = os.path.join('C:\\Users\\Matej', 'inter-testing-feedback-2018', 'texts', text_3_filename)
+        
+        # import into variables
+        with open(practice_text_path, 'r', newline = '', encoding='utf-8') as myfile:
+            practice_text = myfile.read().replace('\n', '')
+        with open(text_1_path, 'r', newline = '', encoding='utf-8') as myfile:
+            text_1 = myfile.read().replace('\n', '')
+        with open(text_2_path, 'r', newline = '', encoding='utf-8') as myfile:
+            text_2 = myfile.read().replace('\n', '')
+        with open(text_3_path, 'r', newline = '', encoding='utf-8') as myfile:
+            text_3 = myfile.read().replace('\n', '')
+            
+        # lengths of texts
+        length_practice = len(practice_text.split())
+        length_text_1 = len(text_1.split())
+        length_text_2 = len(text_2.split())
+        length_text_3 = len(text_3.split())
+        
+        length_text_1/length_practice
+        length_text_2/length_practice
+        length_text_3/length_practice
+        
+        # multiply time spent reading first text by ratio of length of longest text over length of practice text - liberal estimate
+        estimate = self.participant.vars['reading_time_estimate'] * (max(length_text_1, length_text_2, length_text_3)/length_practice) 
         minutes = math.ceil(estimate / 60)
         
         if minutes == 1:

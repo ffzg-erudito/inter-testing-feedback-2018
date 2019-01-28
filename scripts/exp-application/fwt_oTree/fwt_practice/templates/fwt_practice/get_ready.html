@@ -6,6 +6,12 @@
         .important {
             font-weight: bold;
         }
+        
+        .col-form-label {
+            word-wrap: break-word;
+            width: 517px
+        }
+        
     </style>
 {% endblock %}
 
@@ -25,7 +31,9 @@
                 {{ message.0 }}<span class="important">{{ message.1 }}</span>
             </p>
             
+            <p>
                 {% formfield player.predznanje %}
+            </p>
                 
             <br>
             
@@ -65,7 +73,9 @@
                     {{ message.0 }}<span class="important">{{ message.1 }}</span>
                 </p>
                 
+                <p>
                     {% formfield player.predznanje %}
+                </p>
                     
                 <br>
                 
@@ -105,7 +115,9 @@
                     {{ message.0 }}<span class="important">{{ message.1 }}</span>
                 </p>
                 
+                <p>
                     {% formfield player.predznanje %}
+                </p>
                   
                 <br>
                 
