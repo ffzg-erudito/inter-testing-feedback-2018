@@ -25,11 +25,12 @@ class Question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
-        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
+        question_id = 'gk_2.' + str(self.player.question_id)
+        self.participant.vars[question_id] = self.player.is_correct
+        # self.participant.
+        print(question_id, self.participant.vars[question_id])
         
-
-
+        
 
 
 class Results(Page):
@@ -50,6 +51,6 @@ class Results(Page):
 class get_ready(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
-
-
+        
+        
 page_sequence = [text_2, Question, Results, get_ready]

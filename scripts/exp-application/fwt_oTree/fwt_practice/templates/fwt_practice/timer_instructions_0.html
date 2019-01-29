@@ -1,6 +1,17 @@
 {% extends "global/Page.html" %}
 {% load otree %}
 
+{% block styles %}
+    <style>
+        .col-form-label {
+            word-wrap: break-word;
+            width: 517px
+        }
+    </style>
+
+{% endblock %}
+
+
 {% block title %}
     Prvi dio zadatka: Čitanje teksta
 {% endblock %}
@@ -11,7 +22,13 @@
     
         <br>
         
-        <p>Prikaz nakon ovoga sadržava tekst.</p>
+        <p>
+            Prikaz nakon ovoga sadržava tekst.
+        </p>
+        
+        <p>
+            {% formfield player.predznanje %}
+        </p>
         
         <p style="word-wrap: break-word; width: 462px">
             Vaš zadatak je pročitati taj tekst jednom, koncentrirano i s razumijevanjem,
@@ -34,8 +51,6 @@
     <br>
     <br>
     
-    {% formfields %}
-
     <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
 
 {% endblock %}

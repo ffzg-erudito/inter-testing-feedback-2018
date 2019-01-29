@@ -1,6 +1,7 @@
 from ._builtin import Page
 import random
 import re
+import datetime
 
 
 
@@ -10,17 +11,37 @@ class enter_id(Page):
     form_fields = ['participant_code', 'dob', 'spol']
     
     def before_next_page(self):
+        
+        # set basic info
+        self.participant.vars['when'] = str(datetime.datetime.now())
         self.participant.vars['participant_code'] = self.player.participant_code.upper()
         print(self.participant.vars['participant_code'])
-        self.participant.vars['dob'] = self.player.dob
         self.participant.vars['spol'] = self.player.spol
+        self.participant.vars['dob'] = self.player.dob
         
+        
+        # set feedback
         if self.session.config['name'] in ['1','2']:
             self.participant.vars['give_feedback'] = False # random.choice([True, False])
         else:
             self.participant.vars['give_feedback'] = False
         print(self.session.config['app_sequence'],'Give feedback? ' + str(self.participant.vars['give_feedback']))
         
+        
+        # set condition name
+        if self.session.config['name'] == '1':
+            if self.participant.vars['give_feedback'] == False:
+                self.participant.vars['condition'] = 'content_noFeedback'
+            else:
+                self.participant.vars['condition'] = 'content_feedback'
+        elif self.session.config['name'] == '2':
+            if self.participant.vars['give_feedback'] == False:
+                self.participant.vars['condition'] = 'general_noFeedback'
+            else:
+                self.participant.vars['condition'] = 'general_feedback'
+        else:
+            self.participant.vars['condition'] = 'rereading'
+              
         
     def spol_choices(self):
         return ['Ž', 'M']

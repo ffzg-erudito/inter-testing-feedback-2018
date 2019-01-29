@@ -2,6 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 import csv
+# import os
 
 author = 'Matej Pavlić'
 
@@ -67,4 +68,4 @@ class Player(BasePlayer):
         if self.is_correct:
             self.feedback = u'\u2713'
         else:
-            self.feedback = u'\u2717' 
+            self.feedback = u'\u2717'               

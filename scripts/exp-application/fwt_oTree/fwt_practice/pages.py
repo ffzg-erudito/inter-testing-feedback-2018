@@ -6,6 +6,12 @@ import os
 
 
 class timer_instructions_0(Page):
+    form_model = 'player'
+    form_fields = ['predznanje']
+    
+    def predznanje_choices(self):
+        return [1, 2, 3, 4, 5, 6, 7]
+    
     def is_displayed(self):
         return self.round_number == 1
     def before_next_page(self):
@@ -60,10 +66,10 @@ class practice_text(Page):
         
         # set reading time estimate in minutes and limit it
         self.participant.vars['reading_time_estimate'] = math.ceil(estimate / 60)
-        if self.participant.vars['reading_time_estimate'] < 5:
-            self.participant.vars['reading_time_estimate'] = 5
-        elif self.participant.vars['reading_time_estimate'] > 8:
-            self.participant.vars['reading_time_estimate'] = 8
+#        if self.participant.vars['reading_time_estimate'] < 5:
+#            self.participant.vars['reading_time_estimate'] = 5
+#        elif self.participant.vars['reading_time_estimate'] > 8:
+#            self.participant.vars['reading_time_estimate'] = 8
         
         
 class instructions_1(Page):
@@ -284,14 +290,10 @@ class Question_rereading(Page):
 
 
 class get_ready(Page):
-    form_model = 'player'
-    form_fields = ['predznanje']
     
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
     
-    def predznanje_choices(self):
-        return [1, 2, 3, 4, 5, 6, 7]
     
     def vars_for_template(self):
         is_experiment = (self.session.config['name'] is not 'proba')
