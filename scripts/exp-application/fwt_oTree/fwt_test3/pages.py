@@ -1,7 +1,5 @@
 from ._builtin import Page
 from .models import Constants
-import math
-
 
   
 # THIRD AND FINAL TEXT SECTION
@@ -9,14 +7,7 @@ class text_3(Page):
     def is_displayed(self):
         return self.round_number == 1
     def get_timeout_seconds(self):
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-        minutes = math.ceil(estimate / 60)
-        if minutes < 5:
-            minutes = 5
-        elif minutes > 8:
-            minutes = 8
-            
-        return minutes * 60
+        return self.participant.vars['reading_time_estimate'] * 60
 
 
 
