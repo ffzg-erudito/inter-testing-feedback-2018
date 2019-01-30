@@ -16,8 +16,9 @@ class timer_instructions_0(Page):
         return self.round_number == 1
     def before_next_page(self):
         # start timing the reading of the practice text
+        self.participant.vars['predznanje'] = self.player.predznanje
+        print(self.participant.vars['predznanje'])
         self.participant.vars['timer_start'] = time.time()
-
 
 
 
@@ -138,8 +139,14 @@ class Question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
-        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
+        question_id = 'practice_' + str(self.player.question_id)
+        if self.player.is_correct:
+            self.participant.vars[question_id] = 1
+        else:
+            self.participant.vars[question_id] = 0
+
+        print(question_id, self.participant.vars[question_id])
+ 
         
     def vars_for_template(self):
         num_questions = 4
@@ -281,8 +288,13 @@ class Question_rereading(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
-        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
+        question_id = 'practice_' + str(self.player.question_id)
+        if self.player.is_correct:
+            self.participant.vars[question_id] = 1
+        else:
+            self.participant.vars[question_id] = 0
+
+        print(question_id, self.participant.vars[question_id])
 
 
 
@@ -373,8 +385,6 @@ class get_ready(Page):
                     'feedback': self.participant.vars['give_feedback'],
                     'message': message}             
 
-    def before_next_page(self):
-        self.participant.vars['predznanje'] = self.player.predznanje
 
 
 

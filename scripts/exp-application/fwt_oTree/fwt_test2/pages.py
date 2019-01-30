@@ -25,11 +25,22 @@ class Question(Page):
         ]
 
     def before_next_page(self):
-        self.player.check_correct()
-        question_id = 'c_2.' + str(self.player.question_id)
-        self.participant.vars[question_id] = self.player.is_correct
-        # self.participant.
-        print(question_id, self.participant.vars[question_id])
+        self.player.check_answer()
+        question_id = 'content_2_' + str(self.player.question_id)
+        intrusor_id = 'isIntrusor_2_' + str(self.player.question_id)
+        
+        if self.player.is_correct:
+            self.participant.vars[question_id] = 1
+            self.participant.vars[intrusor_id] = 0
+        else:
+            self.participant.vars[question_id] = 0
+            if self.player.is_intrusor:
+                self.participant.vars[intrusor_id] = 1
+            else:
+                self.participant.vars[intrusor_id] = 0
+
+
+        print(question_id, self.participant.vars[question_id], self.participant.vars[intrusor_id])
         
         
         

@@ -44,6 +44,7 @@ class Subsession(BaseSubsession):
             p.question_id = int(question_data['id'])
             p.question = question_data['question']
             p.solution = question_data['solution']
+            p.intrusor = question_data['intrusor']
 
 
 class Group(BaseGroup):
@@ -54,15 +55,19 @@ class Player(BasePlayer):
     question_id = models.IntegerField()
     question = models.StringField()
     solution = models.StringField()
+    intrusor = models.StringField()
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
+    is_intrusor = models.BooleanField()
     feedback = models.StringField()
 
     def current_question(self):
         return self.session.vars['test2_questions'][self.round_number - 1]
 
-    def check_correct(self):
+    def check_answer(self):
         self.is_correct = (self.submitted_answer == self.solution)
+        self.is_intrusor = (self.submitted_answer == self.intrusor)
+
         if self.is_correct:
             self.feedback = u'\u2713'
         else:
