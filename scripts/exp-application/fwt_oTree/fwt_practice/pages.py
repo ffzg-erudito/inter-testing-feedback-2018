@@ -1,4 +1,4 @@
-from ._builtin import Page
+﻿from ._builtin import Page
 from .models import Constants
 import time 
 import math
@@ -67,10 +67,10 @@ class practice_text(Page):
         
         # set reading time estimate in minutes and limit it
         self.participant.vars['reading_time_estimate'] = math.ceil(estimate / 60)
-#        if self.participant.vars['reading_time_estimate'] < 5:
-#            self.participant.vars['reading_time_estimate'] = 5
-#        elif self.participant.vars['reading_time_estimate'] > 8:
-#            self.participant.vars['reading_time_estimate'] = 8
+        if self.participant.vars['reading_time_estimate'] < 5:
+            self.participant.vars['reading_time_estimate'] = 5
+        elif self.participant.vars['reading_time_estimate'] > 8:
+            self.participant.vars['reading_time_estimate'] = 8
         
         
 class instructions_1(Page):
