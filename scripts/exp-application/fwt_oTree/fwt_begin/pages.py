@@ -5,7 +5,7 @@ import datetime
 
 
 
-# participant has to enter ID - to be implemented: check whether ID conforms to required format
+# participant has to enter ID
 class enter_id(Page):
     form_model = 'player'
     form_fields = ['participant_code', 'dob', 'spol']
@@ -46,11 +46,12 @@ class enter_id(Page):
     def spol_choices(self):
         return ['Ž', 'M']
     
-    
+    # check whether ID conforms to required format
     def error_message(self, values):
         pattern = re.compile('^[a-zA-Z]{4}[0-9]{2}$')
         if not bool(pattern.match(values['participant_code'])):
             return "Upisana šifra ne odgovara uputi za njenu konstrukciju!"
+        
         
 # initial instructions        
 class init_instructions(Page):
