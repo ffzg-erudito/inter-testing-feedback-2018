@@ -69,7 +69,7 @@ class end_page(Page):
         return self.round_number == Constants.num_rounds
     
     def get_timeout_seconds(self):
-        return 5
+        return 3
     
     def before_next_page(self):
         
