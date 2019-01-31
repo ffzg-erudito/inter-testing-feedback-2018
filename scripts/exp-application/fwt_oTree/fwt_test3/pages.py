@@ -73,8 +73,7 @@ class end_page(Page):
     
     def before_next_page(self):
         
-    #        data_to_store = [self.participant.vars['participant_code'], self.participant.vars['spol'], self.participant.vars['dob'], self.participant.vars['predznanje']]
-        
+        # save data to .csv in /inter-testing-feedback-2018/results/        
         results_file_exists = os.path.exists('../../../results/results.csv')
         writefile = '../../../results/results.csv'
         
@@ -112,15 +111,6 @@ class end_page(Page):
         
 
         print(data_to_store)
-
-            # output = open('result.xls', 'w+')
-            
-            
-    #        excel_writer = pd.ExcelWriter('result.xls')
-    #        data_to_store.to_excel(excel_writer, 'Sheet1', index = False)
-    #        excel_writer.save()
-    #        
-    
         
 
 

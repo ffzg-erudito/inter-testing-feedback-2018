@@ -171,7 +171,8 @@ class instructions_2(Page):
     def vars_for_template(self):
         message = ['Treći dio sadrži povratnu informaciju o točnosti Vaših odgovora na prethodna pitanja.\
                    Tablica u prvom stupcu sadrži pitanje, u drugom Vaš odgovor, i u trećem točan odgovor.\
-                   Crvenom bojom označena su pitanja na koja niste točno odgovorili.',
+                   Zelenom bojom bojom označena su pitanja na koja ste točno odgovorili, a crvenom bojom\
+                   pitanja na koja niste točno odgovorili.',
                    'Dobro proučite povratne informacije. Nakon 10 sekundi, prikazat će se tipka "Dalje",\
                    te ćete moći pritiskom na nju pokrenuti nastavak postupka. Postupak će se automatski\
                    nastaviti nakon 20 sekundi.',
@@ -336,7 +337,7 @@ class get_ready(Page):
                         povratne informacije, pojavit će se tipka "Dalje" pri dnu tablice. Pritiskom na nju možete sami\
                         pokrenuti nastavak postupka. Nakon što prođe još 20 sekundi (od prikaza tipke "Dalje"), program\
                         će automatski pokrenuti nastavak postupka. Ukupno, dakle, imate 1 minutu za proučavanje povratne\
-                        informacije. Molimo Vas, proučite povratne informacije o Vašoj točnosti jer ćete nakon čitanja\
+                        informacije. Molimo Vas, proučite povratne informacije o točnosti Vaših odgovora jer ćete nakon čitanja\
                         trećeg teksta odgovarati na pitanja koja će se odnositi na sva tri teksta.',
                         'Molimo Vas da zadatke rješavate najbolje što možete. Daljnjih specifičnih uputa neće biti.\
                         Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
