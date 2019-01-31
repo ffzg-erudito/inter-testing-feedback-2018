@@ -1,16 +1,12 @@
 from ._builtin import Page
 from .models import Constants
-import math
-
 
 ## First text section
 class text_1(Page):
     def is_displayed(self):
         return self.round_number == 1
     def get_timeout_seconds(self):
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-        minutes = math.ceil(estimate / 60)
-        return minutes * 60
+        return self.participant.vars['reading_time_estimate'] * 60
 
 
 
@@ -29,8 +25,13 @@ class Question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
-        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
+        question_id = 'genKnowledge_1_' + str(self.player.question_id)
+        if self.player.is_correct:
+            self.participant.vars[question_id] = 1
+        else:
+            self.participant.vars[question_id] = 0
+
+        print(question_id, self.participant.vars[question_id])
         
 
 

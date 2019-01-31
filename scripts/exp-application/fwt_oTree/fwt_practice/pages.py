@@ -2,15 +2,23 @@ from ._builtin import Page
 from .models import Constants
 import time 
 import math
+import os
 
 
 class timer_instructions_0(Page):
+    form_model = 'player'
+    form_fields = ['predznanje']
+    
+    def predznanje_choices(self):
+        return [1, 2, 3, 4, 5, 6, 7]
+    
     def is_displayed(self):
         return self.round_number == 1
     def before_next_page(self):
         # start timing the reading of the practice text
+        self.participant.vars['predznanje'] = self.player.predznanje
+        print(self.participant.vars['predznanje'])
         self.participant.vars['timer_start'] = time.time()
-
 
 
 
@@ -20,9 +28,49 @@ class practice_text(Page):
         
     def before_next_page(self):
         # estimate participant's reading time
-        self.participant.vars['reading_time_estimate'] = time.time() - self.participant.vars['timer_start']
+        self.participant.vars['reading_time'] = time.time() - self.participant.vars['timer_start']
         
+        # text filenames
+        practice_text_filename = 'practice_text.txt'
+        text_1_filename = 'text_1.txt'
+        text_2_filename = 'text_2.txt'
+        text_3_filename = 'text_3.txt'
         
+        # text file paths relative to set working directory
+        practice_text_path = os.path.join('..', '..', '..', 'texts', practice_text_filename)
+        text_1_path = os.path.join('..', '..', '..', 'texts', text_1_filename)
+        text_2_path = os.path.join('..', '..', '..', 'texts', text_2_filename)
+        text_3_path = os.path.join('..', '..', '..', 'texts', text_3_filename)
+        
+        # import into variables
+        with open(practice_text_path, 'r', newline = '', encoding='utf-8') as myfile:
+            practice_text = myfile.read().replace('\n', '')
+        with open(text_1_path, 'r', newline = '', encoding='utf-8') as myfile:
+            text_1 = myfile.read().replace('\n', '')
+        with open(text_2_path, 'r', newline = '', encoding='utf-8') as myfile:
+            text_2 = myfile.read().replace('\n', '')
+        with open(text_3_path, 'r', newline = '', encoding='utf-8') as myfile:
+            text_3 = myfile.read().replace('\n', '')
+            
+        # lengths of texts
+        length_practice = len(practice_text.split())
+        length_text_1 = len(text_1.split())
+        length_text_2 = len(text_2.split())
+        length_text_3 = len(text_3.split())
+        
+        length_text_1/length_practice
+        length_text_2/length_practice
+        length_text_3/length_practice
+        
+        # multiply time spent reading first text by ratio of length of longest text over length of practice text - liberal estimate
+        estimate = self.participant.vars['reading_time'] * (max(length_text_1, length_text_2, length_text_3)/length_practice) 
+        
+        # set reading time estimate in minutes and limit it
+        self.participant.vars['reading_time_estimate'] = math.ceil(estimate / 60)
+#        if self.participant.vars['reading_time_estimate'] < 5:
+#            self.participant.vars['reading_time_estimate'] = 5
+#        elif self.participant.vars['reading_time_estimate'] > 8:
+#            self.participant.vars['reading_time_estimate'] = 8
         
         
 class instructions_1(Page):
@@ -31,16 +79,6 @@ class instructions_1(Page):
         return self.round_number == 1
     
     def vars_for_template(self):
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-        minutes = math.ceil(estimate / 60)
-        
-        if minutes == 1:
-            koliko_min = " minutu"
-        elif minutes > 4:
-            koliko_min = " minuta"
-        else:
-            koliko_min = " minute"
-        
         
         if self.session.config['name'] == '1':
             message = ['Vaš sljedeći zadatak je odgovoriti na nekoliko pitanja vezanih za sadržaj pročitanog teksta.\
@@ -66,8 +104,8 @@ class instructions_1(Page):
                        'Kada ste spremni započeti, pritisnite tipku "Dalje".']
         elif self.session.config['name'] == '3':
             message = ['Vaš sljedeći zadatak je još jednom pročitati tekst koji ste upravo pročitali.\
-                       Sada Vam je vrijeme čitanja ograničeno na otprilike %s %s. Tekst čitajte na jednak\
-                       način i jednakom brzinom kao i prvi put jer ćete imati dovoljno vremena!' % (minutes, koliko_min),
+                       Sada Vam je vrijeme čitanja ograničeno na otprilike %s minuta. Tekst čitajte na jednak\
+                       način i jednakom brzinom kao i prvi put jer ćete imati dovoljno vremena!' % (self.participant.vars['reading_time_estimate']),
                        '30 sekundi prije isteka vremena, na lijevoj strani ekrana prikazat će se\
                        okvir unutar kojega će se odbrojavati vrijeme do kraja.',
                        'U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon što pročitate prvi tekst,\
@@ -101,8 +139,14 @@ class Question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
-        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
+        question_id = 'practice_' + str(self.player.question_id)
+        if self.player.is_correct:
+            self.participant.vars[question_id] = 1
+        else:
+            self.participant.vars[question_id] = 0
+
+        print(question_id, self.participant.vars[question_id])
+ 
         
     def vars_for_template(self):
         num_questions = 4
@@ -115,10 +159,8 @@ class practice_text_rep(Page):
         return (self.session.config['name'] == '3') & (self.round_number == Constants.num_rounds - 4)
     
     def get_timeout_seconds(self):
-            estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-            minutes = math.ceil(estimate / 60)
-            return minutes * 60
-    
+        return self.participant.vars['reading_time_estimate'] * 60
+
     
 
 
@@ -246,8 +288,13 @@ class Question_rereading(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
-        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
+        question_id = 'practice_' + str(self.player.question_id)
+        if self.player.is_correct:
+            self.participant.vars[question_id] = 1
+        else:
+            self.participant.vars[question_id] = 0
+
+        print(question_id, self.participant.vars[question_id])
 
 
 
@@ -255,14 +302,10 @@ class Question_rereading(Page):
 
 
 class get_ready(Page):
-    form_model = 'player'
-    form_fields = ['predznanje']
     
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
     
-    def predznanje_choices(self):
-        return [1, 2, 3, 4, 5, 6, 7]
     
     def vars_for_template(self):
         is_experiment = (self.session.config['name'] is not 'proba')
@@ -279,27 +322,16 @@ class get_ready(Page):
 #            is_gk = False
 #            is_rereading = True
             
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-        minutes = math.ceil(estimate / 60)
-        
-        
-        if minutes == 1:
-            koliko_min = " minutu"
-        elif minutes > 4:
-            koliko_min = " minuta"
-        else:
-            koliko_min = " minute"
-            
         if (self.session.config['name'] in ['1', '2']) & (self.participant.vars['give_feedback'] == True):
             message = ['Slijedi glavni dio istraživanja u kojemu ćete proći kroz tri teksta o korovima.\
                         Nakon prvog, a onda i nakon drugog teksta, odgovarat ćete na pitanja poput onih\
                         s kojima ste se upravo upoznali, ',
                         'a nakon zadnjeg teksta ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri\
                         pročitana teksta.',
-                        'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
-                        način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
-                        30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
-                        kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
+                        'Tekstovi će biti otprilike jednake dužine, a vrijeme čitanja ograničeno na otprilike %s minuta.\
+                        Tekstove čitajte na jednak način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati\
+                        dovoljno vremena! 30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se\
+                        okvir unutar kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (self.participant.vars['reading_time_estimate']),
                         'Vrijeme za proučavanje povratne informacije produženo je. 40 sekundi od početka prikaza\
                         povratne informacije, pojavit će se tipka "Dalje" pri dnu tablice. Pritiskom na nju možete sami\
                         pokrenuti nastavak postupka. Nakon što prođe još 20 sekundi (od prikaza tipke "Dalje"), program\
@@ -316,10 +348,10 @@ class get_ready(Page):
                         s kojima ste se upravo upoznali, ',
                         'a nakon zadnjeg teksta ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri\
                         pročitana teksta.',
-                        'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
-                        način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
-                        30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
-                        kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
+                        'Tekstovi će biti otprilike jednake dužine, a vrijeme čitanja ograničeno na otprilike %s minuta.\
+                        Tekstove čitajte na jednak način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati\
+                        dovoljno vremena! 30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se\
+                        okvir unutar kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (self.participant.vars['reading_time_estimate']),
                         'Molimo Vas da zadatke rješavate najbolje što možete. Daljnjih specifičnih uputa neće biti.\
                         Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
                         "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
@@ -329,18 +361,18 @@ class get_ready(Page):
                        i drugi tekst, ',
                        'a nakon zadnjeg teksta ćete odgovarati na pitanja koja će obuhvaćati sadržaj sva tri\
                        pročitana teksta.',
-                       'Tekstovi će biti duži, a vrijeme čitanja ograničeno na otprilike %s %s. Tekstove čitajte na jednak\
-                       način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati dovoljno vremena!\
-                       30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se okvir unutar\
-                       kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (minutes, koliko_min),
+                       'Tekstovi će biti otprilike jednake dužine, a vrijeme čitanja ograničeno na otprilike %s minuta.\
+                        Tekstove čitajte na jednak način i jednakom brzinom kao ovaj koji ste upravo čitali jer ćete imati\
+                        dovoljno vremena! 30 sekundi prije isteka vremena za čitanje, na lijevoj strani ekrana prikazat će se\
+                        okvir unutar kojega će se odbrojavati vrijeme do kraja prikaza teksta.' % (self.participant.vars['reading_time_estimate']),
                        'Molimo Vas da zadatke rješavate najbolje što možete. Daljnjih specifičnih uputa neće biti.\
                        Ako imate bilo kakvih pitanja, sada ih postavite eksperimentatoru.', 
                        "Pritisnite 'Dalje' kako biste počeli čitati prvi tekst u glavnom dijelu postupka."]
                 
 
         practice_message = ["Sljedeći prikaz sadrži nešto duži tekst.",
-                            "Sada Vam je vrijeme čitanja ograničeno na otprilike %s %s. \
-                            Vaš zadatak je čitati tekst na jednak način i jednakom brzinom kao prethodni!" % (minutes, koliko_min),
+                            "Sada Vam je vrijeme čitanja ograničeno na otprilike %s minuta. \
+                            Vaš zadatak je čitati tekst na jednak način i jednakom brzinom kao prethodni!" % (self.participant.vars['reading_time_estimate']),
                             "30 sekundi prije isteka vremena, na lijevoj strani ekrana prikazat će se\
                             okvir unutar kojega će se odbrojavati vrijeme do kraja.", 
                             "Pritisnite 'Dalje' kako biste počeli čitati drugi tekst."]
@@ -353,8 +385,6 @@ class get_ready(Page):
                     'feedback': self.participant.vars['give_feedback'],
                     'message': message}             
 
-    def before_next_page(self):
-        self.participant.vars['predznanje'] = self.player.predznanje
 
 
 

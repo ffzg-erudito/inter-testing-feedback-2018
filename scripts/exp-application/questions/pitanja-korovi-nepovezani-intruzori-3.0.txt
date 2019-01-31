@@ -1,4 +1,4 @@
-﻿    3.1. Veća otpornost prema nepovoljnim biotskim čimbenicima odnosi se prvenstveno na otpornost prema:
+﻿    3.1. Veća otpornost korova prema nepovoljnim biotskim čimbenicima odnosi se prvenstveno na otpornost prema:
         a. toksičnim tvarima
         b. parazitskim biljkama
         c. virusima i bakterijama
@@ -64,7 +64,7 @@
         c. optimalnu vlažnost tla
         d. period zadržavanja vode u lišću
     3.14. Fruktifikacija je:
-        a. povećanje koncentracije fruktoze u plodu:
+        a. povećanje koncentracije fruktoze u plodu
         b. proces promjene biljnog sastava korova
         c. ispunjenje ekoloških uvjeta za klijanje
         d. posljednji stadij razvoja ploda
