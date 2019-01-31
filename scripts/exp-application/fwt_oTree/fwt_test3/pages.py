@@ -1,6 +1,7 @@
 from ._builtin import Page
 from .models import Constants
-import math
+import csv
+import os
 
 
   
@@ -9,9 +10,7 @@ class text_3(Page):
     def is_displayed(self):
         return self.round_number == 1
     def get_timeout_seconds(self):
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-        minutes = math.ceil(estimate / 60)
-        return minutes * 60
+        return self.participant.vars['reading_time_estimate'] * 60
 
 
 
@@ -29,9 +28,23 @@ class Question(Page):
         ]
 
     def before_next_page(self):
-        self.player.check_correct()
-        self.participant.vars[str(self.player.question_id)] = self.player.is_correct
-        print(str(self.player.question_id), self.participant.vars[str(self.player.question_id)])
+        self.player.check_answer()
+        question_id = 'content_3_' + str(self.player.question_id)
+        intrusor_id = 'isIntrusor_3_' + str(self.player.question_id)
+        
+        if self.player.is_correct:
+            self.participant.vars[question_id] = 1
+            self.participant.vars[intrusor_id] = 0
+
+        else:
+            self.participant.vars[question_id] = 0
+            if self.player.is_intrusor:
+                self.participant.vars[intrusor_id] = 1
+            else:
+                self.participant.vars[intrusor_id] = 0
+             
+
+        print(question_id, self.participant.vars[question_id], self.participant.vars[intrusor_id])
         
 
 
@@ -48,12 +61,69 @@ class Results(Page):
             'player_in_all_rounds': player_in_all_rounds,
             'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
         }
-        
+
         
         
 class end_page(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
+    
+    def get_timeout_seconds(self):
+        return 5
+    
+    def before_next_page(self):
+        
+    #        data_to_store = [self.participant.vars['participant_code'], self.participant.vars['spol'], self.participant.vars['dob'], self.participant.vars['predznanje']]
+        
+        results_file_exists = os.path.exists('../../../results/results.csv')
+        writefile = '../../../results/results.csv'
+        
+        data_to_store = self.participant.vars    
+        
+        fieldnames = ['when', 'participant_code', 'spol', 'dob', 'predznanje', 'give_feedback', 'condition', 
+              'timer_start', 'reading_time', 'reading_time_estimate', 
+              'practice_1', 'practice_2', 'practice_3', 'practice_4', 
+              'genKnowledge_1_1', 'genKnowledge_1_2', 'genKnowledge_1_3', 'genKnowledge_1_4', 'genKnowledge_1_5', 
+              'genKnowledge_1_6', 'genKnowledge_1_7', 'genKnowledge_1_8', 'genKnowledge_1_9', 'genKnowledge_1_10',
+              'genKnowledge_2_1', 'genKnowledge_2_2', 'genKnowledge_2_3', 'genKnowledge_2_4', 'genKnowledge_2_5', 
+              'genKnowledge_2_6', 'genKnowledge_2_7', 'genKnowledge_2_8', 'genKnowledge_2_9', 'genKnowledge_2_10',
+              'content_1_1', 'content_1_2', 'content_1_3', 'content_1_4', 'content_1_5', 'content_1_6', 'content_1_7',
+              'content_1_8', 'content_1_9', 'content_1_10', 'content_2_1', 'content_2_2', 'content_2_3', 'content_2_4',
+              'content_2_5', 'content_2_6', 'content_2_7', 'content_2_8', 'content_2_9', 'content_2_10',
+              'content_3_1', 'content_3_2', 'content_3_3', 'content_3_4', 'content_3_5', 'content_3_6', 'content_3_7',
+              'content_3_8', 'content_3_9', 'content_3_10', 'content_3_11', 'content_3_12', 'content_3_13', 'content_3_14',
+              'content_3_15', 'content_3_16', 'content_3_17', 'content_3_18', 'content_3_19', 'content_3_20',
+              'isIntrusor_2_1', 'isIntrusor_2_2', 'isIntrusor_2_3', 'isIntrusor_2_4', 'isIntrusor_2_5', 'isIntrusor_2_6',
+              'isIntrusor_2_7', 'isIntrusor_2_8', 'isIntrusor_2_9', 'isIntrusor_2_10',
+              'isIntrusor_3_1', 'isIntrusor_3_2', 'isIntrusor_3_3', 'isIntrusor_3_4', 'isIntrusor_3_5', 'isIntrusor_3_6',
+              'isIntrusor_3_7', 'isIntrusor_3_8', 'isIntrusor_3_9', 'isIntrusor_3_10', 'isIntrusor_3_11', 'isIntrusor_3_12',
+              'isIntrusor_3_13', 'isIntrusor_3_14', 'isIntrusor_3_15', 'isIntrusor_3_16', 'isIntrusor_3_17',
+              'isIntrusor_3_18', 'isIntrusor_3_19', 'isIntrusor_3_20']
+        
+        
+        with open(writefile, 'a') as csv_file:
+            writer = csv.DictWriter(csv_file, restval = None, fieldnames = fieldnames, lineterminator = '\n')
+        
+            if not results_file_exists:
+                writer.writeheader()
+                writer.writerow(data_to_store)
+            else:
+                writer.writerow(data_to_store)
+        
 
+        print(data_to_store)
+
+            # output = open('result.xls', 'w+')
+            
+            
+    #        excel_writer = pd.ExcelWriter('result.xls')
+    #        data_to_store.to_excel(excel_writer, 'Sheet1', index = False)
+    #        excel_writer.save()
+    #        
+    
+        
+
+
+    
 
 page_sequence = [text_3, Question, Results, end_page]
