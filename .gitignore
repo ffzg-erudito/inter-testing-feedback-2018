@@ -5,3 +5,5 @@ text/*
 informed-consent/*
 !informed-consent/*tex
 !informed-consent/*pdf
+
+results/*
