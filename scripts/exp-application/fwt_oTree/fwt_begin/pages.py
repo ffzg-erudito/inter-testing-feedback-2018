@@ -22,7 +22,7 @@ class enter_id(Page):
         
         # set feedback
         if self.session.config['name'] in ['1','2']:
-            self.participant.vars['give_feedback'] = True # random.choice([True, False])
+            self.participant.vars['give_feedback'] = random.choice([True, False])
         else:
             self.participant.vars['give_feedback'] = False
         print(self.session.config['app_sequence'],'Give feedback? ' + str(self.participant.vars['give_feedback']))
