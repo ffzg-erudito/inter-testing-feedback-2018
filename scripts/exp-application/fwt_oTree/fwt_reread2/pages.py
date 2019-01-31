@@ -1,15 +1,10 @@
 from ._builtin import Page
 from .models import Constants
-import math
-
-
 
 ## FIRST TEXT SECTION
 class text_2(Page):
-    def get_timeout_seconds(self):
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-        minutes = math.ceil(estimate / 60)
-        return minutes * 60
+    def get_timeout_seconds(self):       
+        return self.participant.vars['reading_time_estimate'] * 60
 
 
 class inter(Page):
@@ -20,9 +15,7 @@ class inter(Page):
 class text_2_rep(Page):
     template_name = 'fwt_reread2/text_2.html'
     def get_timeout_seconds(self):
-        estimate = self.participant.vars['reading_time_estimate'] * 3 # multiplied by 3 because the main text sections have about 3x more words
-        minutes = math.ceil(estimate / 60)
-        return minutes * 60
+        return self.participant.vars['reading_time_estimate'] * 60
 
 
 class get_ready(Page):
