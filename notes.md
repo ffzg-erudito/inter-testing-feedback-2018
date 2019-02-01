@@ -13,7 +13,9 @@ interpolated activity was arithmetic) rather than attentively go through their a
 pertaining to a particular test. Feedback is given in a tabular format, containing in rows the question,
 the participant given answer, and the correct answer for that question. As per the issue of whether
 participants will just skim through or process the feedback thoroughly, we attempted to ensure that they
-indeed process it through the following manipulations. First of all, when the feedback is displayed, 
-proceeding to the next display is disabled for 40 seconds, after which a "Next" button appeared at the 
-bottom of the table. By clicking on this button at will, participants were allowed to proceed to the next
-display. After an additional 20 seconds, though, the protocol proceeded automatically.
+indeed process it through the following manipulations. First, when the feedback is displayed, proceeding 
+to the next display is disabled for 40 seconds, after which a "Next" button appears at the bottom of the
+table. By clicking on this button at will, participants are allowed to proceed to the next display. 
+After an additional 20 seconds, though, the protocol proceeds automatically. Secondly, participants are
+informed during the instructions phase that, after they've read the final text, they will be asked
+questions pertaining to all three texts, whereby we ask them that they therefore study the given feedback
