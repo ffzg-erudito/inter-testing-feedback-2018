@@ -28,8 +28,8 @@ Previous studies usually pitched *retrieval of the studied materials* against *r
 the studied materials*. However, some studies suggest that other types of cognitive activity besides
 retrieval achieve the same effect. For example, Pastötter, Schicker, Niedernhuber & Bäuml (2011)
 found the same effect for retrieval from semantic memory (generation of exemplars from a specified
-category) and a short-term memory task (2-back task). We therefore included three cognitive activities
-as the levels of the 2nd IV:
+category) and from a short-term memory task (2-back task) as well. We therefore included three 
+cognitive activities as the levels of the 2nd IV:
 1. rereading/restudying the studied materials
 2. retrieval of the studied materials
 3. retrieval of general knowledge
