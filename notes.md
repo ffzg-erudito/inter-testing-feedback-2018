@@ -38,7 +38,7 @@ as the levels of the 2nd IV:
 the desirability of ecological validity, we decided to use more complex study materials. We constructed
 a series of three text passages (1. 875 words, 2. 763 words, 3. 872 words) about weeds - a subject we 
 assumed our participants would be unknowledgable about. Our main dependent variable (DV) is the 
-performance on the test comprised of 20 multiple choice questions following the final text passage and 
+performance on a test comprised of 20 multiple choice questions following the final text passage and 
 pertaining to that final text passage. Participants were given 4 possible answers to choose from, one of 
 which was correct, and the other three were distractors. One of the distractors was designed in such a 
 way so as to be particularly luring on account of it being related to the 2nd text passage, not the 3rd 
