@@ -17,7 +17,7 @@ asked to merely restudy the first content.
 - although it is relatively well documented by now, the mechanisms that give rise to the forward testing 
 effect have not been elucidated yet. Chan, Meissner & Davis (2018) have provided an overview of the 
 frameworks that attempt to explain the effect, and conclude that introducing feedback to the study 
-proceedure might be a way to differentiate between two prominent explanations. We decided to do exactly
+procedure might be a way to differentiate between two prominent explanations. We decided to do exactly
 this, so we asked what the effect of feedback on our dependent variable would be? Therefore, one of our
 independent variables (IVs) is feedback, with two levels:
 1. feedback is given
@@ -52,7 +52,7 @@ while the DVs are the number of correct answers on the final test and the number
 on the final test
 
 
-# PROCEEDURE
+# PROCEDURE
 Participants were randomly assigned to one of the 5 conditions. Participants were then given detailed
 instructions about what to expect to encounter during the study and what their task would be. At the very
 beginning, all participants entered their ID, age and sex. They then estimated their present knowledge about
@@ -66,7 +66,7 @@ Results of a pilot study found that most participants found 4 minutes to be too 
 too long. We therefore set the lowest possible estimate to be 5 minutes, and the longest one to be 8 minutes. 
 
 After this passage, depending on the condition they were assigned to, participants were familiarised with the 
-interpolated activity they are going to perform during the main part of the proceedure (e.g. the rereading 
+interpolated activity they are going to perform during the main part of the procedure (e.g. the rereading 
 group reread the practice passage, while the content test group answered four questions pertaining to the 
 content of the practice text passage). **All** participants were told that, after the 3rd and final text 
 passage, they are going to answer questions pertaining to the content of **ALL** the passages (barring the 
