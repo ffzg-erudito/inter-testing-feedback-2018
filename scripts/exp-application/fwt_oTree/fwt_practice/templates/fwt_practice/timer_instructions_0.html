@@ -5,7 +5,7 @@
     <style>
         .col-form-label {
             word-wrap: break-word;
-            width: 517px
+            width: 462px
         }
     </style>
 
@@ -23,11 +23,15 @@
         <br>
         
         <p>
-            Prikaz nakon ovoga sadržava tekst.
+            {% formfield player.predznanje %}
         </p>
         
+        <br>
+        <br>
+        <br>
+        
         <p>
-            {% formfield player.predznanje %}
+            Kada pritisnete gumb "Dalje", na ekranu će se prikazati tekst.
         </p>
         
         <p style="word-wrap: break-word; width: 462px">
@@ -37,7 +41,7 @@
         
         <p style="word-wrap: break-word ; width: 462px">
             Kada ga pročitate jednom, tj. kada dođete do kraja, 
-            pritisnite tipku "Dalje" koja se nalazi pri dnu teksta.
+            pritisnite tipku "Dalje" koja će se nalaziti pri dnu teksta.
         </p>
     
         <br>

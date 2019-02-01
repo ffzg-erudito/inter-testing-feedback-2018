@@ -74,7 +74,7 @@ class Player(BasePlayer):
     is_correct = models.BooleanField()
     feedback = models.StringField()
     predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, 
-                                     label = 'Molimo Vas da procijenite svoje znanje o korovima (botanika, pojam i definicija korova,\
+                                     label = 'Molimo Vas da, na samom početku, procijenite svoje znanje o korovima (botanika, pojam i definicija korova,\
                                      evolucija korova, ekološke značajke korova, biološke značajke korova, širenje korova) na ljestvici\
                                      od 1 do 7 (1 - tema mi je potpuno nepoznata, 7 - tema mi je vrlo bliska):')
 
