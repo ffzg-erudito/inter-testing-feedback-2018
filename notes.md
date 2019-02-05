@@ -17,19 +17,30 @@ asked to merely restudy the first content.
 - although it is relatively well documented by now, the mechanisms that give rise to the forward testing 
 effect have not been elucidated yet. Chan, Meissner & Davis (2018) have provided an overview of the 
 frameworks that attempt to explain the effect, and conclude that introducing feedback to the study 
-procedure might be a way to differentiate between two prominent explanations. We decided to do exactly
-this, so we asked what the effect of feedback on our dependent variable would be? Therefore, one of our
-independent variables (IVs) is feedback, with two levels:
+procedure might be a way to differentiate between two prominent explanations. 
+  *Resource theories* claim that interpolated testing reduces proactive interference during the encoding of
+new materials or by increasing attentional resources that are available for post-retrieval encoding. 
+Theories in this category claim that interpolated tests should reduce the likelihood of intrusions from 
+original learning during new learning, whilst helping participants sustain attention on the encoding task 
+through "resetting" of the encoding process (Pastötter et al., 2011). On the other hand, *integration 
+theories* propose that testing enhances the accessibility of original learning, which should, actually, 
+increase the probability of intrusions, i.e. spontaneous retrievals of original learning. Thus, covert 
+retrieval promotes binding of original and new information into an integrated representation, which 
+improves conceptual organisation and the effectivness of retrieval cues at the time of test.
+  Having opposing predictions regarding the influence of intrusions on the forward testing effect, and
+since corrective feedback, purportedly, increases the likelihood of intrusions during new learning, we 
+decided to pit these two frameworks against each other by asking what the effect of feedback on our 
+dependent variables would be? Therefore, one of our independent variables (IVs) is feedback, with two levels:
 1. feedback is given
 2. feedback is not given
 
 - our second IV is the type of activity interpolated between subsequent phases of reading/studying.
 Previous studies usually pitched *retrieval of the studied materials* against *rereading/restudying
 the studied materials*. However, some studies suggest that other types of cognitive activity besides
-retrieval achieve the same effect. For example, Pastötter, Schicker, Niedernhuber & Bäuml (2011)
-found the same effect for retrieval from semantic memory (generation of exemplars from a specified
-category) and from a short-term memory task (2-back task) as well. We therefore included three 
-cognitive activities as the levels of the 2nd IV:
+retrieval of the studied material achieve the same effect. For example, Pastötter, Schicker, 
+Niedernhuber & Bäuml (2011) found the same effect for retrieval from semantic memory (generation of 
+exemplars from a specified category) and from a short-term memory task (2-back task) as well. 
+We therefore included three cognitive activities as the levels of the 2nd IV:
 1. rereading/restudying the studied materials
 2. retrieval of the studied materials
 3. retrieval of general knowledge
@@ -40,9 +51,25 @@ a series of three text passages (1. 875 words, 2. 763 words, 3. 872 words) about
 assumed our participants would be unknowledgable about. Our main dependent variable (DV) is the 
 performance on a test comprised of 20 multiple choice questions following the final text passage and 
 pertaining to that final text passage. Participants were given 4 possible answers to choose from, one of 
-which was correct, and the other three were distractors. One of the distractors was designed in such a 
-way so as to be particularly luring on account of it being related to the 2nd text passage, not the 3rd 
-and final one. Our 2nd DV was the number of these lures selected in the final test.
+which was correct, and the other three were distractors. 
+  One of the distractors was designed in such a way so as to be particularly luring on account of it being 
+related to the 2nd text passage, not the 3rd and final one. We assumed that selecting these luring options 
+could provide an indication of the influence of covert retrievals (i.e. "intrusions") from older learning on 
+the retrieval of new learning. Our 2nd DV was the number of these lures selected in the final test. As stated
+above, according to resource theories, "intrusions" should decrease the forward testing effect. Therefore, the 
+influence of feedback should decrease the number of selected luring options.
+
+# HYPOTHESES
+1. Interpolated testing increases the effectiveness of future learning. Compared to the rereading group,
+participants in the retrieval groups should have a higher average total score on the final test.
+Furthermore, following the results of some studies, we expect to find no difference between the two
+groups having different types of retrieval, which is in accordance with resource theories.
+2. Although Chan, Meissner & Davis (2018) assert that feedback should increase the likelihood of "intrusions"
+during new learning, we will refrain from setting a directional hypothesis regarding the influence of feedback,
+both on the main DV and 2nd DV. In other words, we will assume that the groups receiving feedback will not 
+achieve a different result from the groups that will not receive feedback. If, however, we find that giving
+feedback leads to a lower average score in the final test, we suppose that this should also be accompanied
+by an increase in the average number of "intrusions". 
 
 
 # DESIGN BASICS
