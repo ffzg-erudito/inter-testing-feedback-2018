@@ -42,7 +42,7 @@ class Subsession(BaseSubsession):
             if self.session.config['name'] in ['1', '3']:
                 self.session.vars['practice_questions'] = Constants.practice_questions_c.copy()
             elif self.session.config['name'] == '2':
-                self.session.vars['practice_questions'] = Constants.practice_questions_gk.copy()
+                self.session.vars['practice_questions'] = Constants.practice_questions_c.copy() + Constants.practice_questions_gk.copy() 
                 
 
             ## ALTERNATIVE DESIGN:
@@ -73,13 +73,13 @@ class Player(BasePlayer):
     submitted_answer = models.StringField(widget=widgets.RadioSelect)
     is_correct = models.BooleanField()
     feedback = models.StringField()
-    predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, 
-                                     label = 'Molimo Vas da, na samom početku, procijenite svoje znanje o korovima (botanika, pojam i definicija korova,\
-                                     evolucija korova, ekološke značajke korova, biološke značajke korova, širenje korova) na ljestvici\
-                                     od 1 do 7 (1 - tema mi je potpuno nepoznata, 7 - tema mi je vrlo bliska):')
+#    predznanje = models.IntegerField(widget = widgets.RadioSelectHorizontal, 
+#                                     label = 'Molimo Vas da, na samom početku, procijenite svoje znanje o korovima (botanika, pojam i definicija korova,\
+#                                     evolucija korova, ekološke značajke korova, biološke značajke korova, širenje korova) na ljestvici\
+#                                     od 1 do 7 (1 - tema mi je potpuno nepoznata, 7 - tema mi je vrlo bliska):')
 
     def current_question(self):
-        if self.session.config['name'] in ['1', '2']:
+        if self.session.config['name'] in ['1', '3']:
             return self.session.vars['practice_questions'][self.round_number - 5]
         else:
             return self.session.vars['practice_questions'][self.round_number - 5]

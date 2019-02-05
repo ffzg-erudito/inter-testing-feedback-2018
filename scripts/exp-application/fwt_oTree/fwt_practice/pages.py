@@ -6,18 +6,18 @@ import os
 
 
 class timer_instructions_0(Page):
-    form_model = 'player'
-    form_fields = ['predznanje']
-    
-    def predznanje_choices(self):
-        return [1, 2, 3, 4, 5, 6, 7]
+#    form_model = 'player'
+#    form_fields = ['predznanje']
+#    
+#    def predznanje_choices(self):
+#        return [1, 2, 3, 4, 5, 6, 7]
     
     def is_displayed(self):
         return self.round_number == 1
     def before_next_page(self):
         # start timing the reading of the practice text
-        self.participant.vars['predznanje'] = self.player.predznanje
-        print(self.participant.vars['predznanje'])
+#        self.participant.vars['predznanje'] = self.player.predznanje
+#        print(self.participant.vars['predznanje'])
         self.participant.vars['timer_start'] = time.time()
 
 
@@ -121,7 +121,7 @@ class instructions_1(Page):
 
 
 
-class Question(Page):
+class question(Page):
     def is_displayed(self):
         return (self.session.config['name'] in ['1', '2']) & (self.round_number < 5)
 
@@ -178,14 +178,12 @@ class instructions_2(Page):
                    nastaviti nakon 20 sekundi.',
                    'Pritisnite tipku "Dalje" kako biste vidjeli povratne informacije.']
                
-        return {
-            'message': message
-        }
+        return {'message': message}
 
 
 
 
-class Results(Page):
+class results(Page):
     def is_displayed(self):
         if self.session.config['name'] in ['1','2']:
             return (self.round_number == Constants.num_rounds - 4) & (self.participant.vars['give_feedback'])
@@ -229,9 +227,11 @@ class instructions_3(Page):
                        upravo odgovarali.',
                        'Nakon čitanja trećeg teksta, odgovarat ćete na pitanja koja će obuhvaćati sadržaj sva tri pročitana\
                        teksta. ',
-                       'Pitanja su ponovno tipa višestrukog izbora, stoga označite onaj odgovor koji smatrate točnim\
-                       te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti prikaz sljedećeg pitanja.',
-                       'Pritisnite tipku "Dalje" kako biste dobili završnu uputu.']
+                       'Sada Vas molimo da odgovorite na nekoliko pitanja vezanih za sadržaj prethodnog teksta kako biste se\
+                       upoznali s oblikom pitanja u završnom dijelu. Pitanja su ponovno tipa višestrukog izbora, stoga označite\
+                       onaj odgovor koji smatrate točnim te ga potvrdite pritiskom na tipku "Dalje". To će i automatski pokrenuti\
+                       prikaz sljedećeg pitanja.',
+                       'Kada ste spremni započeti, pritisnite tipku "Dalje".']
         else:
             rereading = True
             message = ['U glavnom dijelu istraživanja čitat ćete tri teksta. Nakon što jednom pročitate prvi tekst, \
@@ -264,9 +264,9 @@ class instructions_3(Page):
 
 
 
-class Question_rereading(Page):
+class question_genKnowledge_rereading(Page):
     def is_displayed(self):
-        return (self.session.config['name'] == '3') & (self.round_number > Constants.num_rounds - 4)
+        return (self.session.config['name'] in ['2', '3']) & (self.round_number > Constants.num_rounds - 4)
     
     form_model = 'player'
     form_fields = ['submitted_answer']
@@ -389,4 +389,4 @@ class get_ready(Page):
 
 
 
-page_sequence = [timer_instructions_0, practice_text, instructions_1, Question, practice_text_rep, instructions_2, Results, instructions_3, Question_rereading, get_ready]
+page_sequence = [timer_instructions_0, practice_text, instructions_1, question, practice_text_rep, instructions_2, results, instructions_3, question_genKnowledge_rereading, get_ready]

@@ -62,6 +62,62 @@ class Question(Page):
 #            'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
 #        }
 
+
+class koliko_procitao(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.num_rounds
+    
+    def vars_for_template(self):
+        if self.session.config['name'] in ['1', '2']:
+            message = ['Molimo Vas da za svaki od tri dijela procijenite koliko ste teksta uspjeli pročitati prije nego\
+                       što je program automatski pokrenuo sljedeću stranicu.']
+        else:
+            message = ['Molimo Vas da za svaki od tri dijela procijenite koliko ste teksta uspjeli pročitati tijekom prvog\
+                       od dva čitanja prije nego što je program automatski pokrenuo sljedeću stranicu.']
+        
+        return {'message': message}
+    
+    
+    form_model = 'player'
+    form_fields = ['text1', 'text2', 'text3']
+
+    def text1_choices(self):
+        return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
+                'jednom cijeli tekst',
+                'jednom cijeli tekst i preletjeti "ključne" dijelove',
+                'oko jedan i pol put',
+                'više nego jednom, ali nešto manje od jedan i pol put',
+                'više od jedan i pol put, ali manje od dva puta',
+                'dva ili više puta']
+
+    def text2_choices(self):
+         return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
+                'jednom cijeli tekst',
+                'jednom cijeli tekst i preletjeti "ključne" dijelove',
+                'oko jedan i pol put',
+                'više nego jednom, ali nešto manje od jedan i pol put',
+                'više od jedan i pol put, ali manje od dva puta',
+                'dva ili više puta']
+         
+         
+    def text3_choices(self):
+        return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
+                'jednom cijeli tekst',
+                'jednom cijeli tekst i preletjeti "ključne" dijelove',
+                'oko jedan i pol put',
+                'više nego jednom, ali nešto manje od jedan i pol put',
+                'više od jedan i pol put, ali manje od dva puta',
+                'dva ili više puta']
+        
+        
+    def before_next_page(self):
+        self.participant.vars['koliko_procitao_text1'] = self.player.text1
+        self.participant.vars['koliko_procitao_text2'] = self.player.text2
+        self.participant.vars['koliko_procitao_text3'] = self.player.text3
+        
+        
+
+
         
         
 class end_page(Page):
@@ -81,7 +137,8 @@ class end_page(Page):
         
         fieldnames = ['when', 'participant_code', 'spol', 'dob', 'predznanje', 'give_feedback', 'condition', 
               'timer_start', 'reading_time', 'reading_time_estimate', 
-              'practice_1', 'practice_2', 'practice_3', 'practice_4', 
+              'koliko_procitao_text1', 'koliko_procitao_text2', 'koliko_procitao_text3',
+              'practice_1', 'practice_2', 'practice_3', 'practice_4', 'practice_5', 'practice_6', 'practice_7', 'practice_8', '
               'genKnowledge_1_1', 'genKnowledge_1_2', 'genKnowledge_1_3', 'genKnowledge_1_4', 'genKnowledge_1_5', 
               'genKnowledge_1_6', 'genKnowledge_1_7', 'genKnowledge_1_8', 'genKnowledge_1_9', 'genKnowledge_1_10',
               'genKnowledge_2_1', 'genKnowledge_2_2', 'genKnowledge_2_3', 'genKnowledge_2_4', 'genKnowledge_2_5', 
@@ -100,7 +157,7 @@ class end_page(Page):
               'isIntrusor_3_18', 'isIntrusor_3_19', 'isIntrusor_3_20']
         
         
-        with open(writefile, 'a') as csv_file:
+        with open(writefile, 'a', encoding='utf-8') as csv_file:
             writer = csv.DictWriter(csv_file, restval = None, fieldnames = fieldnames, lineterminator = '\n')
         
             if not results_file_exists:
@@ -118,4 +175,4 @@ class end_page(Page):
 
 # page_sequence = [text_3, Question, Results, end_page]
 
-page_sequence = [text_3, Question, end_page]
+page_sequence = [text_3, Question, koliko_procitao, end_page]

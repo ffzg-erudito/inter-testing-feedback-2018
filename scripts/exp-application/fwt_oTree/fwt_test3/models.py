@@ -61,6 +61,10 @@ class Player(BasePlayer):
     is_correct = models.BooleanField()
     is_intrusor = models.BooleanField()
     feedback = models.StringField()
+    text1 = models.StringField(widget = widgets.RadioSelect)
+    text2 = models.StringField(widget = widgets.RadioSelect)
+    text3 = models.StringField(widget = widgets.RadioSelect)
+    
 
     def current_question(self):
         return self.session.vars['test3_questions'][self.round_number - 1]

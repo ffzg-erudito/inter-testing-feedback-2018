@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block styles %}
+    <style>
+        .col-form-label {
+            font-weight: bold;
+        }
+        
+    </style>
+{% endblock%}
+
+
+{% block content %}
+
+
+    <h3>
+        {{ message.0 }}
+    </h3>
+    
+    <br>
+    <br>
+
+    {% formfield player.text1 label="Prvi tekst"%}
+    
+    <br>
+    
+    {% formfield player.text2 label="Drugi tekst"%}
+    
+    <br>
+    
+    {% formfield player.text3 label="Treći tekst"%}
+    
+    <br>
+
+    
+    <button style="float: right;" class="otree-btn-next btn btn-primary next-button otree-next-button">Dalje</button>
+
+{% endblock %}
