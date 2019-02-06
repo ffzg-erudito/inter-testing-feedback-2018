@@ -138,12 +138,9 @@ class end_page(Page):
         fieldnames = ['when', 'participant_code', 'spol', 'dob', 'predznanje', 'give_feedback', 'condition', 
               'timer_start', 'reading_time', 'reading_time_estimate', 
               'koliko_procitao_text1', 'koliko_procitao_text2', 'koliko_procitao_text3',
-<<<<<<< HEAD
-              'practice_1', 'practice_2', 'practice_3', 'practice_4', 'practice_5', 'practice_6', 'practice_7', 'practice_8',              'genKnowledge_1_1', 'genKnowledge_1_2', 'genKnowledge_1_3', 'genKnowledge_1_4', 'genKnowledge_1_5', 
-=======
-              'practice_1', 'practice_2', 'practice_3', 'practice_4', 'practice_5', 'practice_6', 'practice_7', 'practice_8',
+              'practice_for_activity_1', 'practice_for_activity_2', 'practice_for_activity_3', 'practice_for_activity_4',
+              'practice_for_final_1', 'practice_for_final_2', 'practice_for_final_3', 'practice_for_final_4',
               'genKnowledge_1_1', 'genKnowledge_1_2', 'genKnowledge_1_3', 'genKnowledge_1_4', 'genKnowledge_1_5', 
->>>>>>> e5625027aa9e9a9a57f7d47694271f75621b068c
               'genKnowledge_1_6', 'genKnowledge_1_7', 'genKnowledge_1_8', 'genKnowledge_1_9', 'genKnowledge_1_10',
               'genKnowledge_2_1', 'genKnowledge_2_2', 'genKnowledge_2_3', 'genKnowledge_2_4', 'genKnowledge_2_5', 
               'genKnowledge_2_6', 'genKnowledge_2_7', 'genKnowledge_2_8', 'genKnowledge_2_9', 'genKnowledge_2_10',
@@ -161,7 +158,7 @@ class end_page(Page):
               'isIntrusor_3_18', 'isIntrusor_3_19', 'isIntrusor_3_20']
         
         
-        with open(writefile, 'a', encoding='utf-8') as csv_file:
+        with open(writefile, 'a', encoding='utf-8-sig') as csv_file:
             writer = csv.DictWriter(csv_file, restval = None, fieldnames = fieldnames, lineterminator = '\n')
         
             if not results_file_exists:

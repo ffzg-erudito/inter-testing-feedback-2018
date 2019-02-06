@@ -139,7 +139,7 @@ class question(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        question_id = 'practice_' + str(self.player.question_id)
+        question_id = 'practice_for_activity_' + str(self.player.question_id)
         if self.player.is_correct:
             self.participant.vars[question_id] = 1
         else:
@@ -289,7 +289,7 @@ class question_genKnowledge_rereading(Page):
 
     def before_next_page(self):
         self.player.check_correct()
-        question_id = 'practice_' + str(self.player.question_id)
+        question_id = 'practice_for_final_' + str(self.player.question_id)
         if self.player.is_correct:
             self.participant.vars[question_id] = 1
         else:
