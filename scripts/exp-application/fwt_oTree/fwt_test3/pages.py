@@ -138,7 +138,7 @@ class end_page(Page):
         fieldnames = ['when', 'participant_code', 'spol', 'dob', 'predznanje', 'give_feedback', 'condition', 
               'timer_start', 'reading_time', 'reading_time_estimate', 
               'koliko_procitao_text1', 'koliko_procitao_text2', 'koliko_procitao_text3',
-              'practice_1', 'practice_2', 'practice_3', 'practice_4', 'practice_5', 'practice_6', 'practice_7', 'practice_8', '
+              'practice_1', 'practice_2', 'practice_3', 'practice_4', 'practice_5', 'practice_6', 'practice_7', 'practice_8',
               'genKnowledge_1_1', 'genKnowledge_1_2', 'genKnowledge_1_3', 'genKnowledge_1_4', 'genKnowledge_1_5', 
               'genKnowledge_1_6', 'genKnowledge_1_7', 'genKnowledge_1_8', 'genKnowledge_1_9', 'genKnowledge_1_10',
               'genKnowledge_2_1', 'genKnowledge_2_2', 'genKnowledge_2_3', 'genKnowledge_2_4', 'genKnowledge_2_5', 
