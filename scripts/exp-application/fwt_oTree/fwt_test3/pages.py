@@ -63,59 +63,93 @@ class results(Page):
         }
 
 
-class koliko_procitao(Page):
+class questions_about_reading(Page):
     def is_displayed(self):
         return self.round_number == Constants.num_rounds
     
     def vars_for_template(self):
-        if self.session.config['name'] in ['1', '2']:
-            message = ['Molimo Vas da za svaki od tri dijela procijenite koliko ste teksta uspjeli pročitati prije nego\
-                       što je program automatski pokrenuo sljedeću stranicu.']
+        if self.session.config['name'] is '3':
+            message = ['Molimo Vas da za svaki od tri dijela procijenite koliko ste ukupno teksta uspjeli pročitati nakon\
+                       dva navrata čitanja svakog dijela, prije nego što je program automatski pokrenuo sljedeću stranicu.',
+                       'Molimo Vas da odgovorite na par pitanja o Vašem iskustvu čitanja.']    
         else:
-            message = ['Molimo Vas da za svaki od tri dijela procijenite koliko ste teksta uspjeli pročitati tijekom prvog\
-                       od dva čitanja prije nego što je program automatski pokrenuo sljedeću stranicu.']
+            message = ['Molimo Vas da za svaki od tri dijela procijenite koliko ste teksta uspjeli pročitati prije nego\
+                       što je program automatski pokrenuo sljedeću stranicu.',
+                       'Molimo Vas da odgovorite na par pitanja o Vašem iskustvu čitanja.']
         
         return {'message': message}
     
     
     form_model = 'player'
-    form_fields = ['text1', 'text2', 'text3']
+    form_fields = ['text1', 'text2', 'text3', 'reading_deficits', 'which', 'reading_difficulties_this_exp']
 
     def text1_choices(self):
-        return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
-                'jednom cijeli tekst',
-                'jednom cijeli tekst i preletjeti "ključne" dijelove',
-                'oko jedan i pol put',
-                'više nego jednom, ali nešto manje od jedan i pol put',
-                'više od jedan i pol put, ali manje od dva puta',
-                'dva ili više puta']
+        if self.session.config['name'] is '3':
+            return ['jednom cijeli tekst',
+                    'jednom cijeli tekst, a "ključne" dijelove dva puta',
+                    'oko jedan i pola puta',
+                    'oko dva puta',
+                    'oko dva i pola puta',
+                    'tri ili više puta']
+        else:
+            return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
+                    'jednom cijeli tekst',
+                    'jednom cijeli tekst i preletjeti "ključne" dijelove',
+                    'oko jedan i pola puta',
+                    'više nego jednom, ali nešto manje od jedan i pola puta',
+                    'više od jedan i pola puta, ali manje od dva puta',
+                    'dva ili više puta']
 
     def text2_choices(self):
-         return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
-                'jednom cijeli tekst',
-                'jednom cijeli tekst i preletjeti "ključne" dijelove',
-                'oko jedan i pol put',
-                'više nego jednom, ali nešto manje od jedan i pol put',
-                'više od jedan i pol put, ali manje od dva puta',
-                'dva ili više puta']
+        if self.session.config['name'] is '3':
+            return ['jednom cijeli tekst',
+                    'jednom cijeli tekst, a "ključne" dijelove dva puta',
+                    'oko jedan i pola puta',
+                    'oko dva puta',
+                    'oko dva i pola puta',
+                    'tri ili više puta']
+        else:
+            return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
+                    'jednom cijeli tekst',
+                    'jednom cijeli tekst i preletjeti "ključne" dijelove',
+                    'oko jedan i pola puta',
+                    'više nego jednom, ali nešto manje od jedan i pola puta',
+                    'više od jedan i pola puta, ali manje od dva puta',
+                    'dva ili više puta']
          
          
     def text3_choices(self):
-        return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
-                'jednom cijeli tekst',
-                'jednom cijeli tekst i preletjeti "ključne" dijelove',
-                'oko jedan i pol put',
-                'više nego jednom, ali nešto manje od jedan i pol put',
-                'više od jedan i pol put, ali manje od dva puta',
-                'dva ili više puta']
+        if self.session.config['name'] is '3':
+            return ['jednom cijeli tekst',
+                    'jednom cijeli tekst, a "ključne" dijelove dva puta',
+                    'oko jedan i pola puta',
+                    'oko dva puta',
+                    'oko dva i pola puta',
+                    'tri ili više puta']
+        else:
+            return ['nisam uspjela/uspio pročitati do kraja ili sam žurila/žurio da bih pročitala/pročitao',
+                    'jednom cijeli tekst',
+                    'jednom cijeli tekst i preletjeti "ključne" dijelove',
+                    'oko jedan i pola puta',
+                    'više nego jednom, ali nešto manje od jedan i pola puta',
+                    'više od jedan i pola puta, ali manje od dva puta',
+                    'dva ili više puta']
         
+    def reading_deficits_choices(self):
+        return ['NE', 'DA']
+    
+    def reading_difficulties_this_exp_choices(self):
+        return ['NE', 'DA']
+    
         
     def before_next_page(self):
         self.participant.vars['koliko_procitao_text1'] = self.player.text1
         self.participant.vars['koliko_procitao_text2'] = self.player.text2
         self.participant.vars['koliko_procitao_text3'] = self.player.text3
         
-        
+        self.participant.vars['reading_deficits'] = self.player.reading_deficits
+        self.participant.vars['which'] = self.player.which
+        self.participant.vars['reading_difficulties_this_exp'] = self.player.reading_difficulties_this_exp
 
 
         
@@ -135,9 +169,10 @@ class end_page(Page):
         
         data_to_store = self.participant.vars    
         
-        fieldnames = ['when', 'participant_code', 'spol', 'dob', 'predznanje', 'give_feedback', 'condition', 
+        fieldnames = ['when', 'participant_code', 'spol', 'dob', 'give_feedback', 'condition', 
               'timer_start', 'reading_time', 'reading_time_estimate', 
               'koliko_procitao_text1', 'koliko_procitao_text2', 'koliko_procitao_text3',
+              'reading_deficits', 'which', 'reading_difficulties_this_exp',
               'practice_for_activity_1', 'practice_for_activity_2', 'practice_for_activity_3', 'practice_for_activity_4',
               'practice_for_final_1', 'practice_for_final_2', 'practice_for_final_3', 'practice_for_final_4',
               'genKnowledge_1_1', 'genKnowledge_1_2', 'genKnowledge_1_3', 'genKnowledge_1_4', 'genKnowledge_1_5', 
@@ -176,4 +211,4 @@ class end_page(Page):
 
 # page_sequence = [text_3, Question, Results, end_page]
 
-page_sequence = [text_3, question, results, koliko_procitao, end_page]
+page_sequence = [text_3, question, results, questions_about_reading, end_page]

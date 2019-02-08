@@ -64,6 +64,10 @@ class Player(BasePlayer):
     text1 = models.StringField(widget = widgets.RadioSelect)
     text2 = models.StringField(widget = widgets.RadioSelect)
     text3 = models.StringField(widget = widgets.RadioSelect)
+    reading_deficits = models.StringField(widget = widgets.RadioSelect, label = 'Imate li općenito poteškoća s čitanjem (npr. disleksiju)?')
+    which = models.StringField(widget = widgets.TextInput, label = 'Ako ste na prethodno pitanje odgovorili s "DA", molimo Vas da ovdje napišete koje poteškoće imate:')
+    reading_difficulties_this_exp = models.StringField(widget = widgets.RadioSelect, label = 'Jeste li tijekom ovog eksperimenta imali teškoća s čitanjem zbog kvalitete vida ili kvalitete prikaza na ekranu računala?')
+    
     
 
     def current_question(self):
