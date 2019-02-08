@@ -80,10 +80,12 @@ on the final test
 
 
 # PROCEDURE
-Participants were randomly assigned to one of the 5 conditions. Participants were then given detailed
-instructions about what to expect to encounter during the study and what their task would be. At the very
-beginning, all participants entered their ID, age and sex. They then estimated their present knowledge about
-weeds on a scale ranging from 1 to 7 (where 1 means no knowledge of the subject). 
+Participants were randomly assigned to one of the 5 conditions. They were first given a brief oral introduction
+to the study, and brief motivational instructions to encourage them to carefully read the written instructions,
+and to adhere to the specifications of the tasks. They were then assigned to one of six compartments containin
+a computer with requisite input and output devices. Participants were seated in front of the computer monitor,
+where they followed the prompts to receive detailed instructions about what to expect to encounter during the 
+study and what their task would be. At the very beginning, all participants entered their ID, age and sex.
 
 After that they were instructed to read a passage of text (768 words) from beginning to end once, 
 at a rate which comes naturally to them, and to click on a button at the bottom of the passage when they've 
