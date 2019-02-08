@@ -68,7 +68,7 @@ class practice_text(Page):
         # set reading time estimate in minutes and limit it
         self.participant.vars['reading_time_estimate'] = math.ceil(estimate / 60)
         if self.participant.vars['reading_time_estimate'] < 5:
-            self.participant.vars['reading_time_estimate'] = 5
+           self.participant.vars['reading_time_estimate'] = 5
         elif self.participant.vars['reading_time_estimate'] > 8:
             self.participant.vars['reading_time_estimate'] = 8
         
