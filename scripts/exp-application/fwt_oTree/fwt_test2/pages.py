@@ -11,7 +11,7 @@ class text_2(Page):
     
 
 
-class Question(Page):
+class question(Page):
     form_model = 'player'
     form_fields = ['submitted_answer']
 
@@ -44,7 +44,7 @@ class Question(Page):
         
         
         
-class Results(Page):
+class results(Page):
     def is_displayed(self):
         return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
 
@@ -65,4 +65,4 @@ class get_ready(Page):
         return self.round_number == Constants.num_rounds
 
 
-page_sequence = [text_2, Question, Results, get_ready]
+page_sequence = [text_2, question, results, get_ready]

@@ -20,10 +20,10 @@
     	d. porasti za 20 mm Hg
 
     1.1. Koliko se drvenastih i zeljastih biljaka smatra korovima (zaokružite najbližu vrijednost)?
-        a. više od 2500
-        b. više od 3000
-        c. više od 3500
-        d. više od 4000
+        a. više od 2.500
+        b. više od 3.000
+        c. više od 3.500
+        d. više od 4.000
     1.2. Na urbanim prostorima se pojavljuju korovima srodne:
         a. rudimentarne biljke
         b. runalne biljke

@@ -47,7 +47,7 @@ We therefore included three cognitive activities as the levels of the 2nd IV:
 
 - published studies usually use simple study materials like lists of words or word pairs. Having in mind
 the desirability of ecological validity, we decided to use more complex study materials. We constructed
-a series of three text passages (1. 875 words, 2. 763 words, 3. 872 words) about weeds - a subject we 
+a series of three text passages (1. 874 words, 2. 754 words, 3. 843 words) about weeds - a subject we 
 assumed our participants would be unknowledgable about. Our main dependent variable (DV) is the 
 performance on a test comprised of 20 multiple choice questions following the final text passage and 
 pertaining to that final text passage. Participants were given 4 possible answers to choose from, one of 
@@ -58,6 +58,7 @@ could provide an indication of the influence of covert retrievals (i.e. "intrusi
 the retrieval of new learning. Our 2nd DV was the number of these lures selected in the final test. As stated
 above, according to resource theories, "intrusions" should decrease the forward testing effect. Therefore, the 
 influence of feedback should decrease the number of selected luring options.
+
 
 # HYPOTHESES
 1. Interpolated testing increases the effectiveness of future learning. Compared to the rereading group,
