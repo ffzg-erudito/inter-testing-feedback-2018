@@ -3,11 +3,7 @@
 
 {% block styles %}
 
-    <style>
-        #next {
-            display: none;
-        }
-        
+    <style>        
         #feedback {
             display: none;
         }
@@ -26,7 +22,7 @@
         });
         
         $(document).ready(function(){
-            setTimeout(function(){ $("#next").show()}, 40000);
+            setTimeout(function(){ $("#next").show()}, 5000);
         });
     </script>
 
@@ -42,7 +38,8 @@
 
     <p>
         Točno ste odgovorili na {{ questions_correct }} od {{ Constants.num_rounds }}
-        pitanja.
+        pitanja. Za pregled ove tablice imate pola minute prije nego što program automatski prikaže sljedeću stranicu, 
+        a pritiskom na tipku "Dalje" koja je pri dnu tablice možete sami pokrenuti protokol već sada.
     </p>
 
     <table id="res" class="table">

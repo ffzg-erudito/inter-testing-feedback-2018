@@ -14,7 +14,7 @@ class text_3(Page):
 
 
 
-class Question(Page):
+class question(Page):
     form_model = 'player'
     form_fields = ['submitted_answer']
 
@@ -48,19 +48,19 @@ class Question(Page):
         
 
 
-# class Results(Page):
-#    def is_displayed(self):
-#        return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
-#
-#    def get_timeout_seconds(self):
-#        return 60
-#    
-#    def vars_for_template(self):
-#        player_in_all_rounds = self.player.in_all_rounds()
-#        return {
-#            'player_in_all_rounds': player_in_all_rounds,
-#            'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
-#        }
+class results(Page):
+    def is_displayed(self):
+        return (self.round_number == Constants.num_rounds) & (self.participant.vars['give_feedback'])
+
+    def get_timeout_seconds(self):
+        return 30
+    
+    def vars_for_template(self):
+        player_in_all_rounds = self.player.in_all_rounds()
+        return {
+            'player_in_all_rounds': player_in_all_rounds,
+            'questions_correct': sum([p.is_correct for p in player_in_all_rounds])
+        }
 
 
 class koliko_procitao(Page):
@@ -176,4 +176,4 @@ class end_page(Page):
 
 # page_sequence = [text_3, Question, Results, end_page]
 
-page_sequence = [text_3, Question, koliko_procitao, end_page]
+page_sequence = [text_3, question, results, koliko_procitao, end_page]
