@@ -1,9 +1,7 @@
-text/*
-!text/*.latex
-!text/*.pdf
-
 informed-consent/*
 !informed-consent/*tex
 !informed-consent/*pdf
 
-results/*
+analyses/data/*.csv
+
+analyses/.Rproj.user

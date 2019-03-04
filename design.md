@@ -1,4 +1,4 @@
-## EXPERIMENT NOTES
+﻿## EXPERIMENT NOTES
 
 # INTRO
 - the aim of this study is to investigate the forward testing effect (Yang, Potts & Shanks, 2018),
@@ -59,19 +59,38 @@ the retrieval of new learning. Our 2nd DV was the number of these lures selected
 above, according to resource theories, "intrusions" should decrease the forward testing effect. Therefore, the 
 influence of feedback should decrease the number of selected luring options.
 
+Given the above, these are our problems:
+1. Does the type of interpolated activity influence learning from complex materials?
+1. Does the type of interpolated activity interact with feedback presentation when learning from complex
+materials?
 
 # HYPOTHESES
+ 
 1. Interpolated testing increases the effectiveness of future learning. Compared to the rereading group,
-participants in the retrieval groups should have a higher average total score on the final test.
+participants in the retrieval groups should have a significantly higher average total score on the final test.
 Furthermore, following the results of some studies, we expect to find no difference between the two
 groups having different types of retrieval, which is in accordance with resource theories.
-2. Although Chan, Meissner & Davis (2018) assert that feedback should increase the likelihood of "intrusions"
-during new learning, we will refrain from setting a directional hypothesis regarding the influence of feedback,
-both on the main DV and 2nd DV. In other words, we will assume that the groups receiving feedback will not 
-achieve a different result from the groups that will not receive feedback. If, however, we find that giving
-feedback leads to a lower average score in the final test, we suppose that this should also be accompanied
-by an increase in the average number of "intrusions". 
 
+1. Participants in the content-related test condition will have the lowest proportion of intrusive choices
+among uncorrect answers, followed by participants in the general knowledge condition, and finally by the
+participans in the rereading condition. We expect all three differences to be statistically significant. 
+
+1. When looking at the content-related and general knowledge test groups (which were the only ones who
+had both levels of the feedback IV), we suspect to find a significant main effect of feedback on the average number
+of correctly answered questions.
+
+1. Furthermore, we expect to find an interaction between feedback presentation and type of interpolated
+activity. Specifically, we assume that presenting feedback will have a positive effect on the average
+number of correctly answered questions, but only for the participants in the content-related test condition.
+The remaining three groups will not differ.
+
+1. There will be a main effect of feedback on the average proportion of chosen intrusive distractors. Participants
+receiving feedback will have a significantly higher average proportion of chosen instrusive distractors
+than participants receiving no feedback.
+
+1. We also expect to find an interaction effect of activity type and feedback presentation on the
+proportion of intrusive distractors chosen, but cannot set a specific hypothesis regearding its
+pattern.
 
 # DESIGN BASICS
 - we will employ a 2x2 design with a conceptually separate control group, which amounts to
