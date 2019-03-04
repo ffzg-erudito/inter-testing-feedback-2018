@@ -3,5 +3,7 @@ informed-consent/*
 !informed-consent/*pdf
 
 analyses/data/*.csv
+!analyses/data/results.csv
 
 analyses/.Rproj.user
+.Rproj.user
