@@ -3,11 +3,11 @@ library(here)
 library(conflicted)
 library(magrittr)
 
+# created by data-pooling.R
 dat <- read_csv(here('data', 'results.csv'))
 
 # constructing intrusors DV as proportion of chosen intrusive distractors on
 # incorrectly answered questions
-
 getIntrusors <- function(x) {
     x %<>% bind_rows(.)
     propIntrusors <- x[which(x == 0)] %>% colnames(.) %>%
@@ -23,3 +23,7 @@ dat %>% select(., matches('content_3_|isIntrusor_3_')) %>%
 
 # dropping demographics and participant code
 dat %<>% select(., -c(participant_code, spol, dob))
+
+# create total test score, i.e. DV1
+dat$totalCorrect <- dat %>% select(., matches('content_3_')) %>%
+    rowSums(.)
