@@ -12,9 +12,9 @@ We aim to compare the two test groups with the rereading group.
 We plotted the power obtained with our sample size (N = 125) and the sample size we expect to work with after 
 our exclusion criteria have been applied (N = 110) as a function of a range of effect sizes, depicted in
 the images below. 
-![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N%3D125.png)
+![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N125.png)
 
-![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N%3D110.png)
+![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N110.png)
 
 As can be seen from the images, with our effective sample size we expect to have .8 power to detect an effect
 size in the medium range. 
@@ -45,11 +45,11 @@ looking at the main effect of feedback on
 
 
 We plotted the power obtained with our sample size (N = 166) and the sample size we expect to work with after 
-our exclusion criteria have been applied (N = 140) as a function of a range of effect sizes, depicted in
+our exclusion criteria have been applied (N = 145) as a function of a range of effect sizes, depicted in
 the images below. 
-![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H3-H6_power_plot_N_165.png)
+![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H3-H6_power_plot_N166.png)
 
-![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H3-H6_power_plot_N_145.png)
+![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H3-H6_power_plot_N145.png)
 
 As can be seen from the images, with our effective sample size we expect to have .8 power to detect an effect
 size in the lower medium range. 
