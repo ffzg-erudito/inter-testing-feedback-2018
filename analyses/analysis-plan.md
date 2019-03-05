@@ -10,7 +10,7 @@ In case of a statistically significant Wilks' lambda, we will proceed with asses
 We aim to compare the two test groups with the rereading group.
 
 
-![alt text](http://github.com/ffzg-erudito/inter-testing-feedback-2018/analyses/images/H1-H2_power_plot_N=125.png)
+![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/6af77f74e2dae07fab7b3d5802f76ad642846066/analyses/images/H1-H2_power_plot_N%3D125.png)
 
 
 Furthermore, in order to investigate whether there is no difference between the two test groups, we will
