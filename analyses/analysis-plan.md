@@ -9,15 +9,16 @@ incorrect answers. We will perform this analysis only on the subset of participa
 In case of a statistically significant Wilks' lambda, we will proceed with assessing planned contrasts analysis.
 We aim to compare the two test groups with the rereading group.
 
-We plotted the power obtained with our sample size (N = 125) and the sample size we expect to work with after 
-our exclusion criteria have been applied (N = 110) as a function of a range of effect sizes, depicted in
-the images below. 
+We plotted the power obtained with our sample size (N = 125) and the roughly estimated sample size
+we expect to work with after our exclusion criteria have been applied (N = 110) as a function of a
+range of effect sizes, depicted in the images below. 
+
 ![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N125.png)
 
 ![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N110.png)
 
-As can be seen from the images, with our effective sample size we expect to have .8 power to detect an effect
-size in the medium range. 
+As can be seen from the images, with our effective sample size we expect to obtain power of about .8
+to detect even effects deemed small by Cohen (1988).
 
 Furthermore, in order to investigate whether there is no difference between the two test groups, we will
 conduct a two-one-sided t-tests (TOST) procedure, as well as a Bayesian t-test.
@@ -44,15 +45,16 @@ of chosen intrusive distractors among incorrect answers. In line with the hypoth
 looking at the main effect of feedback on 
 
 
-We plotted the power obtained with our sample size (N = 166) and the sample size we expect to work with after 
-our exclusion criteria have been applied (N = 145) as a function of a range of effect sizes, depicted in
-the images below. 
+We plotted the power obtained with our sample size (N = 166) and the roughly estimated sample size
+we expect to work with after our exclusion criteria have been applied (N = 145) as a function of a 
+range of effect sizes, depicted in the images below.
+
 ![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H3-H6_power_plot_N166.png)
 
 ![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H3-H6_power_plot_N145.png)
 
-As can be seen from the images, with our effective sample size we expect to have .8 power to detect an effect
-size in the lower medium range. 
+As can be seen from the images, with our effective sample size we expect to obtain power of about .8
+to detect even effects deemed small by Cohen (1988).
 
 
 # Exclusion criteria
