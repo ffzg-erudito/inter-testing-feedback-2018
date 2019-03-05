@@ -7,3 +7,5 @@ analyses/data/*.csv
 
 analyses/.Rproj.user
 .Rproj.user
+
+analyses/data/results.txt
