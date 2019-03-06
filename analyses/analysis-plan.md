@@ -3,14 +3,33 @@
 ## H1 + H2
 
 We plan to conduct a MANOVA with interpolated activity as a dependent variable, and the number of
-correct answers on the final test and the proportion of chosen intrusive distractors among
+correct answers on the final test and the number of chosen intrusive distractors among
 incorrect answers. We will perform this analysis only on the subset of participants not receiving feedback.
 
-In case of a statistically significant Wilks' lambda, we will proceed with assessing planned contrasts analysis.
-We aim to compare the two test groups with the rereading group.
+In case of a statistically significant Wilks' lambda (or other appropriate omnibus test statistic), we will 
+proceed with assessing planned contrasts analysis. We aim to compare the two test groups with the 
+rereading group. Tabachnick and Fidell (2013) suggest that, in the case of post hoc comparisons, an extension 
+of the Scheffé procedure be used to protect against inflated Type I error due to multiple tests. This 
+conservative procedure allows for an unlimited number of comparisons.
+
+Furthermore, to assess the importance of each dependent variable, since we expect our DVs to be correlated
+(which makes assessing their importance through univariate ANOVAs problematic), we will use Roy-Bargmann 
+stepdown analysis, in which the highest-priority dependent variable is tested in univariate ANOVA (with 
+appropriate alpha adjustment), and the remaining dependent variables are assessed separately each in ANCOVA, 
+where the higher-priority dependent variables (e.g. the dependent variable considered causally prior) are 
+entered as covariates (Tabachnick & Fidell, 2013).
+
+According to our theoretical position, the dependent variable with higher priority in our study is the 
+total number of correct answers a participant gives. Thus, if we obtain a significant omnibus test statistic 
+for the effect of interpolated activity, we will conduct one post hoc ANCOVA, entering the total number 
+of correct answers as the covariate, to assess the effect of interpolated activity on the number of 
+chosen intrusive distractors. In our case, if the observed significant differences are completely 
+accounted for by the effects of the inteprolated activity on the number of correct answers given (i.e. 
+the more important DV), then the ANCOVA will show that there is no significant impact of interpolated 
+activity on the number of chosen intrusive distractors. 
 
 We plotted the power obtained with our sample size (N = 125) and the roughly estimated sample size
-we expect to work with after our exclusion criteria have been applied (N = 110) as a function of a
+we expect to work with after our exclusion criteria have been applied (N = 110), as a function of a
 range of effect sizes, depicted in the images below. 
 
 ![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N125.png)
@@ -18,7 +37,7 @@ range of effect sizes, depicted in the images below.
 ![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N110.png)
 
 As can be seen from the images, with our effective sample size we expect to obtain power of about .8
-to detect even effects deemed small by Cohen (1988).
+to detect effects deemed by Cohen (1988) to be somewhere in the range between small and medium (around .06).
 
 Furthermore, in order to investigate whether there is no difference between the two test groups, we will
 conduct a two-one-sided t-tests (TOST) procedure, as well as a Bayesian t-test.
@@ -40,7 +59,7 @@ Still, we think this SESOI is quite conservative.
 ## H3 to H6
 
 To test these hypotheses, we also plan to conduct a MANOVA with feedback and interpolated activity
-as the independent variables and the number of correct answers on the final test and the proportion 
+as the independent variables and the number of correct answers on the final test and the number 
 of chosen intrusive distractors among incorrect answers. In line with the hypotheses, we will be 
 looking at the main effect of feedback on 
 
@@ -54,7 +73,7 @@ range of effect sizes, depicted in the images below.
 ![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H3-H6_power_plot_N145.png)
 
 As can be seen from the images, with our effective sample size we expect to obtain power of about .8
-to detect even effects deemed small by Cohen (1988).
+to detect effects deemed by Cohen (1988) to be somewhere in the range between small and medium (around .05).
 
 
 # Exclusion criteria

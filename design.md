@@ -71,7 +71,7 @@ participants in the retrieval groups should have a significantly higher average 
 Furthermore, following the results of some studies, we expect to find no difference between the two
 groups having different types of retrieval, which is in accordance with resource theories.
 
-1. Participants in the content-related test condition will have the lowest proportion of intrusive choices
+1. Participants in the content-related test condition will have the lowest number of intrusive choices
 among uncorrect answers, followed by participants in the general knowledge condition, and finally by the
 participans in the rereading condition. We expect all three differences to be statistically significant. 
 
@@ -84,12 +84,12 @@ activity. Specifically, we assume that presenting feedback will have a positive 
 number of correctly answered questions, but only for the participants in the content-related test condition.
 The remaining three groups will not differ.
 
-1. There will be a main effect of feedback on the average proportion of chosen intrusive distractors. Participants
-receiving feedback will have a significantly higher average proportion of chosen instrusive distractors
+1. There will be a main effect of feedback on the average number of chosen intrusive distractors. Participants
+receiving feedback will have a significantly higher average number of chosen instrusive distractors
 than participants receiving no feedback.
 
 1. We also expect to find an interaction effect of activity type and feedback presentation on the
-proportion of intrusive distractors chosen, but cannot set a specific hypothesis regearding its
+number of intrusive distractors chosen, but cannot set a specific hypothesis regearding its
 pattern.
 
 # DESIGN BASICS
