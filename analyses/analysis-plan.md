@@ -6,12 +6,6 @@ We plan to conduct a MANOVA with interpolated activity as a dependent variable, 
 correct answers on the final test and the number of chosen intrusive distractors among
 incorrect answers. We will perform this analysis only on the subset of participants not receiving feedback.
 
-In case of a statistically significant Wilks' lambda (or other appropriate omnibus test statistic), we will 
-proceed with assessing planned contrasts analysis. We aim to compare the two test groups with the 
-rereading group. Tabachnick and Fidell (2013) suggest that, in the case of post hoc comparisons, an extension 
-of the Scheffé procedure be used to protect against inflated Type I error due to multiple tests. This 
-conservative procedure allows for an unlimited number of comparisons.
-
 Furthermore, to assess the importance of each dependent variable, since we expect our DVs to be correlated
 (which makes assessing their importance through univariate ANOVAs problematic), we will use Roy-Bargmann 
 stepdown analysis, in which the highest-priority dependent variable is tested in univariate ANOVA (with 
@@ -26,7 +20,18 @@ of correct answers as the covariate, to assess the effect of interpolated activi
 chosen intrusive distractors. In our case, if the observed significant differences are completely 
 accounted for by the effects of the inteprolated activity on the number of correct answers given (i.e. 
 the more important DV), then the ANCOVA will show that there is no significant impact of interpolated 
-activity on the number of chosen intrusive distractors. 
+activity on the number of chosen intrusive distractors. Finally, to supplement the Roy-Bargmann procedure,
+we will also consider using discriminant analysis, where we will use the otput loading matrix containing
+correlations between the individual DVs and the linear combination of DVs that maximises the treatment 
+differences.
+
+In case of a statistically significant Wilks' lambda (or other appropriate omnibus test statistic), and if 
+a particular DV is found to be important to the main effect, we will proceed with assessing planned contrasts
+analysis. We aim to compare the two test groups with the rereading group. Tabachnick and Fidell (2013) suggest 
+that, in the case of post hoc comparisons, an extension of the Scheffé procedure be used to protect against 
+inflated Type I error due to multiple tests. This conservative procedure allows for an unlimited number of 
+comparisons.
+
 
 We plotted the power obtained with our sample size (N = 125) and the roughly estimated sample size
 we expect to work with after our exclusion criteria have been applied (N = 110), as a function of a
@@ -60,9 +65,16 @@ Still, we think this SESOI is quite conservative.
 
 To test these hypotheses, we also plan to conduct a MANOVA with feedback and interpolated activity
 as the independent variables and the number of correct answers on the final test and the number 
-of chosen intrusive distractors among incorrect answers. In line with the hypotheses, we will be 
-looking at the main effect of feedback on 
+of chosen intrusive distractors among incorrect answers. We will exclude the rereading group from
+this analysis. In line with the hypotheses, we will be looking at the main effect of feedback on 
+the combination of DVs, the main effect of interpolated activity on the combination of DVs, and the 
+interaction effect of the IVs on the combination of DVs.
 
+To follow up on the omnibus analysis, will employ the same general procedure used for testing the first
+two hypotheses, which was outlined above. We will assess the importance of the individual DVs for each 
+of the hypothesised effects through Roy-Bargmann stepdown analysis: first, we will conduct a two-way 
+ANOVA on the number of correct answers, after which we will conduct a two-way ANCOVA with the number of 
+correct answers entered as a covariate. We will consider reinforcing this with a discriminant analysis.
 
 We plotted the power obtained with our sample size (N = 166) and the roughly estimated sample size
 we expect to work with after our exclusion criteria have been applied (N = 145) as a function of a 
