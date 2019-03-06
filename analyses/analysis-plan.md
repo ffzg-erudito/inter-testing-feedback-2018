@@ -144,4 +144,6 @@ The "soft" criteria:
 
 We will perform a robustness check of the obtained results by applying the established
 "soft" exclusion criteria to our sample and repeating the described analyses on the 
-resultant sample.
+resultant sample. Furthermore, we will also check for robustness by again repeating 
+the described analyses after detecting and excluding possible outliers (univarate and 
+multivariate).
