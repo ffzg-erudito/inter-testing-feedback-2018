@@ -140,3 +140,7 @@ The "soft" criteria:
     read the text once/one and a half times/once + key points if they're in the
     test conditions and twice/two and a half times if they're in the rereading
     condition.
+
+We will perform a robustness check of the obtained results by applying the established
+"soft" exclusion criteria to our sample and repeating the described analyses on the 
+resultant sample.
