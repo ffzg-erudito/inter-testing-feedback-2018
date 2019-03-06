@@ -10,14 +10,14 @@ conflict_prefer('filter', 'dplyr')
 dat <- read_csv(here('data', 'results.csv'))
 
 # hard exclusion criteria
-dat %>% filter(., readingTime > 90) %>%
-    filter(., totalCorrect > 0) %>% nrow(.)
+# dat %>% filter(., readingTime > 90) %>%
+#     filter(., totalCorrect > 0) %>% nrow(.)
 # [1] 206
 
-dat %>% filter(., readingDeficits == 'DA') %>% nrow(.)
+# dat %>% filter(., readingDeficits == 'DA') %>% nrow(.)
 # [1] 3
 
-dat %>% filter(., readingDeficits == 'DA') %>% select(., which)
+# dat %>% filter(., readingDeficits == 'DA') %>% select(., which)
 # # A tibble: 3 x 1
 #   which             
 #   <chr>             
@@ -30,7 +30,7 @@ datHard <- dat %>% filter(., readingTime > 90 & totalCorrect > 0 &
                           readingDeficits == 'NE')
 
 # soft exclusion criteria
-datHard %>% filter(., readingDifficultiesThisExp == 'NE') %>% nrow
+# datHard %>% filter(., readingDifficultiesThisExp == 'NE') %>% nrow
 # [1] 196
 
 # function to filter those who've read the text once, one and a half times or
@@ -52,6 +52,7 @@ readFilter <- function(condition, timesRead) {
     }
 }
 
+# applying filter to data, storing as variable
 datHard$timesReadFilter1 <- map2_lgl(datHard$activityFactor,
                                      datHard$kolikoProcitaoText1,
                                      readFilter)
@@ -61,3 +62,7 @@ datHard$timesReadFilter2 <- map2_lgl(datHard$activityFactor,
 datHard$timesReadFilter3 <- map2_lgl(datHard$activityFactor,
                                      datHard$kolikoProcitaoText3,
                                      readFilter)
+
+datSoft <- datHard %>% select(., matches('Filter')) %>% rowSums(.) %>%
+    {which(. >= 2)} %>% {datHard[., ]} %>%
+    filter(., readingDifficultiesThisExp == 'NE')
