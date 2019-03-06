@@ -1,0 +1,9 @@
+library(here)
+# NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
+# `conflict_prefer`s filter from {dplyr}
+# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run
+# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard
+# exclusion criteria applied (as described in `analysis-plan.md`), and (3)
+# `datSoft` which is `datHard` with the soft exclusion criteria applied (as
+# described in `analysis-plan.md`)
+source(here('wrangling', '3-exclusion-criteria.R'))

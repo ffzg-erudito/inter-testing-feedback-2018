@@ -20,7 +20,7 @@ for the effect of interpolated activity, we will conduct a univariate ANOVA
 with the number of correct answers as the dependent variable. Then, we will conduct one post hoc ANCOVA, entering the total number 
 of correct answers as the covariate, to assess the effect of interpolated activity on the number of 
 chosen intrusive distractors. In our case, if the observed significant differences are completely 
-accounted for by the effects of the inteprolated activity on the number of correct answers given (i.e. 
+accounted for by the effects of the interpolated activity on the number of correct answers given (i.e. 
 the more important DV), then the ANCOVA will show that there is no significant impact of interpolated 
 activity on the number of chosen intrusive distractors. Finally, to supplement the Roy-Bargmann procedure,
 we will also consider using discriminant analysis, where we will use the output loading matrix containing
@@ -37,12 +37,12 @@ equivalence of the two conditions with a TOST, and a Bayesian t-test.
 
 ### TOST
 
-The smallest effect size of interest (SEOSI) we would like to detect is Cohen's d = 0.25. This SESOI
+The smallest effect size of interest (SESOI) we would like to detect is Cohen's d = 0.25. This SESOI
 was chosen because:
 a) it falls within Cohen's proposed "small" effect size range
 b) according to the Chan et al. meta-analysis, if the effect exists, it should probably be larger
 c) it represents a 57% probability of superiority of one group over the other (calculated through
-`https://rpsychologist.com/d3/cohend/`). Fifty seven per cent was practically chosen aribtrarily,
+`https://rpsychologist.com/d3/cohend/`). Fifty seven per cent was practically chosen arbitrarily,
 but it represent a just-above-chance probability.
 
 Still, we think this SESOI is quite conservative.
