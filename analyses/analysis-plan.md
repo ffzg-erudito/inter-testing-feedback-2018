@@ -2,16 +2,17 @@
 
 ## H1 + H2
 
-We plan to conduct a MANOVA with interpolated activity as a dependent variable, and the number of
-correct answers on the final test and the number of chosen intrusive distractors among
-incorrect answers. We will perform this analysis only on the subset of participants not receiving feedback.
+We plan to conduct a one-way MANOVA with interpolated activity as the independent variable, and the number 
+of correct answers on the final test and the number of chosen intrusive distractors. We will perform this 
+analysis only on the subset of participants not receiving feedback.
 
-Furthermore, to assess the importance of each dependent variable, since we expect our DVs to be correlated
-(which makes assessing their importance through univariate ANOVAs problematic), we will use Roy-Bargmann 
-stepdown analysis, in which the highest-priority dependent variable is tested in univariate ANOVA (with 
-appropriate alpha adjustment), and the remaining dependent variables are assessed separately each in ANCOVA, 
-where the higher-priority dependent variables (e.g. the dependent variable considered causally prior) are 
-entered as covariates (Tabachnick & Fidell, 2013).
+Furthermore, after conducting the omnibus analysis to assess the impact of interpolated activity on the 
+combination of DVs, in order to assess the importance of each dependent variable, since we expect our DVs 
+to be correlated (which makes assessing their importance through univariate ANOVAs problematic), we will 
+use Roy-Bargmann stepdown analysis, in which the highest-priority dependent variable is tested in univariate 
+ANOVA (with appropriate alpha adjustment), and the remaining dependent variables are assessed separately each 
+in ANCOVA, where the higher-priority dependent variables (e.g. the dependent variable considered causally 
+prior) are entered as covariates (Tabachnick & Fidell, 2013).
 
 According to our theoretical position, the dependent variable with higher priority in our study is the 
 total number of correct answers a participant gives. Thus, if we obtain a significant omnibus test statistic 
@@ -63,12 +64,12 @@ Still, we think this SESOI is quite conservative.
 
 ## H3 to H6
 
-To test these hypotheses, we also plan to conduct a MANOVA with feedback and interpolated activity
-as the independent variables and the number of correct answers on the final test and the number 
-of chosen intrusive distractors among incorrect answers. We will exclude the rereading group from
-this analysis. In line with the hypotheses, we will be looking at the main effect of feedback on 
-the combination of DVs, the main effect of interpolated activity on the combination of DVs, and the 
-interaction effect of the IVs on the combination of DVs.
+To test these hypotheses, we also plan to conduct a two-way MANOVA with feedback and interpolated 
+activity as the independent variables, and the number of correct answers on the final test and the
+number of chosen intrusive distractors as the dependent variables. We will exclude the rereading 
+group from this analysis. In line with the hypotheses, we will be looking at the main effect of 
+feedback on the combination of DVs, the main effect of interpolated activity on the combination of 
+DVs, and the interaction effect of the IVs on the combination of DVs.
 
 To follow up on the omnibus analysis, we will employ the same general procedure used for testing the first
 two hypotheses, which was outlined above. We will assess the importance of the individual DVs for each 

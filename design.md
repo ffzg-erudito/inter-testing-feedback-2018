@@ -71,13 +71,13 @@ participants in the retrieval groups should have a significantly higher average 
 Furthermore, following the results of some studies, we expect to find no difference between the two
 groups having different types of retrieval, which is in accordance with resource theories.
 
-1. Participants in the content-related test condition will have the lowest number of intrusive choices
-among uncorrect answers, followed by participants in the general knowledge condition, and finally by the
-participans in the rereading condition. We expect all three differences to be statistically significant. 
+1. Participants in the content-related test condition will have the lowest number of intrusive distractors chosen,
+followed by participants in the general knowledge condition, and finally by the participans in the rereading 
+condition. We expect all three differences to be statistically significant. 
 
-1. When looking at the content-related and general knowledge test groups (which were the only ones who
-had both levels of the feedback IV), we suspect to find a significant main effect of feedback on the average number
-of correctly answered questions.
+1. When looking at the content-related and general knowledge test groups (which were the only ones who had both 
+levels of the feedback IV), we suspect to find a significant main effect of feedback on the average number of 
+correctly answered questions.
 
 1. Furthermore, we expect to find an interaction between feedback presentation and type of interpolated
 activity. Specifically, we assume that presenting feedback will have a positive effect on the average
