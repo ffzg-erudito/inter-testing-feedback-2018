@@ -141,7 +141,7 @@ The "soft" criteria:
     robustness check. For the check, we will only retain participants who've
     read the text once/one and a half times/once + key points if they're in the
     test conditions and twice/two and a half times if they're in the rereading
-    condition.
+    condition. One deviation per participant will be tolerated.
 
 We will perform a robustness check of the obtained results by applying the established
 "soft" exclusion criteria to our sample and repeating the described analyses on the 

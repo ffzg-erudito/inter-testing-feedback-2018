@@ -27,15 +27,18 @@ dat %>% filter(., readingDeficits == 'DA') %>% select(., which)
 
 # apply hard criteria to data
 datHard <- dat %>% filter(., readingTime > 90 & totalCorrect > 0 &
-                          !which %in% c('slabovidnost', 'brzopletost'))
+                          readingDeficits == 'NE')
 
 # soft exclusion criteria
 datHard %>% filter(., readingDifficultiesThisExp == 'NE') %>% nrow
 # [1] 196
 
+# function to filter those who've read the text once, one and a half times or
+# once + key points (if in the general or content condition) | those who've read
+# the text twice or two and a half times (if in the rereading condition)
 readFilter <- function(condition, timesRead) {
     readGenCont <- c('jednom cijeli tekst',
-                     'jednom cijeli tekst i preletjeti "ključne" dijelove',
+                     'jednom cijeli tekst i preletjeti ključne dijelove',
                      'oko jedan i pola puta')
 
     rereadCont <- c('oko dva i pola puta', 'oko dva puta')
@@ -49,11 +52,12 @@ readFilter <- function(condition, timesRead) {
     }
 }
 
-dat %>% select(., activityFactor, kolikoProcitaoText1) %>%
-    map2(.)
-
-map2_lgl(dat$activityFactor, dat$kolikoProcitaoText1, .f = readFilter)
-
-datHard %>% filter(., (kolikoProcitaoText1 %in% readGenCont &
-                       activityFactor %in% c('general', 'content')) |
-                   ())
+datHard$timesReadFilter1 <- map2_lgl(datHard$activityFactor,
+                                     datHard$kolikoProcitaoText1,
+                                     readFilter)
+datHard$timesReadFilter2 <- map2_lgl(datHard$activityFactor,
+                                     datHard$kolikoProcitaoText2,
+                                     readFilter)
+datHard$timesReadFilter3 <- map2_lgl(datHard$activityFactor,
+                                     datHard$kolikoProcitaoText3,
+                                     readFilter)
