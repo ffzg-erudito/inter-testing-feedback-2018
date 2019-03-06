@@ -70,7 +70,7 @@ this analysis. In line with the hypotheses, we will be looking at the main effec
 the combination of DVs, the main effect of interpolated activity on the combination of DVs, and the 
 interaction effect of the IVs on the combination of DVs.
 
-To follow up on the omnibus analysis, will employ the same general procedure used for testing the first
+To follow up on the omnibus analysis, we will employ the same general procedure used for testing the first
 two hypotheses, which was outlined above. We will assess the importance of the individual DVs for each 
 of the hypothesised effects through Roy-Bargmann stepdown analysis: first, we will conduct a two-way 
 ANOVA on the number of correct answers, after which we will conduct a two-way ANCOVA with the number of 
