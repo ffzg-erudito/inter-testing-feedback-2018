@@ -3,50 +3,37 @@
 ## H1 + H2
 
 We plan to conduct a one-way MANOVA with interpolated activity as the independent variable, and the number 
-of correct answers on the final test and the number of chosen intrusive distractors. We will perform this 
-analysis only on the subset of participants not receiving feedback.
+of correct answers on the final test and the number of chosen intrusive distractors as dependent variables. We
+will perform this analysis only on the subset of participants not receiving feedback.
 
 Furthermore, after conducting the omnibus analysis to assess the impact of interpolated activity on the 
 combination of DVs, in order to assess the importance of each dependent variable, since we expect our DVs 
 to be correlated (which makes assessing their importance through univariate ANOVAs problematic), we will 
-use Roy-Bargmann stepdown analysis, in which the highest-priority dependent variable is tested in univariate 
+use the Roy-Bargmann stepdown analysis, in which the highest-priority dependent variable is tested in univariate 
 ANOVA (with appropriate alpha adjustment), and the remaining dependent variables are assessed separately each 
 in ANCOVA, where the higher-priority dependent variables (e.g. the dependent variable considered causally 
 prior) are entered as covariates (Tabachnick & Fidell, 2013).
 
 According to our theoretical position, the dependent variable with higher priority in our study is the 
 total number of correct answers a participant gives. Thus, if we obtain a significant omnibus test statistic 
-for the effect of interpolated activity, we will conduct one post hoc ANCOVA, entering the total number 
+for the effect of interpolated activity, we will conduct a univariate ANOVA
+with the number of correct answers as the dependent variable. Then, we will conduct one post hoc ANCOVA, entering the total number 
 of correct answers as the covariate, to assess the effect of interpolated activity on the number of 
 chosen intrusive distractors. In our case, if the observed significant differences are completely 
 accounted for by the effects of the inteprolated activity on the number of correct answers given (i.e. 
 the more important DV), then the ANCOVA will show that there is no significant impact of interpolated 
 activity on the number of chosen intrusive distractors. Finally, to supplement the Roy-Bargmann procedure,
-we will also consider using discriminant analysis, where we will use the otput loading matrix containing
+we will also consider using discriminant analysis, where we will use the output loading matrix containing
 correlations between the individual DVs and the linear combination of DVs that maximises the treatment 
 differences.
 
 In case of a statistically significant Wilks' lambda (or other appropriate omnibus test statistic), and if 
-a particular DV is found to be important to the main effect, we will proceed with assessing planned contrasts
-analysis. We aim to compare the two test groups with the rereading group. Tabachnick and Fidell (2013) suggest 
-that, in the case of post hoc comparisons, an extension of the Scheffé procedure be used to protect against 
-inflated Type I error due to multiple tests. This conservative procedure allows for an unlimited number of 
-comparisons.
-
-
-We plotted the power obtained with our sample size (N = 125) and the roughly estimated sample size
-we expect to work with after our exclusion criteria have been applied (N = 110), as a function of a
-range of effect sizes, depicted in the images below. 
-
-![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N125.png)
-
-![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N110.png)
-
-As can be seen from the images, with our effective sample size we expect to obtain power of about .8
-to detect effects deemed by Cohen (1988) to be somewhere in the range between small and medium (around .06).
-
-Furthermore, in order to investigate whether there is no difference between the two test groups, we will
-conduct a two-one-sided t-tests (TOST) procedure, as well as a Bayesian t-test.
+a particular DV is found to be important to the main effect, we will proceed with conducting a planned contrasts
+analysis. We aim to compare the two test groups with the rereading group.
+Further, we plan to compare the two test groups with each other. In the latter
+case, we do not expect to find a significant difference. However, since an
+absence of evidence is not evidence of absence, we aim to confirm the practical
+equivalence of the two conditions with a TOST, and a Bayesian t-test.
 
 ### TOST
 
@@ -61,6 +48,19 @@ but it represent a just-above-chance probability.
 Still, we think this SESOI is quite conservative.
 
 ### Bayesian t-test
+
+### Estimated power to detect different effect sizes
+
+We plotted the power obtained with our sample size (N = 125) and the roughly estimated sample size
+we expect to work with after our exclusion criteria have been applied (N = 110), as a function of a
+range of effect sizes, depicted in the images below. 
+
+![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N125.png)
+
+![alt text](https://github.com/ffzg-erudito/inter-testing-feedback-2018/blob/master/analyses/images/H1-H2_power_plot_N110.png)
+
+As can be seen from the images, with our effective sample size we expect to obtain power of about .8
+to detect effects deemed by Cohen (1988) to be somewhere in the range between small and medium (around .06).
 
 ## H3 to H6
 
@@ -77,6 +77,8 @@ of the hypothesised effects through Roy-Bargmann stepdown analysis: first, we wi
 ANOVA on the number of correct answers, after which we will conduct a two-way ANCOVA with the number of 
 correct answers entered as a covariate. We will consider reinforcing this with a discriminant analysis.
 
+### Estimated power to detect different effect sizes
+
 We plotted the power obtained with our sample size (N = 166) and the roughly estimated sample size
 we expect to work with after our exclusion criteria have been applied (N = 145) as a function of a 
 range of effect sizes, depicted in the images below.
@@ -87,7 +89,6 @@ range of effect sizes, depicted in the images below.
 
 As can be seen from the images, with our effective sample size we expect to obtain power of about .8
 to detect effects deemed by Cohen (1988) to be somewhere in the range between small and medium (around .05).
-
 
 # Exclusion criteria
 
@@ -144,6 +145,6 @@ The "soft" criteria:
 
 We will perform a robustness check of the obtained results by applying the established
 "soft" exclusion criteria to our sample and repeating the described analyses on the 
-resultant sample. Furthermore, we will also check for robustness by again repeating 
+resultant sample. Furthermore, we will also check for robustness by once again repeating 
 the described analyses after detecting and excluding possible outliers (univarate and 
-multivariate).
+multivariate) based on statistical criteria.
