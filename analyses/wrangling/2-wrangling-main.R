@@ -17,4 +17,7 @@ dat$totalIntrusors <- dat %>% select(., matches('isIntrusor_3_')) %>%
 # dropping demographics and participant code
 dat %<>% select(., -c(participant_code, spol, dob))
 
+dat$activityFactor <- dat %>% pull(., condition) %>%
+    str_replace(., regex('_(no)?Feedback', ignore_case = T), '')
+
 write_csv(dat, here('data', 'results.csv'))
