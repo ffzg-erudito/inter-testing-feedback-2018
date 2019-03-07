@@ -24,6 +24,11 @@ dat <- read_csv(here('data', 'results.csv'))
 # 1 slabovidnost      
 # 2 brzopletost       
 # 3 OKP (ako se broji)
+# there are only 3 participants who've answerd YES to the reading difficulties
+# question. their free-text answers are "weak vision", "OCD" and appx.
+# "proneness to errors due to lack of vigilance". since each of these COULD
+# impact the participant's performance, and since there's only three of them,
+# we've decided to exclude them all, to be on the safe side
 
 # apply hard criteria to data
 datHard <- dat %>% filter(., readingTime > 90 & totalCorrect > 0 &
