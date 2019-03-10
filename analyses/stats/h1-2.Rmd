@@ -1,0 +1,104 @@
+---
+author: "DV"
+fontsize: 12pt
+title: "H1-2"
+output:
+    pdf_document:
+        keep_tex: true
+        toc: true
+        toc_depth: 4
+geometry: margin=1.3cm
+header-includes: |
+    \usepackage[utf8]{inputenc}
+    \usepackage{caption}
+    \usepackage{bookman}
+    \usepackage{multirow}
+    \usepackage{array}
+    \usepackage[htt]{hyphenat}
+    \usepackage{booktabs}
+    \usepackage{float}
+    \captionsetup[table]{width=\textwidth}
+    \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
+---
+
+```{r setup}
+library(knitr)
+library(kableExtra)
+opts_chunk$set(dpi = 600, dev = 'pdf')
+options(digits = 5)
+```
+
+```{r packagesAndSource}
+library(here)
+# NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
+# `conflict_prefer`s filter from {dplyr}
+# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run
+# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard
+# exclusion criteria applied (as described in `analysis-plan.md`), and (3)
+# `datSoft` which is `datHard` with the soft exclusion criteria applied (as
+# described in `analysis-plan.md`)
+source(here('wrangling', '3-exclusion-criteria.R'))
+# for LDA
+library(MASS)
+# for Henze-Zirkler
+library(MVN)
+# for Box's M and Bartlett's test
+library(heplots)
+library(viridis)
+conflict_prefer('select', 'dplyr')
+theme_set(theme_minimal())
+```
+
+# Hard exclusion criteria
+
+The following analyses are going to be conducted on a subset of the collected data
+which contains `r nrow(datHard)` cases. First, we will take a look at the data going into
+this analysis. Then, we will check whether the assumptions for conducting a MANOVA
+are satisfied. Finally, we will conduct the analyses specified in the `analysis-plan.md`
+file.
+
+## Descriptive statistics
+
+This analysis is going to be run on a subset participants who were in no-feedback
+conditions. This includes the rereading group, and the two no-feedback test groups.
+
+```{r}
+# creating new df with the specified subset, selecting only relevant vars
+datHardNofeed <- datHard %>% filter(., giveFeedback == F) %>%
+  select(., activityFactor, totalCorrect, totalIntrusors)
+```
+
+This leaves us with `r nrow(datHardNofeed)` cases.
+
+```{r}
+datHardNofeed %>% glimpse(.)
+```
+
+First of all, it's important to mention that the group sizes are imbalanced, but the
+difference is really small:
+
+```{r}
+datHardNofeed %>% group_by(., activityFactor) %>% tally(.)
+```
+
+Here are the descriptives for the whole subset.
+
+```{r totalDescriptives}
+datHardNofeed %>% select(., -activityFactor) %>% psych::describe(.)
+```
+
+And the descriptives by group:
+
+# TODO
+```{r groupDescriptives}
+```
+
+Next, here are the boxplots for the three groups, and for both DVs.
+
+```{r boxplots}
+datHardNofeed %>% add_column(subject = 1:nrow(.), .before = 1) %>%
+  gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
+         value = 'score') %>%
+  ggplot(., aes(x = activityFactor, y = score, fill = activityFactor)) +
+  geom_boxplot() + facet_grid(~dependentVar) + scale_fill_viridis(discrete = T)
+```
