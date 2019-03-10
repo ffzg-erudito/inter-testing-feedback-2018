@@ -1,0 +1,7 @@
+\documentclass[../main.latex]{subfiles}
+
+\begin{document}
+
+This is an intro.
+
+\end{document}

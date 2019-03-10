@@ -1,31 +1,25 @@
-\documentclass[a4paper,12pt]{article}
-
-\usepackage{url}\usepackage{subcaption}
-\usepackage[english]{babel}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage[english]{babel}
 \usepackage{gensymb}
-\usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\graphicspath{{./figures/}}
 \usepackage{titletoc}
 \usepackage{longtable}
 \usepackage[page, toc]{appendix}
-\usepackage{arydshln}
 \usepackage{afterpage}
 \usepackage{microtype}
 \usepackage[euler]{textgreek}
 \usepackage{booktabs}
-\usepackage[autostyle, style=english]{csquotes}
 \usepackage[left=2cm, right=2cm, top=2cm, bottom=3cm]{geometry}
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
 \usepackage{enumitem}
 \usepackage{lmodern}
-\usepackage[dvipsnames]{xcolor}
 \usepackage{caption}
-\usepackage{floatrow}
 \usepackage{lscape}
 \usepackage{amsmath}
-
+\usepackage{subfiles}
+\usepackage[onehalfspacing]{setspace}
 
 %%%%%%%%%%%%%%%%%%%%%%% remove url's and date if there's a doi
 \usepackage{etoolbox}
@@ -39,7 +33,6 @@
 \undef{\endAPACrefURL}
 \undef{\APACrefDOI}
 \undef{\endAPACrefDOI}
-
 
 \long\def\collect@url#1{\global\def\bib@url{#1}}
 \long\def\collect@doi#1{\global\def\bib@doi{#1}}
@@ -56,7 +49,6 @@
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0.38em}
 \renewcommand{\baselinestretch}{1.5}
@@ -66,16 +58,7 @@
 \captionsetup*[figure]{labelsep = period, labelfont = it, justification =
 	justified, position = bottom, font = {singlespacing}}
 
-
-
-\addto\captionsenglish{\renewcommand{\bibname}{\Large\bfseries Literatura}}
-
-\renewcommand{\BCBT}{}%  comma between authors in ref. list when no. of
-%%  authors = 2
-\renewcommand{\BCBL}{}%  comma before last author when no. of authors > 2
-
 \renewcommand{\APACrefYearMonthDay}[3]{\APACrefYear{#1}}
-
 
 \makeatletter
 \renewcommand{\maketitle}{\bgroup\setlength{\parindent}{0pt}
@@ -87,11 +70,20 @@
 }
 \makeatother
 
-\usepackage{helvet}
+\begin{document}
 
+\section{Introduction}
+\subfile{sections/intro.latex}
 
+\section{Methods}
+\subfile{sections/methods.latex}
 
-
-\subsection*{Introduction}
+\clearpage
 \bibliographystyle{apacite}
-\bibliography{forward-testing-effect}
+
+{
+    \setstretch{1}
+    \bibliography{/home/denis/Documents/reference.bib}
+}
+
+\end{document}
