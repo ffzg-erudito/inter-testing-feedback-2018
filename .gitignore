@@ -9,3 +9,12 @@ analyses/.Rproj.user
 .Rproj.user
 
 analyses/data/results.txt
+
+paper/*
+!paper/sections
+paper/sections/*
+!paper/sections/*.latex
+!paper/sections/*.pdf
+
+!paper/*.latex
+!paper/*.pdf

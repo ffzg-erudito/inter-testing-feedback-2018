@@ -27,7 +27,13 @@ we will also consider using discriminant analysis, where we will use the output 
 correlations between the individual DVs and the linear combination of DVs that maximises the treatment 
 differences.
 
-In case of a statistically significant Wilks' lambda (or other appropriate omnibus test statistic), and if 
+For determining statistical significance, we will focus on Pillai's V if the
+homogeneity of covariance matrices assumption seems tenable (Field, Miles,
+Field, 2012). Else, we will look at Hotelling's trace. Regardless of the chosen
+criterion, we will report both of the above, as well as Wilks' lambda and Roy's
+largest root.
+
+In case of a significant test statistic and if 
 a particular DV is found to be important to the main effect, we will proceed with conducting a planned contrasts
 analysis. We aim to compare the two test groups with the rereading group.
 Further, we plan to compare the two test groups with each other. In the latter
