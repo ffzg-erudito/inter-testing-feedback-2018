@@ -41,6 +41,14 @@ case, we do not expect to find a significant difference. However, since an
 absence of evidence is not evidence of absence, we aim to confirm the practical
 equivalence of the two conditions with a TOST, and a Bayesian t-test.
 
+Multivariate normality will be tested with Henze-Zirkler's multivariate normality
+test, and assessed via graphical tools. The homogeneity of covariance matrices
+assumption will be tested using both Box's M and Bartlett's test. Both tests
+will be set to the .01 alpha level (as recommended by Raykov & Marcoulides,
+2008), due to their extreme sensitivity. The covariance matrices will also be
+compared to assess their similarity. Linearity of the relationships among DV's
+will be checked via scatterplots divided by groups.
+
 ### TOST
 
 The smallest effect size of interest (SESOI) we would like to detect is Cohen's d = 0.25. This SESOI
