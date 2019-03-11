@@ -9,6 +9,7 @@ output:
         toc_depth: 4
 geometry: margin=1.3cm
 header-includes: |
+    \usepackage[natbibapa, sectionbib, tocbib]{apacite}
     \usepackage[utf8]{inputenc}
     \usepackage{caption}
     \usepackage{bookman}
@@ -17,6 +18,7 @@ header-includes: |
     \usepackage[htt]{hyphenat}
     \usepackage{booktabs}
     \usepackage{float}
+    \usepackage[onehalfspacing]{setspace}
     \captionsetup[table]{width=\textwidth}
     \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
 ---
@@ -42,7 +44,7 @@ source(here('wrangling', '3-exclusion-criteria.R'))
 library(MASS)
 # for Henze-Zirkler
 library(MVN)
-# for Box's M and Bartlett's test
+# for Box's M
 library(heplots)
 # colorscale
 library(viridis)
@@ -140,6 +142,8 @@ datHardNofeed %>% add_column(subject = 1:nrow(.), .before = 1) %>%
 Looks like there could be an outlier on the number of total intrusions in the
 general knowledge test condition.
 
+## Assumption checks
+
 Next, let's look at the correlation between the DVs. First, let's look at the correlation
 in the whole sub-sample.
 
@@ -209,9 +213,23 @@ variance of the number of correct answers is `r covMatrixRatio(1, 1, .)`. The sa
 ratio for the number of chosen intrusors is `r covMatrixRatio(2, 2, .)`. Finally,
 the ratio of the largest to the smallest covariance between the two DVs is
 `r covMatrixRatio(1, 2, .)`. As we can see, the variance ratios are pretty close
-to one. Still, let's test them with Box's M and Bartlett's test.
+to one. Still, let's test them with Box's M test.
 
 ```{r boxM}
 boxM(datHardNofeed %>% select(., -activityFactor),
      group = datHardNofeed$activityFactor)
 ```
+
+Box's M returns a non-significant p-value, indicating that we cannot reject the null
+hypothesis. \citet{field_discovering_2012} and \citet{raykov_introduction_2008}
+warn that Box's M is extremely sensitive, so we'd expect to find a difference
+if there really was one. On the other hand, \citet{field_discovering_2012} warn
+that the test can return a non-significant p-value when the assumption of
+multivariate normality is not tenable. However, given the results of the
+Henze-Zirkler multivariate normality test, we suspect that this is not the case.
+
+\bibliographystyle{apacite}
+{
+    \setstretch{1}
+    \bibliography{refs}
+}

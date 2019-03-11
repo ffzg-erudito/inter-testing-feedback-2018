@@ -138,6 +138,7 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 
+\usepackage[natbibapa, sectionbib, tocbib]{apacite}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
 \usepackage{bookman}
@@ -146,6 +147,7 @@
 \usepackage[htt]{hyphenat}
 \usepackage{booktabs}
 \usepackage{float}
+\usepackage[onehalfspacing]{setspace}
 \captionsetup[table]{width=\textwidth}
 \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
 
@@ -189,7 +191,7 @@
 \end{Shaded}
 
 \begin{verbatim}
-## -- Attaching packages ------------------------------------------------------- tidyverse 1.2.1 --
+## -- Attaching packages -------------------------------------------------------- tidyverse 1.2.1 --
 \end{verbatim}
 
 \begin{verbatim}
@@ -200,7 +202,7 @@
 \end{verbatim}
 
 \begin{verbatim}
-## -- Conflicts ---------------------------------------------------------- tidyverse_conflicts() --
+## -- Conflicts ----------------------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter()     masks stats::filter()
 ## x dplyr::group_rows() masks kableExtra::group_rows()
 ## x dplyr::lag()        masks stats::lag()
@@ -246,7 +248,7 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# for Box's M and Bartlett's test}
+\CommentTok{# for Box's M}
 \KeywordTok{library}\NormalTok{(heplots)}
 \end{Highlighting}
 \end{Shaded}
@@ -639,9 +641,39 @@ The covariance matrices look quite similar. The ratio of largest to
 smallest variance of the number of correct answers is 1.1583. The same
 ratio for the number of chosen intrusors is 1.76629. Finally, the ratio
 of the largest to the smallest covariance between the two DVs is
-1.76629.
+0.68159. As we can see, the variance ratios are pretty close to one.
+Still, let's test them with Box's M test.
 
-but let's test them with Box's M and Bartlett's test.
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{boxM}\NormalTok{(datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(., }\OperatorTok{-}\NormalTok{activityFactor),}
+     \DataTypeTok{group =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Box's M-test for Homogeneity of Covariance Matrices
+## 
+## data:  datHardNofeed %>% select(., -activityFactor)
+## Chi-Sq (approx.) = 9.34, df = 6, p-value = 0.16
+\end{verbatim}
+
+Box's M returns a non-significant p-value, indicating that we cannot
+reject the null hypothesis. \citet{field_discovering_2012} and
+\citet{raykov_introduction_2008} warn that Box's M is extremely
+sensitive, so we'd expect to find a difference if there really was one.
+On the other hand, \citet{field_discovering_2012} warn that the test can
+return a non-significant p-value when the assumption of multivariate
+normality is not tenable. However, given the results of the
+Henze-Zirkler multivariate normality test, we suspect that this is not
+the case.
+
+\bibliographystyle{apacite}
+{
+    \setstretch{1}
+    \bibliography{refs}
+}
 
 
 \end{document}
