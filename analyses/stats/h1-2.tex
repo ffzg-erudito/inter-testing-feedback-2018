@@ -461,6 +461,9 @@ Next, here are the boxplots for the three groups, and for both DVs.
 Looks like there could be an outlier on the number of total intrusions
 in the general knowledge test condition.
 
+\hypertarget{assumption-checks}{%
+\subsection{Assumption checks}\label{assumption-checks}}
+
 Next, let's look at the correlation between the DVs. First, let's look
 at the correlation in the whole sub-sample.
 
@@ -487,7 +490,7 @@ at the correlation in the whole sub-sample.
 ##  To see confidence intervals of the correlations, print with the short=FALSE option
 \end{verbatim}
 
-We found a statistically significant correlation of .\$r{[}2{]}. Next,
+We found a statistically significant correlation of -0.66831. Next,
 let's look at the correlation in each group.
 
 \begin{Shaded}
@@ -586,7 +589,7 @@ Henze-Zirkler test.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(., }\OperatorTok{-}\NormalTok{activityFactor) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mvn}\NormalTok{(., }\DataTypeTok{multivariatePlot =} \StringTok{'qq'}\NormalTok{, }\DataTypeTok{mvnTest =} \StringTok{'hz'}\NormalTok{, }\DataTypeTok{desc =}\NormalTok{ F)}
+\StringTok{  }\KeywordTok{mvn}\NormalTok{(., }\DataTypeTok{multivariatePlot =} \StringTok{'qq'}\NormalTok{, }\DataTypeTok{mvnTest =} \StringTok{'hz'}\NormalTok{, }\DataTypeTok{desc =}\NormalTok{ T)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -600,7 +603,15 @@ Henze-Zirkler test.
 ## $univariateNormality
 ##           Test       Variable Statistic   p value Normality
 ## 1 Shapiro-Wilk  totalCorrect     0.9870    0.2972    YES   
-## 2 Shapiro-Wilk totalIntrusors    0.9663    0.0038    NO
+## 2 Shapiro-Wilk totalIntrusors    0.9663    0.0038    NO    
+## 
+## $Descriptives
+##                  n    Mean Std.Dev Median Min Max 25th 75th     Skew
+## totalCorrect   122 11.4016  3.0415     11   4  19    9   14 0.040322
+## totalIntrusors 122  4.1803  1.9835      4   0  10    3    5 0.375797
+##                Kurtosis
+## totalCorrect   -0.41051
+## totalIntrusors -0.16727
 \end{verbatim}
 
 The result of Henze-Zirkler's multivariate normality test shows that a
@@ -608,6 +619,48 @@ statistically significant departure from multivariate normality was not
 detected. Hence, we will assume that there really is no departure. The
 points on the Chi-Square Q-Q plot follow the straight line fairly well,
 which is also indicative of a normal distribution.
+
+However, the Shapiro-Wilk test for univariate normality indicates a
+departure in the distribution of the total number of intrusive
+distractors chosen. It is interesting to notice that the value of the
+\emph{W} statistic is close to the maximum of 1, which indicates a close
+fit to the normal distribution \citep{salkind_encyclopedia_2007}.
+Furthermore, when the test is performed for each group separately, the
+departures are declared to be non-significant in two of three cases, the
+third case being marginally significant. Therefore, we will assume that
+the data in each group is normally distributed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{by}\NormalTok{(datHardNofeed}\OperatorTok{$}\NormalTok{totalIntrusors, }\DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor,}
+   \DataTypeTok{FUN =}\NormalTok{ shapiro.test)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## datHardNofeed$activityFactor: content
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dd[x, ]
+## W = 0.946, p-value = 0.048
+## 
+## -------------------------------------------------------- 
+## datHardNofeed$activityFactor: general
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dd[x, ]
+## W = 0.956, p-value = 0.12
+## 
+## -------------------------------------------------------- 
+## datHardNofeed$activityFactor: rereading
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  dd[x, ]
+## W = 0.966, p-value = 0.28
+\end{verbatim}
 
 Now, we'll take a look at the homogeneity of covariance matrices
 assumption. First, let's take a look at the matrices themselves.
@@ -667,7 +720,11 @@ On the other hand, \citet{field_discovering_2012} warn that the test can
 return a non-significant p-value when the assumption of multivariate
 normality is not tenable. However, given the results of the
 Henze-Zirkler multivariate normality test, we suspect that this is not
-the case.
+the case. Since all assumptions seem to hold, we'll proceed with the
+planned MANOVA.
+
+\hypertarget{manova}{%
+\subsection{MANOVA}\label{manova}}
 
 \bibliographystyle{apacite}
 {

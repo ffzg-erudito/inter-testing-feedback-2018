@@ -152,7 +152,7 @@ in the whole sub-sample.
 print(.)
 ```
 
-We found a statistically significant correlation of .$r[2]. Next, let's look at
+We found a statistically significant correlation of `r .$r[2]`. Next, let's look at
 the correlation in each group.
 
 ```{r dvCorGroup}
@@ -190,7 +190,7 @@ we will check the multivariate normality assumption using the Henze-Zirkler test
 
 ```{r hzTest}
 datHardNofeed %>% select(., -activityFactor) %>%
-  mvn(., multivariatePlot = 'qq', mvnTest = 'hz', desc = F)
+  mvn(., multivariatePlot = 'qq', mvnTest = 'hz', desc = T)
 ```
 
 The result of Henze-Zirkler's multivariate normality test shows that a statistically
@@ -198,6 +198,20 @@ significant departure from multivariate normality was not detected. Hence, we wi
 assume that there really is no departure. The points on the Chi-Square Q-Q plot
 follow the straight line fairly well, which is also indicative of a normal
 distribution.
+
+However, the Shapiro-Wilk test for univariate normality indicates a departure in
+the distribution of the total number of intrusive distractors chosen. It is interesting
+to notice that the value of the *W* statistic is close to the maximum of 1, which
+indicates a close fit to the normal distribution \citep{salkind_encyclopedia_2007}.
+Furthermore, when the test is performed for each group separately, the departures
+are declared to be non-significant in two out of three cases, the third case being
+marginally significant. Therefore, we will assume that the data in each group
+is normally distributed.
+
+```{r shapiroGroups}
+by(datHardNofeed$totalIntrusors, INDICES = datHardNofeed$activityFactor,
+   FUN = shapiro.test)
+```
 
 Now, we'll take a look at the homogeneity of covariance matrices assumption. First,
 let's take a look at the matrices themselves.
@@ -227,6 +241,9 @@ if there really was one. On the other hand, \citet{field_discovering_2012} warn
 that the test can return a non-significant p-value when the assumption of
 multivariate normality is not tenable. However, given the results of the
 Henze-Zirkler multivariate normality test, we suspect that this is not the case.
+Since all assumptions seem to hold, we'll proceed with the planned MANOVA.
+
+## MANOVA
 
 \bibliographystyle{apacite}
 {
