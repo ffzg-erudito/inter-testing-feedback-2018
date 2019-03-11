@@ -43,7 +43,7 @@ equivalence of the two conditions with a TOST, and a Bayesian t-test.
 
 Multivariate normality will be tested with Henze-Zirkler's multivariate normality
 test, and assessed via graphical tools. The homogeneity of covariance matrices
-assumption will be tested using both Box's M and Bartlett's test. Both tests
+assumption will be tested using both Box's M. Both tests
 will be set to the .01 alpha level (as recommended by Raykov & Marcoulides,
 2008), due to their extreme sensitivity. The covariance matrices will also be
 compared to assess their similarity. Linearity of the relationships among DV's

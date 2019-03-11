@@ -44,9 +44,14 @@ library(MASS)
 library(MVN)
 # for Box's M and Bartlett's test
 library(heplots)
+# colorscale
 library(viridis)
+
 conflict_prefer('select', 'dplyr')
 theme_set(theme_minimal())
+
+# source helper functions
+source(here('helpers', 'h1-2-helpers.R'))
 ```
 
 # Hard exclusion criteria
@@ -89,9 +94,35 @@ datHardNofeed %>% select(., -activityFactor) %>% psych::describe(.)
 
 And the descriptives by group:
 
-# TODO
 ```{r groupDescriptives}
+by(datHardNofeed$totalCorrect, INDICES = datHardNofeed$activityFactor,
+   psych::describe) %>% reduce(., rbind) %>%
+  mutate(., condition = c("content", "general", "rereading")) %>%
+  select(., condition, everything(), -vars)
 ```
+
+Now, we'll plot the DV distributions, both on the whole subset, and per group.
+
+```{r densityTotal}
+datHardNofeed %>% gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
+                         value = 'score') %>%
+  ggplot(., aes(x = score)) +
+  geom_density() + facet_grid(dependentVar ~ .)
+```
+
+The graph shows that there could be significant deviations from normality. Let's
+look at the distributions in each group.
+
+```{r densityGroup}
+datHardNofeed %>% gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
+                         value = 'score') %>%
+  ggplot(., aes(x = score, color = activityFactor, fill = activityFactor)) +
+  geom_density(alpha = .5) + facet_grid(dependentVar ~ .) +
+  scale_fill_viridis_d() + scale_color_viridis_d()
+```
+
+The distributions seem to be fairly similar on both dependent variables, and look
+a bit more normal than on the whole sample.
 
 Next, here are the boxplots for the three groups, and for both DVs.
 
@@ -100,5 +131,87 @@ datHardNofeed %>% add_column(subject = 1:nrow(.), .before = 1) %>%
   gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
          value = 'score') %>%
   ggplot(., aes(x = activityFactor, y = score, fill = activityFactor)) +
-  geom_boxplot() + facet_grid(~dependentVar) + scale_fill_viridis(discrete = T)
+  geom_boxplot(alpha = .5) + geom_dotplot(mapping = aes(y = score), binaxis = 'y',
+                                stackdir = 'centerwhole', dotsize = .5,
+                                fill = 'black', color = 'black') +
+  facet_grid(dependentVar~.) + scale_fill_viridis(discrete = T)
+```
+
+Looks like there could be an outlier on the number of total intrusions in the
+general knowledge test condition.
+
+Next, let's look at the correlation between the DVs. First, let's look at the correlation
+in the whole sub-sample.
+
+```{r dvCorTotal}
+. <- datHardNofeed %>% select(., -activityFactor) %>% psych::corr.test(.)
+print(.)
+```
+
+We found a statistically significant correlation of .$r[2]. Next, let's look at
+the correlation in each group.
+
+```{r dvCorGroup}
+by(datHardNofeed[, c('totalCorrect', 'totalIntrusors')],
+   INDICES = datHardNofeed$activityFactor, FUN = psych::corr.test)
+```
+
+The correlations in all three groups are fairly similar and statistically significant.
+To check whether the relationship between the DVs could be described as linear,
+we'll plot the scatterplots for the whole sample and for each group.
+
+```{r scatterToral}
+datHardNofeed %>%
+  ggplot(., aes(x = totalCorrect, y = totalIntrusors)) +
+  geom_point(aes(fill = activityFactor, color = activityFactor)) +
+  geom_smooth(method = 'lm', color = 'black', level = .99) +
+  scale_fill_viridis_d(option = 'C') + scale_color_viridis_d(option = 'C')
+```
+
+As can be seen from the plot, the relationship seems to be pretty linear, and the
+99% confidence interval of the regression slopes is pretty small. Now, let's
+take a look at the scatterplots for each group separately.
+
+```{r scatterGroup}
+datHardNofeed %>%
+  ggplot(., aes(x = totalCorrect, y = totalIntrusors)) +
+  geom_point(aes(fill = activityFactor, color = activityFactor)) +
+  geom_smooth(method = 'lm', level = .99, color = 'black') +
+  facet_grid(activityFactor ~ .) +
+  scale_fill_viridis_d(option = 'C') + scale_color_viridis_d(option = 'C')
+```
+
+Again, we can see that the relationships are linear, as well as similar. Next,
+we will check the multivariate normality assumption using the Henze-Zirkler test.
+
+```{r hzTest}
+datHardNofeed %>% select(., -activityFactor) %>%
+  mvn(., multivariatePlot = 'qq', mvnTest = 'hz', desc = F)
+```
+
+The result of Henze-Zirkler's multivariate normality test shows that a statistically
+significant departure from multivariate normality was not detected. Hence, we will
+assume that there really is no departure. The points on the Chi-Square Q-Q plot
+follow the straight line fairly well, which is also indicative of a normal
+distribution.
+
+Now, we'll take a look at the homogeneity of covariance matrices assumption. First,
+let's take a look at the matrices themselves.
+
+```{r covMatricesGroup}
+by(datHardNofeed[, c('totalCorrect', 'totalIntrusors')],
+   INDICES = datHardNofeed$activityFactor, FUN = cov) -> .
+print(.)
+```
+
+The covariance matrices look quite similar. The ratio of largest to smallest
+variance of the number of correct answers is `r covMatrixRatio(1, 1, .)`. The same
+ratio for the number of chosen intrusors is `r covMatrixRatio(2, 2, .)`. Finally,
+the ratio of the largest to the smallest covariance between the two DVs is
+`r covMatrixRatio(1, 2, .)`. As we can see, the variance ratios are pretty close
+to one. Still, let's test them with Box's M and Bartlett's test.
+
+```{r boxM}
+boxM(datHardNofeed %>% select(., -activityFactor),
+     group = datHardNofeed$activityFactor)
 ```

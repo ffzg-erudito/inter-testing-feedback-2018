@@ -18,3 +18,8 @@ paper/sections/*
 
 !paper/*.latex
 !paper/*.pdf
+
+analyses/.Rhistory
+
+analyses/stats/h1-2_files
+analyses/stats/h3-6_files
