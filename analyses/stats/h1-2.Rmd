@@ -48,6 +48,8 @@ library(MVN)
 library(heplots)
 # colorscale
 library(viridis)
+# multivariate outliers
+library(mvoutlier)
 
 conflict_prefer('select', 'dplyr')
 theme_set(theme_minimal())
@@ -169,7 +171,7 @@ datHardNofeed %>%
   ggplot(., aes(x = totalCorrect, y = totalIntrusors)) +
   geom_point(aes(fill = activityFactor, color = activityFactor)) +
   geom_smooth(method = 'lm', color = 'black', level = .99) +
-  scale_fill_viridis_d(option = 'C') + scale_color_viridis_d(option = 'C')
+  scale_fill_viridis_d(option = 'D') + scale_color_viridis_d(option = 'D')
 ```
 
 As can be seen from the plot, the relationship seems to be pretty linear, and the
@@ -182,7 +184,7 @@ datHardNofeed %>%
   geom_point(aes(fill = activityFactor, color = activityFactor)) +
   geom_smooth(method = 'lm', level = .99, color = 'black') +
   facet_grid(activityFactor ~ .) +
-  scale_fill_viridis_d(option = 'C') + scale_color_viridis_d(option = 'C')
+  scale_fill_viridis_d(option = 'D') + scale_color_viridis_d(option = 'D')
 ```
 
 Again, we can see that the relationships are linear, as well as similar. Next,
@@ -241,9 +243,27 @@ if there really was one. On the other hand, \citet{field_discovering_2012} warn
 that the test can return a non-significant p-value when the assumption of
 multivariate normality is not tenable. However, given the results of the
 Henze-Zirkler multivariate normality test, we suspect that this is not the case.
-Since all assumptions seem to hold, we'll proceed with the planned MANOVA.
+Since all assumptions seem to hold, we can proceed with the planned MANOVA.
 
 ## MANOVA
+
+Now that it seems that all the assumptions of a MANOVA are satisfied, let's run
+the analysis.
+
+```{r manova}
+manovaModel <- manova(data = datHardNofeed,
+                      cbind(totalCorrect, totalIntrusors) ~ activityFactor)
+summary(manovaModel)
+summary(manovaModel, test = 'Wilks')
+summary(manovaModel, test = 'Hotelling')
+summary(manovaModel, test = 'Roy')
+```
+
+As can be seen from the resulting output, Pillai's V indicates that the three
+groups differ significantly along the linear combination of the two DVs. The other
+three reported statistics point to the same conclusion. Therefore, we'll proceed
+with conducting a linear discriminant analyis, as well as Roy-Bargmann's stepdown
+analysis.
 
 \bibliographystyle{apacite}
 {
