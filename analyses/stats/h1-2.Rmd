@@ -245,6 +245,19 @@ multivariate normality is not tenable. However, given the results of the
 Henze-Zirkler multivariate normality test, we suspect that this is not the case.
 Since all assumptions seem to hold, we can proceed with the planned MANOVA.
 
+### Note
+
+A decision was made not to check the univariate and multivariate outliers at this
+point. Regarding the univariate outliers - the boxplots point to only one case
+which could be an outlier. The scatterplots show no point that's obviously different
+from the rest. As for the multivariate outliers, \citet{tabachnick_using_2012} warn
+that the Mahalanobis distance can produce false negatives or false positives. Furthermore,
+deleting a set of outliers and rerunning the analysis can reveal yet another set of
+outliers --- without a clear-cut and absolute criterion, exclusions are somewhat
+arbitrary. Finally, cases were excluded based on criteria that are more or less
+substantivelly meaningful in the context of the conducted study. Given the above,
+no statistical criteria is used for exclusion at this point.
+
 ## MANOVA
 
 Now that it seems that all the assumptions of a MANOVA are satisfied, let's run
@@ -264,6 +277,27 @@ groups differ significantly along the linear combination of the two DVs. The oth
 three reported statistics point to the same conclusion. Therefore, we'll proceed
 with conducting a linear discriminant analyis, as well as Roy-Bargmann's stepdown
 analysis.
+
+### Linear discriminant analysis
+
+```{r lda}
+datHardNofeed %>% count(., activityFactor) %>% pull(n) %>%
+  {lda(activityFactor ~ totalCorrect + totalIntrusors,
+      data = datHardNofeed,
+      prior = c(.[1]/nrow(datHardNofeed), .[2]/nrow(datHardNofeed),
+                .[3]/nrow(datHardNofeed)))} -> ldaModel
+ldaModel
+```
+
+```{r}
+ldaModel %>% predict(.) %>% pluck('x') %>% as.data.frame(.) %>%
+  cbind(datHardNofeed) %>%
+  ggplot(., aes(x = LD1, y = LD2, color = activityFactor)) +
+  geom_point() + geom_vline(aes(xintercept = 0)) +
+  geom_hline(aes(yintercept = 0)) +
+  scale_color_viridis_d()
+```
+
 
 \bibliographystyle{apacite}
 {
