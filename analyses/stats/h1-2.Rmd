@@ -40,8 +40,6 @@ library(here)
 # `datSoft` which is `datHard` with the soft exclusion criteria applied (as
 # described in `analysis-plan.md`)
 source(here('wrangling', '3-exclusion-criteria.R'))
-# for LDA
-library(MASS)
 # for Henze-Zirkler
 library(MVN)
 # for Box's M
@@ -50,6 +48,8 @@ library(heplots)
 library(viridis)
 # multivariate outliers
 library(mvoutlier)
+# for LDA
+library(candisc)
 
 conflict_prefer('select', 'dplyr')
 theme_set(theme_minimal())
@@ -103,6 +103,11 @@ by(datHardNofeed$totalCorrect, INDICES = datHardNofeed$activityFactor,
    psych::describe) %>% reduce(., rbind) %>%
   mutate(., condition = c("content", "general", "rereading")) %>%
   select(., condition, everything(), -vars)
+
+by(datHardNofeed$totalIntrusors, INDICES = datHardNofeed$activityFactor,
+   psych::describe) %>% reduce(., rbind) %>%
+  mutate(., condition = c("content", "general", "rereading")) %>%
+  select(., condition, everything(), -vars)
 ```
 
 Now, we'll plot the DV distributions, both on the whole subset, and per group.
@@ -135,7 +140,8 @@ datHardNofeed %>% add_column(subject = 1:nrow(.), .before = 1) %>%
   gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
          value = 'score') %>%
   ggplot(., aes(x = activityFactor, y = score, fill = activityFactor)) +
-  geom_boxplot(alpha = .5) + geom_dotplot(mapping = aes(y = score), binaxis = 'y',
+  geom_boxplot(alpha = .5) + geom_dotplot(mapping = aes(y = score),
+                                          binaxis = 'y',
                                 stackdir = 'centerwhole', dotsize = .5,
                                 fill = 'black', color = 'black') +
   facet_grid(dependentVar~.) + scale_fill_viridis(discrete = T)
@@ -191,8 +197,9 @@ Again, we can see that the relationships are linear, as well as similar. Next,
 we will check the multivariate normality assumption using the Henze-Zirkler test.
 
 ```{r hzTest}
-datHardNofeed %>% select(., -activityFactor) %>%
-  mvn(., multivariatePlot = 'qq', mvnTest = 'hz', desc = T)
+by(datHardNofeed %>% select(-activityFactor),
+   INDICES = datHardNofeed$activityFactor,
+   FUN = mvn, mvnTest = 'hz')
 ```
 
 The result of Henze-Zirkler's multivariate normality test shows that a statistically
@@ -202,18 +209,11 @@ follow the straight line fairly well, which is also indicative of a normal
 distribution.
 
 However, the Shapiro-Wilk test for univariate normality indicates a departure in
-the distribution of the total number of intrusive distractors chosen. It is interesting
+the distribution of the total number of intrusive distractors chosen in one group. It is interesting
 to notice that the value of the *W* statistic is close to the maximum of 1, which
 indicates a close fit to the normal distribution \citep{salkind_encyclopedia_2007}.
-Furthermore, when the test is performed for each group separately, the departures
-are declared to be non-significant in two out of three cases, the third case being
-marginally significant. Therefore, we will assume that the data in each group
-is normally distributed.
-
-```{r shapiroGroups}
-by(datHardNofeed$totalIntrusors, INDICES = datHardNofeed$activityFactor,
-   FUN = shapiro.test)
-```
+Also, the test is only marginally significant at the conventional .05 level.
+Therefore, we will assume that the data in each group is normally distributed.
 
 Now, we'll take a look at the homogeneity of covariance matrices assumption. First,
 let's take a look at the matrices themselves.
@@ -265,7 +265,8 @@ the analysis.
 
 ```{r manova}
 manovaModel <- manova(data = datHardNofeed,
-                      cbind(totalCorrect, totalIntrusors) ~ activityFactor)
+                      cbind(totalCorrect, totalIntrusors) ~
+                        as.factor(activityFactor))
 summary(manovaModel)
 summary(manovaModel, test = 'Wilks')
 summary(manovaModel, test = 'Hotelling')
@@ -280,24 +281,36 @@ analysis.
 
 ### Linear discriminant analysis
 
-```{r lda}
-datHardNofeed %>% count(., activityFactor) %>% pull(n) %>%
-  {lda(activityFactor ~ totalCorrect + totalIntrusors,
-      data = datHardNofeed,
-      prior = c(.[1]/nrow(datHardNofeed), .[2]/nrow(datHardNofeed),
-                .[3]/nrow(datHardNofeed)))} -> ldaModel
-ldaModel
+```{r ldaModel}
+. <- candisc(manovaModel)
+summary(.)
+cat('\n======== print ========\n')
+.
 ```
 
-```{r}
-ldaModel %>% predict(.) %>% pluck('x') %>% as.data.frame(.) %>%
-  cbind(datHardNofeed) %>%
-  ggplot(., aes(x = LD1, y = LD2, color = activityFactor)) +
+From the above output we can see that the first variate explains most of the variance.
+
+Let's take a closer look at the LDA model.
+
+```{r ldaStdCoefs}
+.$coeffs.raw %>% as.data.frame(.)
+```
+
+```{r ldaStructure}
+.$structure %>% as.data.frame(.)
+```
+
+
+```{r ldaPlot1}
+plot(.)
+```
+
+```{r ldaPlot2}
+.$scores %>% cbind(datHardNofeed, .) %>%
+  ggplot(., aes(x = Can1, y = Can2, color = activityFactor)) +
   geom_point() + geom_vline(aes(xintercept = 0)) +
-  geom_hline(aes(yintercept = 0)) +
   scale_color_viridis_d()
 ```
-
 
 \bibliographystyle{apacite}
 {
