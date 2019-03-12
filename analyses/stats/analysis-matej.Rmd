@@ -1,0 +1,124 @@
+---
+Author: Matej PavliÃƒâ€žÃ¢â‚¬Â¡
+Title: inter-testing-feedback-2018 data analysis
+output:
+  pdf_document: default
+  html_notebook: default
+  pdf: default
+  html_document:
+    df_print: paged
+---
+
+First we will import requisite libraries
+
+```{R}
+library(here)
+# NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
+# `conflict_prefer`s filter from {dplyr}
+# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run
+# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard
+# exclusion criteria applied (as described in `analysis-plan.md`), and (3)
+# `datSoft` which is `datHard` with the soft exclusion criteria applied (as
+# described in `analysis-plan.md`)
+source(here('wrangling', '3-exclusion-criteria.R'))
+
+# import MVN library for outlier detection and testing normality assumptions, and other libs
+library(rmarkdown)
+library(MVN)
+library(purrr)
+library(haven)
+library(psych)
+library(TOSTER)
+```
+
+
+Now we will extract the data for the relevant groups from the dataset created after applying hard exclusion criteria.
+These groups are the rereading group and the other two groups not receiving feedback (content_noFeedback, general_noFeedback).
+
+```{R}
+dat_h1_h2 <- datHard[datHard$giveFeedback == 0,]
+```
+
+
+Let's observe the relevant descriptive statistics
+
+```{r}
+dat_h1_h2 %>% select(activityFactor, totalCorrect, totalIntrusors) %>% describeBy(dat_h1_h2$activityFactor, skew = TRUE, ranges = TRUE)
+```
+
+
+And an alternative approach:
+
+```{r}
+dat_h1_h2 %>% select(activityFactor, totalCorrect, totalIntrusors) %>% split(.$activityFactor) %>% map(summary)
+```
+
+Let's test for univariate and multivariate normality, inspect univariate and multivariate plots, and look at within-group correlations
+
+```{r}
+dat_h1_h2 %<>% select(activityFactor, totalCorrect, totalIntrusors)
+```
+
+```{r}
+# select content group
+this_group <- dat_h1_h2[dat_h1_h2$activityFactor == "rereading",] 
+
+mvn(this_group[2-3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+  univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
+  multivariateOutlierMethod = "quan", showOutliers = TRUE)
+
+corr.test(this_group[2-3])
+```
+
+```{r}
+# select general group
+this_group <- dat_h1_h2[dat_h1_h2$activityFactor == "general",] 
+
+mvn(this_group[2-3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+  univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
+  multivariateOutlierMethod = "quan", showOutliers = TRUE)
+
+corr.test(this_group[2-3])
+```
+
+```{r}
+# select rereading group
+this_group <- dat_h1_h2[dat_h1_h2$activityFactor == "content",] 
+
+mvn(this_group[2-3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+  univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
+  multivariateOutlierMethod = "quan", showOutliers = TRUE)
+
+corr.test(this_group[2-3])
+```
+
+Now let's conduct a MANOVA.
+
+```{r}
+res.man <- manova(cbind(totalCorrect, totalIntrusors) ~ activityFactor, data = dat_h1_h2)
+summary(res.man, 'Wilks')
+```
+
+Now let's conduct Roy-Bargmann stepdown analysis.
+
+```{r}
+# first we create a linear model with just one dependent variable
+model1 <- lm(totalCorrect ~ activityFactor, data = dat_h1_h2)
+anova(model1)
+
+# and another one with the above DV used as a covariate
+model2 <- lm(totalIntrusors ~ totalCorrect*activityFactor, data = dat_h1_h2)
+anova(model2)
+
+```
+
+Now let's conduct planned contrasts.
+
+```{r}
+unique(dat_h1_h2$activityFactor)
+
+
+TOSTtwo(m1 = 10.47, m2 = 12.79, sd1 = 2.84, sd2 = 3.02, n1 = 40, n2 = 42, low_eqbound_d = -0.25, high_eqbound_d = 0.25)
+
+
+```
