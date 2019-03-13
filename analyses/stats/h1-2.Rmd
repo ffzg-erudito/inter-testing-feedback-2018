@@ -50,6 +50,9 @@ library(viridis)
 library(mvoutlier)
 # for LDA
 library(candisc)
+library(MASS)
+# for labels in ggplots
+library(ggrepel)
 
 conflict_prefer('select', 'dplyr')
 theme_set(theme_minimal())
@@ -276,21 +279,22 @@ summary(manovaModel, test = 'Roy')
 As can be seen from the resulting output, Pillai's V indicates that the three
 groups differ significantly along the linear combination of the two DVs. The other
 three reported statistics point to the same conclusion. Therefore, we'll proceed
-with conducting a linear discriminant analyis, as well as Roy-Bargmann's stepdown
-analysis.
+with conducting a linear discriminant analyis.
 
 ### Linear discriminant analysis
 
-```{r ldaModel}
-. <- candisc(manovaModel)
+```{r ldaCandisc}
+. <- candisc(manovaModel, type = '2')
 summary(.)
 cat('\n======== print ========\n')
 .
 ```
 
 From the above output we can see that the first variate explains most of the variance.
-
-Let's take a closer look at the LDA model.
+Furthermore, Wilks' lambda values inform us that the groups are separated only
+on the first variate, so that's the only one we'll interpret. Also, we can see that
+the variation in the grouping variable is almost exclusively explained by the first
+variate.
 
 ```{r ldaStdCoefs}
 .$coeffs.raw %>% as.data.frame(.)
@@ -300,15 +304,27 @@ Let's take a closer look at the LDA model.
 .$structure %>% as.data.frame(.)
 ```
 
+Looking at the structure scores, we can see that both the total number of
+correct answers and the total number of intrusive distractors chosen share a lot
+of variance with the first variate. The first variate is almost completely
+defined by the total number of correct answers, but the contribution of the number
+of chosen intrusors in also considerable. This could be due to the relatively high
+correlation between those two variables.
 
-```{r ldaPlot1}
-plot(.)
-```
-
-```{r ldaPlot2}
+```{r ldaPlot}
 .$scores %>% cbind(datHardNofeed, .) %>%
   ggplot(., aes(x = Can1, y = Can2, color = activityFactor)) +
   geom_point() + geom_vline(aes(xintercept = 0)) +
+  geom_point(data = . %>% group_by(activityFactor) %>%
+               summarise(ld1 = mean(Can1), ld2 = mean(Can2)),
+             mapping = aes(x = ld1, y = ld2),
+             color = 'black', size = 3, shape = 3) +
+  theme(panel.grid = element_blank()) +
+  geom_text_repel(data = . %>% group_by(activityFactor) %>%
+               summarise(ld1 = mean(Can1), ld2 = mean(Can2)),
+            mapping = aes(x = ld1, y = ld2, label = activityFactor),
+            fontface = 'bold',
+            inherit.aes = F) +
   scale_color_viridis_d()
 ```
 
