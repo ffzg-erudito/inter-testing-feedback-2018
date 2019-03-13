@@ -13,8 +13,8 @@ analyses/data/results.txt
 paper/*
 !paper/sections
 paper/sections/*
-!paper/sections/*.latex
+!paper/sections/*.tex
 !paper/sections/*.pdf
 
-!paper/*.latex
+!paper/*.tex
 !paper/*.pdf
