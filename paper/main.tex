@@ -70,7 +70,11 @@
 }
 \makeatother
 
+\def\biblio{\bibliographystyle{apacite}\bibliography{../reference.bib}}
+
 \begin{document}
+
+\def\biblio{}
 
 \section{Introduction}
 \subfile{sections/intro.latex}
@@ -83,7 +87,7 @@
 
 {
     \setstretch{1}
-    \bibliography{/home/denis/Documents/reference.bib}
+    \bibliography{reference.bib}
 }
 
 \end{document}
