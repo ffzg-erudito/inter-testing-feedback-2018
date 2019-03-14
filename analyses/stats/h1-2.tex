@@ -163,33 +163,14 @@
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(knitr)}
 \KeywordTok{library}\NormalTok{(kableExtra)}
-\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{dpi =} \DecValTok{600}\NormalTok{, }\DataTypeTok{dev =} \StringTok{'pdf'}\NormalTok{)}
+\NormalTok{opts_chunk}\OperatorTok{$}\KeywordTok{set}\NormalTok{(}\DataTypeTok{dpi =} \DecValTok{600}\NormalTok{, }\DataTypeTok{dev =} \StringTok{'pdf'}\NormalTok{, }\DataTypeTok{echo =}\NormalTok{ F)}
 \KeywordTok{options}\NormalTok{(}\DataTypeTok{digits =} \DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(here)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## here() starts at /home/denis/Documents/Poso/faks/istraživanja/inter-testing-feedback-2018/analyses
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# }\AlertTok{NOTE}\CommentTok{: this will load \{magrittr\}, \{here\}, \{conflicted\} and \{tidyverse\}. also,}
-\CommentTok{# `conflict_prefer`s filter from \{dplyr\}}
-\CommentTok{# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run}
-\CommentTok{# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard}
-\CommentTok{# exclusion criteria applied (as described in `analysis-plan.md`), and (3)}
-\CommentTok{# `datSoft` which is `datHard` with the soft exclusion criteria applied (as}
-\CommentTok{# described in `analysis-plan.md`)}
-\KeywordTok{source}\NormalTok{(}\KeywordTok{here}\NormalTok{(}\StringTok{'wrangling'}\NormalTok{, }\StringTok{'3-exclusion-criteria.R'}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## -- Attaching packages -------------------------------------------------------- tidyverse 1.2.1 --
@@ -234,23 +215,9 @@
 ## See spec(...) for full column specifications.
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# for Henze-Zirkler}
-\KeywordTok{library}\NormalTok{(MVN)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## sROC 0.1-2 loaded
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# for Box's M}
-\KeywordTok{library}\NormalTok{(heplots)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## Loading required package: car
@@ -277,52 +244,17 @@
 ##     some
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# colorscale}
-\KeywordTok{library}\NormalTok{(viridis)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## Loading required package: viridisLite
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# multivariate outliers}
-\KeywordTok{library}\NormalTok{(mvoutlier)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## Loading required package: sgeostat
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# for LDA}
-\KeywordTok{library}\NormalTok{(candisc)}
-\KeywordTok{library}\NormalTok{(MASS)}
-\CommentTok{# for labels in ggplots}
-\KeywordTok{library}\NormalTok{(ggrepel)}
-
-\KeywordTok{conflict_prefer}\NormalTok{(}\StringTok{'select'}\NormalTok{, }\StringTok{'dplyr'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## [conflicted] Will prefer dplyr::select over any other package
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{theme_set}\NormalTok{(}\KeywordTok{theme_minimal}\NormalTok{())}
-
-\CommentTok{# source helper functions}
-\KeywordTok{source}\NormalTok{(}\KeywordTok{here}\NormalTok{(}\StringTok{'helpers'}\NormalTok{, }\StringTok{'h1-2-helpers.R'}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
 
 \hypertarget{hard-exclusion-criteria}{%
 \section{Hard exclusion criteria}\label{hard-exclusion-criteria}}
@@ -340,21 +272,7 @@ This analysis is going to be run on a subset participants who were in
 no-feedback conditions. This includes the rereading group, and the two
 no-feedback test groups.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# creating new df with the specified subset, selecting only relevant vars}
-\NormalTok{datHardNofeed <-}\StringTok{ }\NormalTok{datHard }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(., giveFeedback }\OperatorTok{==}\StringTok{ }\NormalTok{F) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(., activityFactor, totalCorrect, totalIntrusors)}
-\end{Highlighting}
-\end{Shaded}
-
 This leaves us with 122 cases.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{glimpse}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## Observations: 122
@@ -367,12 +285,6 @@ This leaves us with 122 cases.
 First of all, it's important to mention that the group sizes are
 imbalanced, but the difference is really small:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(., activityFactor) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{tally}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## # A tibble: 3 x 2
 ##   activityFactor     n
@@ -383,12 +295,6 @@ imbalanced, but the difference is really small:
 \end{verbatim}
 
 Here are the descriptives for the whole subset.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(., }\OperatorTok{-}\NormalTok{activityFactor) }\OperatorTok{%>%}\StringTok{ }\NormalTok{psych}\OperatorTok{::}\KeywordTok{describe}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##                vars   n  mean   sd median trimmed  mad min max range skew
@@ -401,15 +307,6 @@ Here are the descriptives for the whole subset.
 
 And the descriptives by group:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{by}\NormalTok{(datHardNofeed}\OperatorTok{$}\NormalTok{totalCorrect, }\DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor,}
-\NormalTok{   psych}\OperatorTok{::}\NormalTok{describe) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{reduce}\NormalTok{(., rbind) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(., }\DataTypeTok{condition =} \KeywordTok{c}\NormalTok{(}\StringTok{"content"}\NormalTok{, }\StringTok{"general"}\NormalTok{, }\StringTok{"rereading"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(., condition, }\KeywordTok{everything}\NormalTok{(), }\OperatorTok{-}\NormalTok{vars)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##   condition  n   mean     sd median trimmed    mad min max range      skew
 ## 1   content 42 12.786 3.0165     12  12.765 2.9652   7  19    12  0.039247
@@ -420,15 +317,6 @@ And the descriptives by group:
 ## 2 -0.98633 0.44863
 ## 3 -0.25332 0.44316
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{by}\NormalTok{(datHardNofeed}\OperatorTok{$}\NormalTok{totalIntrusors, }\DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor,}
-\NormalTok{   psych}\OperatorTok{::}\NormalTok{describe) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{reduce}\NormalTok{(., rbind) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(., }\DataTypeTok{condition =} \KeywordTok{c}\NormalTok{(}\StringTok{"content"}\NormalTok{, }\StringTok{"general"}\NormalTok{, }\StringTok{"rereading"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(., condition, }\KeywordTok{everything}\NormalTok{(), }\OperatorTok{-}\NormalTok{vars)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##   condition  n  mean     sd median trimmed    mad min max range    skew
@@ -444,29 +332,10 @@ And the descriptives by group:
 Now, we'll plot the DV distributions, both on the whole subset, and per
 group.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{gather}\NormalTok{(., totalCorrect, totalIntrusors, }\DataTypeTok{key =} \StringTok{'dependentVar'}\NormalTok{,}
-                         \DataTypeTok{value =} \StringTok{'score'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ score)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_density}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_grid}\NormalTok{(dependentVar }\OperatorTok{~}\StringTok{ }\NormalTok{.)}
-\end{Highlighting}
-\end{Shaded}
-
 \includegraphics{h1-2_files/figure-latex/densityTotal-1.pdf}
 
 The graph shows that there could be significant deviations from
 normality. Let's look at the distributions in each group.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{gather}\NormalTok{(., totalCorrect, totalIntrusors, }\DataTypeTok{key =} \StringTok{'dependentVar'}\NormalTok{,}
-                         \DataTypeTok{value =} \StringTok{'score'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ score, }\DataTypeTok{color =}\NormalTok{ activityFactor, }\DataTypeTok{fill =}\NormalTok{ activityFactor)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_density}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_grid}\NormalTok{(dependentVar }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_fill_viridis_d}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
 
 \includegraphics{h1-2_files/figure-latex/densityGroup-1.pdf}
 
@@ -474,20 +343,6 @@ The distributions seem to be fairly similar on both dependent variables,
 and look a bit more normal than on the whole sample.
 
 Next, here are the boxplots for the three groups, and for both DVs.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{add_column}\NormalTok{(}\DataTypeTok{subject =} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(.), }\DataTypeTok{.before =} \DecValTok{1}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{gather}\NormalTok{(., totalCorrect, totalIntrusors, }\DataTypeTok{key =} \StringTok{'dependentVar'}\NormalTok{,}
-         \DataTypeTok{value =} \StringTok{'score'}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ activityFactor, }\DataTypeTok{y =}\NormalTok{ score, }\DataTypeTok{fill =}\NormalTok{ activityFactor)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_dotplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ score),}
-                                          \DataTypeTok{binaxis =} \StringTok{'y'}\NormalTok{,}
-                                \DataTypeTok{stackdir =} \StringTok{'centerwhole'}\NormalTok{, }\DataTypeTok{dotsize =} \FloatTok{.5}\NormalTok{,}
-                                \DataTypeTok{fill =} \StringTok{'black'}\NormalTok{, }\DataTypeTok{color =} \StringTok{'black'}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(dependentVar}\OperatorTok{~}\NormalTok{.) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_fill_viridis}\NormalTok{(}\DataTypeTok{discrete =}\NormalTok{ T)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.
@@ -503,13 +358,6 @@ in the general knowledge test condition.
 
 Next, let's look at the correlation between the DVs. First, let's look
 at the correlation in the whole sub-sample.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{. <-}\StringTok{ }\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(., }\OperatorTok{-}\NormalTok{activityFactor) }\OperatorTok{%>%}\StringTok{ }\NormalTok{psych}\OperatorTok{::}\KeywordTok{corr.test}\NormalTok{(.)}
-\KeywordTok{print}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## Call:psych::corr.test(x = .)
@@ -529,13 +377,6 @@ at the correlation in the whole sub-sample.
 
 We found a statistically significant correlation of -0.66831. Next,
 let's look at the correlation in each group.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{by}\NormalTok{(datHardNofeed[, }\KeywordTok{c}\NormalTok{(}\StringTok{'totalCorrect'}\NormalTok{, }\StringTok{'totalIntrusors'}\NormalTok{)],}
-   \DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor, }\DataTypeTok{FUN =}\NormalTok{ psych}\OperatorTok{::}\NormalTok{corr.test)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## datHardNofeed$activityFactor: content
@@ -589,16 +430,6 @@ statistically significant. To check whether the relationship between the
 DVs could be described as linear, we'll plot the scatterplots for the
 whole sample and for each group.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ totalCorrect, }\DataTypeTok{y =}\NormalTok{ totalIntrusors)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ activityFactor, }\DataTypeTok{color =}\NormalTok{ activityFactor)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{'lm'}\NormalTok{, }\DataTypeTok{color =} \StringTok{'black'}\NormalTok{, }\DataTypeTok{level =} \FloatTok{.99}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_fill_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \includegraphics{h1-2_files/figure-latex/scatterToral-1.pdf}
 
 As can be seen from the plot, the relationship seems to be pretty
@@ -606,30 +437,11 @@ linear, and the 99\% confidence interval of the regression slopes is
 pretty small. Now, let's take a look at the scatterplots for each group
 separately.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ totalCorrect, }\DataTypeTok{y =}\NormalTok{ totalIntrusors)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ activityFactor, }\DataTypeTok{color =}\NormalTok{ activityFactor)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{'lm'}\NormalTok{, }\DataTypeTok{level =} \FloatTok{.99}\NormalTok{, }\DataTypeTok{color =} \StringTok{'black'}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(activityFactor }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_fill_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \includegraphics{h1-2_files/figure-latex/scatterGroup-1.pdf}
 
 Again, we can see that the relationships are linear, as well as similar.
 Next, we will check the multivariate normality assumption using the
 Henze-Zirkler test.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{by}\NormalTok{(datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{activityFactor),}
-   \DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor,}
-   \DataTypeTok{FUN =}\NormalTok{ mvn, }\DataTypeTok{mvnTest =} \StringTok{'hz'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## datHardNofeed$activityFactor: content
@@ -707,14 +519,6 @@ that the data in each group is normally distributed.
 Now, we'll take a look at the homogeneity of covariance matrices
 assumption. First, let's take a look at the matrices themselves.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{by}\NormalTok{(datHardNofeed[, }\KeywordTok{c}\NormalTok{(}\StringTok{'totalCorrect'}\NormalTok{, }\StringTok{'totalIntrusors'}\NormalTok{)],}
-   \DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor, }\DataTypeTok{FUN =}\NormalTok{ cov) ->}\StringTok{ }\NormalTok{.}
-\KeywordTok{print}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## datHardNofeed$activityFactor: content
 ##                totalCorrect totalIntrusors
@@ -738,13 +542,6 @@ ratio for the number of chosen intrusors is 1.76629. Finally, the ratio
 of the largest to the smallest covariance between the two DVs is
 0.68159. As we can see, the variance ratios are pretty close to one.
 Still, let's test them with Box's M test.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{boxM}\NormalTok{(datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(., }\OperatorTok{-}\NormalTok{activityFactor),}
-     \DataTypeTok{group =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## 
@@ -787,15 +584,6 @@ statistical criteria is used for exclusion at this point.
 Now that it seems that all the assumptions of a MANOVA are satisfied,
 let's run the analysis.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{manovaModel <-}\StringTok{ }\KeywordTok{manova}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ datHardNofeed,}
-                      \KeywordTok{cbind}\NormalTok{(totalCorrect, totalIntrusors) }\OperatorTok{~}
-\StringTok{                        }\KeywordTok{as.factor}\NormalTok{(activityFactor))}
-\KeywordTok{summary}\NormalTok{(manovaModel)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##                            Df Pillai approx F num Df den Df Pr(>F)   
 ## as.factor(activityFactor)   2  0.126     3.99      4    238 0.0038 **
@@ -804,12 +592,6 @@ let's run the analysis.
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(manovaModel, }\DataTypeTok{test =} \StringTok{'Wilks'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##                            Df Wilks approx F num Df den Df Pr(>F)   
 ## as.factor(activityFactor)   2 0.875     4.07      4    236 0.0033 **
@@ -817,12 +599,6 @@ let's run the analysis.
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(manovaModel, }\DataTypeTok{test =} \StringTok{'Hotelling'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##                            Df Hotelling-Lawley approx F num Df den Df
@@ -834,12 +610,6 @@ let's run the analysis.
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(manovaModel, }\DataTypeTok{test =} \StringTok{'Roy'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##                            Df   Roy approx F num Df den Df  Pr(>F)    
@@ -876,13 +646,6 @@ discriminant analysis.
 \subsubsection{Linear discriminant
 analysis}\label{linear-discriminant-analysis}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{. <-}\StringTok{ }\KeywordTok{candisc}\NormalTok{(manovaModel, }\DataTypeTok{type =} \StringTok{'2'}\NormalTok{)}
-\KeywordTok{summary}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## 
 ## Canonical Discriminant Analysis for as.factor(activityFactor):
@@ -904,22 +667,10 @@ analysis}\label{linear-discriminant-analysis}}
 ## totalIntrusors -0.3551 1.245
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{cat}\NormalTok{(}\StringTok{'}\CharTok{\textbackslash{}n}\StringTok{======== print ========}\CharTok{\textbackslash{}n}\StringTok{'}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## 
 ## ======== print ========
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{.}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## 
@@ -945,23 +696,11 @@ groups are separated only on the first variate, so that's the only one
 we'll interpret. Also, we can see that the variation in the grouping
 variable is almost exclusively explained by the first variate.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{.}\OperatorTok{$}\NormalTok{coeffs.raw }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##                    Can1    Can2
 ## totalCorrect    0.25479 0.36845
 ## totalIntrusors -0.18574 0.65094
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{.}\OperatorTok{$}\NormalTok{structure }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(.)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##                    Can1    Can2
@@ -977,41 +716,12 @@ the contribution of the number of chosen intrusors in also considerable.
 This could be due to the relatively high correlation between those two
 variables.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{.}\OperatorTok{$}\NormalTok{scores }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cbind}\NormalTok{(datHardNofeed, .) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Can1, }\DataTypeTok{y =}\NormalTok{ Can2, }\DataTypeTok{color =}\NormalTok{ activityFactor)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xintercept =} \DecValTok{0}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ . }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(activityFactor) }\OperatorTok{%>%}
-\StringTok{               }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{ld1 =} \KeywordTok{mean}\NormalTok{(Can1), }\DataTypeTok{ld2 =} \KeywordTok{mean}\NormalTok{(Can2)),}
-             \DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ld1, }\DataTypeTok{y =}\NormalTok{ ld2),}
-             \DataTypeTok{color =} \StringTok{'black'}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{shape =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_blank}\NormalTok{()) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ . }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(activityFactor) }\OperatorTok{%>%}
-\StringTok{               }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{ld1 =} \KeywordTok{mean}\NormalTok{(Can1), }\DataTypeTok{ld2 =} \KeywordTok{mean}\NormalTok{(Can2)),}
-            \DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ld1, }\DataTypeTok{y =}\NormalTok{ ld2, }\DataTypeTok{label =}\NormalTok{ activityFactor),}
-            \DataTypeTok{fontface =} \StringTok{'bold'}\NormalTok{,}
-            \DataTypeTok{inherit.aes =}\NormalTok{ F) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_color_viridis_d}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
 \includegraphics{h1-2_files/figure-latex/ldaPlot-1.pdf}
 
 To assess the ability of the LDA model to discriminate group membership
 based on the number of correct answers to the questions and the number
 of chosen instrusive distractors, we'll re-train the model and evaluate
 it's error rate using the leave-one-out cross-validation technique.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ldaCVTotal <-}\StringTok{ }\KeywordTok{lda}\NormalTok{(activityFactor }\OperatorTok{~}\StringTok{ }\NormalTok{totalCorrect }\OperatorTok{+}\StringTok{ }\NormalTok{totalIntrusors,}
-                  \DataTypeTok{data =}\NormalTok{ datHardNofeed, }\DataTypeTok{CV =}\NormalTok{ T)}
-\NormalTok{confTotal <-}\StringTok{ }\NormalTok{caret}\OperatorTok{::}\KeywordTok{confusionMatrix}\NormalTok{(ldaCVTotal}\OperatorTok{$}\NormalTok{class,}
-\NormalTok{                                   datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor }\OperatorTok{%>%}\StringTok{ }\NormalTok{as.factor)}
-\NormalTok{confTotal}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## Confusion Matrix and Statistics
@@ -1064,16 +774,6 @@ fit an LDA model containing only the number of correct answers as a
 predictor. Then, we will compare this model's LOOCV accuracy to that of
 the full model (reported at the end of the previous section).
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{ldaCVcorrect <-}\StringTok{ }\KeywordTok{lda}\NormalTok{(activityFactor }\OperatorTok{~}\StringTok{ }\NormalTok{totalCorrect,}
-                    \DataTypeTok{data =}\NormalTok{ datHardNofeed, }\DataTypeTok{CV =}\NormalTok{ T)}
-\NormalTok{confCorrect <-}\StringTok{ }\NormalTok{caret}\OperatorTok{::}\KeywordTok{confusionMatrix}\NormalTok{(ldaCVcorrect}\OperatorTok{$}\NormalTok{class,}
-                                      \KeywordTok{as.factor}\NormalTok{(datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor))}
-\NormalTok{confCorrect}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ## Confusion Matrix and Statistics
 ## 
@@ -1108,13 +808,12 @@ the full model (reported at the end of the previous section).
 
 As can be seen from the second confusion matrix, the accuracy of this
 model is actually somewhat higher than in the full model, as is Cohen's
-\textKappa.
-
-\bibliographystyle{apacite}
+\textkappa.
 
 \{ \setstretch{1}
 
-\bibliography{refs}
+\bibliographystyle{apacite}
+    \bibliography{refs}
 
 \}
 

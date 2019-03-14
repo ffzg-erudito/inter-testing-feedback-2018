@@ -27,7 +27,7 @@ header-includes: |
 ```{r setup}
 library(knitr)
 library(kableExtra)
-opts_chunk$set(dpi = 600, dev = 'pdf')
+opts_chunk$set(dpi = 600, dev = 'pdf', echo = F)
 options(digits = 5)
 ```
 
@@ -377,16 +377,22 @@ containing only the number of correct answers as a predictor. Then, we will
 compare this model's LOOCV accuracy to that of the full model (reported at the
 end of the previous section).
 
-```{r}
+```{r ldaCVcorrect}
 ldaCVcorrect <- lda(activityFactor ~ totalCorrect,
                     data = datHardNofeed, CV = T)
 confCorrect <- caret::confusionMatrix(ldaCVcorrect$class,
-                                      as.factor(datHardNofeed$activityFactor))
+                                      as.factor(datHardNofeed$activityFactor),
+                                      mode = 'everything')
 confCorrect
 ```
 
 As can be seen from the second confusion matrix, the accuracy of this model
 is actually somewhat higher than in the full model, as is Cohen's \textkappa.
+Importantly, we notice that adding the total number of intrusors to the model
+doesn't significantly increase the accuracy of the model (the 95% confidence
+intervals for the accuracies of the two models completely overlap).
+
+### Multivariate contrasts
 
 {
     \setstretch{1}
