@@ -116,14 +116,3 @@ model2 <- lm(totalIntrusors ~ totalCorrect*activityFactor*giveFeedback, data = d
 anova(model2)
 
 ```
-
-
-```{r Roy-Bargmann_H3}
-# first we create a linear model with just one dependent variable
-model1 <- lm(totalCorrect ~ activityFactor*giveFeedback, data = dat_h36)
-anova(model1)
-
-# and another one with the above DV used as a covariate
-model2 <- lm(totalIntrusors ~ totalCorrect*activityFactor*giveFeedback, data = dat_h36)
-anova(model2)
-```
