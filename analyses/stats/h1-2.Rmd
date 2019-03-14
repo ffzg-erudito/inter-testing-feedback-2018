@@ -17,6 +17,7 @@ header-includes: |
     \usepackage{array}
     \usepackage[htt]{hyphenat}
     \usepackage{booktabs}
+    \usepackage[euler]{textgreek}
     \usepackage{float}
     \usepackage[onehalfspacing]{setspace}
     \captionsetup[table]{width=\textwidth}
@@ -281,6 +282,24 @@ groups differ significantly along the linear combination of the two DVs. The oth
 three reported statistics point to the same conclusion. Therefore, we'll proceed
 with conducting a linear discriminant analyis.
 
+We can look at \(1 - \Lambda\) as an extension to the univariate \(\eta^2\)
+\citep{huberty_applied_2006}. In our case, the multivariate \(\eta^2\) is
+`r 1 - summary(manovaModel, test = 'Wilks') %>% pluck('stats') %>% .[1,2]`, which
+represents the proportion of total variance associated with the activity type
+IV. Further, we can calculate the effect size index \(\xi^2\), which is based
+on Pillai's test statistic, and represents the mean squared canonical correlation
+\citep{huberty_applied_2006}:
+\[\xi^2 = \frac{U}{r},\] where \(r\) is the number of variates (2, in our case).
+Therefore, \(\xi^2 = `r summary(manovaModel, test = 'Pillai') %>% pluck('stats') %>%
+.[1,2] %>% {. / 2} -> xsi; xsi`\). Finally, we will calculate Tatsuoka's
+\citep[1970; according to][]{huberty_applied_2006} extension of the \(\omega^2\)
+to the multivariate case. In this case, \(\omega^2_{mult} = `r 1 - (122 * .875) /
+(119 + .875)`\). The adjusted value of the \(\xi^2\) statistic is
+\(\xi^2_{adj} = `r 1 - 121/119 * (1 - xsi)`\)
+
+Now, let's take a closer look at the nature of our effect, using linear discriminant
+analysis.
+
 ### Linear discriminant analysis
 
 ```{r ldaCandisc}
@@ -328,8 +347,49 @@ correlation between those two variables.
   scale_color_viridis_d()
 ```
 
-\bibliographystyle{apacite}
+To assess the ability of the LDA model to discriminate group membership based on
+the number of correct answers to the questions and the number of chosen instrusive
+distractors, we'll re-train the model and evaluate it's error rate using the
+leave-one-out cross-validation technique.
+
+```{r ldaCVTotal}
+ldaCVTotal <- lda(activityFactor ~ totalCorrect + totalIntrusors,
+                  data = datHardNofeed, CV = T)
+confTotal <- caret::confusionMatrix(ldaCVTotal$class,
+                                   datHardNofeed$activityFactor %>% as.factor)
+confTotal
+```
+
+As can be seen from the table, the total LOOCV accuracy is
+`r confTotal$overall['Accuracy']`, which is significantly above the
+no information rate (which is taken to be the largest class percentage
+in the data). According to the Landis & Koch
+\citep[1977; as reported in][]{salkind_encyclopedia_2007} guidlines, this
+represents only a slight agreement between the predicted and actual classes.
+Next, we'll drill into the individual predictors to see which are useful for 
+discriminating between different groups.
+
+### Evaluating individual predictors
+\citet{tabachnick_using_2012} describe the process of sequential discriminant
+analysis, where predictors are entered one-by-one, and the improvement in
+classification accuracy is monitored. Therefore, we'll fit an LDA model
+containing only the number of correct answers as a predictor. Then, we will
+compare this model's LOOCV accuracy to that of the full model (reported at the
+end of the previous section).
+
+```{r}
+ldaCVcorrect <- lda(activityFactor ~ totalCorrect,
+                    data = datHardNofeed, CV = T)
+confCorrect <- caret::confusionMatrix(ldaCVcorrect$class,
+                                      as.factor(datHardNofeed$activityFactor))
+confCorrect
+```
+
+As can be seen from the second confusion matrix, the accuracy of this model
+is actually somewhat higher than in the full model, as is Cohen's \textkappa.
+
 {
     \setstretch{1}
+    \bibliographystyle{apacite}
     \bibliography{refs}
 }

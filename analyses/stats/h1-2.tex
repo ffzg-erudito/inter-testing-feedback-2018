@@ -146,6 +146,7 @@
 \usepackage{array}
 \usepackage[htt]{hyphenat}
 \usepackage{booktabs}
+\usepackage[euler]{textgreek}
 \usepackage{float}
 \usepackage[onehalfspacing]{setspace}
 \captionsetup[table]{width=\textwidth}
@@ -235,8 +236,6 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# for LDA}
-\KeywordTok{library}\NormalTok{(MASS)}
 \CommentTok{# for Henze-Zirkler}
 \KeywordTok{library}\NormalTok{(MVN)}
 \end{Highlighting}
@@ -291,6 +290,23 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# multivariate outliers}
+\KeywordTok{library}\NormalTok{(mvoutlier)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: sgeostat
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# for LDA}
+\KeywordTok{library}\NormalTok{(candisc)}
+\KeywordTok{library}\NormalTok{(MASS)}
+\CommentTok{# for labels in ggplots}
+\KeywordTok{library}\NormalTok{(ggrepel)}
+
 \KeywordTok{conflict_prefer}\NormalTok{(}\StringTok{'select'}\NormalTok{, }\StringTok{'dplyr'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -405,6 +421,26 @@ And the descriptives by group:
 ## 3 -0.25332 0.44316
 \end{verbatim}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{by}\NormalTok{(datHardNofeed}\OperatorTok{$}\NormalTok{totalIntrusors, }\DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor,}
+\NormalTok{   psych}\OperatorTok{::}\NormalTok{describe) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{reduce}\NormalTok{(., rbind) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(., }\DataTypeTok{condition =} \KeywordTok{c}\NormalTok{(}\StringTok{"content"}\NormalTok{, }\StringTok{"general"}\NormalTok{, }\StringTok{"rereading"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(., condition, }\KeywordTok{everything}\NormalTok{(), }\OperatorTok{-}\NormalTok{vars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   condition  n  mean     sd median trimmed    mad min max range    skew
+## 1   content 42 3.381 1.6668      3  3.3529 1.4826   0   7     7 0.20311
+## 2   general 40 4.575 1.8242      4  4.5312 1.4826   1   9     8 0.32757
+## 3 rereading 40 4.625 2.2152      5  4.5312 2.2239   1  10     9 0.27232
+##   kurtosis      se
+## 1 -0.38484 0.25719
+## 2 -0.48422 0.28843
+## 3 -0.53693 0.35025
+\end{verbatim}
+
 Now, we'll plot the DV distributions, both on the whole subset, and per
 group.
 
@@ -445,7 +481,8 @@ Next, here are the boxplots for the three groups, and for both DVs.
 \StringTok{  }\KeywordTok{gather}\NormalTok{(., totalCorrect, totalIntrusors, }\DataTypeTok{key =} \StringTok{'dependentVar'}\NormalTok{,}
          \DataTypeTok{value =} \StringTok{'score'}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ activityFactor, }\DataTypeTok{y =}\NormalTok{ score, }\DataTypeTok{fill =}\NormalTok{ activityFactor)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_dotplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ score), }\DataTypeTok{binaxis =} \StringTok{'y'}\NormalTok{,}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{alpha =} \FloatTok{.5}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_dotplot}\NormalTok{(}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ score),}
+                                          \DataTypeTok{binaxis =} \StringTok{'y'}\NormalTok{,}
                                 \DataTypeTok{stackdir =} \StringTok{'centerwhole'}\NormalTok{, }\DataTypeTok{dotsize =} \FloatTok{.5}\NormalTok{,}
                                 \DataTypeTok{fill =} \StringTok{'black'}\NormalTok{, }\DataTypeTok{color =} \StringTok{'black'}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{facet_grid}\NormalTok{(dependentVar}\OperatorTok{~}\NormalTok{.) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_fill_viridis}\NormalTok{(}\DataTypeTok{discrete =}\NormalTok{ T)}
@@ -558,7 +595,7 @@ whole sample and for each group.
 \StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ totalCorrect, }\DataTypeTok{y =}\NormalTok{ totalIntrusors)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ activityFactor, }\DataTypeTok{color =}\NormalTok{ activityFactor)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{'lm'}\NormalTok{, }\DataTypeTok{color =} \StringTok{'black'}\NormalTok{, }\DataTypeTok{level =} \FloatTok{.99}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_fill_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'C'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'C'}\NormalTok{)}
+\StringTok{  }\KeywordTok{scale_fill_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -576,7 +613,7 @@ separately.
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{fill =}\NormalTok{ activityFactor, }\DataTypeTok{color =}\NormalTok{ activityFactor)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{'lm'}\NormalTok{, }\DataTypeTok{level =} \FloatTok{.99}\NormalTok{, }\DataTypeTok{color =} \StringTok{'black'}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{facet_grid}\NormalTok{(activityFactor }\OperatorTok{~}\StringTok{ }\NormalTok{.) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_fill_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'C'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'C'}\NormalTok{)}
+\StringTok{  }\KeywordTok{scale_fill_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{scale_color_viridis_d}\NormalTok{(}\DataTypeTok{option =} \StringTok{'D'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -588,30 +625,68 @@ Henze-Zirkler test.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(., }\OperatorTok{-}\NormalTok{activityFactor) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mvn}\NormalTok{(., }\DataTypeTok{multivariatePlot =} \StringTok{'qq'}\NormalTok{, }\DataTypeTok{mvnTest =} \StringTok{'hz'}\NormalTok{, }\DataTypeTok{desc =}\NormalTok{ T)}
+\KeywordTok{by}\NormalTok{(datHardNofeed }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{activityFactor),}
+   \DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor,}
+   \DataTypeTok{FUN =}\NormalTok{ mvn, }\DataTypeTok{mvnTest =} \StringTok{'hz'}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{h1-2_files/figure-latex/hzTest-1.pdf}
-
 \begin{verbatim}
+## datHardNofeed$activityFactor: content
 ## $multivariateNormality
 ##            Test      HZ p value MVN
-## 1 Henze-Zirkler 0.52318 0.58715 YES
+## 1 Henze-Zirkler 0.23726 0.95885 YES
 ## 
 ## $univariateNormality
 ##           Test       Variable Statistic   p value Normality
-## 1 Shapiro-Wilk  totalCorrect     0.9870    0.2972    YES   
-## 2 Shapiro-Wilk totalIntrusors    0.9663    0.0038    NO    
+## 1 Shapiro-Wilk  totalCorrect     0.9751    0.4830    YES   
+## 2 Shapiro-Wilk totalIntrusors    0.9465    0.0483    NO    
 ## 
 ## $Descriptives
-##                  n    Mean Std.Dev Median Min Max 25th 75th     Skew
-## totalCorrect   122 11.4016  3.0415     11   4  19    9   14 0.040322
-## totalIntrusors 122  4.1803  1.9835      4   0  10    3    5 0.375797
+##                 n   Mean Std.Dev Median Min Max  25th 75th     Skew
+## totalCorrect   42 12.786  3.0165     12   7  19 10.25   15 0.039247
+## totalIntrusors 42  3.381  1.6668      3   0   7  2.00    5 0.203106
 ##                Kurtosis
-## totalCorrect   -0.41051
-## totalIntrusors -0.16727
+## totalCorrect   -0.77457
+## totalIntrusors -0.38484
+## 
+## -------------------------------------------------------- 
+## datHardNofeed$activityFactor: general
+## $multivariateNormality
+##            Test      HZ p value MVN
+## 1 Henze-Zirkler 0.59687 0.23328 YES
+## 
+## $univariateNormality
+##           Test       Variable Statistic   p value Normality
+## 1 Shapiro-Wilk  totalCorrect     0.9646    0.2398    YES   
+## 2 Shapiro-Wilk totalIntrusors    0.9559    0.1211    YES   
+## 
+## $Descriptives
+##                 n   Mean Std.Dev Median Min Max 25th  75th      Skew
+## totalCorrect   40 10.475  2.8374     10   5  16    8 13.00 -0.053301
+## totalIntrusors 40  4.575  1.8242      4   1   9    3  5.25  0.327568
+##                Kurtosis
+## totalCorrect   -0.98633
+## totalIntrusors -0.48422
+## 
+## -------------------------------------------------------- 
+## datHardNofeed$activityFactor: rereading
+## $multivariateNormality
+##            Test     HZ p value MVN
+## 1 Henze-Zirkler 0.2667 0.91818 YES
+## 
+## $univariateNormality
+##           Test       Variable Statistic   p value Normality
+## 1 Shapiro-Wilk  totalCorrect     0.9858    0.8872    YES   
+## 2 Shapiro-Wilk totalIntrusors    0.9665    0.2770    YES   
+## 
+## $Descriptives
+##                 n   Mean Std.Dev Median Min Max 25th 75th     Skew
+## totalCorrect   40 10.875  2.8028     11   4  17    9   13 -0.14083
+## totalIntrusors 40  4.625  2.2152      5   1  10    3    6  0.27232
+##                Kurtosis
+## totalCorrect   -0.25332
+## totalIntrusors -0.53693
 \end{verbatim}
 
 The result of Henze-Zirkler's multivariate normality test shows that a
@@ -622,45 +697,12 @@ which is also indicative of a normal distribution.
 
 However, the Shapiro-Wilk test for univariate normality indicates a
 departure in the distribution of the total number of intrusive
-distractors chosen. It is interesting to notice that the value of the
-\emph{W} statistic is close to the maximum of 1, which indicates a close
-fit to the normal distribution \citep{salkind_encyclopedia_2007}.
-Furthermore, when the test is performed for each group separately, the
-departures are declared to be non-significant in two of three cases, the
-third case being marginally significant. Therefore, we will assume that
-the data in each group is normally distributed.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{by}\NormalTok{(datHardNofeed}\OperatorTok{$}\NormalTok{totalIntrusors, }\DataTypeTok{INDICES =}\NormalTok{ datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor,}
-   \DataTypeTok{FUN =}\NormalTok{ shapiro.test)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## datHardNofeed$activityFactor: content
-## 
-##  Shapiro-Wilk normality test
-## 
-## data:  dd[x, ]
-## W = 0.946, p-value = 0.048
-## 
-## -------------------------------------------------------- 
-## datHardNofeed$activityFactor: general
-## 
-##  Shapiro-Wilk normality test
-## 
-## data:  dd[x, ]
-## W = 0.956, p-value = 0.12
-## 
-## -------------------------------------------------------- 
-## datHardNofeed$activityFactor: rereading
-## 
-##  Shapiro-Wilk normality test
-## 
-## data:  dd[x, ]
-## W = 0.966, p-value = 0.28
-\end{verbatim}
+distractors chosen in one group. It is interesting to notice that the
+value of the \emph{W} statistic is close to the maximum of 1, which
+indicates a close fit to the normal distribution
+\citep{salkind_encyclopedia_2007}. Also, the test is only marginally
+significant at the conventional .05 level. Therefore, we will assume
+that the data in each group is normally distributed.
 
 Now, we'll take a look at the homogeneity of covariance matrices
 assumption. First, let's take a look at the matrices themselves.
@@ -720,17 +762,361 @@ On the other hand, \citet{field_discovering_2012} warn that the test can
 return a non-significant p-value when the assumption of multivariate
 normality is not tenable. However, given the results of the
 Henze-Zirkler multivariate normality test, we suspect that this is not
-the case. Since all assumptions seem to hold, we'll proceed with the
+the case. Since all assumptions seem to hold, we can proceed with the
 planned MANOVA.
+
+\hypertarget{note}{%
+\subsubsection{Note}\label{note}}
+
+A decision was made not to check the univariate and multivariate
+outliers at this point. Regarding the univariate outliers - the boxplots
+point to only one case which could be an outlier. The scatterplots show
+no point that's obviously different from the rest. As for the
+multivariate outliers, \citet{tabachnick_using_2012} warn that the
+Mahalanobis distance can produce false negatives or false positives.
+Furthermore, deleting a set of outliers and rerunning the analysis can
+reveal yet another set of outliers --- without a clear-cut and absolute
+criterion, exclusions are somewhat arbitrary. Finally, cases were
+excluded based on criteria that are more or less substantivelly
+meaningful in the context of the conducted study. Given the above, no
+statistical criteria is used for exclusion at this point.
 
 \hypertarget{manova}{%
 \subsection{MANOVA}\label{manova}}
 
+Now that it seems that all the assumptions of a MANOVA are satisfied,
+let's run the analysis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{manovaModel <-}\StringTok{ }\KeywordTok{manova}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ datHardNofeed,}
+                      \KeywordTok{cbind}\NormalTok{(totalCorrect, totalIntrusors) }\OperatorTok{~}
+\StringTok{                        }\KeywordTok{as.factor}\NormalTok{(activityFactor))}
+\KeywordTok{summary}\NormalTok{(manovaModel)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            Df Pillai approx F num Df den Df Pr(>F)   
+## as.factor(activityFactor)   2  0.126     3.99      4    238 0.0038 **
+## Residuals                 119                                        
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(manovaModel, }\DataTypeTok{test =} \StringTok{'Wilks'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            Df Wilks approx F num Df den Df Pr(>F)   
+## as.factor(activityFactor)   2 0.875     4.07      4    236 0.0033 **
+## Residuals                 119                                       
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(manovaModel, }\DataTypeTok{test =} \StringTok{'Hotelling'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            Df Hotelling-Lawley approx F num Df den Df
+## as.factor(activityFactor)   2            0.142     4.16      4    234
+## Residuals                 119                                        
+##                           Pr(>F)   
+## as.factor(activityFactor) 0.0028 **
+## Residuals                          
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(manovaModel, }\DataTypeTok{test =} \StringTok{'Roy'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                            Df   Roy approx F num Df den Df  Pr(>F)    
+## as.factor(activityFactor)   2 0.137     8.13      2    119 0.00049 ***
+## Residuals                 119                                         
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+As can be seen from the resulting output, Pillai's V indicates that the
+three groups differ significantly along the linear combination of the
+two DVs. The other three reported statistics point to the same
+conclusion. Therefore, we'll proceed with conducting a linear
+discriminant analyis.
+
+We can look at \(1 - \Lambda\) as an extension to the univariate
+\(\eta^2\) \citep{huberty_applied_2006}. In our case, the multivariate
+\(\eta^2\) is 0.125, which represents the proportion of total variance
+associated with the activity type IV. Further, we can calculate the
+effect size index \(\xi^2\), which is based on Pillai's test statistic,
+and represents the mean squared canonical correlation
+\citep{huberty_applied_2006}: \[\xi^2 = \frac{U}{r},\] where \(r\) is
+the number of variates (2, in our case). Therefore, \(\xi^2 = 0.06283\).
+Finally, we will calculate Tatsuoka's
+\citep[1970; according to][]{huberty_applied_2006} extension of the
+\(\omega^2\) to the multivariate case. In this case,
+\(\omega^2_{mult} = 0.10949\). The adjusted value of the \(\xi^2\)
+statistic is \(\xi^2_{adj} = 0.04708\)
+
+Now, let's take a closer look at the nature of our effect, using linear
+discriminant analysis.
+
+\hypertarget{linear-discriminant-analysis}{%
+\subsubsection{Linear discriminant
+analysis}\label{linear-discriminant-analysis}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{. <-}\StringTok{ }\KeywordTok{candisc}\NormalTok{(manovaModel, }\DataTypeTok{type =} \StringTok{'2'}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(.)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Canonical Discriminant Analysis for as.factor(activityFactor):
+## 
+##     CanRsq Eigenvalue Difference Percent Cumulative
+## 1 0.120185   0.136602     0.1311   96.13      96.13
+## 2 0.005469   0.005499     0.1311    3.87     100.00
+## 
+## Class means:
+## 
+##              Can1     Can2
+## content    0.5011 -0.01039
+## general   -0.3094 -0.08451
+## rereading -0.2168  0.09541
+## 
+##  std coefficients:
+##                   Can1  Can2
+## totalCorrect    0.7362 1.065
+## totalIntrusors -0.3551 1.245
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cat}\NormalTok{(}\StringTok{'}\CharTok{\textbackslash{}n}\StringTok{======== print ========}\CharTok{\textbackslash{}n}\StringTok{'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## ======== print ========
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Canonical Discriminant Analysis for as.factor(activityFactor):
+## 
+##    CanRsq Eigenvalue Difference Percent Cumulative
+## 1 0.12018     0.1366      0.131   96.13       96.1
+## 2 0.00547     0.0055      0.131    3.87      100.0
+## 
+## Test of H0: The canonical correlations in the 
+## current row and all that follow are zero
+## 
+##   LR test stat approx F numDF denDF Pr(> F)   
+## 1        0.875     4.07     4   236  0.0033 **
+## 2        0.995     0.65     1   119  0.4202   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+From the above output we can see that the first variate explains most of
+the variance. Furthermore, Wilks' lambda values inform us that the
+groups are separated only on the first variate, so that's the only one
+we'll interpret. Also, we can see that the variation in the grouping
+variable is almost exclusively explained by the first variate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{.}\OperatorTok{$}\NormalTok{coeffs.raw }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(.)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    Can1    Can2
+## totalCorrect    0.25479 0.36845
+## totalIntrusors -0.18574 0.65094
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{.}\OperatorTok{$}\NormalTok{structure }\OperatorTok{%>%}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(.)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    Can1    Can2
+## totalCorrect    0.96582 0.25920
+## totalIntrusors -0.83829 0.54523
+\end{verbatim}
+
+Looking at the structure scores, we can see that both the total number
+of correct answers and the total number of intrusive distractors chosen
+share a lot of variance with the first variate. The first variate is
+almost completely defined by the total number of correct answers, but
+the contribution of the number of chosen intrusors in also considerable.
+This could be due to the relatively high correlation between those two
+variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{.}\OperatorTok{$}\NormalTok{scores }\OperatorTok{%>%}\StringTok{ }\KeywordTok{cbind}\NormalTok{(datHardNofeed, .) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Can1, }\DataTypeTok{y =}\NormalTok{ Can2, }\DataTypeTok{color =}\NormalTok{ activityFactor)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xintercept =} \DecValTok{0}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ . }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(activityFactor) }\OperatorTok{%>%}
+\StringTok{               }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{ld1 =} \KeywordTok{mean}\NormalTok{(Can1), }\DataTypeTok{ld2 =} \KeywordTok{mean}\NormalTok{(Can2)),}
+             \DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ld1, }\DataTypeTok{y =}\NormalTok{ ld2),}
+             \DataTypeTok{color =} \StringTok{'black'}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{, }\DataTypeTok{shape =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.grid =} \KeywordTok{element_blank}\NormalTok{()) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_text_repel}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ . }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(activityFactor) }\OperatorTok{%>%}
+\StringTok{               }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{ld1 =} \KeywordTok{mean}\NormalTok{(Can1), }\DataTypeTok{ld2 =} \KeywordTok{mean}\NormalTok{(Can2)),}
+            \DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ ld1, }\DataTypeTok{y =}\NormalTok{ ld2, }\DataTypeTok{label =}\NormalTok{ activityFactor),}
+            \DataTypeTok{fontface =} \StringTok{'bold'}\NormalTok{,}
+            \DataTypeTok{inherit.aes =}\NormalTok{ F) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_viridis_d}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{h1-2_files/figure-latex/ldaPlot-1.pdf}
+
+To assess the ability of the LDA model to discriminate group membership
+based on the number of correct answers to the questions and the number
+of chosen instrusive distractors, we'll re-train the model and evaluate
+it's error rate using the leave-one-out cross-validation technique.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ldaCVTotal <-}\StringTok{ }\KeywordTok{lda}\NormalTok{(activityFactor }\OperatorTok{~}\StringTok{ }\NormalTok{totalCorrect }\OperatorTok{+}\StringTok{ }\NormalTok{totalIntrusors,}
+                  \DataTypeTok{data =}\NormalTok{ datHardNofeed, }\DataTypeTok{CV =}\NormalTok{ T)}
+\NormalTok{confTotal <-}\StringTok{ }\NormalTok{caret}\OperatorTok{::}\KeywordTok{confusionMatrix}\NormalTok{(ldaCVTotal}\OperatorTok{$}\NormalTok{class,}
+\NormalTok{                                   datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor }\OperatorTok{%>%}\StringTok{ }\NormalTok{as.factor)}
+\NormalTok{confTotal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##            Reference
+## Prediction  content general rereading
+##   content        27      16        17
+##   general        11      19        13
+##   rereading       4       5        10
+## 
+## Overall Statistics
+##                                         
+##                Accuracy : 0.459         
+##                  95% CI : (0.368, 0.552)
+##     No Information Rate : 0.344         
+##     P-Value [Acc > NIR] : 0.00572       
+##                                         
+##                   Kappa : 0.185         
+##  Mcnemar's Test P-Value : 0.00577       
+## 
+## Statistics by Class:
+## 
+##                      Class: content Class: general Class: rereading
+## Sensitivity                   0.643          0.475            0.250
+## Specificity                   0.588          0.707            0.890
+## Pos Pred Value                0.450          0.442            0.526
+## Neg Pred Value                0.758          0.734            0.709
+## Prevalence                    0.344          0.328            0.328
+## Detection Rate                0.221          0.156            0.082
+## Detection Prevalence          0.492          0.352            0.156
+## Balanced Accuracy             0.615          0.591            0.570
+\end{verbatim}
+
+As can be seen from the table, the total LOOCV accuracy is 0.45902,
+which is significantly above the no information rate (which is taken to
+be the largest class percentage in the data). According to the Landis \&
+Koch \citep[1977; as reported in][]{salkind_encyclopedia_2007}
+guidlines, this represents only a slight agreement between the predicted
+and actual classes. Next, we'll drill into the individual predictors to
+see which are useful for discriminating between different groups.
+
+\hypertarget{evaluating-individual-predictors}{%
+\subsubsection{Evaluating individual
+predictors}\label{evaluating-individual-predictors}}
+
+\citet{tabachnick_using_2012} describe the process of sequential
+discriminant analysis, where predictors are entered one-by-one, and the
+improvement in classification accuracy is monitored. Therefore, we'll
+fit an LDA model containing only the number of correct answers as a
+predictor. Then, we will compare this model's LOOCV accuracy to that of
+the full model (reported at the end of the previous section).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ldaCVcorrect <-}\StringTok{ }\KeywordTok{lda}\NormalTok{(activityFactor }\OperatorTok{~}\StringTok{ }\NormalTok{totalCorrect,}
+                    \DataTypeTok{data =}\NormalTok{ datHardNofeed, }\DataTypeTok{CV =}\NormalTok{ T)}
+\NormalTok{confCorrect <-}\StringTok{ }\NormalTok{caret}\OperatorTok{::}\KeywordTok{confusionMatrix}\NormalTok{(ldaCVcorrect}\OperatorTok{$}\NormalTok{class,}
+                                      \KeywordTok{as.factor}\NormalTok{(datHardNofeed}\OperatorTok{$}\NormalTok{activityFactor))}
+\NormalTok{confCorrect}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##            Reference
+## Prediction  content general rereading
+##   content        29      15        16
+##   general        11      22        18
+##   rereading       2       3         6
+## 
+## Overall Statistics
+##                                        
+##                Accuracy : 0.467        
+##                  95% CI : (0.376, 0.56)
+##     No Information Rate : 0.344        
+##     P-Value [Acc > NIR] : 0.00334      
+##                                        
+##                   Kappa : 0.198        
+##  Mcnemar's Test P-Value : 5.87e-05     
+## 
+## Statistics by Class:
+## 
+##                      Class: content Class: general Class: rereading
+## Sensitivity                   0.690          0.550           0.1500
+## Specificity                   0.613          0.646           0.9390
+## Pos Pred Value                0.483          0.431           0.5455
+## Neg Pred Value                0.790          0.746           0.6937
+## Prevalence                    0.344          0.328           0.3279
+## Detection Rate                0.238          0.180           0.0492
+## Detection Prevalence          0.492          0.418           0.0902
+## Balanced Accuracy             0.651          0.598           0.5445
+\end{verbatim}
+
+As can be seen from the second confusion matrix, the accuracy of this
+model is actually somewhat higher than in the full model, as is Cohen's
+\textKappa.
+
 \bibliographystyle{apacite}
-{
-    \setstretch{1}
-    \bibliography{refs}
-}
+
+\{ \setstretch{1}
+
+\bibliography{refs}
+
+\}
 
 
 \end{document}
