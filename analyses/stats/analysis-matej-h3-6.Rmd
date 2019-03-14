@@ -1,0 +1,129 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+First we will import requisite libraries
+
+```{R}
+library(here)
+# NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
+# `conflict_prefer`s filter from {dplyr}
+# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run
+# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard
+# exclusion criteria applied (as described in `analysis-plan.md`), and (3)
+# `datSoft` which is `datHard` with the soft exclusion criteria applied (as
+# described in `analysis-plan.md`)
+source(here('wrangling', '3-exclusion-criteria.R'))
+
+# import MVN library for outlier detection and testing normality assumptions, and other libs
+library(rmarkdown)
+library(MVN)
+library(haven)
+library(psych)
+library(TOSTER)
+library(heplots)
+```
+
+
+Now we will extract the data for the relevant groups from the dataset created after applying hard exclusion criteria.
+These groups are the rereading group and the other two groups not receiving feedback (content_noFeedback, general_noFeedback).
+
+```{R}
+dat_h36 <- datHard[datHard$activityFactor != "rereading",]
+```
+
+
+Let's observe the relevant descriptive statistics
+
+```{r}
+dat_h36 %>% select(activityFactor, giveFeedback, totalCorrect, totalIntrusors) %>% describeBy(list(dat_h36$giveFeedback, dat_h36$activityFactor), skew = TRUE, ranges = TRUE)
+```
+
+
+And an alternative approach:
+
+```{r}
+dat_h36 %>% select(activityFactor, giveFeedback, totalCorrect, totalIntrusors) %>% split(list(.$giveFeedback, .$activityFactor)) %>% map(summary)
+```
+
+Let's test for univariate and multivariate normality, inspect univariate and multivariate plots, and look at within-group correlations
+
+```{r}
+dat_h36 %<>% select(activityFactor, giveFeedback, totalCorrect, totalIntrusors)
+```
+
+```{r}
+# select general_noFeedback group
+this_group <- dat_h36[dat_h36$activityFactor == "general" & dat_h36$giveFeedback == 0,]
+
+mvn(this_group[,3:4], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+  univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
+  multivariateOutlierMethod = "quan")
+
+corr.test(this_group[,3:4])
+```
+
+```{r}
+# select general_Feedback group
+this_group <- dat_h36[dat_h36$activityFactor == "general" & dat_h36$giveFeedback == 1,] 
+
+mvn(this_group[,3:4], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+  univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
+  multivariateOutlierMethod = "quan")
+
+corr.test(this_group[,3:4])
+```
+
+```{r}
+# select content_noFeedback group
+this_group <- dat_h36[dat_h36$activityFactor == "content" & dat_h36$giveFeedback == 0,] 
+
+mvn(this_group[,3:4], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+  univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
+  multivariateOutlierMethod = "quan")
+
+corr.test(this_group[,3:4])
+```
+
+```{r}
+# select content_feedback group
+this_group <- dat_h36[dat_h36$activityFactor == "content" & dat_h36$giveFeedback == 1,] 
+
+mvn(this_group[,3:4], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+  univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
+  multivariateOutlierMethod = "quan")
+
+corr.test(this_group[,3:4])
+```
+
+Now let's conduct a MANOVA.
+
+```{r MANOVA_H3}
+res.man <- manova(cbind(totalCorrect, totalIntrusors) ~ activityFactor*giveFeedback, data = dat_h36)
+summary(res.man)
+```
+
+Now let's conduct Roy-Bargmann stepdown analysis.
+
+```{r Roy-Bargmann_H3}
+# first we create a linear model with just one dependent variable
+model1 <- lm(totalCorrect ~ activityFactor*giveFeedback, data = dat_h36)
+anova(model1)
+
+# and another one with the above DV used as a covariate
+model2 <- lm(totalIntrusors ~ totalCorrect*activityFactor*giveFeedback, data = dat_h36)
+anova(model2)
+
+```
+
+
+```{r Roy-Bargmann_H3}
+# first we create a linear model with just one dependent variable
+model1 <- lm(totalCorrect ~ activityFactor*giveFeedback, data = dat_h36)
+anova(model1)
+
+# and another one with the above DV used as a covariate
+model2 <- lm(totalIntrusors ~ totalCorrect*activityFactor*giveFeedback, data = dat_h36)
+anova(model2)
+```

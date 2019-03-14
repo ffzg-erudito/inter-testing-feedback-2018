@@ -60,36 +60,36 @@ dat_h1_h2 %<>% select(activityFactor, totalCorrect, totalIntrusors)
 ```
 
 ```{r}
-# select content group
+# select rereading group
 this_group <- dat_h1_h2[dat_h1_h2$activityFactor == "rereading",] 
 
-mvn(this_group[2-3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+mvn(this_group[,2:3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
   univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
   multivariateOutlierMethod = "quan")
 
-corr.test(this_group[2-3])
+corr.test(this_group[,2:3])
 ```
 
 ```{r}
 # select general group
 this_group <- dat_h1_h2[dat_h1_h2$activityFactor == "general",] 
 
-mvn(this_group[2-3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+mvn(this_group[,2:3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
   univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
   multivariateOutlierMethod = "quan")
 
-corr.test(this_group[2-3])
+corr.test(this_group[,2:3])
 ```
 
 ```{r}
-# select rereading group
+# select content group
 this_group <- dat_h1_h2[dat_h1_h2$activityFactor == "content",] 
 
-mvn(this_group[2-3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
+mvn(this_group[,2:3], mvnTest = "hz", covariance = TRUE, tol = 1e-25, alpha = 0.5, desc = TRUE, transform = "none",
   univariateTest = c("SW"), univariatePlot = "histogram", multivariatePlot = "qq",
   multivariateOutlierMethod = "quan")
 
-corr.test(this_group[2-3])
+corr.test(this_group[,2:3])
 ```
 
 Now let's conduct a MANOVA.
@@ -120,28 +120,3 @@ unique(dat_h1_h2$activityFactor)
 TOSTtwo(m1 = 10.47, m2 = 12.79, sd1 = 2.84, sd2 = 3.02, n1 = 40, n2 = 42, low_eqbound_d = -0.25, high_eqbound_d = 0.25)
 ```
 
-
-
-```{r create dataframe for H3-H6}
-dat_h3_h6 <- datHard[datHard$condition != "rereading", ]
-```
-
-```{r}
-dat_h3_h6 %>% select(giveFeedback, activityFactor, totalCorrect, totalIntrusors) %>% describeBy(list(dat_h3_h6$activityFactor, dat_h3_h6$giveFeedback), skew = TRUE, ranges = TRUE)
-```
-
-
-```{r MANOVA for H3}
-res.man <- manova(cbind(totalCorrect, totalIntrusors) ~ activityFactor*giveFeedback, data = dat_h3_h6)
-summary(res.man)
-```
-
-```{r Roy-Bargmann_H3}
-# first we create a linear model with just one dependent variable
-model1 <- lm(totalCorrect ~ activityFactor*giveFeedback, data = dat_h3_h6)
-anova(model1)
-
-# and another one with the above DV used as a covariate
-model2 <- lm(totalIntrusors ~ activityFactor*giveFeedback + totalCorrect*activityFactor*giveFeedback, data = dat_h3_h6)
-anova(model2)
-```
