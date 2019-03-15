@@ -1,0 +1,151 @@
+\documentclass[12pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1.3cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{}
+    \pretitle{\vspace{\droptitle}}
+  \posttitle{}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\usepackage[natbibapa, sectionbib, tocbib]{apacite}
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+\usepackage{bookman}
+\usepackage{multirow}
+\usepackage[inline]{enumitem}
+\usepackage{array}
+\usepackage[htt]{hyphenat}
+\usepackage{booktabs}
+\usepackage[euler]{textgreek}
+\usepackage{float}
+\usepackage[onehalfspacing]{setspace}
+\captionsetup[table]{width=\textwidth}
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
+
+\begin{document}
+
+\hypertarget{participants-and-design}{%
+\subsection{Participants and design}\label{participants-and-design}}
+
+Undergraduate and graduate phontecis and psychology students (80.8\%
+female, median age = 21, IQR = 3, range = {[}18, 31{]}) from the
+University of Zagreb participated in the study in exchange for course
+credit. Participants were randomly assigned to one of five groups which
+differed in type of activity between parts of the text and in whether
+they are to receive feedback on their intermittent test achievement or
+not (\(n_{reread}\) = 40, \(n_{content, feed}\) = 41,
+\(n_{content, nofeed}\) = 42, \(n_{general, feed}\) = 40,
+\(n_{general, nofeed}\) = 40).
+
+\hypertarget{materials-and-procedure}{%
+\subsection{Materials and procedure}\label{materials-and-procedure}}
+
+Participants read a text on the evolution, ecological and biological
+characteristics of weeds. The text was taken from a chapter in a
+Croatian university-level textbook. Some sentences and passages were
+slightly modified, so as to avoid odd language constructions; Latin
+plant names were translated to Croatian, and some plants were removed
+from the text to make it less difficult for the target participant
+population. The text was divided into three parts of 874, 754, and 835
+words, respectively. Additionaly, there was a practice text taken from
+the same chapter, but unrelated to any of the other three parts of the
+text (768 words).
+
+Forty-four content related questions, with four response options, were
+generated from the presented texts. Four questions were presented after
+the practice text, ten after each of the first two parts, and twenty
+after the third part of the text. Starting from the second ten question
+set, the distractor options were chosen so that
+
+\begin{enumerate*}[label = (\roman*)] \item aaa \item bbb \end{enumerate*}
+
+
+\end{document}
