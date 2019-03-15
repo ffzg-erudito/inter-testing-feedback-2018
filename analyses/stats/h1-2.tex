@@ -585,36 +585,29 @@ Now that it seems that all the assumptions of a MANOVA are satisfied,
 let's run the analysis.
 
 \begin{verbatim}
-##                            Df Pillai approx F num Df den Df Pr(>F)   
-## as.factor(activityFactor)   2  0.126     3.99      4    238 0.0038 **
-## Residuals                 119                                        
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
-\begin{verbatim}
-##                            Df Wilks approx F num Df den Df Pr(>F)   
-## as.factor(activityFactor)   2 0.875     4.07      4    236 0.0033 **
-## Residuals                 119                                       
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
-\begin{verbatim}
-##                            Df Hotelling-Lawley approx F num Df den Df
-## as.factor(activityFactor)   2            0.142     4.16      4    234
-## Residuals                 119                                        
-##                           Pr(>F)   
-## as.factor(activityFactor) 0.0028 **
-## Residuals                          
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-\end{verbatim}
-
-\begin{verbatim}
-##                            Df   Roy approx F num Df den Df  Pr(>F)    
-## as.factor(activityFactor)   2 0.137     8.13      2    119 0.00049 ***
-## Residuals                 119                                         
+## 
+## Type II MANOVA Tests:
+## 
+## Sum of squares and products for error:
+##                totalCorrect totalIntrusors
+## totalCorrect         993.42        -417.37
+## totalIntrusors      -417.37         435.05
+## 
+## ------------------------------------------
+##  
+## Term: as.factor(activityFactor) 
+## 
+## Sum of squares and products for the hypothesis:
+##                totalCorrect totalIntrusors
+## totalCorrect        125.898        -70.465
+## totalIntrusors      -70.465         40.978
+## 
+## Multivariate Tests: as.factor(activityFactor)
+##                  Df test stat approx F num Df den Df    Pr(>F)    
+## Pillai            2   0.12565   3.9888      4    238 0.0037564 ** 
+## Wilks             2   0.87500   4.0735      4    236 0.0032669 ** 
+## Hotelling-Lawley  2   0.14210   4.1565      4    234 0.0028498 ** 
+## Roy               2   0.13660   8.1278      2    119 0.0004912 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
@@ -749,6 +742,9 @@ it's error rate using the leave-one-out cross-validation technique.
 ## Specificity                   0.588          0.707            0.890
 ## Pos Pred Value                0.450          0.442            0.526
 ## Neg Pred Value                0.758          0.734            0.709
+## Precision                     0.450          0.442            0.526
+## Recall                        0.643          0.475            0.250
+## F1                            0.529          0.458            0.339
 ## Prevalence                    0.344          0.328            0.328
 ## Detection Rate                0.221          0.156            0.082
 ## Detection Prevalence          0.492          0.352            0.156
@@ -800,6 +796,9 @@ the full model (reported at the end of the previous section).
 ## Specificity                   0.613          0.646           0.9390
 ## Pos Pred Value                0.483          0.431           0.5455
 ## Neg Pred Value                0.790          0.746           0.6937
+## Precision                     0.483          0.431           0.5455
+## Recall                        0.690          0.550           0.1500
+## F1                            0.569          0.484           0.2353
 ## Prevalence                    0.344          0.328           0.3279
 ## Detection Rate                0.238          0.180           0.0492
 ## Detection Prevalence          0.492          0.418           0.0902
@@ -808,14 +807,204 @@ the full model (reported at the end of the previous section).
 
 As can be seen from the second confusion matrix, the accuracy of this
 model is actually somewhat higher than in the full model, as is Cohen's
-\textkappa.
+\textkappa. Importantly, we notice that adding the total number of
+intrusors to the model doesn't significantly increase the accuracy of
+the model (the 95\% confidence intervals for the accuracies of the two
+models completely overlap).
 
-\{ \setstretch{1}
+\hypertarget{multivariate-contrasts}{%
+\subsubsection{Multivariate contrasts}\label{multivariate-contrasts}}
 
+We've planned to contrast the two test groups with the rereading group,
+and the two test groups with each other. That's what we'll do here.
+
+\begin{verbatim}
+##           test vs rereading content vs general
+## content                   1                  1
+## general                   1                 -1
+## rereading                -2                  0
+\end{verbatim}
+
+\begin{verbatim}
+##                                  totalCorrect totalIntrusors
+## (Intercept)                          11.37857        4.19365
+## activityFactortest vs rereading       0.25179       -0.21567
+## activityFactorcontent vs general      1.15536       -0.59702
+\end{verbatim}
+
+Now that we've set up the model, let's run the contrasts. The first
+contrast is between the two test groups (content and general knowledge)
+and the rereading group.
+
+\begin{verbatim}
+## 
+## Sum of squares and products for the hypothesis:
+##                totalCorrect totalIntrusors
+## totalCorrect         15.337        -13.137
+## totalIntrusors      -13.137         11.253
+## 
+## Sum of squares and products for error:
+##                totalCorrect totalIntrusors
+## totalCorrect         993.42        -417.37
+## totalIntrusors      -417.37         435.05
+## 
+## Multivariate Tests: 
+##                  Df test stat approx F num Df den Df Pr(>F)
+## Pillai            1   0.02599   1.5746      2    118 0.2114
+## Wilks             1   0.97401   1.5746      2    118 0.2114
+## Hotelling-Lawley  1   0.02669   1.5746      2    118 0.2114
+## Roy               1   0.02669   1.5746      2    118 0.2114
+\end{verbatim}
+
+As can be seen from the test statistics, no significant difference is
+found between the two test groups and the rereading group. Next, we'll
+look at the contrast between the content test group and the general
+knowledge test group.
+
+\begin{verbatim}
+## 
+## Sum of squares and products for the hypothesis:
+##                totalCorrect totalIntrusors
+## totalCorrect        109.393        -56.528
+## totalIntrusors      -56.528         29.210
+## 
+## Sum of squares and products for error:
+##                totalCorrect totalIntrusors
+## totalCorrect         993.42        -417.37
+## totalIntrusors      -417.37         435.05
+## 
+## Multivariate Tests: 
+##                  Df test stat approx F num Df den Df   Pr(>F)   
+## Pillai            1   0.10237   6.7289      2    118 0.001709 **
+## Wilks             1   0.89763   6.7289      2    118 0.001709 **
+## Hotelling-Lawley  1   0.11405   6.7289      2    118 0.001709 **
+## Roy               1   0.11405   6.7289      2    118 0.001709 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+This contrast is statistically significant, indicating that the two
+groups differ on the linear combination of the number of correct answers
+and number of intrusive distractors chosen. We'll calculate the same
+effect size indices as for the omnibus model.
+
+The multivariate \(\eta^2\) is 0.10237. The effect size index \(\xi^2\)
+is 0.05118. Finally, we will calculate Tatsuoka's
+\citep[1970; according to][]{huberty_applied_2006} extension of the
+\(\omega^2\) to the multivariate case. In this case,
+\(\omega^2_{mult} = 0.08663\). The adjusted value of the \(\xi^2\)
+statistic is \(\xi^2_{adj} = 0.03524\)
+
+\hypertarget{contrast-lda}{%
+\paragraph{Contrast LDA}\label{contrast-lda}}
+
+Again, to further investigate the nature of the difference between the
+content and general knowledge test group, we'll conduct a linear
+discriminant analysis to try and find the variate that best
+discriminates these two groups.
+
+\begin{verbatim}
+## 
+## Type II MANOVA Tests: Pillai test statistic
+##                Df test stat approx F num Df den Df Pr(>F)   
+## activityFactor  1     0.148     6.85      2     79 0.0018 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Canonical Discriminant Analysis for activityFactor:
+## 
+##   CanRsq Eigenvalue Difference Percent Cumulative
+## 1 0.1479     0.1735                100        100
+## 
+## Class means:
+## 
+## [1]  0.4015 -0.4216
+## 
+##  std coefficients:
+##   totalCorrect totalIntrusors 
+##         0.7210        -0.3722
+\end{verbatim}
+
+\begin{verbatim}
+##                    Can1
+## totalCorrect    0.96382
+## totalIntrusors -0.85085
+\end{verbatim}
+
+Again, we see that both predictors are highly correlated with the
+discriminant function, albeit with different signs. Let's look at the
+LOOCV prediction accuracy.
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction content general
+##    content      28      16
+##    general      14      24
+##                                        
+##                Accuracy : 0.634        
+##                  95% CI : (0.52, 0.738)
+##     No Information Rate : 0.512        
+##     P-Value [Acc > NIR] : 0.0175       
+##                                        
+##                   Kappa : 0.267        
+##  Mcnemar's Test P-Value : 0.8551       
+##                                        
+##             Sensitivity : 0.667        
+##             Specificity : 0.600        
+##          Pos Pred Value : 0.636        
+##          Neg Pred Value : 0.632        
+##              Prevalence : 0.512        
+##          Detection Rate : 0.341        
+##    Detection Prevalence : 0.537        
+##       Balanced Accuracy : 0.633        
+##                                        
+##        'Positive' Class : content      
+## 
+\end{verbatim}
+
+With both predictors, the prediction accuracy is significantlly above
+the no information rate.
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction content general
+##    content      29      15
+##    general      13      25
+##                                        
+##                Accuracy : 0.659        
+##                  95% CI : (0.546, 0.76)
+##     No Information Rate : 0.512        
+##     P-Value [Acc > NIR] : 0.00523      
+##                                        
+##                   Kappa : 0.316        
+##  Mcnemar's Test P-Value : 0.85011      
+##                                        
+##             Sensitivity : 0.690        
+##             Specificity : 0.625        
+##          Pos Pred Value : 0.659        
+##          Neg Pred Value : 0.658        
+##              Prevalence : 0.512        
+##          Detection Rate : 0.354        
+##    Detection Prevalence : 0.537        
+##       Balanced Accuracy : 0.658        
+##                                        
+##        'Positive' Class : content      
+## 
+\end{verbatim}
+
+Furthermore, the prediction accuracy doesn't drop significantly when we
+omit the total number of intrusors.
+
+\setstretch{1}
 \bibliographystyle{apacite}
-    \bibliography{refs}
-
-\}
+\bibliography{refs}
 
 
 \end{document}
