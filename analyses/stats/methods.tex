@@ -64,7 +64,7 @@
 \usepackage{titling}
 
 % Create subtitle command for use in maketitle
-\newcommand{\subtitle}[1]{
+\providecommand{\subtitle}[1]{
   \posttitle{
     \begin{center}\large#1\end{center}
     }
@@ -128,6 +128,9 @@ not (\(n_{reread}\) = 40, \(n_{content, feed}\) = 41,
 \hypertarget{materials-and-procedure}{%
 \subsection{Materials and procedure}\label{materials-and-procedure}}
 
+\hypertarget{materials}{%
+\subsubsection{Materials}\label{materials}}
+
 Participants read a text on the evolution, ecological and biological
 characteristics of weeds. The text was taken from a chapter in a
 Croatian university-level textbook. Some sentences and passages were
@@ -137,15 +140,85 @@ from the text to make it less difficult for the target participant
 population. The text was divided into three parts of 874, 754, and 835
 words, respectively. Additionaly, there was a practice text taken from
 the same chapter, but unrelated to any of the other three parts of the
-text (768 words).
+text (768 words). \vspace{\parskip}
 
-Forty-four content related questions, with four response options, were
-generated from the presented texts. Four questions were presented after
-the practice text, ten after each of the first two parts, and twenty
-after the third part of the text. Starting from the second ten question
-set, the distractor options were chosen so that
+\parbox{\textwidth}{
+Forty-four content related questions with four response options were generated
+from the presented texts. Four questions were presented after the practice text,
+ten after each of the first two parts (only to the participatns in the content
+related test condition), and twenty after the third part of the text (to all
+participants).
+Starting from the second ten question set, the distractor options were chosen so that
+\begin{enumerate*}[label = (\alph*)]
+\item two distractors were plausible, but unrelated to the text, and
+\item one distractor was a term or concept mentioned in the previous part of the
+text --- this was considered to be the "intrusive" option.
+\end{enumerate*}}
 
-\begin{enumerate*}[label = (\roman*)] \item aaa \item bbb \end{enumerate*}
+\vspace{\parskip}
+
+An example question is:
+
+\begin{quotation}
+\noindent Compared to younger weeds, older weeds:
+\begin{enumerate}[label = (\alph*)]
+\item have a stronger allelopathic effect
+\item contain more phytotoxins
+\item \label{optCorr} \textbf{contain less inhibitory matter}
+\item \label{optIntr} \textit{show greater plasticity.}
+\end{enumerate}
+\end{quotation}
+
+Option \ref{optCorr} is the correct answer, and option \ref{optIntr} is
+the intrusive distractor.
+
+Further, twenty general knowledge questions were generated. These
+questions were presented to participants in the general knowledge test
+condition, after the first two parts of the text. An example general
+knowledge question is:
+
+\begin{quotation}
+\noindent The name of Kurt Vonnegut's famous anti-war novel is:
+\begin{enumerate}[label = (\alph*)]
+\item \textbf{Slaughterhouse Five}
+\item All Quiet on the Western Front
+\item A Farewell to Arms
+\item Journey to the End of the Night.
+\end{enumerate}
+\end{quotation}
+
+At the beginning of the session, participants' ID, age and sex
+information was collected. At the end of the session, participants were
+asked to estimate how much of each text they have read. The texts and
+questions were presented on a personal computer, in an application
+constructed using the open source \texttt{oTree} framework
+\citep[version 2.0,][]{chen_otreeopen-source_2016} for the Python
+programming language (version 3.7.1, October 20, 2018).
+
+\hypertarget{procedure}{%
+\subsubsection{Procedure}\label{procedure}}
+
+Participants were first given a brief introduction to the study, and
+were encouraged to carefully read and follow the written instructions.
+Then, they were led to one of six compartments containing a computer,
+which was running a fullscreen instance of the \texttt{oTree}
+application with a randomly chosen experimental condition. There,
+participants read the informed consent form and, in case there were no
+questions, started the experiment.
+
+After entering their personal information, participants were presented
+with instructions for their first task, which was to read the practice
+text at a speed that comes naturally to them. They were to click a
+button at the bottom of the text when they have finished reading it.
+Unbeknownst to the participants, the time they took to read the practice
+text was recorded, and used as the basis for determining the reading
+time limits for the remaining texts. Results of a pilot study using
+different participant have shown that most participants found 4 minutes
+to be too short, and 9 minute too long, so we have set the lowest
+possible limit to 5 minutes, and the longest to 8 mnutes.
+
+\bibliographystyle{apacite}
+\bibliography{../../paper/reference.bib}
 
 
 \end{document}

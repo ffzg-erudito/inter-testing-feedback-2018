@@ -69,13 +69,20 @@ participated in the study in exchange for course credit. Participants were
 randomly assigned to one of five groups which differed in type of activity
 between parts of the text and in whether they are to receive feedback on their
 intermittent test achievement or not
-(\(n_{reread}\) = `r datHard %>% count(condition) -> .; (.) %>% filter(condition == 'rereading') %>% pull(n)`,
-\(n_{content, feed}\) = `r (.) %>% filter(condition == 'content_feedback') %>% pull(n)`,
-\(n_{content, nofeed}\) = `r (.) %>% filter(condition == 'content_noFeedback') %>% pull(n)`,
-\(n_{general, feed}\) = `r (.) %>% filter(condition == 'general_feedback') %>% pull(n)`,
-\(n_{general, nofeed}\) = `r (.) %>% filter(condition == 'general_noFeedback') %>% pull(n)`).
+(\(n_{reread}\) = `r datHard %>% count(condition) -> .; (.) %>%
+filter(condition == 'rereading') %>% pull(n)`,
+\(n_{content, feed}\) = `r (.) %>% filter(condition == 'content_feedback') %>%
+pull(n)`,
+\(n_{content, nofeed}\) = `r (.) %>%
+filter(condition == 'content_noFeedback') %>% pull(n)`,
+\(n_{general, feed}\) = `r (.) %>% filter(condition == 'general_feedback') %>%
+pull(n)`,
+\(n_{general, nofeed}\) = `r (.) %>% filter(condition == 'general_noFeedback') %>%
+pull(n)`).
 
 ## Materials and procedure
+
+### Materials
 
 Participants read a text on the evolution, ecological and biological characteristics
 of weeds. The text was taken from a chapter in a Croatian university-level textbook.
@@ -85,12 +92,82 @@ were removed from the text to make it less difficult for the target participant
 population. The text was divided into three parts of 874, 754, and 835 words,
 respectively. Additionaly, there was a practice text taken from the same chapter,
 but unrelated to any of the other three parts of the text (768 words).
+\vspace{\parskip}
 
-Forty-four content related questions, with four response options, were generated
+\parbox{\textwidth}{
+Forty-four content related questions with four response options were generated
 from the presented texts. Four questions were presented after the practice text,
-ten after each of the first two parts, and twenty after the third part of the text.
+ten after each of the first two parts (only to the participatns in the content
+related test condition), and twenty after the third part of the text (to all
+participants).
 Starting from the second ten question set, the distractor options were chosen so that
-\begin{enumerate*}[label = (\roman*)]
-\item aaa
-\item bbb
-\end{enumerate*}
+\begin{enumerate*}[label = (\alph*)]
+\item two distractors were plausible, but unrelated to the text, and
+\item one distractor was a term or concept mentioned in the previous part of the
+text --- this was considered to be the "intrusive" option.
+\end{enumerate*}}
+
+\vspace{\parskip}
+An example question is:
+\begin{quotation}
+\noindent Compared to younger weeds, older weeds:
+\begin{enumerate}[label = (\alph*)]
+\item have a stronger allelopathic effect
+\item contain more phytotoxins
+\item \label{optCorr} \textbf{contain less inhibitory matter}
+\item \label{optIntr} \textit{show greater plasticity.}
+\end{enumerate}
+\end{quotation}
+Option \ref{optCorr} is the correct answer, and option \ref{optIntr} is the
+intrusive distractor.
+
+Further, twenty general knowledge questions were generated. These questions were
+presented to participants in the general knowledge test condition, after the first
+two parts of the text. An example general knowledge question is:
+\begin{quotation}
+\noindent The name of Kurt Vonnegut's famous anti-war novel is:
+\begin{enumerate}[label = (\alph*)]
+\item \textbf{Slaughterhouse Five}
+\item All Quiet on the Western Front
+\item A Farewell to Arms
+\item Journey to the End of the Night.
+\end{enumerate}
+\end{quotation}
+
+At the beginning of the session, participants' ID, age and sex information was
+collected. At the end of the session, participants were asked to estimate how
+much of each text they have read.
+The texts and questions were presented on a personal computer, in an application
+constructed using the open source `oTree` framework
+\citep[version 2.0,][]{chen_otreeopen-source_2016}
+for the Python programming language (version 3.7.1, October 20, 2018).
+
+### Procedure
+
+Participants were first given a brief introduction to the study, and were
+encouraged to carefully read and follow the written instructions.
+Then, they were led to one of six compartments containing a computer, which was
+running a fullscreen instance of the `oTree` application with
+a randomly chosen experimental condition. There, participants read the informed consent
+form and, in case there were no questions, started the experiment.
+
+After entering their personal information, participants were presented with
+instructions for their first task, which was to read the practice text at a speed
+that comes naturally to them. They were to click a button at the bottom of the text
+when they have finished reading it. Unbeknownst to the participants, the
+time they took to read the practice text was recorded, and used as the basis
+for determining the reading time limits for the remaining texts. Results of a pilot
+study using different participants have shown that most participants found 4 minutes
+to be too short, and 9 minutes too long, so we have set the lowest possible limit
+to 5 minutes, and the longest to 8 minutes.
+
+Next, participants were familiarised with the interpolated activity they were
+going to perform during the main part of the procedure. The rereading group
+reread the practice text (this time with the time limit applied), the general
+knowledge test group answered four general knowledge questions, and the content
+related test group answered four questions based on the practice text. Participants
+assigned to the feedback condition also received feedback on their practice
+test achievement.
+
+\bibliographystyle{apacite}
+\bibliography{../../paper/reference.bib}
