@@ -1,6 +1,6 @@
 ---
-fontsize: 12pt
-geometry: margin=1.3cm
+fontsize: 11pt
+geometry: margin=1.8cm
 output:
   pdf_document:
     keep_tex: true
@@ -21,6 +21,8 @@ header-includes: |
     \captionsetup[table]{width=\textwidth}
     \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
 ---
+
+\twocolumn
 
 ```{r setup, include = FALSE}
 library(knitr)
@@ -92,22 +94,17 @@ were removed from the text to make it less difficult for the target participant
 population. The text was divided into three parts of 874, 754, and 835 words,
 respectively. Additionaly, there was a practice text taken from the same chapter,
 but unrelated to any of the other three parts of the text (768 words).
-\vspace{\parskip}
 
-\parbox{\textwidth}{
 Forty-four content related questions with four response options were generated
 from the presented texts. Four questions were presented after the practice text,
 ten after each of the first two parts (only to the participatns in the content
 related test condition), and twenty after the third part of the text (to all
 participants).
 Starting from the second ten question set, the distractor options were chosen so that
-\begin{enumerate*}[label = (\alph*)]
-\item two distractors were plausible, but unrelated to the text, and
-\item one distractor was a term or concept mentioned in the previous part of the
+(a) two distractors were plausible, but unrelated to the text, and
+(b) one distractor was a term or concept mentioned in the previous part of the
 text --- this was considered to be the "intrusive" option.
-\end{enumerate*}}
 
-\vspace{\parskip}
 An example question is:
 \begin{quotation}
 \noindent Compared to younger weeds, older weeds:
@@ -139,8 +136,8 @@ collected. At the end of the session, participants were asked to estimate how
 much of each text they have read.
 The texts and questions were presented on a personal computer, in an application
 constructed using the open source `oTree` framework
-\citep[version 2.0,][]{chen_otreeopen-source_2016}
-for the Python programming language (version 3.7.1, October 20, 2018).
+\citep[version 2.1.35,][]{chen_otreeopen-source_2016}
+for the Python programming language (version 3.6.4, October 20, 2018).
 
 ### Procedure
 
@@ -192,6 +189,8 @@ the third text. The computer recorded whether a participant correctly answered
 a question and whether the participant chose an intrusive distractor. This allowed
 us to compute our dependent variables --- the total number of correct answers
 and the total number of intrusive distractors chosen.
+
+\onecolumn
 
 \bibliographystyle{apacite}
 \bibliography{../../paper/reference.bib}

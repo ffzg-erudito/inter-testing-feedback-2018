@@ -1,7 +1,7 @@
 ---
-fontsize: 12pt
-geometry: margin=1.3cm
-output: |
+fontsize: 11pt
+geometry: margin=1.8cm
+output:
   pdf_document:
     keep_tex: true
     toc: false
@@ -20,3 +20,112 @@ header_includes: |
     \captionsetup[table]{width=\textwidth}
     \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
 ---
+
+```{r setup, echo = F, include = F}
+library(knitr)
+library(kableExtra)
+opts_chunk$set(dpi = 600, dev = 'pdf', echo = F, include = F)
+options(digits = 5, scipen = 10)
+
+library(here)
+# NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
+# `conflict_prefer`s filter from {dplyr}
+# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run
+# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard
+# exclusion criteria applied (as described in `analysis-plan.md`), and (3)
+# `datSoft` which is `datHard` with the soft exclusion criteria applied (as
+# described in `analysis-plan.md`)
+source(here('wrangling', '3-exclusion-criteria.R'))
+# for Henze-Zirkler
+library(MVN)
+# for Box's M
+library(heplots)
+# colorscale
+library(viridis)
+# multivariate outliers
+library(mvoutlier)
+# for LDA
+library(candisc)
+library(MASS)
+# for labels in ggplots
+library(ggrepel)
+# for different sums of squares
+library(car)
+
+library(psych)
+
+conflict_prefer('select', 'dplyr')
+theme_set(theme_minimal())
+
+# source helper functions
+source(here('helpers', 'h1-2-helpers.R'))
+```
+
+\twocolumn
+
+## Results
+
+### Exclusion criteria
+
+Prior to analysing the data, we have excluded participants based on a priori
+set criteria. Participants who have spent less than or equal to 90 seconds
+on the practice text were excluded
+(`r nrow(dat) - dat %>% filter(., readingTime > 90) %>% nrow(.)` exclusion).
+Further, we wanted to exclude participants who have had no correct answers on
+the final test
+(`r dat %>% filter(., readingTime > 90) %>% nrow(.) -
+{dat %>% filter(., readingTime > 90 & totalCorrect > 0) %>% nrow(.)}` exclusions).
+Finally, we have excluded participants who have stated that they have reading
+deficits
+(`r dat %>% filter(., readingTime > 90 & totalCorrect > 0) %>% nrow(.) -
+{dat %>% filter(., readingTime > 90 & totalCorrect > 0 &
+readingDeficits == 'NE')%>% nrow(.)}` exclusions). This left us with a total sample
+of `r nrow(datHard)` participants. There is another set of exclusion criteria
+based on the number of times the participants have read each of the three texts.
+These are used in robustness check analyses (see suplementary materials).
+
+### Interpolated activity effect
+
+Our first two hypotheses are concerned with the effects of different interpolated
+activities on the total number of correct answers and total number of intrusive
+distractors chosen. To test these hypotheses, we have focused only on the groups
+which have not received feedback, since there was no feedback option for the
+rereading group. We conducted a one-way MANOVA with interpolated activity as
+the independent variable and the total number of correct and intrusive options
+chosen as dependent variables. The correlation between our DVs calculated on the
+whole sample is
+`r datHard %>% select(totalCorrect, totalIntrusors) %>% corr.test(.) -> .;
+pluck(., 'r') %>% .[1,2] %>% round(., 2)`
+(95% CI: [`r pluck(., 'ci') %>% pull(lower) %>% round(., 2)`,
+`r pluck(., 'ci') %>% pull(upper) %>% round(., 2)`],
+\(p\) = \(`r datHard %>% select(totalCorrect, totalIntrusors) %>% corr.test(.) -> .;
+pluck(., 'p') %>% .[1,2]`\)).
+
+```{r manovaInterpActivity}
+datHardNofeed <- datHard %>% filter(., giveFeedback == F) %>%
+  select(., activityFactor, totalCorrect, totalIntrusors)
+
+manovaModel <- manova(data = datHardNofeed,
+                      cbind(totalCorrect, totalIntrusors) ~
+                        as.factor(activityFactor))
+```
+
+Pillai's V for the analysis is
+`r summary(manovaModel) %>% pluck(., 'stats') %>% .[1, 'Pillai']`,
+\(p\) = `r summary(manovaModel) %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`
+(Wilks' \(\Lambda\) =
+`r summary(manovaModel, test = 'Wilks') %>% pluck(., 'stats') %>% .[1, 'Wilks']`,
+\(p\) = `r summary(manovaModel, test = 'Wilks') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`;
+Hotelling-Lawley's trace =
+`r summary(manovaModel, test = 'Hotelling-Lawley') %>% pluck(., 'stats') %>% .[1, 'Hotelling-Lawley']`,
+\(p\) = `r summary(manovaModel, test = 'Hotelling-Lawley') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`;
+Roy's largest root =
+`r summary(manovaModel, test = 'Roy') %>% pluck(., 'stats') %>% .[1, 'Roy']`,
+\(p\) = `r summary(manovaModel, test = 'Roy') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`)
+
+\onecolumn
+
+## References
+
+\bibliographystyle{apacite}
+\bibliography{reference.bib}
