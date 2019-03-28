@@ -7,11 +7,13 @@ output:
     toc: false
 header-includes: |
     \usepackage[natbibapa, sectionbib, tocbib]{apacite}
+    \usepackage{microtype}
     \usepackage[utf8]{inputenc}
     \usepackage{caption}
     \usepackage{bookman}
     \usepackage{multirow}
     \usepackage{array}
+    \usepackage{float}
     \usepackage[htt]{hyphenat}
     \usepackage{booktabs}
     \usepackage[euler]{textgreek}
@@ -23,7 +25,6 @@ header-includes: |
 
 ```{r setup, echo = F, include = F}
 library(knitr)
-library(kableExtra)
 opts_chunk$set(dpi = 600, dev = 'pdf', echo = F, include = F)
 options(digits = 5, scipen = 10)
 
@@ -51,6 +52,10 @@ library(MASS)
 library(ggrepel)
 # for different sums of squares
 library(car)
+# for ancova effects
+library(effects)
+# for tables
+library(kableExtra)
 
 library(psych)
 
@@ -67,6 +72,30 @@ source(here('helpers', 'manova-helpers.R'))
 
 ### Exclusion criteria
 
+```{r descTable, results = 'asis', include = T}
+.a <- by(datHard$totalCorrect, datHard$condition, describe) %>%
+  map_dfr(., rbind) %>%
+  select(., n, mean, se, sd, min, max, skew, kurtosis)
+  
+.b <- by(datHard$totalIntrusors, datHard$condition, describe) %>%
+  map_dfr(., rbind) %>%
+  select(., n, mean, se, sd, min, max, skew, kurtosis)
+  
+rbind(.a, .b) %>%
+  rename(., '$n$' = n, '$M$' = mean, '$SE$' = se, '$SD$' = sd) %>%
+  cbind(Measure = c(rep('Total correct', 5), rep('Total intrusors', 5)),
+        Condition = rep(c("Content, feedback", "Content, no feedback",
+                          "General, feedback", "General, no feedback",
+                          "Rereading")), .) %>% 
+  kable(., caption = '\\label{descTable} Descriptive statistics for the
+                     number of correct answers and chosen intrusors broken down
+                     by experimental condition.',
+        format = 'latex', booktabs = T, table.env = 'table*',
+        digits = 3, escape = F) %>% 
+  collapse_rows(., columns = 1, latex_hline = 'major') %>% 
+  kable_styling(latex_options = c('scale_down', 'hold_position'))
+```
+
 Prior to analysing the data, we have excluded participants based on a priori
 set criteria. Participants who have spent less than or equal to 90 seconds
 on the practice text were excluded
@@ -80,7 +109,9 @@ deficits
 (`r dat %>% filter(., readingTime > 90 & totalCorrect > 0) %>% nrow(.) -
 {dat %>% filter(., readingTime > 90 & totalCorrect > 0 &
 readingDeficits == 'NE')%>% nrow(.)}` exclusions). This left us with a total sample
-of `r nrow(datHard)` participants. There is another set of exclusion criteria
+of `r nrow(datHard)` participants. The descriptives for the sample are shown
+in Table \ref{descTable}.
+There is another set of exclusion criteria
 based on the number of times the participants have read each of the three texts.
 These are used in robustness check analyses (see suplementary materials).
 
@@ -89,6 +120,7 @@ These are used in robustness check analyses (see suplementary materials).
 ```{r datHardNofeedFilter}
 datHardNofeed <- datHard %>% filter(., giveFeedback == F) %>%
   select(., activityFactor, totalCorrect, totalIntrusors)
+datHardNofeed$activityFactor %<>% as.factor(.)
 ```
 
 Our first two hypotheses are concerned with the effects of different interpolated
@@ -105,12 +137,33 @@ pluck(., 'r') %>% .[1,2] %>% round(., 2)`
 (95% CI: [`r pluck(., 'ci') %>% pull(lower) %>% round(., 2)`,
 `r pluck(., 'ci') %>% pull(upper) %>% round(., 2)`],
 \(p\) = \(`r datHard %>% select(totalCorrect, totalIntrusors) %>% corr.test(.) -> .;
-pluck(., 'p') %>% .[1,2]`\)).
+pluck(., 'p') %>% .[1,2]`\)). Boxplots for the groups in this analysis are shown
+in Figure \ref{box1}.
+
+```{r boxPlot, include = T, fig.align = 'center', fig.cap = '\\label{box1} Boxplots broken down by experimental condition and dependent variable, with overlayed raw scores.', fig.env = 'figure*', message = F}
+datHardNofeed %>%
+  mutate_at(vars(activityFactor), fct_relevel,
+            'rereading', 'general', 'content') %>%
+  mutate_at(vars(activityFactor), fct_recode,
+            'Rereading' = 'rereading', 'General' = 'general',
+            'Content' = 'content') %>%
+  gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
+         value = 'score') %>%
+  ggplot(., aes(x = activityFactor, y = score)) +
+  geom_boxplot(alpha = .5) + geom_dotplot(mapping = aes(y = score),
+                                          binaxis = 'y',
+                                stackdir = 'centerwhole', dotsize = .5,
+                                fill = 'black', color = 'black') +
+  xlab('Condition') + ylab('Score') +
+  facet_grid(dependentVar~.,
+             labeller = as_labeller(c('totalCorrect' = 'Total correct',
+                                      'totalIntrusors' = 'Total intrusors'))) +
+  theme(panel.spacing.y = unit(2, 'line'))
+```
 
 ```{r manovaInterpActivity}
 manovaModel <- manova(data = datHardNofeed,
-                      cbind(totalCorrect, totalIntrusors) ~
-                        as.factor(activityFactor))
+                      cbind(totalCorrect, totalIntrusors) ~ activityFactor)
 ```
 
 Pillai's V for the analysis is
@@ -129,6 +182,32 @@ The effect size, calculated as
 \(\omega^2_{mult}\) = `r summary(manovaModel, test = 'Wilks') -> .;
 omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`.
 
+To further inspect the relationship of the interpolated activities with our
+dependent variables, we have conducted a Roy-Bargmann stepdown analysis, as
+suggested by \citeauthor{tabachnick_using_2012} (\citeyear{tabachnick_using_2012};
+a linear discriminant analysis with the same aim is available in the supplementary
+materials). The total number of correct answers was a priori chosen to be the
+higher priority variable. Therefore, we first conducted an ANOVA with interpolated
+activity type as the indepedent variable and the total number of correct answers
+as the dependent variable.
+
+```{r royBargmann1}
+# anova
+anovaRB <- aov(totalCorrect ~ activityFactor, datHardNofeed)
+Anova(anovaRB)
+
+# ancova with totalCorrect as covariate
+ancovaRB <- aov(totalIntrusors ~ totalCorrect + activityFactor, datHardNofeed)
+Anova(ancovaRB, type = '3')
+
+effect('activityFactor', ancovaRB, se = T) %>% summary(.)
+```
+
+As could be expected, the ANOVA points to an interpolated activity effect, with
+\(F(2, 119)\) = `r anovaRB %>% broom::tidy(.) %>% select(., statistic) %>%
+slice(1)`, \(p\) = `r anovaRB %>% broom::tidy(.) %>%
+select(., p.value) %>% slice(1)`.
+
 ### The interaction between feedback and interpolated activity type
 
 ```{r datHardFeedFilter}
@@ -143,6 +222,8 @@ test conditions (\(n\) = `r nrow(datHard)`). To test these hypotheses, we first
 conducted a two-way MANOVA with interpolated activity and feedback as independent
 variables, and total number of correct answers and total number of intrusors as
 the dependent variables.
+
+### Additional analyses
 
 \onecolumn
 

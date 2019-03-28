@@ -96,11 +96,13 @@
 \usepackage{xcolor}
 
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
+\usepackage{microtype}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
 \usepackage{bookman}
 \usepackage{multirow}
 \usepackage{array}
+\usepackage{float}
 \usepackage[htt]{hyphenat}
 \usepackage{booktabs}
 \usepackage[euler]{textgreek}
@@ -119,16 +121,51 @@
 \hypertarget{exclusion-criteria}{%
 \subsubsection{Exclusion criteria}\label{exclusion-criteria}}
 
+\begin{table*}[t]
+
+\caption{\label{tab:descTable}\label{descTable} Descriptive statistics for the
+                     number of correct answers and chosen intrusors broken down
+                     by experimental condition.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{llrrrrrrrr}
+\toprule
+Measure & Condition & $n$ & $M$ & $SE$ & $SD$ & min & max & skew & kurtosis\\
+\midrule
+ & Content, feedback & 41 & 13.220 & 0.508 & 3.252 & 2 & 19 & -0.800 & 1.503\\
+
+ & Content, no feedback & 42 & 12.786 & 0.465 & 3.017 & 7 & 19 & 0.039 & -0.775\\
+
+ & General, feedback & 40 & 10.975 & 0.533 & 3.370 & 1 & 17 & -0.481 & 0.462\\
+
+ & General, no feedback & 40 & 10.475 & 0.449 & 2.837 & 5 & 16 & -0.053 & -0.986\\
+
+\multirow{-5}{*}{\raggedright\arraybackslash Total correct} & Rereading & 40 & 10.875 & 0.443 & 2.803 & 4 & 17 & -0.141 & -0.253\\
+\cmidrule{1-10}
+ & Content, feedback & 41 & 3.146 & 0.258 & 1.652 & 0 & 7 & 0.292 & -0.351\\
+
+ & Content, no feedback & 42 & 3.381 & 0.257 & 1.667 & 0 & 7 & 0.203 & -0.385\\
+
+ & General, feedback & 40 & 4.175 & 0.318 & 2.011 & 0 & 8 & 0.024 & -1.124\\
+
+ & General, no feedback & 40 & 4.575 & 0.288 & 1.824 & 1 & 9 & 0.328 & -0.484\\
+
+\multirow{-5}{*}{\raggedright\arraybackslash Total intrusors} & Rereading & 40 & 4.625 & 0.350 & 2.215 & 1 & 10 & 0.272 & -0.537\\
+\bottomrule
+\end{tabular}}
+\end{table*}
+
 Prior to analysing the data, we have excluded participants based on a
 priori set criteria. Participants who have spent less than or equal to
 90 seconds on the practice text were excluded (1 exclusion). Further, we
 wanted to exclude participants who have had no correct answers on the
 final test (0 exclusions). Finally, we have excluded participants who
 have stated that they have reading deficits (3 exclusions). This left us
-with a total sample of 203 participants. There is another set of
-exclusion criteria based on the number of times the participants have
-read each of the three texts. These are used in robustness check
-analyses (see suplementary materials).
+with a total sample of 203 participants. The descriptives for the sample
+are shown in Table \ref{descTable}. There is another set of exclusion
+criteria based on the number of times the participants have read each of
+the three texts. These are used in robustness check analyses (see
+suplementary materials).
 
 \hypertarget{interpolated-activity-effect}{%
 \subsubsection{Interpolated activity
@@ -143,12 +180,35 @@ conducted a one-way MANOVA with interpolated activity as the independent
 variable and the total number of correct and intrusive options chosen as
 dependent variables. The correlation between our DVs calculated on the
 whole sample is -0.71 (95\% CI: {[}-0.77, -0.63{]}, \(p\) =
-\(4.79255\times 10^{-32}\)).
+\(4.79255\times 10^{-32}\)). Boxplots for the groups in this analysis
+are shown in Figure \ref{box1}.
+
+\begin{figure*}
+
+{\centering \includegraphics{analyses-main_files/figure-latex/boxPlot-1} 
+
+}
+
+\caption{\label{box1} Boxplots broken down by experimental condition and dependent variable, with overlayed raw scores.}\label{fig:boxPlot}
+\end{figure*}
 
 Pillai's V for the analysis is 0.12565, \(p\) = 0.00376 (Wilks'
 \(\Lambda\) = 0.875, \(p\) = 0.00327; Hotelling-Lawley's trace = 0.1421,
 \(p\) = 0.00285; Roy's largest root = 0.1366, \(p\) = 0.00049). The
 effect size, calculated as \(\omega^2_{mult}\) = 0.10949.
+
+To further inspect the relationship of the interpolated activities with
+our dependent variables, we have conducted a Roy-Bargmann stepdown
+analysis, as suggested by \citeauthor{tabachnick_using_2012}
+(\citeyear{tabachnick_using_2012}; a linear discriminant analysis with
+the same aim is available in the supplementary materials). The total
+number of correct answers was a priori chosen to be the higher priority
+variable. Therefore, we first conducted an ANOVA with interpolated
+activity type as the indepedent variable and the total number of correct
+answers as the dependent variable.
+
+As could be expected, the ANOVA points to an interpolated activity
+effect, with \(F(2, 119)\) = 7.54055, \(p\) = 0.00083.
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
 \subsubsection{The interaction between feedback and interpolated
@@ -158,7 +218,14 @@ type}\label{the-interaction-between-feedback-and-interpolated-activity-type}}
 The remaining hypotheses deal with the effect of feedback on the total
 number of correct answers and the total number of intrusors. Therefore,
 these analyses are carried out only on the data from participants in the
-general and content related test conditions (\(n\) = 203).
+general and content related test conditions (\(n\) = 203). To test these
+hypotheses, we first conducted a two-way MANOVA with interpolated
+activity and feedback as independent variables, and total number of
+correct answers and total number of intrusors as the dependent
+variables.
+
+\hypertarget{additional-analyses}{%
+\subsubsection{Additional analyses}\label{additional-analyses}}
 
 \onecolumn
 
