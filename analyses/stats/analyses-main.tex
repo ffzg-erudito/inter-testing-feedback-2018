@@ -95,6 +95,20 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 
+\usepackage[natbibapa, sectionbib, tocbib]{apacite}
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+\usepackage{bookman}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[htt]{hyphenat}
+\usepackage{booktabs}
+\usepackage[euler]{textgreek}
+\usepackage{float}
+\usepackage[onehalfspacing]{setspace}
+\captionsetup[table]{width=\textwidth}
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
+
 \begin{document}
 
 \twocolumn
@@ -124,16 +138,27 @@ Our first two hypotheses are concerned with the effects of different
 interpolated activities on the total number of correct answers and total
 number of intrusive distractors chosen. To test these hypotheses, we
 have focused only on the groups which have not received feedback, since
-there was no feedback option for the rereading group. We conducted a
-one-way MANOVA with interpolated activity as the independent variable
-and the total number of correct and intrusive options chosen as
+there was no feedback option for the rereading group (\(n\) = 122). We
+conducted a one-way MANOVA with interpolated activity as the independent
+variable and the total number of correct and intrusive options chosen as
 dependent variables. The correlation between our DVs calculated on the
 whole sample is -0.71 (95\% CI: {[}-0.77, -0.63{]}, \(p\) =
 \(4.79255\times 10^{-32}\)).
 
 Pillai's V for the analysis is 0.12565, \(p\) = 0.00376 (Wilks'
 \(\Lambda\) = 0.875, \(p\) = 0.00327; Hotelling-Lawley's trace = 0.1421,
-\(p\) = 0.00285; Roy's largest root = 0.1366, \(p\) = 0.00049)
+\(p\) = 0.00285; Roy's largest root = 0.1366, \(p\) = 0.00049). The
+effect size, calculated as \(\omega^2_{mult}\) = 0.10949.
+
+\hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
+\subsubsection{The interaction between feedback and interpolated
+activity
+type}\label{the-interaction-between-feedback-and-interpolated-activity-type}}
+
+The remaining hypotheses deal with the effect of feedback on the total
+number of correct answers and the total number of intrusors. Therefore,
+these analyses are carried out only on the data from participants in the
+general and content related test conditions (\(n\) = 203).
 
 \onecolumn
 
@@ -141,7 +166,7 @@ Pillai's V for the analysis is 0.12565, \(p\) = 0.00376 (Wilks'
 \subsection{References}\label{references}}
 
 \bibliographystyle{apacite}
-\bibliography{reference.bib}
+\bibliography{../../paper/reference.bib}
 
 
 \end{document}

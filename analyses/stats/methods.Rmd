@@ -60,7 +60,7 @@ conflict_prefer('select', 'dplyr')
 theme_set(theme_minimal())
 
 # source helper functions
-source(here('helpers', 'h1-2-helpers.R'))
+source(here('helpers', 'manova-helpers.R'))
 ```
 
 ## Participants and design
