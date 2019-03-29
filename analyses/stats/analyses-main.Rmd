@@ -37,19 +37,6 @@ library(here)
 # `datSoft` which is `datHard` with the soft exclusion criteria applied (as
 # described in `analysis-plan.md`)
 source(here('wrangling', '3-exclusion-criteria.R'))
-# for Henze-Zirkler
-library(MVN)
-# for Box's M
-library(heplots)
-# colorscale
-library(viridis)
-# multivariate outliers
-library(mvoutlier)
-# for LDA
-library(candisc)
-library(MASS)
-# for labels in ggplots
-library(ggrepel)
 # for different sums of squares
 library(car)
 # for ancova effects
@@ -142,7 +129,7 @@ pluck(., 'r') %>% .[1,2] %>% round(., 2)`
 pluck(., 'p') %>% .[1,2]`\)). Boxplots for the groups in this analysis are shown
 in Figure \ref{box1}.
 
-```{r boxPlot, include = T, fig.align = 'center', fig.cap = '\\label{box1} Boxplots broken down by experimental condition and dependent variable, with overlayed raw scores.', fig.env = 'figure*', message = F}
+```{r boxPlot, include = T, fig.align = 'center', fig.cap = '\\label{box1} Boxplots broken down by experimental condition and dependent variable, with overlayed raw scores.', fig.env = 'figure*', message = F, fig.pos = 'h'}
 datHardNofeed %>%
   mutate_at(vars(activityFactor), fct_relevel,
             'rereading', 'general', 'content') %>%
@@ -243,9 +230,9 @@ esCont1 <- tes((.) %>% select(., statistic) %>% slice(2) %>% as.integer(.),
                  as.integer(.))
 
 esCont2 <- tes((.) %>% select(., statistic) %>% slice(3) %>% as.integer(.),
-               datHardNofeed %>% tally(., activityFactor == 'rereading') %>%
+               datHardNofeed %>% tally(., activityFactor == 'content') %>%
                  as.integer(.),
-               datHardNofeed %>% tally(., activityFactor != 'rereading') %>%
+               datHardNofeed %>% tally(., activityFactor == 'general') %>%
                  as.integer(.))
 
 ```
@@ -262,7 +249,11 @@ Cohens's \(U_{3, g_s}\) = `r esCont1$U3.g`%,
 probability of superiority = `r esCont1$cl.g`%).
 However, there is a difference between the two test groups
 (\(t\) = `r (.) %>% select(statistic) %>% slice(3)`,
-\(p\) = `r (.) %>% select(p.value) %>% slice(3)`).
+\(p\) = `r (.) %>% select(p.value) %>% slice(3)`
+\(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
+Cohens's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
+probability of superiority = `r esCont2$cl.g`%).
+These two findings are not in line with our predictions.
 
 ### The interaction between feedback and interpolated activity type
 
@@ -278,8 +269,6 @@ test conditions (\(n\) = `r nrow(datHard)`). To test these hypotheses, we first
 conducted a two-way MANOVA with interpolated activity and feedback as independent
 variables, and total number of correct answers and total number of intrusors as
 the dependent variables.
-
-### Additional analyses
 
 \onecolumn
 
