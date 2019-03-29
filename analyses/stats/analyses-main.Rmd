@@ -10,7 +10,7 @@ header-includes: |
     \usepackage{microtype}
     \usepackage[utf8]{inputenc}
     \usepackage{caption}
-    \usepackage{bookman}
+    \usepackage{lmodern}
     \usepackage{multirow}
     \usepackage{array}
     \usepackage{float}
@@ -25,7 +25,7 @@ header-includes: |
 
 ```{r setup, echo = F, include = F}
 library(knitr)
-opts_chunk$set(dpi = 600, dev = 'pdf', echo = F, include = F)
+opts_chunk$set(dpi = 600, dev = 'tikz', echo = F, include = F)
 options(digits = 5, scipen = 10)
 
 library(here)
@@ -56,6 +56,8 @@ library(car)
 library(effects)
 # for tables
 library(kableExtra)
+# for effect sizes
+library(compute.es)
 
 library(psych)
 
@@ -181,7 +183,6 @@ Roy's largest root =
 The effect size, calculated as
 \(\omega^2_{mult}\) = `r summary(manovaModel, test = 'Wilks') -> .;
 omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`.
-
 To further inspect the relationship of the interpolated activities with our
 dependent variables, we have conducted a Roy-Bargmann stepdown analysis, as
 suggested by \citeauthor{tabachnick_using_2012} (\citeyear{tabachnick_using_2012};
@@ -194,19 +195,74 @@ as the dependent variable.
 ```{r royBargmann1}
 # anova
 anovaRB <- aov(totalCorrect ~ activityFactor, datHardNofeed)
-Anova(anovaRB)
+anovaRB %<>% Anova(.) %>% broom::tidy(.)
 
 # ancova with totalCorrect as covariate
 ancovaRB <- aov(totalIntrusors ~ totalCorrect + activityFactor, datHardNofeed)
-Anova(ancovaRB, type = '3')
+ancovaRB %>% Anova(., type = '3') %>% broom::tidy(.) -> .
 
 effect('activityFactor', ancovaRB, se = T) %>% summary(.)
 ```
 
 As could be expected, the ANOVA points to an interpolated activity effect, with
-\(F(2, 119)\) = `r anovaRB %>% broom::tidy(.) %>% select(., statistic) %>%
-slice(1)`, \(p\) = `r anovaRB %>% broom::tidy(.) %>%
-select(., p.value) %>% slice(1)`.
+\(F(`r anovaRB %>% filter(., term == 'activityFactor') %>% pull(., df)`,
+`r anovaRB %>% filter(., term == 'Residuals') %>% pull(., df)`)\) =
+`r anovaRB %>% select(., statistic) %>% slice(1)`,
+\(p\) = `r anovaRB %>% select(., p.value) %>% slice(1)`.
+Following the ANOVA, we conducted an ANCOVA, with
+the total number of correct answers as the covariate, and the total number of intrusors
+as the dependent variable. As could be expected, the results imply a main effect
+of the total number of correct answers
+(\(F(`r (.) %>% filter(., term == 'totalCorrect') %>% pull(df)`,
+`r (.) %>% filter(., term == 'Residuals') %>% pull(df)`)\) =
+`r (.) %>% filter(., term == 'totalCorrect') %>% pull(statistic)`,
+\(p = `r (.) %>% filter(., term == 'totalCorrect') %>% pull(p.value)`\)).
+After correcting for the number of correct
+answers, there is no evidence for an effect of interpolated activity on the total
+number of chosen intrusors
+(\(F (`r (.) %>% filter(., term == 'activityFactor') %>% pull(df)`,
+`r (.) %>% filter(., term == 'Residuals') %>% pull(df)`)\) =
+`r (.) %>% filter(., term == 'activityFactor') %>% pull(statistic)`,
+\(p\) = `r (.) %>% filter(., term == 'activityFactor') %>% pull(p.value)`).
+For now, we may claim that we do not have any evidence to support our second hypothesis
+that the type of interpolated activity will have an effect on the number of
+intrusors.
+
+```{r contrastsH1}
+contrastMatrix <- matrix(c(1, 1, -2, 1, -1, 0), 3, 2)
+colnames(contrastMatrix) <- c('test vs rereading', 'content vs general')
+
+anovaContrastH1 <- aov(totalCorrect ~ activityFactor, datHardNofeed,
+                       contrasts = list(activityFactor = contrastMatrix))
+anovaContrastH1 %>% summary.lm(.) %>% broom::tidy(.) -> .
+
+esCont1 <- tes((.) %>% select(., statistic) %>% slice(2) %>% as.integer(.),
+               datHardNofeed %>% tally(., activityFactor == 'rereading') %>%
+                 as.integer(.),
+               datHardNofeed %>% tally(., activityFactor != 'rereading') %>%
+                 as.integer(.))
+
+esCont2 <- tes((.) %>% select(., statistic) %>% slice(3) %>% as.integer(.),
+               datHardNofeed %>% tally(., activityFactor == 'rereading') %>%
+                 as.integer(.),
+               datHardNofeed %>% tally(., activityFactor != 'rereading') %>%
+                 as.integer(.))
+
+```
+
+In order to test our first hypothesis, we have contrasted
+(i) the rereading group with the two test groups, and (ii) the two test groups with
+each other, taking only the total number of correct answers as the DV.
+The first contrast finds no evidence of a difference between the rereading group
+and the two test groups
+(\(t\) = `r (.) %>% select(statistic) %>% slice(2)`,
+\(p\) = `r (.) %>% select(p.value) %>% slice(2)`,
+\(g_s\) = `r esCont1$g`, 95% CI = [`r esCont1$l.g`, `r esCont1$u.g`],
+Cohens's \(U_{3, g_s}\) = `r esCont1$U3.g`%,
+probability of superiority = `r esCont1$cl.g`%).
+However, there is a difference between the two test groups
+(\(t\) = `r (.) %>% select(statistic) %>% slice(3)`,
+\(p\) = `r (.) %>% select(p.value) %>% slice(3)`).
 
 ### The interaction between feedback and interpolated activity type
 
@@ -226,8 +282,6 @@ the dependent variables.
 ### Additional analyses
 
 \onecolumn
-
-## References
 
 \bibliographystyle{apacite}
 \bibliography{../../paper/reference.bib}

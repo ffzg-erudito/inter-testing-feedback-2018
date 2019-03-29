@@ -99,7 +99,7 @@
 \usepackage{microtype}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
-\usepackage{bookman}
+\usepackage{lmodern}
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{float}
@@ -195,11 +195,10 @@ are shown in Figure \ref{box1}.
 Pillai's V for the analysis is 0.12565, \(p\) = 0.00376 (Wilks'
 \(\Lambda\) = 0.875, \(p\) = 0.00327; Hotelling-Lawley's trace = 0.1421,
 \(p\) = 0.00285; Roy's largest root = 0.1366, \(p\) = 0.00049). The
-effect size, calculated as \(\omega^2_{mult}\) = 0.10949.
-
-To further inspect the relationship of the interpolated activities with
-our dependent variables, we have conducted a Roy-Bargmann stepdown
-analysis, as suggested by \citeauthor{tabachnick_using_2012}
+effect size, calculated as \(\omega^2_{mult}\) = 0.10949. To further
+inspect the relationship of the interpolated activities with our
+dependent variables, we have conducted a Roy-Bargmann stepdown analysis,
+as suggested by \citeauthor{tabachnick_using_2012}
 (\citeyear{tabachnick_using_2012}; a linear discriminant analysis with
 the same aim is available in the supplementary materials). The total
 number of correct answers was a priori chosen to be the higher priority
@@ -208,7 +207,27 @@ activity type as the indepedent variable and the total number of correct
 answers as the dependent variable.
 
 As could be expected, the ANOVA points to an interpolated activity
-effect, with \(F(2, 119)\) = 7.54055, \(p\) = 0.00083.
+effect, with \(F(2, 119)\) = 7.54055, \(p\) = 0.00083. Following the
+ANOVA, we conducted an ANCOVA, with the total number of correct answers
+as the covariate, and the total number of intrusors as the dependent
+variable. As could be expected, the results imply a main effect of the
+total number of correct answers (\(F(1, 118)\) = 79.67428,
+\(p = 6.87333\times 10^{-15}\)). After correcting for the number of
+correct answers, there is no evidence for an effect of interpolated
+activity on the total number of chosen intrusors (\(F (2, 118)\) =
+0.84413, \(p\) = 0.43251). For now, we may claim that we do not have any
+evidence to support our second hypothesis that the type of interpolated
+activity will have an effect on the number of intrusors.
+
+In order to test our first hypothesis, we have contrasted (i) the
+rereading group with the two test groups, and (ii) the two test groups
+with each other, taking only the total number of correct answers as the
+DV. The first contrast finds no evidence of a difference between the
+rereading group and the two test groups (\(t\) = 1.35542, \(p\) =
+0.17785, \(g_s\) = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohens's
+\(U_{3, g_s}\) = 57.6\%, probability of superiority = 55.39\%). However,
+there is a difference between the two test groups (\(t\) = 3.61993,
+\(p\) = 0.00043).
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
 \subsubsection{The interaction between feedback and interpolated
@@ -228,9 +247,6 @@ variables.
 \subsubsection{Additional analyses}\label{additional-analyses}}
 
 \onecolumn
-
-\hypertarget{references}{%
-\subsection{References}\label{references}}
 
 \bibliographystyle{apacite}
 \bibliography{../../paper/reference.bib}
