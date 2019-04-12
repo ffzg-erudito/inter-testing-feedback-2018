@@ -45,6 +45,8 @@ library(effects)
 library(kableExtra)
 # for effect sizes
 library(compute.es)
+# for bootstrapping
+library(boot)
 
 library(psych)
 
@@ -153,6 +155,30 @@ datHardNofeed %>%
 ```{r manovaInterpActivity}
 manovaModel <- manova(data = datHardNofeed,
                       cbind(totalCorrect, totalIntrusors) ~ activityFactor)
+```
+
+```{r manovaBoot, cache = T}
+set.seed(1192017)
+
+bootOmega <- function(data, i) {
+  d <- data[i,]
+  
+  bootManova <- manova(data = d,
+                       cbind(totalCorrect, totalIntrusors) ~
+                         activityFactor)
+  
+  manovaSummary <- summary(bootManova, test = 'Wilks')
+  
+  omSq <- omegaSquared(nrow(bootManova$residuals), manovaSummary$stats[1, 'Wilks'],
+               manovaSummary$stats[1, 'Df']) 
+  
+  return(omSq)
+}
+
+bootOut <- boot(datHardNofeed, statistic = bootOmega, R = 10000,
+                parallel = 'multicore', ncpus = 3)
+
+ciOut <- boot.ci(bootOut, index = 1)
 ```
 
 Pillai's V for the analysis is
