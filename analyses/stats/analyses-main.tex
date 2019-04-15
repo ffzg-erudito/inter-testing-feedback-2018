@@ -189,7 +189,7 @@ are shown in Figure \ref{box1}.
 
 }
 
-\caption{\label{box1} Boxplots broken down by experimental condition and dependent variable, with overlayed raw scores.}\label{fig:boxPlot}
+\caption{\label{box1} Boxplots broken down by experimental conditions included in the first MANOVA, and dependent variable, with overlayed raw scores.}\label{fig:boxPlot}
 \end{figure*}
 
 Pillai's V for the analysis is 0.12565, \(p\) = 0.00376 (Wilks'
@@ -240,11 +240,20 @@ type}\label{the-interaction-between-feedback-and-interpolated-activity-type}}
 The remaining hypotheses deal with the effect of feedback on the total
 number of correct answers and the total number of intrusors. Therefore,
 these analyses are carried out only on the data from participants in the
-general and content related test conditions (\(n\) = 163). To test these
-hypotheses, we first conducted a two-way MANOVA with interpolated
-activity and feedback as independent variables, and total number of
-correct answers and total number of intrusors as the dependent
-variables.
+general and content related test conditions (\(n\) = 163). Boxplots for
+these groups are shown in Figure \ref{box2}. To test these hypotheses,
+we first conducted a two-way MANOVA with interpolated activity and
+feedback as independent variables, and total number of correct answers
+and total number of intrusors as the dependent variables.
+
+\begin{figure*}[h]
+
+{\centering \includegraphics{analyses-main_files/figure-latex/boxPlot2-1} 
+
+}
+
+\caption{\label{box2} Boxplots broken down by experimental conditions included in the second MANOVA, and dependent variable, with overlayed raw scores.}\label{fig:boxPlot2}
+\end{figure*}
 
 Pillai's V for the interpolated activity effect (calculated with type
 III sums of squares) is 0.071, \(p\) = 0.003 (Wilks' \(\Lambda\) =
@@ -261,6 +270,24 @@ Hotelling-Lawley's trace = 0, \(p\) = 0.8; Roy's largest root = 0, \(p\)
 = 0.8). The effect size is \(\omega^2_{mult}\) = -0.00317 (bootstrap (R
 = 10000) median = 0.00283, \(BC_\alpha\) 95\% CI = {[}-0.00617,
 0.00383{]}).
+
+Furthermore, we find no evidence for an interaction effect between
+activity type and feedback --- Pillai's V = 0.001, \(p\) = 0.941 (Wilks'
+\(\Lambda\) = 0.999, \(p\) = 0.941; Hotelling-Lawley's trace = 0, \(p\)
+= 0.941; Roy's largest root = 0, \(p\) = 0.941). The effect size
+\(\omega^2_{mult}\) = -0.00517 (bootstrap (R = 10000) median = 0.00283,
+\(BC_\alpha\) 95\% CI = {[}-0.00617, -0.00517{]}). Both the feedback and
+the interaction estimates of \(\omega^2_{mult}\) are to be considered to
+be zero, given their negative values.
+
+Again, we have conducted a follow-up Roy-Bargmann stepdown analysis. In
+the ANOVA model with the total number of correct answers as the
+dependent variable and the type of interpolated activity, feedback and
+their interaction as predictors, only the type of activity seems to be
+relevant (\(F(1, 159) = 11.19956, p = 0.00102\)). In the second step, we
+fit an ANCOVA model with the total number of correct answers as the
+covariate. In this model, the type of interpolated activity ceases to be
+a relevant predictor (\(F(1, 155) = 0.17504, p = 0.67625\)).
 
 \onecolumn
 
