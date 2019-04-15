@@ -176,7 +176,7 @@ bootOmega <- function(data, i) {
 }
 
 bootOut <- boot(datHardNofeed, statistic = bootOmega, R = 10000,
-                parallel = 'multicore', ncpus = 3)
+                parallel = 'multicore', ncpus = parallel::detectCores() - 1)
 
 ciOut <- boot.ci(bootOut, index = 1)
 ```
@@ -195,7 +195,9 @@ Roy's largest root =
 \(p\) = `r summary(manovaModel, test = 'Roy') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`).
 The effect size, calculated as
 \(\omega^2_{mult}\) = `r summary(manovaModel, test = 'Wilks') -> .;
-omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`.
+omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`
+(bootstrap (R = 10000) median = `r bootOut$t %>% median(.)`, \(BC_\alpha\) 95% CI =
+[`r ciOut$bca[4]`, `r ciOut$bca[5]`]).
 To further inspect the relationship of the interpolated activities with our
 dependent variables, we have conducted a Roy-Bargmann stepdown analysis, as
 suggested by \citeauthor{tabachnick_using_2012} (\citeyear{tabachnick_using_2012};
@@ -284,17 +286,111 @@ These two findings are not in line with our predictions.
 ### The interaction between feedback and interpolated activity type
 
 ```{r datHardFeedFilter}
-datHardFeed <- datHard %>% filter(., activityFactor != 'rereading') %>%
-  select(., activityFactor, totalCorrect, totalIntrusors)
+datHardFeed <- datHard %>% filter(., condition != 'rereading') %>%
+  select(., condition, giveFeedback, activityFactor,
+         totalCorrect, totalIntrusors)
+
+datHardFeed %<>% mutate_at(., vars(activityFactor), as.factor)
 ```
 
 The remaining hypotheses deal with the effect of feedback on the total number of
 correct answers and the total number of intrusors. Therefore, these analyses are
 carried out only on the data from participants in the general and content related
-test conditions (\(n\) = `r nrow(datHard)`). To test these hypotheses, we first
+test conditions (\(n\) = `r nrow(datHardFeed)`). To test these hypotheses, we first
 conducted a two-way MANOVA with interpolated activity and feedback as independent
 variables, and total number of correct answers and total number of intrusors as
 the dependent variables.
+
+```{r manovaInteraction}
+manovaModelInter <- manova(cbind(totalCorrect, totalIntrusors) ~
+                             activityFactor * giveFeedback,
+                           data = datHardFeed)
+```
+
+```{r manovaBootFeed, cache = T}
+set.seed(1912017)
+
+bootOmegaFeed <- function(data, i) {
+  d <- data[i,]
+  
+  bootManova <- manova(data = d,
+                       cbind(totalCorrect, totalIntrusors) ~
+                         activityFactor)
+  
+  manovaSummary <- summary(bootManova, test = 'Wilks')
+  
+  omSq <- omegaSquared(nrow(bootManova$residuals),
+                       manovaSummary$stats[1, 'Wilks'],
+                       manovaSummary$stats[1, 'Df']) 
+  
+  return(omSq)
+}
+
+bootOutFeed <- boot(datHardFeed, statistic = bootOmegaFeed,
+                           R = 10000, parallel = 'multicore',
+                           ncpus = parallel::detectCores() - 1)
+
+ciOutFeed <- boot.ci(bootOut, index = 1)
+```
+
+Pillai's V for the interpolated activity effect (calculated with type III sums of
+squares) is 
+`r manovaStats(manovaModelInter, 'test', '^activityFactor ')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^activityFactor ')`
+(Wilks' \(\Lambda\) =
+`r manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Wilks')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^activityFactor ', test = 'Wilks')`;
+Hotelling-Lawley's trace =
+`r manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Hotelling-Lawley')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^activityFactor ', test = 'Hotelling-Lawley')`;
+Roy's largest root =
+`r manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Roy')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^activityFactor ', test = 'Roy')`)
+confirming the main effect of interpolated activity type.
+The effect size, calculated as
+\(\omega^2_{mult}\) = `r summary(manovaModelInter, test = 'Wilks') -> .;
+omegaSquared(nrow(manovaModelInter$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`
+(bootstrap (R = 10000) median = `r bootOutFeed$t %>% median(.)`, \(BC_\alpha\) 95% CI =
+[`r ciOutFeed$bca[4]`, `r ciOutFeed$bca[5]`]).
+
+On the other hand, we find no effect of feedback ---
+Pillai's V =
+`r manovaStats(manovaModelInter, 'test', '^giveFeedback ')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ')`
+(Wilks' \(\Lambda\) =
+`r manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Wilks')`;
+Hotelling-Lawley's trace =
+`r manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Hotelling-Lawley')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Hotelling-Lawley')`;
+Roy's largest root =
+`r manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Roy')`,
+\(p\) = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Roy')`).
+
+The effect size, calculated as
+\(\omega^2_{mult}\) = `r summary(manovaModelInter, test = 'Wilks') -> .;
+omegaSquared(nrow(manovaModelInter$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`
+(bootstrap (R = 10000) median = `r bootOutFeed$t %>% median(.)`, \(BC_\alpha\) 95% CI =
+[`r ciOutFeed$bca[4]`, `r ciOutFeed$bca[5]`]).
+
+```{r}
+Anova(manovaModelInter, type = '3') %>% pluck('SSPE') -> .e
+
+Anova(manovaModelInter, type = '3') %>% pluck('SSPE') %>%
+  {. + Anova(manovaModelInter, type = '3') %>% pluck('SSP') %>% pluck('activityFactor')} -> .h
+
+det(.e) / det(.h)
+
+Anova(manovaModelInter, type = '3') %>% pluck('SSP') %>% pluck('giveFeedback') -> .h
+
+options(scipen=39)
+
+{solve(.e) %*% .h} %>% eigen(.)
+
+.076473 / (1+.076473)
+```
+
+
 
 \onecolumn
 
