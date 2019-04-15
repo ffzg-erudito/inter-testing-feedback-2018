@@ -18,7 +18,8 @@ manovaStats <- function(manovaModel, statistic = 'test', effect,
     str_subset(., effect) %>% str_extract_all(., '\\d+\\.?\\d*') %>%
     pluck(1) -> results
   
-  if (statistic == 'test') return(results[2])
-  else if (statistic == 'p') return(results[6])
-  else print('unrecognized statistic requested. try "p" or "test".')
+  if (statistic == 'test') return(results[2] %>% as.numeric(.))
+  else if (statistic == 'df') return(results[1] %>% as.numeric(.))
+  else if (statistic == 'p') return(results[6] %>% as.numeric(.))
+  else print('unrecognized statistic requested. try "p", "df" or "test".')
   }
