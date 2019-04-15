@@ -26,7 +26,7 @@ header-includes: |
 ```{r setup, echo = F, include = F}
 library(knitr)
 opts_chunk$set(dpi = 600, dev = 'tikz', echo = F, include = F)
-options(digits = 5, scipen = 10)
+options(digits = 5, scipen = 7, knitr.kable.NA = '')
 
 library(here)
 # NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
@@ -498,6 +498,26 @@ a relevant predictor
 `r rbAncova2 %>% slice(9) %>% pull(df)`) =
 `r rbAncova2 %>% slice(2) %>% pull(statistic)`, p
 = `r rbAncova2 %>% slice(2) %>% pull(p.value)`\)).
+
+```{r rb2Table, results = 'asis', include = T}
+rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
+  mutate_at(., vars(term), str_replace_all,
+            'activityFactor', 'Activity') %>%
+  mutate_at(., vars(term), str_replace_all,
+            'giveFeedback', 'Feedback') %>%
+  mutate_at(., vars(term), str_replace_all,
+            'totalCorrect', 'Total correct') %>%
+  mutate_at(., vars(term), str_replace_all,
+            ':', ' x ') %>%
+  rename('Term' = term, '$SS$' = sumsq, '$df$' = df,
+              '$F$' = statistic, '$p$' = p.value) %>%
+  kable(., caption = 'Full ANOVA and ANCOVA models for the second Roy-Bargmann
+                     stepdown analysis.',
+        format = 'latex', booktabs = T, table.env = 'table*',
+        digits = 3, escape = F) %>%
+  kable_styling(., latex_options = c('hold_position')) %>%
+  pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
+```
 
 \onecolumn
 
