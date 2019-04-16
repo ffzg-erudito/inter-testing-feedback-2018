@@ -33,7 +33,7 @@ analysis. We aim to compare the two test groups with the rereading group.
 Further, we plan to compare the two test groups with each other. In the latter
 case, we do not expect to find a significant difference. However, since an
 absence of evidence is not evidence of absence, we aim to confirm the practical
-equivalence of the two conditions with a TOST, and a Bayesian t-test.
+equivalence of the two conditions with a TOST.
 
 ### TOST
 
@@ -46,8 +46,6 @@ c) it represents a 57% probability of superiority of one group over the other (c
 but it represent a just-above-chance probability.
 
 Still, we think this SESOI is quite conservative.
-
-### Bayesian t-test
 
 ### Estimated power to detect different effect sizes
 
