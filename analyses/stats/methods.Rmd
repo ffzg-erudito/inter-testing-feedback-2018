@@ -9,7 +9,7 @@ header-includes: |
     \usepackage[natbibapa, sectionbib, tocbib]{apacite}
     \usepackage[utf8]{inputenc}
     \usepackage{caption}
-    \usepackage{bookman}
+    \usepackage{lmodern}
     \usepackage{multirow}
     \usepackage[inline]{enumitem}
     \usepackage{array}
@@ -22,9 +22,7 @@ header-includes: |
     \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
 ---
 
-\twocolumn
-
-```{r setup, include = FALSE}
+```{r setup-methods, include = FALSE}
 library(knitr)
 opts_chunk$set(echo = FALSE, dev = 'pdf')
 
@@ -40,21 +38,6 @@ library(here)
 # `datSoft` which is `datHard` with the soft exclusion criteria applied (as
 # described in `analysis-plan.md`)
 source(here('wrangling', '3-exclusion-criteria.R'))
-# for Henze-Zirkler
-library(MVN)
-# for Box's M
-library(heplots)
-# colorscale
-library(viridis)
-# multivariate outliers
-library(mvoutlier)
-# for LDA
-library(candisc)
-library(MASS)
-# for labels in ggplots
-library(ggrepel)
-# for different sums of squares
-library(car)
 
 conflict_prefer('select', 'dplyr')
 theme_set(theme_minimal())
@@ -66,21 +49,12 @@ source(here('helpers', 'manova-helpers.R'))
 ## Participants and design
 
 Undergraduate and graduate phontecis and psychology students (80.8% female,
-median age = 21, IQR = 3, range = [18, 31]) from the University of Zagreb
+median age = 21, IQR = 3, range = [18, 31], total \(N\) = `r nrow(dat)`)
+from the University of Zagreb
 participated in the study in exchange for course credit. Participants were
-randomly assigned to one of five groups which differed in type of activity
-between parts of the text and in whether they are to receive feedback on their
-intermittent test achievement or not
-(\(n_{reread}\) = `r datHard %>% count(condition) -> .; (.) %>%
-filter(condition == 'rereading') %>% pull(n)`,
-\(n_{content, feed}\) = `r (.) %>% filter(condition == 'content_feedback') %>%
-pull(n)`,
-\(n_{content, nofeed}\) = `r (.) %>%
-filter(condition == 'content_noFeedback') %>% pull(n)`,
-\(n_{general, feed}\) = `r (.) %>% filter(condition == 'general_feedback') %>%
-pull(n)`,
-\(n_{general, nofeed}\) = `r (.) %>% filter(condition == 'general_noFeedback') %>%
-pull(n)`).
+randomly assigned to one of five groups which differed in the type of activity
+they engaged in between parts of the text they have read and in whether they
+received feedback on their intermittent test achievement or not.
 
 ## Materials and procedure
 
@@ -100,7 +74,7 @@ from the presented texts. Four questions were presented after the practice text,
 ten after each of the first two parts (only to the participatns in the content
 related test condition), and twenty after the third part of the text (to all
 participants).
-Starting from the second ten question set, the distractor options were chosen so that
+Starting from the second ten-question-set, the distractor options were chosen so that
 (a) two distractors were plausible, but unrelated to the text, and
 (b) one distractor was a term or concept mentioned in the previous part of the
 text --- this was considered to be the "intrusive" option.
@@ -176,21 +150,16 @@ next text.
 
 Subjects in the rereading and general knowledge conditions
 also answered the four questions related to the practice text, so as to
-familiarise them with the scope and specificity level of questions that they
+familiarise themselves with the scope and specificity level of questions that they
 will receive after reading the final text. All participants were told that
 there would be a cumulative test after the final text, examining their knowledge
 of the three texts following the practice text. In reality, the final test examined
 only the knowledge of the final text.
 
-After the practice round, participants proceeded to read the main texts, engaging
+After the practice round, participants proceeded to the main texts, engaging
 in the interpolated activities they were assigned. After the third text, all
 participatns were presented with twenty questions examining their knowledge of
 the third text. The computer recorded whether a participant correctly answered
 a question and whether the participant chose an intrusive distractor. This allowed
 us to compute our dependent variables --- the total number of correct answers
 and the total number of intrusive distractors chosen.
-
-\onecolumn
-
-\bibliographystyle{apacite}
-\bibliography{../../paper/reference.bib}

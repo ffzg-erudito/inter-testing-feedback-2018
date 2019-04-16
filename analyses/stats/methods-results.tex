@@ -1,0 +1,485 @@
+\documentclass[11pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{}
+    \pretitle{\vspace{\droptitle}}
+  \posttitle{}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\usepackage[natbibapa, sectionbib, tocbib]{apacite}
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+\usepackage{lmodern}
+\usepackage{multirow}
+\usepackage[inline]{enumitem}
+\usepackage{array}
+\usepackage[htt]{hyphenat}
+\usepackage{booktabs}
+\usepackage[euler]{textgreek}
+\usepackage{float}
+\usepackage[onehalfspacing]{setspace}
+\captionsetup[table]{width=\textwidth}
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
+
+\begin{document}
+
+\hypertarget{participants-and-design}{%
+\subsection{Participants and design}\label{participants-and-design}}
+
+Undergraduate and graduate phontecis and psychology students (80.8\%
+female, median age = 21, IQR = 3, range = {[}18, 31{]}, total \(N\) =
+207) from the University of Zagreb participated in the study in exchange
+for course credit. Participants were randomly assigned to one of five
+groups which differed in the type of activity they engaged in between
+parts of the text they have read and in whether they received feedback
+on their intermittent test achievement or not.
+
+\hypertarget{materials-and-procedure}{%
+\subsection{Materials and procedure}\label{materials-and-procedure}}
+
+\hypertarget{materials}{%
+\subsubsection{Materials}\label{materials}}
+
+Participants read a text on the evolution, ecological and biological
+characteristics of weeds. The text was taken from a chapter in a
+Croatian university-level textbook. Some sentences and passages were
+slightly modified, so as to avoid odd language constructions; Latin
+plant names were translated to Croatian, and some plants were removed
+from the text to make it less difficult for the target participant
+population. The text was divided into three parts of 874, 754, and 835
+words, respectively. Additionaly, there was a practice text taken from
+the same chapter, but unrelated to any of the other three parts of the
+text (768 words).
+
+Forty-four content related questions with four response options were
+generated from the presented texts. Four questions were presented after
+the practice text, ten after each of the first two parts (only to the
+participatns in the content related test condition), and twenty after
+the third part of the text (to all participants). Starting from the
+second ten-question-set, the distractor options were chosen so that (a)
+two distractors were plausible, but unrelated to the text, and (b) one
+distractor was a term or concept mentioned in the previous part of the
+text --- this was considered to be the ``intrusive'' option.
+
+An example question is:
+
+\begin{quotation}
+\noindent Compared to younger weeds, older weeds:
+\begin{enumerate}[label = (\alph*)]
+\item have a stronger allelopathic effect
+\item contain more phytotoxins
+\item \label{optCorr} \textbf{contain less inhibitory matter}
+\item \label{optIntr} \textit{show greater plasticity.}
+\end{enumerate}
+\end{quotation}
+
+Option \ref{optCorr} is the correct answer, and option \ref{optIntr} is
+the intrusive distractor.
+
+Further, twenty-four general knowledge questions were generated. These
+questions were presented to participants in the general knowledge test
+condition, after the first two parts of the text. An example general
+knowledge question is:
+
+\begin{quotation}
+\noindent The name of Kurt Vonnegut's famous anti-war novel is:
+\begin{enumerate}[label = (\alph*)]
+\item \textbf{Slaughterhouse Five}
+\item All Quiet on the Western Front
+\item A Farewell to Arms
+\item Journey to the End of the Night.
+\end{enumerate}
+\end{quotation}
+
+At the beginning of the session, participants' ID, age and sex
+information was collected. At the end of the session, participants were
+asked to estimate how much of each text they have read. The texts and
+questions were presented on a personal computer, in an application
+constructed using the open source \texttt{oTree} framework
+\citep[version 2.1.35,][]{chen_otreeopen-source_2016} for the Python
+programming language (version 3.6.4, October 20, 2018).
+
+\hypertarget{procedure}{%
+\subsubsection{Procedure}\label{procedure}}
+
+Participants were first given a brief introduction to the study, and
+were encouraged to carefully read and follow the written instructions.
+Then, they were led to one of six compartments containing a computer,
+which was running a fullscreen instance of the \texttt{oTree}
+application with a randomly chosen experimental condition. There,
+participants read the informed consent form and, in case there were no
+questions, started the experiment.
+
+After entering their personal information, participants were presented
+with instructions for their first task, which was to read the practice
+text at a speed that comes naturally to them. They were to click a
+button at the bottom of the text when they have finished reading it.
+Unbeknownst to the participants, the time they took to read the practice
+text was recorded, and used as the basis for determining the reading
+time limits for the remaining texts. Results of a pilot study using
+different participants have shown that most participants found 4 minutes
+to be too short, and 9 minutes too long, so we have set the lowest
+possible limit to 5 minutes, and the longest to 8 minutes.
+
+Next, participants were familiarised with the interpolated activity they
+were going to perform during the main part of the procedure. The
+rereading group reread the practice text (this time with the time limit
+applied), the general knowledge test group answered four general
+knowledge questions, and the content related test group answered four
+questions based on the practice text.
+
+Participants assigned to the feedback condition also received feedback
+on their practice test achievement. Feedback was presented on a separate
+screen, which listed the questions, the participant's answers, and the
+correct answers in tabular format. Incorrectly answered questions were
+highlighted in red. After 40 seconds elapsed, a ``Next'' button
+appeared, allowing participants to proceed to the next text. This way,
+we wanted to prevent participants from simply clicking through the
+feedback, hoping that they will spend their time examining it. The
+feedback was presented for maximally 60 seconds, after which the
+application proceeded to the next text.
+
+Subjects in the rereading and general knowledge conditions also answered
+the four questions related to the practice text, so as to familiarise
+themselves with the scope and specificity level of questions that they
+will receive after reading the final text. All participants were told
+that there would be a cumulative test after the final text, examining
+their knowledge of the three texts following the practice text. In
+reality, the final test examined only the knowledge of the final text.
+
+After the practice round, participants proceeded to the main texts,
+engaging in the interpolated activities they were assigned. After the
+third text, all participatns were presented with twenty questions
+examining their knowledge of the third text. The computer recorded
+whether a participant correctly answered a question and whether the
+participant chose an intrusive distractor. This allowed us to compute
+our dependent variables --- the total number of correct answers and the
+total number of intrusive distractors chosen.
+
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
+
+\hypertarget{exclusion-criteria}{%
+\subsubsection{Exclusion criteria}\label{exclusion-criteria}}
+
+\begin{table*}[t]
+
+\caption{\label{tab:descTable}\label{descTable} Descriptive statistics for the
+                     number of correct answers and chosen intrusors broken down
+                     by experimental condition.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{llrrrrrrrr}
+\toprule
+Measure & Condition & $n$ & $M$ & $SE$ & $SD$ & min & max & skew & kurtosis\\
+\midrule
+ & Content, feedback & 41 & 13.22 & 0.508 & 3.25 & 2 & 19 & -0.800 & 1.503\\
+
+ & Content, no feedback & 42 & 12.79 & 0.465 & 3.02 & 7 & 19 & 0.039 & -0.775\\
+
+ & General, feedback & 40 & 10.97 & 0.533 & 3.37 & 1 & 17 & -0.481 & 0.462\\
+
+ & General, no feedback & 40 & 10.47 & 0.449 & 2.84 & 5 & 16 & -0.053 & -0.986\\
+
+\multirow{-5}{*}{\raggedright\arraybackslash Total correct} & Rereading & 40 & 10.88 & 0.443 & 2.80 & 4 & 17 & -0.141 & -0.253\\
+\cmidrule{1-10}
+ & Content, feedback & 41 & 3.15 & 0.258 & 1.65 & 0 & 7 & 0.292 & -0.351\\
+
+ & Content, no feedback & 42 & 3.38 & 0.257 & 1.67 & 0 & 7 & 0.203 & -0.385\\
+
+ & General, feedback & 40 & 4.17 & 0.318 & 2.01 & 0 & 8 & 0.024 & -1.124\\
+
+ & General, no feedback & 40 & 4.58 & 0.288 & 1.82 & 1 & 9 & 0.328 & -0.484\\
+
+\multirow{-5}{*}{\raggedright\arraybackslash Total intrusors} & Rereading & 40 & 4.62 & 0.350 & 2.21 & 1 & 10 & 0.272 & -0.537\\
+\bottomrule
+\end{tabular}}
+\end{table*}
+
+Prior to analysing the data, we have excluded participants based on a
+priori set criteria. Participants who have spent less than or equal to
+90 seconds on the practice text were excluded (1 exclusion). Further, we
+wanted to exclude participants who have had no correct answers on the
+final test (0 exclusions). Finally, we have excluded participants who
+have stated that they have reading deficits (3 exclusions). This left us
+with a total sample of 203 participants. The descriptives for the sample
+are shown in Table \ref{descTable}. There is another set of exclusion
+criteria based on the number of times the participants have read each of
+the three texts. These are used in robustness check analyses (see
+suplementary materials).
+
+\hypertarget{interpolated-activity-effect}{%
+\subsubsection{Interpolated activity
+effect}\label{interpolated-activity-effect}}
+
+Our first two hypotheses are concerned with the effects of different
+interpolated activities on the total number of correct answers and total
+number of intrusive distractors chosen. To test these hypotheses, we
+have focused only on the groups which have not received feedback, since
+there was no feedback option for the rereading group (\(n\) = 122). We
+conducted a one-way MANOVA with interpolated activity as the independent
+variable and the total number of correct and intrusive options chosen as
+dependent variables. The correlation between our DVs calculated on the
+whole sample is -0.71 (95\% CI: {[}-0.77, -0.63{]}, \(p\) =
+\(4.793\times 10^{-32}\)). Boxplots for the groups in this analysis are
+shown in Figure \ref{box1}.
+
+\begin{figure*}[h]
+
+{\centering \includegraphics{methods-results_files/figure-latex/boxPlot-1} 
+
+}
+
+\caption{\label{box1} Boxplots broken down by experimental conditions included in the first MANOVA, and dependent variable, with overlayed raw scores.}\label{fig:boxPlot}
+\end{figure*}
+
+Pillai's V for the analysis is 0.126, \(p = 0.004\) (Wilks' \(\Lambda\)
+= 0.875, \(p = 0.003\); Hotelling-Lawley's trace = 0.142, \(p = 0.003\);
+Roy's largest root = 0.137, \(p = 4.912\times 10^{-4}\)). The effect
+size, calculated as \(\omega^2_{mult} = 0.109\)
+(bootstrap\textsubscript{R = 10000} median = 0.132, \(BC_\alpha\) 95\%
+CI = {[}0.012, 0.201{]}). To further inspect the relationship of the
+interpolated activities with our dependent variables, we have conducted
+a Roy-Bargmann stepdown analysis, as suggested by
+\citeauthor{tabachnick_using_2012} (\citeyear{tabachnick_using_2012}; a
+linear discriminant analysis with the same aim is available in the
+supplementary materials). The total number of correct answers was a
+priori chosen to be the higher priority variable. Therefore, we first
+conducted an ANOVA with interpolated activity type as the indepedent
+variable and the total number of correct answers as the dependent
+variable.
+
+As could be expected, the ANOVA points to an interpolated activity
+effect, with \(F(2, 119)\) = 7.541, \(p = 8.254\times 10^{-4}\).
+Following the ANOVA, we conducted an ANCOVA, with the total number of
+correct answers as the covariate, and the total number of intrusors as
+the dependent variable. The results imply a main effect of the total
+number of correct answers (\(F(1, 118)\) = 79.674,
+\(p = 6.873\times 10^{-15}\)), but after taking into acount the number
+of correct answers, there is no evidence for an effect of interpolated
+activity on the total number of chosen intrusors (\(F (2, 118)\) =
+0.844, \(p = 0.433\). For now, we may claim that we do not have any
+evidence to support our second hypothesis that the type of interpolated
+activity will have an effect on the number of intrusors.
+
+In order to test our first hypothesis, we have contrasted (i) the
+rereading group with the two test groups, and (ii) the two test groups
+with each other, taking only the total number of correct answers as the
+DV. The first contrast finds no evidence of a difference between the
+rereading group and the two test groups (\(t\) = 1.355, \(p = 0.178\),
+\(g_s\) = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohens's \(U_{3, g_s}\) =
+57.6\%, probability of superiority = 55.39\%). However, there is a
+difference between the two test groups (\(t\) = 3.62,
+\(p = 4.34\times 10^{-4}\), \(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]},
+Cohens's \(U_{3, g_s}\) = 74.43\%, probability of superiority =
+67.88\%). Participants in the content related test group scored higher
+on the final test than participants in the general knowledge test
+condition. These two findings are not in line with our predictions.
+
+\hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
+\subsubsection{The interaction between feedback and interpolated
+activity
+type}\label{the-interaction-between-feedback-and-interpolated-activity-type}}
+
+The remaining hypotheses deal with the effect of feedback on the total
+number of correct answers and the total number of intrusors. Therefore,
+these analyses are carried out only on the data from participants in the
+general and content related test conditions (\(n\) = 163). Boxplots for
+these groups are shown in Figure \ref{box2}. To test these hypotheses,
+we first conducted a two-way MANOVA with interpolated activity and
+feedback as independent variables, and total number of correct answers
+and total number of intrusors as the dependent variables.
+
+\begin{figure*}[h]
+
+{\centering \includegraphics{methods-results_files/figure-latex/boxPlot2-1} 
+
+}
+
+\caption{\label{box2} Boxplots broken down by experimental conditions included in the second MANOVA, and dependent variable, with overlayed raw scores.}\label{fig:boxPlot2}
+\end{figure*}
+
+Pillai's V for the interpolated activity effect (calculated with type
+III sums of squares) is 0.071, \(p = 0.003\) (Wilks' \(\Lambda\) =
+0.929, \(p = 0.003\); Hotelling-Lawley's trace = 0.08, \(p = 0.003\);
+Roy's largest root = 0.08, \(p = 0.003\)) confirming the main effect of
+interpolated activity type. The effect size \(\omega^2_{mult}\) = 0.065
+(bootstrap\textsubscript{R = 10000} median = 0.072, \(BC_\alpha\) 95\%
+CI = {[}0.007, 0.139{]}).
+
+On the other hand, we find no evidence for an effect of giving feedback
+on the linear combination of our two dependent variables --- Pillai's V
+= 0.003, \(p = 0.8\) (Wilks' \(\Lambda\) = 0.997, \(p = 0.8\);
+Hotelling-Lawley's trace \(\approx\) 0, \(p = 0.8\); Roy's largest root
+\(\approx\) 0, \(p = 0.8\)). The effect size is \(\omega^2_{mult}\) =
+-0.003 (bootstrap\textsubscript{R = 10000} median = 0.003\footnote{
+The \(BC_\alpha\) 95\% CI for this estimate is \([-0.006, 0.004]\).
+\label{bca-ref}}).
+
+Furthermore, we find no evidence for an interaction effect between
+activity type and feedback --- Pillai's V = 0.001, \(p = 0.941\) (Wilks'
+\(\Lambda\) = 0.999, \(p = 0.941\); Hotelling-Lawley's trace \(\approx\)
+0, \(p = 0.941\); Roy's largest root \(\approx\) 0, \(p = 0.941\)). The
+effect size \(\omega^2_{mult}\) = -0.005
+(bootstrap\textsubscript{R = 10000} median = 0.003\footnote{
+The \(BC_\alpha\) 95\% CI = \([-0.006, -0.005]\).
+Our guess is that this odd result is due to the fact that most of the density is concentrated
+around 0, causing an unreliable estimate. The same could be said for the CI in
+footnote \ref{bca-ref}.}). Both the feedback and the interaction
+estimates of \(\omega^2_{mult}\) are to be considered to be zero, given
+their negative values.
+
+Again, we have conducted a follow-up Roy-Bargmann stepdown analysis. In
+the ANOVA model with the total number of correct answers as the
+dependent variable and the type of interpolated activity, feedback and
+their interaction as predictors, only the type of activity seems to be
+relevant (\(F(1, 159) = 11.2, p = 0.001\)). This result also shows that
+participants in the content related test condition scored higher on the
+final test than the participants in the general knowledge test
+condition, which should be no suprise given the results of the first
+stepdown analysis. In the second step, we fit an ANCOVA model with the
+total number of correct answers as the covariate. In this model, the
+type of interpolated activity ceases to be a relevant predictor
+(\(F(1, 155) = 0.175, p = 0.676\)). The full models are shown in Table
+\ref{rb2-table}.
+
+\begin{table*}[t]
+
+\caption{\label{tab:rb2Table}Full ANOVA and ANCOVA models for the second Roy-Bargmann
+                     stepdown analysis.\label{rb2-table}}
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Term & $SS$ & $df$ & $F$ & $p$\\
+\midrule
+\addlinespace[0.3em]
+\multicolumn{5}{l}{\textbf{ANOVA}}\\
+\hspace{1em}Activity & 109.393 & 1 & 11.200 & 0.001\\
+\hspace{1em}Feedback & 3.904 & 1 & 0.400 & 0.528\\
+\hspace{1em}Activity x Feedback & 0.045 & 1 & 0.005 & 0.946\\
+\hspace{1em}Residuals & 1553.046 & 159 &  & \\
+\addlinespace[0.3em]
+\multicolumn{5}{l}{\textbf{ANCOVA}}\\
+\hspace{1em}Activity & 0.301 & 1 & 0.175 & 0.676\\
+\hspace{1em}Feedback & 0.173 & 1 & 0.100 & 0.752\\
+\hspace{1em}Total correct & 63.216 & 1 & 36.760 & 0.000\\
+\hspace{1em}Activity x Feedback & 0.813 & 1 & 0.473 & 0.493\\
+\hspace{1em}Activity x Total correct & 0.862 & 1 & 0.501 & 0.480\\
+\hspace{1em}Feedback x Total correct & 0.130 & 1 & 0.075 & 0.784\\
+\hspace{1em}Activity x Feedback x Total correct & 1.229 & 1 & 0.715 & 0.399\\
+\hspace{1em}Residuals & 266.551 & 155 &  & \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\hypertarget{notes}{%
+\subsection{Notes}\label{notes}}
+
+Plots created using \texttt{ggplot2} \citep{wickham_ggplot2:_2016}.
+Bootstrap conducted using the \texttt{boot} package
+\citep{canty_boot:_2017}. Methods and analyses written using
+\texttt{rmarkdown} \citep{allaire_rmarkdown:_2019} and \texttt{knitr}
+\citep{xie_knitr:_2019}. The package \texttt{car} \citep{fox_r_2011} was
+used to obtain type III sums of squares. \texttt{compute.es}
+\citep{re_compute.es:_2013} was used to obtain effect sizes for
+contrasts. \texttt{kableExtra} was used to help generate tables
+\citep{zhu_kableextra:_2019}. Other utilities used are
+\texttt{tidyverse} \citep{wickham_tidyverse:_2017}, \texttt{magrittr}
+\citep{bache_magrittr:_2014}, \texttt{here} \citep{muller_here:_2017},
+\texttt{conflicted} \citep{wickham_conflicted:_2018}, \texttt{psych}
+\citep{revelle_psych:_2018}.
+
+\bibliographystyle{apacite}
+\bibliography{../../paper/reference.bib}
+
+
+\end{document}
