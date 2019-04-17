@@ -96,24 +96,154 @@
 \usepackage{xcolor}
 
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
-\usepackage{microtype}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
 \usepackage{lmodern}
 \usepackage{multirow}
+\usepackage[inline]{enumitem}
 \usepackage{array}
-\usepackage{float}
 \usepackage[htt]{hyphenat}
 \usepackage{booktabs}
 \usepackage[euler]{textgreek}
 \usepackage{float}
 \usepackage[onehalfspacing]{setspace}
 \captionsetup[table]{width=\textwidth}
-\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
 
 \begin{document}
 
-\twocolumn
+\hypertarget{participants-and-design}{%
+\subsection{Participants and design}\label{participants-and-design}}
+
+Undergraduate and graduate phontecis and psychology students (80.8\%
+female, median age = 21, IQR = 3, range = {[}18, 31{]}, total \(N\) =
+207) from the University of Zagreb participated in the study in exchange
+for course credit. Participants were randomly assigned to one of five
+groups which differed in the type of activity they engaged in between
+parts of the text they have read and in whether they received feedback
+on their intermittent test achievement or not.
+
+\hypertarget{materials-and-procedure}{%
+\subsection{Materials and procedure}\label{materials-and-procedure}}
+
+\hypertarget{materials}{%
+\subsubsection{Materials}\label{materials}}
+
+Participants read a text on the evolution, ecological and biological
+characteristics of weeds. The text was taken from a chapter in a
+Croatian university-level textbook. Some sentences and passages were
+slightly modified, so as to avoid odd language constructions; Latin
+plant names were translated to Croatian, and some plants were removed
+from the text to make it less difficult for the target participant
+population. The text was divided into three parts of 874, 754, and 835
+words, respectively. Additionaly, there was a practice text taken from
+the same chapter, but unrelated to any of the other three parts of the
+text (768 words).
+
+Forty-four content related questions with four response options were
+generated from the presented texts. Four questions were presented after
+the practice text, ten after each of the first two parts (only to the
+participatns in the content related test condition), and twenty after
+the third part of the text (to all participants). Starting from the
+second ten-question-set, the distractor options were chosen so that (a)
+two distractors were plausible, but unrelated to the text, and (b) one
+distractor was a term or concept mentioned in the previous part of the
+text --- this was considered to be the ``intrusive'' option.
+
+An example question is:
+
+\begin{quotation}
+\noindent Compared to younger weeds, older weeds:
+\begin{enumerate}[label = (\alph*)]
+\item have a stronger allelopathic effect
+\item contain more phytotoxins
+\item \label{optCorr} \textbf{contain less inhibitory matter}
+\item \label{optIntr} \textit{show greater plasticity.}
+\end{enumerate}
+\end{quotation}
+
+Option \ref{optCorr} is the correct answer, and option \ref{optIntr} is
+the intrusive distractor.
+
+Further, twenty-four general knowledge questions were generated. These
+questions were presented to participants in the general knowledge test
+condition, after the first two parts of the text. An example general
+knowledge question is:
+
+\begin{quotation}
+\noindent The name of Kurt Vonnegut's famous anti-war novel is:
+\begin{enumerate}[label = (\alph*)]
+\item \textbf{Slaughterhouse Five}
+\item All Quiet on the Western Front
+\item A Farewell to Arms
+\item Journey to the End of the Night.
+\end{enumerate}
+\end{quotation}
+
+At the beginning of the session, participants' ID, age and sex
+information was collected. At the end of the session, participants were
+asked to estimate how much of each text they have read. The texts and
+questions were presented on a personal computer, in an application
+constructed using the open source \texttt{oTree} framework
+\citep[version 2.1.35,][]{chen_otreeopen-source_2016} for the Python
+programming language (version 3.6.4, October 20, 2018).
+
+\hypertarget{procedure}{%
+\subsubsection{Procedure}\label{procedure}}
+
+Participants were first given a brief introduction to the study, and
+were encouraged to carefully read and follow the written instructions.
+Then, they were led to one of six compartments containing a computer,
+which was running a fullscreen instance of the \texttt{oTree}
+application with a randomly chosen experimental condition. There,
+participants read the informed consent form and, in case there were no
+questions, started the experiment.
+
+After entering their personal information, participants were presented
+with instructions for their first task, which was to read the practice
+text at a speed that comes naturally to them. They were to click a
+button at the bottom of the text when they have finished reading it.
+Unbeknownst to the participants, the time they took to read the practice
+text was recorded, and used as the basis for determining the reading
+time limits for the remaining texts. Results of a pilot study using
+different participants have shown that most participants found 4 minutes
+to be too short, and 9 minutes too long, so we have set the lowest
+possible limit to 5 minutes, and the longest to 8 minutes.
+
+Next, participants were familiarised with the interpolated activity they
+were going to perform during the main part of the procedure. The
+rereading group reread the practice text (this time with the time limit
+applied), the general knowledge test group answered four general
+knowledge questions, and the content related test group answered four
+questions based on the practice text.
+
+Participants assigned to the feedback condition also received feedback
+on their practice test achievement. Feedback was presented on a separate
+screen, which listed the questions, the participant's answers, and the
+correct answers in tabular format. Incorrectly answered questions were
+highlighted in red. After 40 seconds elapsed, a ``Next'' button
+appeared, allowing participants to proceed to the next text. This way,
+we wanted to prevent participants from simply clicking through the
+feedback, hoping that they will spend their time examining it. The
+feedback was presented for maximally 60 seconds, after which the
+application proceeded to the next text.
+
+Subjects in the rereading and general knowledge conditions also answered
+the four questions related to the practice text, so as to familiarise
+themselves with the scope and specificity level of questions that they
+will receive after reading the final text. All participants were told
+that there would be a cumulative test after the final text, examining
+their knowledge of the three texts following the practice text. In
+reality, the final test examined only the knowledge of the final text.
+
+After the practice round, participants proceeded to the main texts,
+engaging in the interpolated activities they were assigned. After the
+third text, all participatns were presented with twenty questions
+examining their knowledge of the third text. The computer recorded
+whether a participant correctly answered a question and whether the
+participant chose an intrusive distractor. This allowed us to compute
+our dependent variables --- the total number of correct answers and the
+total number of intrusive distractors chosen.
 
 \hypertarget{results}{%
 \subsection{Results}\label{results}}
@@ -185,7 +315,7 @@ shown in Figure \ref{box1}.
 
 \begin{figure*}[h]
 
-{\centering \includegraphics{analyses-main_files/figure-latex/boxPlot-1} 
+{\centering \includegraphics{methods-results_files/figure-latex/boxPlot-1} 
 
 }
 
@@ -194,7 +324,7 @@ shown in Figure \ref{box1}.
 
 Pillai's V for the analysis is 0.126, \(p = 0.004\) (Wilks' \(\Lambda\)
 = 0.875, \(p = 0.003\); Hotelling-Lawley's trace = 0.142, \(p = 0.003\);
-Roy's largest root = 0.137, \(p = 4.912\times 10^{-4}\). The effect
+Roy's largest root = 0.137, \(p = 4.912\times 10^{-4}\)). The effect
 size, calculated as \(\omega^2_{mult} = 0.109\)
 (bootstrap\textsubscript{R = 10000} median = 0.132, \(BC_\alpha\) 95\%
 CI = {[}0.012, 0.201{]}). To further inspect the relationship of the
@@ -212,10 +342,10 @@ As could be expected, the ANOVA points to an interpolated activity
 effect, with \(F(2, 119)\) = 7.541, \(p = 8.254\times 10^{-4}\).
 Following the ANOVA, we conducted an ANCOVA, with the total number of
 correct answers as the covariate, and the total number of intrusors as
-the dependent variable. As could be expected, the results imply a main
-effect of the total number of correct answers (\(F(1, 118)\) = 79.674,
-\(p = 6.873\times 10^{-15}\)). After correcting for the number of
-correct answers, there is no evidence for an effect of interpolated
+the dependent variable. The results imply a main effect of the total
+number of correct answers (\(F(1, 118)\) = 79.674,
+\(p = 6.873\times 10^{-15}\)), but after taking into acount the number
+of correct answers, there is no evidence for an effect of interpolated
 activity on the total number of chosen intrusors (\(F (2, 118)\) =
 0.844, \(p = 0.433\). For now, we may claim that we do not have any
 evidence to support our second hypothesis that the type of interpolated
@@ -231,7 +361,9 @@ rereading group and the two test groups (\(t\) = 1.355, \(p = 0.178\),
 difference between the two test groups (\(t\) = 3.62,
 \(p = 4.34\times 10^{-4}\), \(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]},
 Cohens's \(U_{3, g_s}\) = 74.43\%, probability of superiority =
-67.88\%). These two findings are not in line with our predictions.
+67.88\%). Participants in the content related test group scored higher
+on the final test than participants in the general knowledge test
+condition. These two findings are not in line with our predictions.
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
 \subsubsection{The interaction between feedback and interpolated
@@ -249,7 +381,7 @@ and total number of intrusors as the dependent variables.
 
 \begin{figure*}[h]
 
-{\centering \includegraphics{analyses-main_files/figure-latex/boxPlot2-1} 
+{\centering \includegraphics{methods-results_files/figure-latex/boxPlot2-1} 
 
 }
 
@@ -267,36 +399,43 @@ CI = {[}0.007, 0.139{]}).
 On the other hand, we find no evidence for an effect of giving feedback
 on the linear combination of our two dependent variables --- Pillai's V
 = 0.003, \(p = 0.8\) (Wilks' \(\Lambda\) = 0.997, \(p = 0.8\);
-Hotelling-Lawley's trace = 0, \(p = 0.8\); Roy's largest root = 0,
-\(p = 0.8\)). The effect size is \(\omega^2_{mult}\) = -0.003
-(bootstrap\textsubscript{R = 10000} median = 0.003\footnote{
+Hotelling-Lawley's trace \(\approx\) 0, \(p = 0.8\); Roy's largest root
+\(\approx\) 0, \(p = 0.8\)). The effect size is \(\omega^2_{mult}\) =
+-0.003 (bootstrap\textsubscript{R = 10000} median = 0.003\footnote{
 The \(BC_\alpha\) 95\% CI for this estimate is \([-0.006, 0.004]\).
-Our guess is that this odd result is due to the fact that most of the density is concentrated
-around 0, causing an unreliable estimate.\label{bca-ref}}).
+\label{bca-ref}}).
 
 Furthermore, we find no evidence for an interaction effect between
 activity type and feedback --- Pillai's V = 0.001, \(p = 0.941\) (Wilks'
-\(\Lambda\) = 0.999, \(p = 0.941\); Hotelling-Lawley's trace = 0,
-\(p = 0.941\); Roy's largest root = 0, \(p = 0.941\)). The effect size
-\(\omega^2_{mult}\) = -0.005 (bootstrap\textsubscript{R = 10000} median
-= 0.003\footnote{
-Same as footnote \ref{bca-ref}. \(BC_\alpha\) 95\% CI = \([-0.006, -0.005]\).}).
-Both the feedback and the interaction estimates of \(\omega^2_{mult}\)
-are to be considered to be zero, given their negative values.
+\(\Lambda\) = 0.999, \(p = 0.941\); Hotelling-Lawley's trace \(\approx\)
+0, \(p = 0.941\); Roy's largest root \(\approx\) 0, \(p = 0.941\)). The
+effect size \(\omega^2_{mult}\) = -0.005
+(bootstrap\textsubscript{R = 10000} median = 0.003\footnote{
+The \(BC_\alpha\) 95\% CI = \([-0.006, -0.005]\).
+Our guess is that this odd result is due to the fact that most of the density is concentrated
+around 0, causing an unreliable estimate. The same could be said for the CI in
+footnote \ref{bca-ref}.}). Both the feedback and the interaction
+estimates of \(\omega^2_{mult}\) are to be considered to be zero, given
+their negative values.
 
 Again, we have conducted a follow-up Roy-Bargmann stepdown analysis. In
 the ANOVA model with the total number of correct answers as the
 dependent variable and the type of interpolated activity, feedback and
 their interaction as predictors, only the type of activity seems to be
-relevant (\(F(1, 159) = 11.2, p = 0.001\)). In the second step, we fit
-an ANCOVA model with the total number of correct answers as the
-covariate. In this model, the type of interpolated activity ceases to be
-a relevant predictor (\(F(1, 155) = 0.175, p = 0.676\)).
+relevant (\(F(1, 159) = 11.2, p = 0.001\)). This result also shows that
+participants in the content related test condition scored higher on the
+final test than the participants in the general knowledge test
+condition, which should be no suprise given the results of the first
+stepdown analysis. In the second step, we fit an ANCOVA model with the
+total number of correct answers as the covariate. In this model, the
+type of interpolated activity ceases to be a relevant predictor
+(\(F(1, 155) = 0.175, p = 0.676\)). The full models are shown in Table
+\ref{rb2-table}.
 
 \begin{table*}[t]
 
 \caption{\label{tab:rb2Table}Full ANOVA and ANCOVA models for the second Roy-Bargmann
-                     stepdown analysis.}
+                     stepdown analysis.\label{rb2-table}}
 \centering
 \begin{tabular}{lrrrr}
 \toprule
@@ -338,8 +477,6 @@ contrasts. \texttt{kableExtra} was used to help generate tables
 \citep{bache_magrittr:_2014}, \texttt{here} \citep{muller_here:_2017},
 \texttt{conflicted} \citep{wickham_conflicted:_2018}, \texttt{psych}
 \citep{revelle_psych:_2018}.
-
-\onecolumn
 
 \bibliographystyle{apacite}
 \bibliography{../../paper/reference.bib}

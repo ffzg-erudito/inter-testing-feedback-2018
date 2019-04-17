@@ -1,0 +1,36 @@
+---
+fontsize: 11pt
+geometry: margin=1.8cm
+output:
+  pdf_document:
+    keep_tex: true
+    toc: false
+header-includes: |
+    \usepackage[natbibapa, sectionbib, tocbib]{apacite}
+    \usepackage[utf8]{inputenc}
+    \usepackage{caption}
+    \usepackage{lmodern}
+    \usepackage{multirow}
+    \usepackage[inline]{enumitem}
+    \usepackage{array}
+    \usepackage[htt]{hyphenat}
+    \usepackage{booktabs}
+    \usepackage[euler]{textgreek}
+    \usepackage{float}
+    \usepackage[onehalfspacing]{setspace}
+    \captionsetup[table]{width=\textwidth}
+    \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
+---
+
+```{r set, echo = F, include = F}
+library(knitr)
+```
+
+```{r method, child = 'methods.Rmd'}
+```
+
+```{r results, child = 'analyses-main.Rmd'}
+```
+
+\bibliographystyle{apacite}
+\bibliography{../../paper/reference.bib}
