@@ -192,7 +192,7 @@ Roy's largest root =
 The effect size, calculated as
 \(\omega^2_{mult} = `r summary(manovaModel, test = 'Wilks') -> .;
 omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`\)
-(bootstrap\textsubscript{R = 10000} median = `r bootOut$t %>% median(.)`, \(BC_\alpha\) 95% CI =
+(bootstrap median\footnote{All bootstrap estimates taken from 10000 replications.} = `r bootOut$t %>% median(.)`, \(BC_\alpha\) 95% CI =
 [`r ciOut$bca[4]`, `r ciOut$bca[5]`]).
 To further inspect the relationship of the interpolated activities with our
 dependent variables, we have conducted a Roy-Bargmann stepdown analysis, as
@@ -373,7 +373,7 @@ The effect size
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Wilks'),
 manovaStats(manovaModelInter, 'df', '^activityFactor ', test = 'Wilks'))`
-(bootstrap\textsubscript{R = 10000} median = `r bootOutActivity$t %>% median(.)`, \(BC_\alpha\) 95% CI =
+(bootstrap median = `r bootOutActivity$t %>% median(.)`, \(BC_\alpha\) 95% CI =
 [`r ciOutActivity$bca[4]`, `r ciOutActivity$bca[5]`]).
 
 ```{r manovaBootFeed, cache = T}
@@ -419,7 +419,7 @@ The effect size is
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks'),
 manovaStats(manovaModelInter, 'df', '^giveFeedback ', test = 'Wilks'))`
-(bootstrap\textsubscript{R = 10000} median = `r bootOutFeed$t %>% median(.)`\footnote{
+(bootstrap median = `r bootOutFeed$t %>% median(.)`\footnote{
 The \(BC_\alpha\) 95\% CI for this estimate is \([`r ciOutFeed$bca[4]`, `r ciOutFeed$bca[5]`]\).
 \label{bca-ref}}).
 
@@ -466,7 +466,7 @@ The effect size
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Wilks'),
 manovaStats(manovaModelInter, 'df', '^activityFactor:', test = 'Wilks'))`
-(bootstrap\textsubscript{R = 10000} median = `r bootOutInt$t %>% median(.)`\footnote{
+(bootstrap median = `r bootOutInt$t %>% median(.)`\footnote{
 The \(BC_\alpha\) 95\% CI = \([`r ciOutInt$bca[4]`, `r ciOutInt$bca[5]`]\).
 Our guess is that this odd result is due to the fact that most of the density is concentrated
 around 0, causing an unreliable estimate. The same could be said for the CI in
@@ -524,6 +524,12 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
   kable_styling(., latex_options = c('hold_position')) %>%
   pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
 ```
+
+## Additional analyses
+
+### Bayesian reanalysis of the first Roy-Bargmann procedure
+
+### Bayesian reanalysis of the second Roy-Bargmann procedure
 
 ## Notes
 

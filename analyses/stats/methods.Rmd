@@ -71,7 +71,7 @@ but unrelated to any of the other three parts of the text (768 words).
 
 Forty-four content related questions with four response options were generated
 from the presented texts. Four questions were presented after the practice text,
-ten after each of the first two parts (only to the participatns in the content
+ten after each of the first two parts (only to the participants in the content
 related test condition), and twenty after the third part of the text (to all
 participants).
 Starting from the second ten-question-set, the distractor options were chosen so that
@@ -138,16 +138,6 @@ reread the practice text (this time with the time limit applied), the general
 knowledge test group answered four general knowledge questions, and the content
 related test group answered four questions based on the practice text.
 
-Participants assigned to the feedback condition also received feedback on their practice
-test achievement. Feedback was presented on a separate screen, which listed the
-questions, the participant's answers, and the correct answers in tabular format.
-Incorrectly answered questions were highlighted in red. After 40 seconds
-elapsed, a "Next" button appeared, allowing participants to proceed to the next
-text. This way, we wanted to prevent participants from simply clicking through
-the feedback, hoping that they will spend their time examining it. The feedback
-was presented for maximally 60 seconds, after which the application proceeded to the
-next text.
-
 Subjects in the rereading and general knowledge conditions
 also answered the four questions related to the practice text, so as to
 familiarise themselves with the scope and specificity level of questions that they
@@ -155,6 +145,17 @@ will receive after reading the final text. All participants were told that
 there would be a cumulative test after the final text, examining their knowledge
 of the three texts following the practice text. In reality, the final test examined
 only the knowledge of the final text.
+
+Participants assigned to the feedback condition also received feedback on their practice
+test achievement. Feedback was presented on a separate screen, which listed the
+questions, the participant's answers, and the correct answers in a tabular format.
+Incorrectly answered questions were highlighted in red, and correctly answered
+questions in green. After 40 seconds
+elapsed, a "Next" button appeared, allowing participants to proceed to the next
+text. By setting this cooldown period and by emphasising that there would be a cumulative test,
+we wanted to encourage our participants to carefully examine the feedback.
+The feedback was presented for maximally 60 seconds, after which the application
+proceeded to the next text.
 
 After the practice round, participants proceeded to the main texts, engaging
 in the interpolated activities they were assigned. After the third text, all
