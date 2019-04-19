@@ -110,7 +110,7 @@ collected. At the end of the session, participants were asked to estimate how
 much of each text they have read.
 The texts and questions were presented on a personal computer, in an application
 constructed using the open source `oTree` framework
-\citep[version 2.1.35,][]{chen_otreeopen-source_2016}
+\citep[version 2.1.35,][]{chenOTreeOpensourcePlatform2016}
 for the Python programming language (version 3.6.4, October 20, 2018).
 
 ### Procedure

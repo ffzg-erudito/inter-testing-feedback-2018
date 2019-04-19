@@ -196,7 +196,8 @@ omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])
 [`r ciOut$bca[4]`, `r ciOut$bca[5]`]).
 To further inspect the relationship of the interpolated activities with our
 dependent variables, we have conducted a Roy-Bargmann stepdown analysis, as
-suggested by \citeauthor{tabachnick_using_2012} (\citeyear{tabachnick_using_2012};
+suggested by \citeauthor{tabachnickUsingMultivariateStatistics2012}
+(\citeyear{tabachnickUsingMultivariateStatistics2012};
 a linear discriminant analysis with the same aim is available in the supplementary
 materials). The total number of correct answers was a priori chosen to be the
 higher priority variable. Therefore, we first conducted an ANOVA with interpolated
@@ -533,12 +534,16 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
 
 ## Notes
 
-Plots created using `ggplot2` \citep{wickham_ggplot2:_2016}. Bootstrap conducted
-using the `boot` package \citep{canty_boot:_2017}. Methods and analyses written
-using `rmarkdown` \citep{allaire_rmarkdown:_2019} and `knitr` \citep{xie_knitr:_2019}. The package `car`
-\citep{fox_r_2011} was used to obtain type III sums of squares. `compute.es` \citep{re_compute.es:_2013}
+Plots created using `ggplot2` \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap conducted
+using the `boot` package \citep{cantyBootBootstrapSPlus2017}. Methods and analyses written
+using `rmarkdown` \citep{allaireRmarkdownDynamicDocuments2019} and
+`knitr` \citep{xieKnitrGeneralPurposePackage2019}. The package `car`
+\citep{foxCompanionAppliedRegression2011} was used to obtain type III sums of
+squares. `compute.es` \citep{reComputeEsCompute2013}
 was used to obtain effect sizes for contrasts.
-`kableExtra` was used to help generate tables \citep{zhu_kableextra:_2019}.
-Other utilities used are `tidyverse` \citep{wickham_tidyverse:_2017},
-`magrittr` \citep{bache_magrittr:_2014}, `here` \citep{muller_here:_2017},
-`conflicted` \citep{wickham_conflicted:_2018}, `psych` \citep{revelle_psych:_2018}.
+`kableExtra` was used to help generate tables \citep{zhuKableExtraConstructComplex2019}.
+Other utilities used are `tidyverse` \citep{wickhamTidyverseEasilyInstall2017},
+`magrittr` \citep{bacheMagrittrForwardPipeOperator2014}, `here`
+\citep{mullerHereSimplerWay2017},
+`conflicted` \citep{wickhamConflictedAlternativeConflict2018},
+`psych` \citep{revellePsychProceduresPsychological2018}.
