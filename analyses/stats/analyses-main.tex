@@ -193,13 +193,14 @@ shown in Figure \ref{box1}.
 Pillai's V for the analysis is 0.126, \(p = 0.004\) (Wilks' \(\Lambda\)
 = 0.875, \(p = 0.003\); Hotelling-Lawley's trace = 0.142, \(p = 0.003\);
 Roy's largest root = 0.137, \(p = 4.912\times 10^{-4}\)). The effect
-size, calculated as \(\omega^2_{mult} = 0.109\)
-(bootstrap\textsubscript{R = 10000} median = 0.132, \(BC_\alpha\) 95\%
-CI = {[}0.012, 0.201{]}). To further inspect the relationship of the
-interpolated activities with our dependent variables, we have conducted
-a Roy-Bargmann stepdown analysis, as suggested by
-\citeauthor{tabachnick_using_2012} (\citeyear{tabachnick_using_2012}; a
-linear discriminant analysis with the same aim is available in the
+size, calculated as \(\omega^2_{mult} = 0.109\) (bootstrap
+median\footnote{All bootstrap estimates taken from 10000 replications.}
+= 0.132, \(BC_\alpha\) 95\% CI = {[}0.012, 0.201{]}). To further inspect
+the relationship of the interpolated activities with our dependent
+variables, we have conducted a Roy-Bargmann stepdown analysis, as
+suggested by \citeauthor{tabachnickUsingMultivariateStatistics2012}
+(\citeyear{tabachnickUsingMultivariateStatistics2012}; a linear
+discriminant analysis with the same aim is available in the
 supplementary materials). The total number of correct answers was a
 priori chosen to be the higher priority variable. Therefore, we first
 conducted an ANOVA with interpolated activity type as the indepedent
@@ -261,15 +262,14 @@ III sums of squares) is 0.071, \(p = 0.003\) (Wilks' \(\Lambda\) =
 0.929, \(p = 0.003\); Hotelling-Lawley's trace = 0.08, \(p = 0.003\);
 Roy's largest root = 0.08, \(p = 0.003\)) confirming the main effect of
 interpolated activity type. The effect size \(\omega^2_{mult}\) = 0.065
-(bootstrap\textsubscript{R = 10000} median = 0.072, \(BC_\alpha\) 95\%
-CI = {[}0.007, 0.139{]}).
+(bootstrap median = 0.072, \(BC_\alpha\) 95\% CI = {[}0.007, 0.139{]}).
 
 On the other hand, we find no evidence for an effect of giving feedback
 on the linear combination of our two dependent variables --- Pillai's V
 = 0.003, \(p = 0.8\) (Wilks' \(\Lambda\) = 0.997, \(p = 0.8\);
 Hotelling-Lawley's trace \(\approx\) 0, \(p = 0.8\); Roy's largest root
 \(\approx\) 0, \(p = 0.8\)). The effect size is \(\omega^2_{mult}\) =
--0.003 (bootstrap\textsubscript{R = 10000} median = 0.003\footnote{
+-0.003 (bootstrap median = 0.003\footnote{
 The \(BC_\alpha\) 95\% CI for this estimate is \([-0.006, 0.004]\).
 \label{bca-ref}}).
 
@@ -277,8 +277,8 @@ Furthermore, we find no evidence for an interaction effect between
 activity type and feedback --- Pillai's V = 0.001, \(p = 0.941\) (Wilks'
 \(\Lambda\) = 0.999, \(p = 0.941\); Hotelling-Lawley's trace \(\approx\)
 0, \(p = 0.941\); Roy's largest root \(\approx\) 0, \(p = 0.941\)). The
-effect size \(\omega^2_{mult}\) = -0.005
-(bootstrap\textsubscript{R = 10000} median = 0.003\footnote{
+effect size \(\omega^2_{mult}\) = -0.005 (bootstrap median =
+0.003\footnote{
 The \(BC_\alpha\) 95\% CI = \([-0.006, -0.005]\).
 Our guess is that this odd result is due to the fact that most of the density is concentrated
 around 0, causing an unreliable estimate. The same could be said for the CI in
@@ -332,9 +332,37 @@ Term & $SS$ & $df$ & $F$ & $p$\\
 \hypertarget{additional-analyses}{%
 \subsection{Additional analyses}\label{additional-analyses}}
 
+Because it is theoretically interesting to see whether there is evidence
+for no difference between certain conditions, or no effect of certain
+manipulations, we have conducted a Bayesian reanalysis of the two
+Roy-Bargmann stepdown procedures. Since these analyses were not planned,
+we have decided to use the default priors provided in the
+\texttt{BayesFactor} \citep{moreyBayesFactorComputationBayes2018}
+package. All posteriors obtained from 6000 simulations.
+
 \hypertarget{bayesian-reanalysis-of-the-first-roy-bargmann-procedure}{%
 \subsubsection{Bayesian reanalysis of the first Roy-Bargmann
 procedure}\label{bayesian-reanalysis-of-the-first-roy-bargmann-procedure}}
+
+As was earlier done in a frequentist setting, we first fit an ANOVA
+model with the total number of correct answers as the dependent
+variable, and the type of interpolated activity as the predictor. The
+mean of the posterior intercept distribution is 11.381 (95\% highest
+density interval (HDI) = {[}10.863, 11.888{]}). The estimated mean of
+the \(b\) coefficient associated with the content-test condition is
+1.254 (95\% HDI = {[}0.553, 2.005{]}). The 95\% highest density interval
+for the posterior indicates that there is a fair amount of uncertainty
+around the exact effect of content-related testing. However, most of the
+probability mass is quite far above the null value, implying that we can
+be certain that there really is a positive effect (given the used
+priors, of course). The means of the posterior distributions for the
+general-knowledge-test and rereading conditions \(b\)s are -0.805 (95\%
+HDI = {[}-1.549, -0.116{]}) and -0.449, (95\% HDI = {[}-1.125, 0.257{]})
+respectively. Most of the posterior distribution for the effect of
+general-knowledge testing lies below the null value. However, the
+distance is not as marked as in the content-related condition. On the
+other hand, there is a lot of uncertainty about the effect of rereading,
+compared to the other two estimates ( 89.8\% --- lies below 0).
 
 \hypertarget{bayesian-reanalysis-of-the-second-roy-bargmann-procedure}{%
 \subsubsection{Bayesian reanalysis of the second Roy-Bargmann
@@ -343,19 +371,23 @@ procedure}\label{bayesian-reanalysis-of-the-second-roy-bargmann-procedure}}
 \hypertarget{notes}{%
 \subsection{Notes}\label{notes}}
 
-Plots created using \texttt{ggplot2} \citep{wickham_ggplot2:_2016}.
-Bootstrap conducted using the \texttt{boot} package
-\citep{canty_boot:_2017}. Methods and analyses written using
-\texttt{rmarkdown} \citep{allaire_rmarkdown:_2019} and \texttt{knitr}
-\citep{xie_knitr:_2019}. The package \texttt{car} \citep{fox_r_2011} was
-used to obtain type III sums of squares. \texttt{compute.es}
-\citep{re_compute.es:_2013} was used to obtain effect sizes for
-contrasts. \texttt{kableExtra} was used to help generate tables
-\citep{zhu_kableextra:_2019}. Other utilities used are
-\texttt{tidyverse} \citep{wickham_tidyverse:_2017}, \texttt{magrittr}
-\citep{bache_magrittr:_2014}, \texttt{here} \citep{muller_here:_2017},
-\texttt{conflicted} \citep{wickham_conflicted:_2018}, \texttt{psych}
-\citep{revelle_psych:_2018}.
+Plots created using \texttt{ggplot2}
+\citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap conducted using the
+\texttt{boot} package \citep{cantyBootBootstrapSPlus2017}. Methods and
+analyses written using \texttt{rmarkdown}
+\citep{allaireRmarkdownDynamicDocuments2019} and \texttt{knitr}
+\citep{xieKnitrGeneralPurposePackage2019}. The package \texttt{car}
+\citep{foxCompanionAppliedRegression2011} was used to obtain type III
+sums of squares. \texttt{compute.es} \citep{reComputeEsCompute2013} was
+used to obtain effect sizes for contrasts. \texttt{kableExtra} was used
+to help generate tables \citep{zhuKableExtraConstructComplex2019}. Other
+utilities used are \texttt{tidyverse}
+\citep{wickhamTidyverseEasilyInstall2017}, \texttt{magrittr}
+\citep{bacheMagrittrForwardPipeOperator2014}, \texttt{here}
+\citep{mullerHereSimplerWay2017}, \texttt{conflicted}
+\citep{wickhamConflictedAlternativeConflict2018}, \texttt{psych}
+\citep{revellePsychProceduresPsychological2018}. Highest density
+intervals obtained using \citep{meredithHDIntervalHighestPosterior2018}.
 
 
 \end{document}

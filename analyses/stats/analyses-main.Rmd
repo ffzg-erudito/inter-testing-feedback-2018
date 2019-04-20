@@ -45,6 +45,10 @@ library(kableExtra)
 library(compute.es)
 # for bootstrapping
 library(boot)
+# for Bayesian analyses
+library(BayesFactor)
+# for extracting HDIs
+library(HDInterval)
 
 library(psych)
 
@@ -528,7 +532,63 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
 
 ## Additional analyses
 
+Because it is theoretically interesting to see whether there is evidence for no
+difference between certain conditions, or no effect of certain manipulations, we
+have conducted a Bayesian reanalysis of the two Roy-Bargmann stepdown procedures.
+Since these analyses were not planned, we have decided to use the default priors
+provided in the `BayesFactor` \citep{moreyBayesFactorComputationBayes2018} package.
+All posteriors obtained from 6000 simulations.
+
+```{r bfOpts}
+numIter <- 6000
+```
+
 ### Bayesian reanalysis of the first Roy-Bargmann procedure
+
+```{r bfAnovaRB1, cache = T}
+set.seed(1108)
+
+anovaBfRb1 <- anovaBF(data = datHardNofeed,
+                     totalCorrect ~ activityFactor)
+
+anovaBfRb1Posterior <- posterior(anovaBfRb1, iterations = numIter)
+
+anovaBfRb1Summary <- summary(anovaBfRb1Posterior)
+
+anovaBfRb1HDI <- hdi(anovaBfRb1Posterior)
+```
+
+As was earlier done in a frequentist setting, we first fit an ANOVA model with the
+total number of correct answers as the dependent variable, and the type of interpolated
+activity as the predictor. The mean of the posterior intercept distribution is
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[1, 'Mean']`
+(95% highest density interval (HDI) =
+[`r anovaBfRb1HDI[1, 'mu']`, `r anovaBfRb1HDI[2, 'mu']`]). The estimated mean of the \(b\)
+coefficient associated with the content-test condition is
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[2, 'Mean']`
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-content']`,
+`r anovaBfRb1HDI[2, 'activityFactor-content']`]). The 95% highest
+density interval for the posterior indicates that there is a fair amount of uncertainty around
+the exact effect of content-related testing. However, most of the probability mass
+is quite far above the null value, implying that we can be certain that there really
+is a positive effect (given the used priors, of course). The means of the posterior
+distributions for the general-knowledge-test and rereading conditions \(b\)s are
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[3, 'Mean']`
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-general']`,
+`r anovaBfRb1HDI[2, 'activityFactor-general']`])
+and
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[4, 'Mean']`,
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-rereading']`,
+`r anovaBfRb1HDI[2, 'activityFactor-rereading']`])
+respectively. Most of the posterior distribution for the effect of general-knowledge
+testing lies below the null value. However, the distance is not as marked as in the
+content-related condition. On the other hand, there is a lot of uncertainty
+about the effect of rereading, compared to the other two estimates
+(`r anovaBfRb1Posterior %>% as.data.frame(.) %>%
+janitor::clean_names(.) %>%
+select('activity_factor_rereading') %>%
+filter(., activity_factor_rereading < 0) %>% nrow(.) / numIter * 100`% 
+of the posterior lies below 0).
 
 ### Bayesian reanalysis of the second Roy-Bargmann procedure
 
@@ -547,3 +607,4 @@ Other utilities used are `tidyverse` \citep{wickhamTidyverseEasilyInstall2017},
 \citep{mullerHereSimplerWay2017},
 `conflicted` \citep{wickhamConflictedAlternativeConflict2018},
 `psych` \citep{revellePsychProceduresPsychological2018}.
+Highest density intervals obtained using \citep{meredithHDIntervalHighestPosterior2018}.
