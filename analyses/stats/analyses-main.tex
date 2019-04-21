@@ -338,7 +338,7 @@ manipulations, we have conducted a Bayesian reanalysis of the two
 Roy-Bargmann stepdown procedures. Since these analyses were not planned,
 we have decided to use the default priors provided in the
 \texttt{BayesFactor} \citep{moreyBayesFactorComputationBayes2018}
-package. All posteriors obtained from 6000 simulations.
+package. \footnote{All posteriors obtained from 6000 simulations.}
 
 \hypertarget{bayesian-reanalysis-of-the-first-roy-bargmann-procedure}{%
 \subsubsection{Bayesian reanalysis of the first Roy-Bargmann
@@ -353,8 +353,8 @@ the \(b\) coefficient associated with the content-test condition is
 1.254 (95\% HDI = {[}0.553, 2.005{]}). The 95\% highest density interval
 for the posterior indicates that there is a fair amount of uncertainty
 around the exact effect of content-related testing. However, most of the
-probability mass is quite far above the null value, implying that we can
-be certain that there really is a positive effect (given the used
+probability density is quite far above the null value, implying that we
+can be certain that there really is a positive effect (given the used
 priors, of course). The means of the posterior distributions for the
 general-knowledge-test and rereading conditions \(b\)s are -0.805 (95\%
 HDI = {[}-1.549, -0.116{]}) and -0.449, (95\% HDI = {[}-1.125, 0.257{]})
@@ -367,7 +367,7 @@ compared to the other two estimates (89.8\% of the posterior lies below
 
 Furthermore, we wanted to explore the difference between the rereading
 and general-knowledge-test conditions, given their somewhat similar
-coefficient and HDI estimats. To do this, we conducted a Bayesian
+coefficient and HDI estimates. To do this, we conducted a Bayesian
 t-test, again with the \texttt{BayesFactor} package's default priors.
 The estimated posterior mean of the difference in the total number of
 correct answers between the general-knowledge-test and rereading groups
@@ -388,7 +388,7 @@ the different experimental conditions --- content-related testing \(b\)
 be either slightly positive (decreasing the number of intrusors) or
 slightly negative (increasing the number of intrusors), preventing us
 from making a conclusion about the nature of the effects. However, given
-the current data and priors we find the following --- 87.433\% of the
+the current data and priors, we find the following --- 87.433\% of the
 posterior for the effect of content related testing falls below zero;
 65.567\% of the posterior for the effect of general knowledge testing
 falls above zero; 77.683\% of the posterior for the effect of rereading
@@ -404,23 +404,60 @@ particular direction.
 \subsubsection{Bayesian reanalysis of the second Roy-Bargmann
 procedure}\label{bayesian-reanalysis-of-the-second-roy-bargmann-procedure}}
 
+In the second Roy-Bargmann analysis, we wanted to test whether there is
+an effect of the type of interpolated activity, receiving feedback, and
+their interaction on the total number of correct answers and chosen
+intrusors. Again, we first fit an ANOVA model with the two predictors
+and the total number of correct answers as the dependent variable.
+
+The mean of the posterior distribution of the intercept is 11.868 (95\%
+HDI = {[}11.39, 12.35{]}). We find that being in the
+content-related-testing condition leads to an increase in the total
+number of correct answers, \(b\) = 1.086 (95\% HDI = {[}0.589,
+1.559{]}), compared to the general-knowledge-testing condition. This is
+aligned with the finding obtained in the frequentist setting. The mean
+of the posterior for the effect of receiving feedback is 0.218 (95\% HDI
+= {[}-0.251, 0.679{]}). The HDI around the estimate prevents us from
+making any relevant conclusions regarding the effect of receiving
+feedback. However, we will mention that 82.25\% of the posterior lies
+above zero. Finally, the estimate for the interaction effect (being in
+the content condition and receiving feedback) is -0.013 (95\% HDI =
+{[}-0.46, 0.432{]}). This could point to there not being a relevant
+interaction effect. According to the collected data and the priors, we
+could claim that the effect is practically equivalent to zero if we were
+not interested in a half-point increase or decrease in the average
+scores (i.e.~defining a region of practical equivalence (ROPE) between
+{[}-0.5, 0.5{]}). However, greater precision would require further data
+collection.
+
+We continue with the ANCOVA model, taking the total number of correct
+answers as the covariate. The estimate of the model intercept is 3.821
+(95\% HDI = {[}3.6, 4.03{]}). The estimate for the effect of content
+related testing on the total number of intrusive distractors chosen is
+\(b\) = -0.118 (95\% HDI = {[}-0.325, 0.092{]}). There is some evidence
+for a slight decrease in the number of intrusive distractors chosen in
+the content related testing condition. However, an increase is also
+possible, but less likely and negligibly small. The estimate for the
+effect of receiving feedback is -0.091 (95\% HDI = {[}-0.302, 0.121{]}).
+
 \hypertarget{notes}{%
 \subsection{Notes}\label{notes}}
 
-Plots created using \texttt{ggplot2}
-\citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap conducted using the
-\texttt{boot} package \citep{cantyBootBootstrapSPlus2017}. Methods and
-analyses written using \texttt{rmarkdown}
-\citep{allaireRmarkdownDynamicDocuments2019} and \texttt{knitr}
-\citep{xieKnitrGeneralPurposePackage2019}. The package \texttt{car}
-\citep{foxCompanionAppliedRegression2011} was used to obtain type III
-sums of squares. \texttt{compute.es} \citep{reComputeEsCompute2013} was
-used to obtain effect sizes for contrasts. \texttt{kableExtra} was used
-to help generate tables \citep{zhuKableExtraConstructComplex2019}. Other
-utilities used are \texttt{tidyverse}
-\citep{wickhamTidyverseEasilyInstall2017}, \texttt{magrittr}
-\citep{bacheMagrittrForwardPipeOperator2014}, \texttt{here}
-\citep{mullerHereSimplerWay2017}, \texttt{conflicted}
+Analyses conducted using the \texttt{R} language
+\citep{rcoreteamLanguageEnvironmentStatistical2019}. Plots created using
+\texttt{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap
+conducted using the \texttt{boot} package
+\citep{cantyBootBootstrapSPlus2017}. Methods and analyses written using
+\texttt{rmarkdown} \citep{allaireRmarkdownDynamicDocuments2019} and
+\texttt{knitr} \citep{xieKnitrGeneralPurposePackage2019}. The package
+\texttt{car} \citep{foxCompanionAppliedRegression2011} was used to
+obtain type III sums of squares. \texttt{compute.es}
+\citep{reComputeEsCompute2013} was used to obtain effect sizes for
+contrasts. \texttt{kableExtra} was used to help generate tables
+\citep{zhuKableExtraConstructComplex2019}. Other utilities used are
+\texttt{tidyverse} \citep{wickhamTidyverseEasilyInstall2017},
+\texttt{magrittr} \citep{bacheMagrittrForwardPipeOperator2014},
+\texttt{here} \citep{mullerHereSimplerWay2017}, \texttt{conflicted}
 \citep{wickhamConflictedAlternativeConflict2018}, \texttt{psych}
 \citep{revellePsychProceduresPsychological2018}. Highest density
 intervals obtained using \citep{meredithHDIntervalHighestPosterior2018}.
