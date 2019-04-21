@@ -362,7 +362,43 @@ respectively. Most of the posterior distribution for the effect of
 general-knowledge testing lies below the null value. However, the
 distance is not as marked as in the content-related condition. On the
 other hand, there is a lot of uncertainty about the effect of rereading,
-compared to the other two estimates ( 89.8\% --- lies below 0).
+compared to the other two estimates (89.8\% of the posterior lies below
+0).
+
+Furthermore, we wanted to explore the difference between the rereading
+and general-knowledge-test conditions, given their somewhat similar
+coefficient and HDI estimats. To do this, we conducted a Bayesian
+t-test, again with the \texttt{BayesFactor} package's default priors.
+The estimated posterior mean of the difference in the total number of
+correct answers between the general-knowledge-test and rereading groups
+is -0.362 (95\% HDI = {[}-1.49, 0.856{]}). As can be seen from the HDI,
+there is a lot of uncertainty around the estimate of the difference.
+This points to a lack of evidence either for or against a difference
+between the two conditions.
+
+In the second step of the Roy-Bargmann procedure, we fit an ANCOVA model
+with the total number of correct answers as the covariate and the total
+number of intrusive options chosen as the dependent variable. The mean
+of the posterior intercept distribution is 4.193 (95\% HDI = {[}3.92,
+4.473{]}). There is uncertainty around the estimates of the effects of
+the different experimental conditions --- content-related testing \(b\)
+= -0.214 (95\% HDI = {[}-0.583, 0.146{]}), general-knowledge testing
+\(b\) = 0.072 (95\% HDI = {[}-0.288, 0.424{]}), rereading \(b\) = 0.142
+(95\% HDI = {[}-0.216, 0.494{]}). The HDIs show that the effects could
+be either slightly positive (decreasing the number of intrusors) or
+slightly negative (increasing the number of intrusors), preventing us
+from making a conclusion about the nature of the effects. However, given
+the current data and priors we find the following --- 87.433\% of the
+posterior for the effect of content related testing falls below zero;
+65.567\% of the posterior for the effect of general knowledge testing
+falls above zero; 77.683\% of the posterior for the effect of rereading
+falls above zero. Given the stated, there is some evidence implying that
+content related testing decreases the number of intrusors chosen, after
+controlling for the effect of the total number of correct answers.
+Further, there is some, albeit weaker evidence that rereading leads to
+an increase in the number of chosen intrusive distractors. Lastly, the
+posterior of the general knowledge testing effect points to no
+particular direction.
 
 \hypertarget{bayesian-reanalysis-of-the-second-roy-bargmann-procedure}{%
 \subsubsection{Bayesian reanalysis of the second Roy-Bargmann

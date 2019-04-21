@@ -590,6 +590,85 @@ select('activity_factor_rereading') %>%
 filter(., activity_factor_rereading < 0) %>% nrow(.) / numIter * 100`% 
 of the posterior lies below 0).
 
+```{r bfRb1contrast, cache = T}
+set.seed(9429)
+
+datHardNofeed %>% filter(activityFactor != 'content') %>%
+  ttestBF(data = .,
+          formula = totalCorrect ~ activityFactor,
+          posterior = T,
+          iterations = numIter) -> contReadGen
+
+hdi(contReadGen) -> contReadGenHDI
+```
+
+Furthermore, we wanted to explore the difference between the rereading and
+general-knowledge-test conditions, given their somewhat similar coefficient
+and HDI estimats. To do this, we conducted a Bayesian t-test, again with the
+`BayesFactor` package's default priors. The estimated posterior mean of the difference in
+the total number of correct answers between the general-knowledge-test and
+rereading groups is `r summary(contReadGen)$statistics[2, 'Mean']`
+(95% HDI = [`r contReadGenHDI[1, 'beta (general - rereading)']`,
+`r contReadGenHDI[2, 'beta (general - rereading)']`]). As can be seen from the
+HDI, there is a lot of uncertainty around the estimate of the difference.
+This points to a lack of evidence either for or against a difference between the
+two conditions.
+
+```{r, bfAncovaRB1, cache = T}
+set.seed(171918)
+
+ancovaBfRb1 <- lmBF(data = datHardNofeed,
+                     totalIntrusors ~ activityFactor * totalCorrect)
+
+ancovaBfRb1Posterior <- posterior(ancovaBfRb1, iterations = numIter)
+
+ancovaBfRb1Summary <- summary(ancovaBfRb1Posterior)
+
+ancovaBfRb1HDI <- hdi(ancovaBfRb1Posterior)
+
+ancovaBfRb1Frame <- as.data.frame(ancovaBfRb1Posterior) %>%
+  janitor::clean_names(.)
+```
+ 
+In the second step of the Roy-Bargmann procedure, we fit an ANCOVA model with
+the total number of correct answers as the covariate and the total number
+of intrusive options chosen as the dependent variable. The mean of the posterior
+intercept distribution is `r ancovaBfRb1Summary$statistics[1, 'Mean']`
+(95% HDI = [`r ancovaBfRb1HDI[1, 'mu']`,
+`r ancovaBfRb1HDI[2, 'mu']`]). 
+There is uncertainty around the estimates of the effects of the
+different experimental conditions --- content-related testing \(b\) =
+`r ancovaBfRb1Summary$statistics[2, 'Mean']`
+(95% HDI = [`r ancovaBfRb1HDI[1, 'activityFactor-content']`,
+`r ancovaBfRb1HDI[2, 'activityFactor-content']`]),
+general-knowledge testing \(b\) =
+`r ancovaBfRb1Summary$statistics[3, 'Mean']`
+(95% HDI = [`r ancovaBfRb1HDI[1, 'activityFactor-general']`,
+`r ancovaBfRb1HDI[2, 'activityFactor-general']`]),
+rereading \(b\) =
+`r ancovaBfRb1Summary$statistics[4, 'Mean']`
+(95% HDI = [`r ancovaBfRb1HDI[1, 'activityFactor-rereading']`,
+`r ancovaBfRb1HDI[2, 'activityFactor-rereading']`]).
+The HDIs show that the effects could be either slightly positive (decreasing the
+number of intrusors) or slightly negative (increasing the number of intrusors),
+preventing us from making a conclusion about the nature of the effects.
+However, given the current data and priors we find the following ---
+`r ancovaBfRb1Frame %>% select(., activity_factor_content) %>%
+filter(., activity_factor_content < 0) %>% nrow() / numIter * 100`% of the
+posterior for the effect of content related testing falls below zero;
+`r ancovaBfRb1Frame %>% select(., activity_factor_general) %>%
+filter(., activity_factor_general > 0) %>% nrow() / numIter * 100`% 
+of the posterior for the effect of general knowledge testing falls
+above zero; `r ancovaBfRb1Frame %>% select(., activity_factor_rereading) %>%
+filter(., activity_factor_rereading > 0) %>% nrow() / numIter * 100`% of
+the posterior for the effect of rereading falls above zero.
+Given the stated, there is some evidence implying that content related testing
+decreases the number of intrusors chosen, after controlling for the effect of
+the total number of correct answers. Further, there is some, albeit weaker evidence
+that rereading leads to an increase in the number of chosen intrusive distractors.
+Lastly, the posterior of the general knowledge testing effect points to no particular
+direction.
+
 ### Bayesian reanalysis of the second Roy-Bargmann procedure
 
 ## Notes
