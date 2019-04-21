@@ -45,6 +45,10 @@ library(kableExtra)
 library(compute.es)
 # for bootstrapping
 library(boot)
+# for Bayesian analyses
+library(BayesFactor)
+# for extracting HDIs
+library(HDInterval)
 
 library(psych)
 
@@ -192,11 +196,12 @@ Roy's largest root =
 The effect size, calculated as
 \(\omega^2_{mult} = `r summary(manovaModel, test = 'Wilks') -> .;
 omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`\)
-(bootstrap\textsubscript{R = 10000} median = `r bootOut$t %>% median(.)`, \(BC_\alpha\) 95% CI =
+(bootstrap median\footnote{All bootstrap estimates taken from 10000 replications.} = `r bootOut$t %>% median(.)`, \(BC_\alpha\) 95% CI =
 [`r ciOut$bca[4]`, `r ciOut$bca[5]`]).
 To further inspect the relationship of the interpolated activities with our
 dependent variables, we have conducted a Roy-Bargmann stepdown analysis, as
-suggested by \citeauthor{tabachnick_using_2012} (\citeyear{tabachnick_using_2012};
+suggested by \citeauthor{tabachnickUsingMultivariateStatistics2012}
+(\citeyear{tabachnickUsingMultivariateStatistics2012};
 a linear discriminant analysis with the same aim is available in the supplementary
 materials). The total number of correct answers was a priori chosen to be the
 higher priority variable. Therefore, we first conducted an ANOVA with interpolated
@@ -373,7 +378,7 @@ The effect size
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Wilks'),
 manovaStats(manovaModelInter, 'df', '^activityFactor ', test = 'Wilks'))`
-(bootstrap\textsubscript{R = 10000} median = `r bootOutActivity$t %>% median(.)`, \(BC_\alpha\) 95% CI =
+(bootstrap median = `r bootOutActivity$t %>% median(.)`, \(BC_\alpha\) 95% CI =
 [`r ciOutActivity$bca[4]`, `r ciOutActivity$bca[5]`]).
 
 ```{r manovaBootFeed, cache = T}
@@ -419,7 +424,7 @@ The effect size is
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks'),
 manovaStats(manovaModelInter, 'df', '^giveFeedback ', test = 'Wilks'))`
-(bootstrap\textsubscript{R = 10000} median = `r bootOutFeed$t %>% median(.)`\footnote{
+(bootstrap median = `r bootOutFeed$t %>% median(.)`\footnote{
 The \(BC_\alpha\) 95\% CI for this estimate is \([`r ciOutFeed$bca[4]`, `r ciOutFeed$bca[5]`]\).
 \label{bca-ref}}).
 
@@ -466,7 +471,7 @@ The effect size
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Wilks'),
 manovaStats(manovaModelInter, 'df', '^activityFactor:', test = 'Wilks'))`
-(bootstrap\textsubscript{R = 10000} median = `r bootOutInt$t %>% median(.)`\footnote{
+(bootstrap median = `r bootOutInt$t %>% median(.)`\footnote{
 The \(BC_\alpha\) 95\% CI = \([`r ciOutInt$bca[4]`, `r ciOutInt$bca[5]`]\).
 Our guess is that this odd result is due to the fact that most of the density is concentrated
 around 0, causing an unreliable estimate. The same could be said for the CI in
@@ -525,14 +530,81 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
   pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
 ```
 
+## Additional analyses
+
+Because it is theoretically interesting to see whether there is evidence for no
+difference between certain conditions, or no effect of certain manipulations, we
+have conducted a Bayesian reanalysis of the two Roy-Bargmann stepdown procedures.
+Since these analyses were not planned, we have decided to use the default priors
+provided in the `BayesFactor` \citep{moreyBayesFactorComputationBayes2018} package.
+All posteriors obtained from 6000 simulations.
+
+```{r bfOpts}
+numIter <- 6000
+```
+
+### Bayesian reanalysis of the first Roy-Bargmann procedure
+
+```{r bfAnovaRB1, cache = T}
+set.seed(1108)
+
+anovaBfRb1 <- anovaBF(data = datHardNofeed,
+                     totalCorrect ~ activityFactor)
+
+anovaBfRb1Posterior <- posterior(anovaBfRb1, iterations = numIter)
+
+anovaBfRb1Summary <- summary(anovaBfRb1Posterior)
+
+anovaBfRb1HDI <- hdi(anovaBfRb1Posterior)
+```
+
+As was earlier done in a frequentist setting, we first fit an ANOVA model with the
+total number of correct answers as the dependent variable, and the type of interpolated
+activity as the predictor. The mean of the posterior intercept distribution is
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[1, 'Mean']`
+(95% highest density interval (HDI) =
+[`r anovaBfRb1HDI[1, 'mu']`, `r anovaBfRb1HDI[2, 'mu']`]). The estimated mean of the \(b\)
+coefficient associated with the content-test condition is
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[2, 'Mean']`
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-content']`,
+`r anovaBfRb1HDI[2, 'activityFactor-content']`]). The 95% highest
+density interval for the posterior indicates that there is a fair amount of uncertainty around
+the exact effect of content-related testing. However, most of the probability mass
+is quite far above the null value, implying that we can be certain that there really
+is a positive effect (given the used priors, of course). The means of the posterior
+distributions for the general-knowledge-test and rereading conditions \(b\)s are
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[3, 'Mean']`
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-general']`,
+`r anovaBfRb1HDI[2, 'activityFactor-general']`])
+and
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[4, 'Mean']`,
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-rereading']`,
+`r anovaBfRb1HDI[2, 'activityFactor-rereading']`])
+respectively. Most of the posterior distribution for the effect of general-knowledge
+testing lies below the null value. However, the distance is not as marked as in the
+content-related condition. On the other hand, there is a lot of uncertainty
+about the effect of rereading, compared to the other two estimates
+(`r anovaBfRb1Posterior %>% as.data.frame(.) %>%
+janitor::clean_names(.) %>%
+select('activity_factor_rereading') %>%
+filter(., activity_factor_rereading < 0) %>% nrow(.) / numIter * 100`% 
+of the posterior lies below 0).
+
+### Bayesian reanalysis of the second Roy-Bargmann procedure
+
 ## Notes
 
-Plots created using `ggplot2` \citep{wickham_ggplot2:_2016}. Bootstrap conducted
-using the `boot` package \citep{canty_boot:_2017}. Methods and analyses written
-using `rmarkdown` \citep{allaire_rmarkdown:_2019} and `knitr` \citep{xie_knitr:_2019}. The package `car`
-\citep{fox_r_2011} was used to obtain type III sums of squares. `compute.es` \citep{re_compute.es:_2013}
+Plots created using `ggplot2` \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap conducted
+using the `boot` package \citep{cantyBootBootstrapSPlus2017}. Methods and analyses written
+using `rmarkdown` \citep{allaireRmarkdownDynamicDocuments2019} and
+`knitr` \citep{xieKnitrGeneralPurposePackage2019}. The package `car`
+\citep{foxCompanionAppliedRegression2011} was used to obtain type III sums of
+squares. `compute.es` \citep{reComputeEsCompute2013}
 was used to obtain effect sizes for contrasts.
-`kableExtra` was used to help generate tables \citep{zhu_kableextra:_2019}.
-Other utilities used are `tidyverse` \citep{wickham_tidyverse:_2017},
-`magrittr` \citep{bache_magrittr:_2014}, `here` \citep{muller_here:_2017},
-`conflicted` \citep{wickham_conflicted:_2018}, `psych` \citep{revelle_psych:_2018}.
+`kableExtra` was used to help generate tables \citep{zhuKableExtraConstructComplex2019}.
+Other utilities used are `tidyverse` \citep{wickhamTidyverseEasilyInstall2017},
+`magrittr` \citep{bacheMagrittrForwardPipeOperator2014}, `here`
+\citep{mullerHereSimplerWay2017},
+`conflicted` \citep{wickhamConflictedAlternativeConflict2018},
+`psych` \citep{revellePsychProceduresPsychological2018}.
+Highest density intervals obtained using \citep{meredithHDIntervalHighestPosterior2018}.
