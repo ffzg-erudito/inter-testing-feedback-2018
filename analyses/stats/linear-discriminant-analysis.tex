@@ -1,0 +1,590 @@
+\documentclass[11pt,]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1.3cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Supplementary material - linear discriminant analysis},
+            pdfauthor={DV},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Supplementary material - linear discriminant analysis}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{DV}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+    \date{}
+    \predate{}\postdate{}
+  
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\usepackage[natbibapa, sectionbib, tocbib]{apacite}
+\usepackage[utf8]{inputenc}
+\usepackage{caption}
+\usepackage{bookman}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[htt]{hyphenat}
+\usepackage{booktabs}
+\usepackage[euler]{textgreek}
+\usepackage{float}
+\usepackage[onehalfspacing]{setspace}
+\captionsetup[table]{width=\textwidth}
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = black}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{4}
+\tableofcontents
+}
+In the results section of the paper, Roy-Bargmann stepdown analyses are
+used to dive deeper into the nature of the differences identified by the
+MANOVAs. As some authors
+\citep[eg.][]{tabachnickUsingMultivariateStatistics2012,salkindEncyclopediaMeasurementStatistics2007,
+fieldDiscoveringStatisticsUsing2012} recommend conducting a linear
+discriminant analysis as a follow-up to MANOVA, we are reporting these
+results here.
+
+\hypertarget{hard-exclusion-criteria}{%
+\section{Hard exclusion criteria}\label{hard-exclusion-criteria}}
+
+As in the paper itself, the following analyses are going to be conducted
+on a subset of the collected data which contains 203 cases. We will
+conduct the analyses specified in the \texttt{analysis-plan.md} file and
+follow them up with linear discriminant analyses.
+
+\hypertarget{interpolated-activity-effect}{%
+\section{Interpolated activity
+effect}\label{interpolated-activity-effect}}
+
+Again, we will first conduct a MANOVA with the total number of correct
+answers and total number of intrusive distractors chosen as dependent
+variables and the type of interpolated activity as the independent
+variable.
+
+\hypertarget{note}{%
+\subsection{Note}\label{note}}
+
+A decision was made not to check the univariate and multivariate
+outliers at this point. Regarding the univariate outliers - the boxplots
+point to only one case which could be an outlier. The scatterplots show
+no point that's obviously different from the rest. As for the
+multivariate outliers, \citet{tabachnickUsingMultivariateStatistics2012}
+warn that the Mahalanobis distance can produce false negatives or false
+positives. Furthermore, deleting a set of outliers and rerunning the
+analysis can reveal yet another set of outliers --- without a clear-cut
+and absolute criterion, exclusions are somewhat arbitrary. Finally,
+cases were excluded based on criteria that are more or less
+substantivelly meaningful in the context of the conducted study. Given
+the above, no statistical criteria is used for exclusion at this point.
+
+\hypertarget{manova}{%
+\subsection{MANOVA}\label{manova}}
+
+Here's the otuput of \texttt{R}'s \texttt{manova} function:
+
+\begin{verbatim}
+## 
+## Type II MANOVA Tests:
+## 
+## Sum of squares and products for error:
+##                totalCorrect totalIntrusors
+## totalCorrect            993           -417
+## totalIntrusors         -417            435
+## 
+## ------------------------------------------
+##  
+## Term: as.factor(activityFactor) 
+## 
+## Sum of squares and products for the hypothesis:
+##                totalCorrect totalIntrusors
+## totalCorrect          125.9          -70.5
+## totalIntrusors        -70.5           41.0
+## 
+## Multivariate Tests: as.factor(activityFactor)
+##                  Df test stat approx F num Df den Df  Pr(>F)    
+## Pillai            2     0.126     3.99      4    238 0.00376 ** 
+## Wilks             2     0.875     4.07      4    236 0.00327 ** 
+## Hotelling-Lawley  2     0.142     4.16      4    234 0.00285 ** 
+## Roy               2     0.137     8.13      2    119 0.00049 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+As can be seen from the resulting output, Pillai's V indicates that the
+three groups differ significantly along the linear combination of the
+two DVs. The other three reported statistics point to the same
+conclusion. Therefore, we'll proceed with conducting a linear
+discriminant analyis.
+
+We can look at \(1 - \Lambda\) as an extension to the univariate
+\(\eta^2\) \citep{hubertyAppliedMANOVADiscriminant2006}. In our case,
+the multivariate \(\eta^2\) is 0.125, which represents the proportion of
+total variance associated with the activity type IV. Further, we can
+calculate the effect size index \(\xi^2\), which is based on Pillai's
+test statistic, and represents the mean squared canonical correlation
+\citep{hubertyAppliedMANOVADiscriminant2006}: \[\xi^2 = \frac{U}{r},\]
+where \(r\) is the number of variates (2, in our case). Therefore,
+\(\xi^2 = 0.063\). Finally, we will calculate Tatsuoka's
+\citep[1970; according to][]{hubertyAppliedMANOVADiscriminant2006}
+extension of the \(\omega^2\) to the multivariate case. In this case,
+\(\omega^2_{mult} = 0.109\). The adjusted value of the \(\xi^2\)
+statistic is \(\xi^2_{adj} = 0.047\)
+
+Now, let's take a closer look at the nature of our effect, using linear
+discriminant analysis.
+
+\hypertarget{linear-discriminant-analysis}{%
+\subsection{Linear discriminant
+analysis}\label{linear-discriminant-analysis}}
+
+We are using the \texttt{candisc} function from the eponymous package
+\citep{friendlyCandiscVisualizingGeneralized2017} to conduct the LDA.
+
+\begin{verbatim}
+## 
+## Canonical Discriminant Analysis for as.factor(activityFactor):
+## 
+##    CanRsq Eigenvalue Difference Percent Cumulative
+## 1 0.12018     0.1366      0.131   96.13       96.1
+## 2 0.00547     0.0055      0.131    3.87      100.0
+## 
+## Test of H0: The canonical correlations in the 
+## current row and all that follow are zero
+## 
+##   LR test stat approx F numDF denDF Pr(> F)   
+## 1        0.875     4.07     4   236  0.0033 **
+## 2        0.995     0.65     1   119  0.4202   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{verbatim}
+## Class means
+\end{verbatim}
+
+\begin{verbatim}
+##             Can1    Can2
+## content    0.501 -0.0104
+## general   -0.309 -0.0845
+## rereading -0.217  0.0954
+\end{verbatim}
+
+\begin{verbatim}
+## Raw coefficients
+\end{verbatim}
+
+\begin{verbatim}
+##                  Can1  Can2
+## totalCorrect    0.255 0.368
+## totalIntrusors -0.186 0.651
+\end{verbatim}
+
+\begin{verbatim}
+## Standardized coefficients
+\end{verbatim}
+
+\begin{verbatim}
+##                  Can1 Can2
+## totalCorrect    0.736 1.06
+## totalIntrusors -0.355 1.24
+\end{verbatim}
+
+From the above output we can see that the first variate explains most of
+the variance. Furthermore, Wilks' lambda values inform us that the
+groups are separated only on the first variate, so that's the only one
+we'll interpret. Also, we can see that the variation in the grouping
+variable is almost exclusively explained by the first variate.
+
+Looking at the structure scores, we can see that both the total number
+of correct answers and the total number of intrusive distractors chosen
+share a lot of variance with the first variate. The first variate is
+almost completely defined by the total number of correct answers, but
+the contribution of the number of chosen intrusors in also considerable.
+This could be due to the relatively high correlation between those two
+variables.
+
+\begin{figure*}
+\includegraphics{linear-discriminant-analysis_files/figure-latex/ldaPlot-1} \caption{\label{ldaPlot1}Plot showing the cases' location on the two variates. Group means on the variates are marked by crosses. The vertical line marks the 0 on the first variate.}\label{fig:ldaPlot}
+\end{figure*}
+
+To assess the ability of the LDA model to discriminate group membership
+based on the number of correct answers to the questions and the number
+of chosen instrusive distractors, we'll re-train the model and evaluate
+it's error rate using the leave-one-out cross-validation technique.
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##            Reference
+## Prediction  content general rereading
+##   content        27      16        17
+##   general        11      19        13
+##   rereading       4       5        10
+## 
+## Overall Statistics
+##                                         
+##                Accuracy : 0.459         
+##                  95% CI : (0.368, 0.552)
+##     No Information Rate : 0.344         
+##     P-Value [Acc > NIR] : 0.00572       
+##                                         
+##                   Kappa : 0.185         
+##  Mcnemar's Test P-Value : 0.00577       
+## 
+## Statistics by Class:
+## 
+##                      Class: content Class: general Class: rereading
+## Sensitivity                   0.643          0.475            0.250
+## Specificity                   0.588          0.707            0.890
+## Pos Pred Value                0.450          0.442            0.526
+## Neg Pred Value                0.758          0.734            0.709
+## Precision                     0.450          0.442            0.526
+## Recall                        0.643          0.475            0.250
+## F1                            0.529          0.458            0.339
+## Prevalence                    0.344          0.328            0.328
+## Detection Rate                0.221          0.156            0.082
+## Detection Prevalence          0.492          0.352            0.156
+## Balanced Accuracy             0.615          0.591            0.570
+\end{verbatim}
+
+As can be seen from the table, the total LOOCV accuracy is 0.459, which
+is significantly above the no information rate (which is taken to be the
+largest class percentage in the data). According to the Landis \& Koch
+\citep[1977; as reported in][]{salkindEncyclopediaMeasurementStatistics2007}
+guidlines, this represents only a slight agreement between the predicted
+and actual classes. Next, we'll drill into the individual predictors to
+see which are useful for discriminating between different groups.
+
+\hypertarget{evaluating-individual-predictors}{%
+\subsection{Evaluating individual
+predictors}\label{evaluating-individual-predictors}}
+
+\citet{tabachnickUsingMultivariateStatistics2012} describe the process
+of sequential discriminant analysis, where predictors are entered
+one-by-one, and the improvement in classification accuracy is monitored.
+Therefore, we'll fit an LDA model containing only the number of correct
+answers as a predictor. Then, we will compare this model's LOOCV
+accuracy to that of the full model (reported at the end of the previous
+section).
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##            Reference
+## Prediction  content general rereading
+##   content        29      15        16
+##   general        11      22        18
+##   rereading       2       3         6
+## 
+## Overall Statistics
+##                                        
+##                Accuracy : 0.467        
+##                  95% CI : (0.376, 0.56)
+##     No Information Rate : 0.344        
+##     P-Value [Acc > NIR] : 0.00334      
+##                                        
+##                   Kappa : 0.198        
+##  Mcnemar's Test P-Value : 5.87e-05     
+## 
+## Statistics by Class:
+## 
+##                      Class: content Class: general Class: rereading
+## Sensitivity                   0.690          0.550           0.1500
+## Specificity                   0.613          0.646           0.9390
+## Pos Pred Value                0.483          0.431           0.5455
+## Neg Pred Value                0.790          0.746           0.6937
+## Precision                     0.483          0.431           0.5455
+## Recall                        0.690          0.550           0.1500
+## F1                            0.569          0.484           0.2353
+## Prevalence                    0.344          0.328           0.3279
+## Detection Rate                0.238          0.180           0.0492
+## Detection Prevalence          0.492          0.418           0.0902
+## Balanced Accuracy             0.651          0.598           0.5445
+\end{verbatim}
+
+As can be seen from the second confusion matrix, the accuracy of this
+model is actually somewhat higher than in the full model, as is Cohen's
+\textkappa. Importantly, we notice that adding the total number of
+intrusors to the model doesn't significantly increase the accuracy of
+the model (the 95\% confidence intervals for the accuracies of the two
+models completely overlap).
+
+\hypertarget{multivariate-contrasts}{%
+\subsection{Multivariate contrasts}\label{multivariate-contrasts}}
+
+We've planned to contrast the two test groups with the rereading group,
+and the two test groups with each other. That's what we'll do here.
+
+\begin{verbatim}
+##           test vs rereading content vs general
+## content                   1                  1
+## general                   1                 -1
+## rereading                -2                  0
+\end{verbatim}
+
+\begin{verbatim}
+##                                  totalCorrect totalIntrusors
+## (Intercept)                            11.379          4.194
+## activityFactortest vs rereading         0.252         -0.216
+## activityFactorcontent vs general        1.155         -0.597
+\end{verbatim}
+
+Now that we've set up the model, let's run the contrasts. The first
+contrast is between the two test groups (content and general knowledge)
+and the rereading group.
+
+\begin{verbatim}
+## 
+## Sum of squares and products for the hypothesis:
+##                totalCorrect totalIntrusors
+## totalCorrect           15.3          -13.1
+## totalIntrusors        -13.1           11.3
+## 
+## Sum of squares and products for error:
+##                totalCorrect totalIntrusors
+## totalCorrect            993           -417
+## totalIntrusors         -417            435
+## 
+## Multivariate Tests: 
+##                  Df test stat approx F num Df den Df Pr(>F)
+## Pillai            1     0.026     1.57      2    118   0.21
+## Wilks             1     0.974     1.57      2    118   0.21
+## Hotelling-Lawley  1     0.027     1.57      2    118   0.21
+## Roy               1     0.027     1.57      2    118   0.21
+\end{verbatim}
+
+As can be seen from the test statistics, no significant difference is
+found between the two test groups and the rereading group. Next, we'll
+look at the contrast between the content test group and the general
+knowledge test group.
+
+\begin{verbatim}
+## 
+## Sum of squares and products for the hypothesis:
+##                totalCorrect totalIntrusors
+## totalCorrect          109.4          -56.5
+## totalIntrusors        -56.5           29.2
+## 
+## Sum of squares and products for error:
+##                totalCorrect totalIntrusors
+## totalCorrect            993           -417
+## totalIntrusors         -417            435
+## 
+## Multivariate Tests: 
+##                  Df test stat approx F num Df den Df Pr(>F)   
+## Pillai            1     0.102     6.73      2    118 0.0017 **
+## Wilks             1     0.898     6.73      2    118 0.0017 **
+## Hotelling-Lawley  1     0.114     6.73      2    118 0.0017 **
+## Roy               1     0.114     6.73      2    118 0.0017 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+This contrast is statistically significant, indicating that the two
+groups differ on the linear combination of the number of correct answers
+and number of intrusive distractors chosen. We'll calculate the same
+effect size indices as for the omnibus model.
+
+The multivariate \(\eta^2\) is 0.102. The effect size index \(\xi^2\) is
+0.051. Finally, we will calculate Tatsuoka's
+\citep[1970; according to][]{hubertyAppliedMANOVADiscriminant2006}
+extension of the \(\omega^2\) to the multivariate case. In this case,
+\(\omega^2_{mult} = 0.087\). The adjusted value of the \(\xi^2\)
+statistic is \(\xi^2_{adj} = 0.035\)
+
+\hypertarget{contrast-lda}{%
+\subsubsection{Contrast LDA}\label{contrast-lda}}
+
+Again, to further investigate the nature of the difference between the
+content and general knowledge test group, we'll conduct a linear
+discriminant analysis to try and find the variate that best
+discriminates these two groups.
+
+\begin{verbatim}
+## 
+## Type II MANOVA Tests: Pillai test statistic
+##                Df test stat approx F num Df den Df Pr(>F)   
+## activityFactor  1     0.148     6.85      2     79 0.0018 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Canonical Discriminant Analysis for activityFactor:
+## 
+##   CanRsq Eigenvalue Difference Percent Cumulative
+## 1 0.1479     0.1735                100        100
+## 
+## Class means:
+## 
+## [1]  0.4015 -0.4216
+## 
+##  std coefficients:
+##   totalCorrect totalIntrusors 
+##         0.7210        -0.3722
+\end{verbatim}
+
+\begin{verbatim}
+##                  Can1
+## totalCorrect    0.964
+## totalIntrusors -0.851
+\end{verbatim}
+
+Again, we see that both predictors are highly correlated with the
+discriminant function, albeit with different signs. Let's look at the
+LOOCV prediction accuracy.
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction content general
+##    content      28      16
+##    general      14      24
+##                                        
+##                Accuracy : 0.634        
+##                  95% CI : (0.52, 0.738)
+##     No Information Rate : 0.512        
+##     P-Value [Acc > NIR] : 0.0175       
+##                                        
+##                   Kappa : 0.267        
+##  Mcnemar's Test P-Value : 0.8551       
+##                                        
+##             Sensitivity : 0.667        
+##             Specificity : 0.600        
+##          Pos Pred Value : 0.636        
+##          Neg Pred Value : 0.632        
+##              Prevalence : 0.512        
+##          Detection Rate : 0.341        
+##    Detection Prevalence : 0.537        
+##       Balanced Accuracy : 0.633        
+##                                        
+##        'Positive' Class : content      
+## 
+\end{verbatim}
+
+With both predictors, the prediction accuracy is significantlly above
+the no information rate.
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction content general
+##    content      29      15
+##    general      13      25
+##                                        
+##                Accuracy : 0.659        
+##                  95% CI : (0.546, 0.76)
+##     No Information Rate : 0.512        
+##     P-Value [Acc > NIR] : 0.00523      
+##                                        
+##                   Kappa : 0.316        
+##  Mcnemar's Test P-Value : 0.85011      
+##                                        
+##             Sensitivity : 0.690        
+##             Specificity : 0.625        
+##          Pos Pred Value : 0.659        
+##          Neg Pred Value : 0.658        
+##              Prevalence : 0.512        
+##          Detection Rate : 0.354        
+##    Detection Prevalence : 0.537        
+##       Balanced Accuracy : 0.658        
+##                                        
+##        'Positive' Class : content      
+## 
+\end{verbatim}
+
+Furthermore, the prediction accuracy doesn't drop significantly when we
+omit the total number of intrusors.
+
+\setstretch{1}
+\bibliographystyle{apacite}
+\bibliography{../../paper/reference.bib}
+
+
+\end{document}
