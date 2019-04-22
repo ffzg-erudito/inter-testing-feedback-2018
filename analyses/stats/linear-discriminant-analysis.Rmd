@@ -1,0 +1,334 @@
+---
+author: "DV"
+fontsize: 11pt
+title: "Supplementary material - linear discriminant analysis"
+output:
+    pdf_document:
+        keep_tex: true
+        toc: true
+        toc_depth: 4
+geometry: margin=1.3cm
+header-includes: |
+    \usepackage[natbibapa, sectionbib, tocbib]{apacite}
+    \usepackage[utf8]{inputenc}
+    \usepackage{caption}
+    \usepackage{bookman}
+    \usepackage{multirow}
+    \usepackage{array}
+    \usepackage[htt]{hyphenat}
+    \usepackage{booktabs}
+    \usepackage[euler]{textgreek}
+    \usepackage{float}
+    \usepackage[onehalfspacing]{setspace}
+    \captionsetup[table]{width=\textwidth}
+    \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = black}
+---
+
+```{r setup, echo = F, include = F}
+library(knitr)
+library(kableExtra)
+opts_chunk$set(dpi = 600, dev = 'tikz', echo = F)
+options(digits = 3, scipen = 0, knitr.kable.NA = '')
+
+library(here)
+# NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
+# `conflict_prefer`s filter from {dplyr}
+# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run
+# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard
+# exclusion criteria applied (as described in `analysis-plan.md`), and (3)
+# `datSoft` which is `datHard` with the soft exclusion criteria applied (as
+# described in `analysis-plan.md`)
+source(here('wrangling', '3-exclusion-criteria.R'))
+# for Henze-Zirkler
+library(MVN)
+# for Box's M
+library(heplots)
+# colorscale
+library(viridis)
+# multivariate outliers
+library(mvoutlier)
+# for LDA
+library(candisc)
+library(MASS)
+# for labels in ggplots
+library(ggrepel)
+# for different sums of squares
+library(car)
+
+conflict_prefer('select', 'dplyr')
+theme_set(theme_minimal())
+
+# source helper functions
+source(here('helpers', 'manova-helpers.R'))
+```
+
+```{r datHardNofeedFilter}
+datHardNofeed <- datHard %>% filter(., giveFeedback == F) %>%
+  select(., activityFactor, totalCorrect, totalIntrusors)
+datHardNofeed$activityFactor %<>% as.factor(.)
+```
+
+In the results section of the paper, Roy-Bargmann stepdown analyses are used to
+dive deeper into the nature of the differences identified by the MANOVAs. As some
+authors \citep[eg.][]{tabachnickUsingMultivariateStatistics2012,salkindEncyclopediaMeasurementStatistics2007,
+fieldDiscoveringStatisticsUsing2012} recommend conducting a linear discriminant analysis
+as a follow-up to MANOVA, we are reporting these results here.
+
+# Hard exclusion criteria
+
+As in the paper itself, the following analyses are going to be conducted on a
+subset of the collected data which contains `r nrow(datHard)` cases.
+We will conduct the analyses specified in the `analysis-plan.md`
+file and follow them up with linear discriminant analyses.
+
+# Interpolated activity effect
+
+Again, we will first conduct a MANOVA with the total number of correct answers and
+total number of intrusive distractors chosen as dependent variables and the type
+of interpolated activity as the independent variable.
+
+## Note
+
+A decision was made not to check the univariate and multivariate outliers at this
+point. Regarding the univariate outliers - the boxplots point to only one case
+which could be an outlier. The scatterplots show no point that's obviously different
+from the rest. As for the multivariate outliers, \citet{tabachnickUsingMultivariateStatistics2012} warn
+that the Mahalanobis distance can produce false negatives or false positives. Furthermore,
+deleting a set of outliers and rerunning the analysis can reveal yet another set of
+outliers --- without a clear-cut and absolute criterion, exclusions are somewhat
+arbitrary. Finally, cases were excluded based on criteria that are more or less
+substantivelly meaningful in the context of the conducted study. Given the above,
+no statistical criteria is used for exclusion at this point.
+
+## MANOVA
+
+Here's the otuput of `R`'s `manova` function:
+
+```{r manova}
+manovaModel <- manova(data = datHardNofeed,
+                      cbind(totalCorrect, totalIntrusors) ~
+                        as.factor(activityFactor))
+Anova(manovaModel) %>% summary(.)
+```
+
+As can be seen from the resulting output, Pillai's V indicates that the three
+groups differ significantly along the linear combination of the two DVs. The other
+three reported statistics point to the same conclusion. Therefore, we'll proceed
+with conducting a linear discriminant analyis.
+
+We can look at \(1 - \Lambda\) as an extension to the univariate \(\eta^2\)
+\citep{hubertyAppliedMANOVADiscriminant2006}. In our case, the multivariate \(\eta^2\) is
+`r 1 - summary(manovaModel, test = 'Wilks') %>% pluck('stats') %>% .[1,2]`, which
+represents the proportion of total variance associated with the activity type
+IV. Further, we can calculate the effect size index \(\xi^2\), which is based
+on Pillai's test statistic, and represents the mean squared canonical correlation
+\citep{hubertyAppliedMANOVADiscriminant2006}:
+\[\xi^2 = \frac{U}{r},\] where \(r\) is the number of variates (2, in our case).
+Therefore, \(\xi^2 = `r summary(manovaModel, test = 'Pillai') %>% pluck('stats') %>%
+.[1,2] %>% {. / 2} -> xsi; xsi`\). Finally, we will calculate Tatsuoka's
+\citep[1970; according to][]{hubertyAppliedMANOVADiscriminant2006} extension of the \(\omega^2\)
+to the multivariate case. In this case, \(\omega^2_{mult} = `r 1 - (122 * .875) /
+(119 + .875)`\). The adjusted value of the \(\xi^2\) statistic is
+\(\xi^2_{adj} = `r 1 - 121/119 * (1 - xsi)`\)
+
+Now, let's take a closer look at the nature of our effect, using linear discriminant
+analysis.
+
+## Linear discriminant analysis
+
+We are using the `candisc` function from the eponymous package
+\citep{friendlyCandiscVisualizingGeneralized2017} to conduct the LDA.
+
+```{r ldaCandisc}
+. <- candisc(manovaModel, type = '2')
+.
+cat('Class means')
+.$means
+cat('Raw coefficients')
+.$coeffs.raw
+cat('Standardized coefficients')
+.$coeffs.std
+```
+
+From the above output we can see that the first variate explains most of the variance.
+Furthermore, Wilks' lambda values inform us that the groups are separated only
+on the first variate, so that's the only one we'll interpret. Also, we can see that
+the variation in the grouping variable is almost exclusively explained by the first
+variate.
+
+Looking at the structure scores, we can see that both the total number of
+correct answers and the total number of intrusive distractors chosen share a lot
+of variance with the first variate. The first variate is almost completely
+defined by the total number of correct answers, but the contribution of the number
+of chosen intrusors in also considerable. This could be due to the relatively high
+correlation between those two variables.
+
+```{r ldaPlot, fig.env='figure*', fig.cap='\\label{ldaPlot1}Plot showing the cases\' location on the two variates. Group means on the variates are marked by crosses. The vertical line marks the 0 on the first variate.'}
+.$scores %>% cbind(datHardNofeed, .) %>%
+  ggplot(., aes(x = Can1, y = Can2, color = activityFactor)) +
+  geom_point() + geom_vline(aes(xintercept = 0)) +
+  geom_point(data = . %>% group_by(activityFactor) %>%
+               summarise(ld1 = mean(Can1), ld2 = mean(Can2)),
+             mapping = aes(x = ld1, y = ld2),
+             color = 'black', size = 3, shape = 3) +
+  theme(panel.grid = element_blank()) +
+  geom_text_repel(data = . %>% group_by(activityFactor) %>%
+               summarise(ld1 = mean(Can1), ld2 = mean(Can2)),
+            mapping = aes(x = ld1, y = ld2, label = activityFactor),
+            fontface = 'bold',
+            inherit.aes = F) +
+  scale_color_viridis_d()
+```
+
+To assess the ability of the LDA model to discriminate group membership based on
+the number of correct answers to the questions and the number of chosen instrusive
+distractors, we'll re-train the model and evaluate it's error rate using the
+leave-one-out cross-validation technique.
+
+```{r ldaCVTotal}
+ldaCVTotal <- lda(activityFactor ~ totalCorrect + totalIntrusors,
+                  data = datHardNofeed, CV = T)
+confTotal <- caret::confusionMatrix(ldaCVTotal$class,
+                                   datHardNofeed$activityFactor %>% as.factor,
+                                   mode = 'everything')
+confTotal
+```
+
+As can be seen from the table, the total LOOCV accuracy is
+`r confTotal$overall['Accuracy']`, which is significantly above the
+no information rate (which is taken to be the largest class percentage
+in the data). According to the Landis & Koch
+\citep[1977; as reported in][]{salkindEncyclopediaMeasurementStatistics2007} guidlines, this
+represents only a slight agreement between the predicted and actual classes.
+Next, we'll drill into the individual predictors to see which are useful for 
+discriminating between different groups.
+
+## Evaluating individual predictors
+\citet{tabachnickUsingMultivariateStatistics2012} describe the process of sequential discriminant
+analysis, where predictors are entered one-by-one, and the improvement in
+classification accuracy is monitored. Therefore, we'll fit an LDA model
+containing only the number of correct answers as a predictor. Then, we will
+compare this model's LOOCV accuracy to that of the full model (reported at the
+end of the previous section).
+
+```{r ldaCVcorrect}
+ldaCVcorrect <- lda(activityFactor ~ totalCorrect,
+                    data = datHardNofeed, CV = T)
+confCorrect <- caret::confusionMatrix(ldaCVcorrect$class,
+                                      as.factor(datHardNofeed$activityFactor),
+                                      mode = 'everything')
+confCorrect
+```
+
+As can be seen from the second confusion matrix, the accuracy of this model
+is actually somewhat higher than in the full model, as is Cohen's \textkappa.
+Importantly, we notice that adding the total number of intrusors to the model
+doesn't significantly increase the accuracy of the model (the 95% confidence
+intervals for the accuracies of the two models completely overlap).
+
+## Multivariate contrasts
+
+We've planned to contrast the two test groups with the rereading group, and the
+two test groups with each other. That's what we'll do here.
+
+```{r contrastSetup}
+# first, let's turn activityFactor into a proper factor
+datHardNofeed$activityFactor %<>% as.factor(.)
+
+contrastMatrix <- matrix(c(1, 1, -2, 1, -1, 0), 3, 2)
+colnames(contrastMatrix) <- c('test vs rereading', 'content vs general')
+
+contrasts(datHardNofeed$activityFactor) <- contrastMatrix
+
+manovaModelContrasts <- manova(cbind(totalCorrect, totalIntrusors) ~
+                                 activityFactor,
+                               data = datHardNofeed)
+
+contrasts(manovaModelContrasts$model$activityFactor)
+coef(manovaModelContrasts)
+```
+Now that we've set up the model, let's run the contrasts. The first contrast
+is between the two test groups (content and general knowledge) and the rereading
+group.
+
+```{r contrastTestRead}
+linearHypothesis(manovaModelContrasts, c(0, 1, 0))
+```
+
+As can be seen from the test statistics, no significant difference is found between
+the two test groups and the rereading group. Next, we'll look at the contrast
+between the content test group and the general knowledge test group.
+
+```{r contrastConGen}
+. <- linearHypothesis(manovaModelContrasts, c(0, 0, 1))
+.
+```
+
+This contrast is statistically significant, indicating that the two groups differ
+on the linear combination of the number of correct answers and number of
+intrusive distractors chosen. We'll calculate the same effect size indices as for
+the omnibus model.
+
+The multivariate \(\eta^2\) is
+`r 1 - capture.output(print(.))[15] %>% str_extract(., '\\d\\.\\d+\\b') %>%
+as.numeric()`.
+The effect size index \(\xi^2\) is
+`r capture.output(print(.))[14] %>% str_extract(., '\\d\\.\\d+\\b') %>%
+as.numeric(.) %>% {. / 2} -> xsi; xsi`. Finally, we will calculate Tatsuoka's
+\citep[1970; according to][]{hubertyAppliedMANOVADiscriminant2006} extension of the \(\omega^2\)
+to the multivariate case. In this case, \(\omega^2_{mult} = `r 1 - (122 * .89763) /
+(119 + .89763)`\). The adjusted value of the \(\xi^2\) statistic is
+\(\xi^2_{adj} = `r 1 - 121/119 * (1 - xsi)`\)
+
+### Contrast LDA
+
+Again, to further investigate the nature of the difference between the content
+and general knowledge test group, we'll conduct a linear discriminant analysis
+to try and find the variate that best discriminates these two groups.
+
+```{r contModel}
+ldaContrast <- datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
+  droplevels(.) %>% 
+  manova(formula = cbind(totalCorrect, totalIntrusors) ~ activityFactor,
+      data = .)
+ldaContrast %>% Anova(.)
+```
+
+```{r contCandisc}
+contCandisc <- candisc(ldaContrast)
+summary(contCandisc)
+contCandisc$structure
+```
+
+Again, we see that both predictors are highly correlated with the discriminant
+function, albeit with different signs. Let's look at the LOOCV prediction accuracy.
+
+```{r ldaContCVtotal}
+datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
+  droplevels(.) -> cvDat
+  lda(formula = activityFactor ~ totalCorrect + totalIntrusors,
+      data = cvDat, CV = T) -> conCV
+ 
+  caret::confusionMatrix(conCV$class, cvDat$activityFactor)
+```
+
+With both predictors, the prediction accuracy is significantlly above the
+no information rate. 
+
+```{r ldaContCVcorrect}
+datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
+  droplevels(.) %>% 
+  lda(formula = activityFactor ~ totalCorrect,
+      data = ., CV = T) -> conCV
+ 
+datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
+  droplevels(.) %>% pull(activityFactor) %>%
+  caret::confusionMatrix(conCV$class, .)
+```
+
+Furthermore, the prediction accuracy doesn't drop significantly when we omit the
+total number of intrusors.
+
+\setstretch{1}
+\bibliographystyle{apacite}
+\bibliography{../../paper/reference.bib}

@@ -22,11 +22,7 @@ paper/sections/*
 !paper/*.pdf
 
 analyses/.Rhistory
-analyses/stats/h1-2_files/
-analyses/stats/analyses-main_files/
-analyses/stats/analyses-main-tikzDictionary
-
-analyses/stats/analyses-main_cache/**
-
+analyses/stats/*tikzDictionary
 analyses/stats/methods-results*/**
-analyses/stats/methods-results-tikzDictionary
+analyses/stats/*files/**
+analyses/stats/*cache/**
