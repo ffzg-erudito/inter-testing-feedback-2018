@@ -12,7 +12,7 @@ header-includes: |
     \usepackage[natbibapa, sectionbib, tocbib]{apacite}
     \usepackage[utf8]{inputenc}
     \usepackage{caption}
-    \usepackage{bookman}
+    \usepackage{lmodern}
     \usepackage{multirow}
     \usepackage{array}
     \usepackage[htt]{hyphenat}
@@ -39,14 +39,8 @@ library(here)
 # `datSoft` which is `datHard` with the soft exclusion criteria applied (as
 # described in `analysis-plan.md`)
 source(here('wrangling', '3-exclusion-criteria.R'))
-# for Henze-Zirkler
-library(MVN)
-# for Box's M
-library(heplots)
 # colorscale
 library(viridis)
-# multivariate outliers
-library(mvoutlier)
 # for LDA
 library(candisc)
 library(MASS)
@@ -97,12 +91,12 @@ that the Mahalanobis distance can produce false negatives or false positives. Fu
 deleting a set of outliers and rerunning the analysis can reveal yet another set of
 outliers --- without a clear-cut and absolute criterion, exclusions are somewhat
 arbitrary. Finally, cases were excluded based on criteria that are more or less
-substantivelly meaningful in the context of the conducted study. Given the above,
+substantively meaningful in the context of the conducted study. Given the above,
 no statistical criteria is used for exclusion at this point.
 
 ## MANOVA
 
-Here's the otuput of `R`'s `manova` function:
+Here's the output of `R`'s `manova` function:
 
 ```{r manova}
 manovaModel <- manova(data = datHardNofeed,
@@ -114,25 +108,7 @@ Anova(manovaModel) %>% summary(.)
 As can be seen from the resulting output, Pillai's V indicates that the three
 groups differ significantly along the linear combination of the two DVs. The other
 three reported statistics point to the same conclusion. Therefore, we'll proceed
-with conducting a linear discriminant analyis.
-
-We can look at \(1 - \Lambda\) as an extension to the univariate \(\eta^2\)
-\citep{hubertyAppliedMANOVADiscriminant2006}. In our case, the multivariate \(\eta^2\) is
-`r 1 - summary(manovaModel, test = 'Wilks') %>% pluck('stats') %>% .[1,2]`, which
-represents the proportion of total variance associated with the activity type
-IV. Further, we can calculate the effect size index \(\xi^2\), which is based
-on Pillai's test statistic, and represents the mean squared canonical correlation
-\citep{hubertyAppliedMANOVADiscriminant2006}:
-\[\xi^2 = \frac{U}{r},\] where \(r\) is the number of variates (2, in our case).
-Therefore, \(\xi^2 = `r summary(manovaModel, test = 'Pillai') %>% pluck('stats') %>%
-.[1,2] %>% {. / 2} -> xsi; xsi`\). Finally, we will calculate Tatsuoka's
-\citep[1970; according to][]{hubertyAppliedMANOVADiscriminant2006} extension of the \(\omega^2\)
-to the multivariate case. In this case, \(\omega^2_{mult} = `r 1 - (122 * .875) /
-(119 + .875)`\). The adjusted value of the \(\xi^2\) statistic is
-\(\xi^2_{adj} = `r 1 - 121/119 * (1 - xsi)`\)
-
-Now, let's take a closer look at the nature of our effect, using linear discriminant
-analysis.
+with conducting a linear discriminant analysis.
 
 ## Linear discriminant analysis
 
@@ -160,7 +136,7 @@ Looking at the structure scores, we can see that both the total number of
 correct answers and the total number of intrusive distractors chosen share a lot
 of variance with the first variate. The first variate is almost completely
 defined by the total number of correct answers, but the contribution of the number
-of chosen intrusors in also considerable. This could be due to the relatively high
+of chosen intrusors is also considerable. This could be due to the relatively high
 correlation between those two variables.
 
 ```{r ldaPlot, fig.env='figure*', fig.cap='\\label{ldaPlot1}Plot showing the cases\' location on the two variates. Group means on the variates are marked by crosses. The vertical line marks the 0 on the first variate.'}
@@ -181,9 +157,9 @@ correlation between those two variables.
 ```
 
 To assess the ability of the LDA model to discriminate group membership based on
-the number of correct answers to the questions and the number of chosen instrusive
-distractors, we'll re-train the model and evaluate it's error rate using the
-leave-one-out cross-validation technique.
+the number of correct answers to the questions and the number of chosen intrusive
+distractors, we'll re-train the model and evaluate its error rate using the
+leave-one-out cross-validation technique:
 
 ```{r ldaCVTotal}
 ldaCVTotal <- lda(activityFactor ~ totalCorrect + totalIntrusors,
@@ -198,7 +174,7 @@ As can be seen from the table, the total LOOCV accuracy is
 `r confTotal$overall['Accuracy']`, which is significantly above the
 no information rate (which is taken to be the largest class percentage
 in the data). According to the Landis & Koch
-\citep[1977; as reported in][]{salkindEncyclopediaMeasurementStatistics2007} guidlines, this
+\citep[1977; as reported in][]{salkindEncyclopediaMeasurementStatistics2007} guidelines, this
 represents only a slight agreement between the predicted and actual classes.
 Next, we'll drill into the individual predictors to see which are useful for 
 discriminating between different groups.
@@ -209,7 +185,7 @@ analysis, where predictors are entered one-by-one, and the improvement in
 classification accuracy is monitored. Therefore, we'll fit an LDA model
 containing only the number of correct answers as a predictor. Then, we will
 compare this model's LOOCV accuracy to that of the full model (reported at the
-end of the previous section).
+end of the previous section). Here are the results for the total-correct-only model:
 
 ```{r ldaCVcorrect}
 ldaCVcorrect <- lda(activityFactor ~ totalCorrect,
@@ -274,17 +250,18 @@ The multivariate \(\eta^2\) is
 as.numeric()`.
 The effect size index \(\xi^2\) is
 `r capture.output(print(.))[14] %>% str_extract(., '\\d\\.\\d+\\b') %>%
-as.numeric(.) %>% {. / 2} -> xsi; xsi`. Finally, we will calculate Tatsuoka's
+as.numeric(.) %>% {. / 2} -> xi; xi`. Finally, we will calculate Tatsuoka's
 \citep[1970; according to][]{hubertyAppliedMANOVADiscriminant2006} extension of the \(\omega^2\)
 to the multivariate case. In this case, \(\omega^2_{mult} = `r 1 - (122 * .89763) /
 (119 + .89763)`\). The adjusted value of the \(\xi^2\) statistic is
-\(\xi^2_{adj} = `r 1 - 121/119 * (1 - xsi)`\)
+\(\xi^2_{adj} = `r 1 - 121/119 * (1 - xi)`\)
 
 ### Contrast LDA
 
 Again, to further investigate the nature of the difference between the content
 and general knowledge test group, we'll conduct a linear discriminant analysis
-to try and find the variate that best discriminates these two groups.
+to try and find the variate that best discriminates these two groups. Here's the
+MANOVA model:
 
 ```{r contModel}
 ldaContrast <- datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
@@ -294,6 +271,8 @@ ldaContrast <- datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
 ldaContrast %>% Anova(.)
 ```
 
+And the LDA:
+
 ```{r contCandisc}
 contCandisc <- candisc(ldaContrast)
 summary(contCandisc)
@@ -301,7 +280,7 @@ contCandisc$structure
 ```
 
 Again, we see that both predictors are highly correlated with the discriminant
-function, albeit with different signs. Let's look at the LOOCV prediction accuracy.
+function, albeit with different signs. Let's look at the LOOCV prediction accuracy:
 
 ```{r ldaContCVtotal}
 datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
@@ -312,8 +291,9 @@ datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
   caret::confusionMatrix(conCV$class, cvDat$activityFactor)
 ```
 
-With both predictors, the prediction accuracy is significantlly above the
-no information rate. 
+As can be seen from the above output, with both predictors, the prediction
+accuracy is significantly above the no information rate. Here is the model with
+the total number of intrusive distractors dropped:
 
 ```{r ldaContCVcorrect}
 datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
@@ -326,8 +306,84 @@ datHardNofeed %>% filter(., activityFactor != 'rereading') %>%
   caret::confusionMatrix(conCV$class, .)
 ```
 
-Furthermore, the prediction accuracy doesn't drop significantly when we omit the
+As can be seen, the prediction accuracy doesn't drop significantly when we omit the
 total number of intrusors.
+
+# The interaction between feedback and interpolated activity type
+
+```{r datHardFeedFilter}
+datHardFeed <- datHard %>% filter(., condition != 'rereading') %>%
+  select(., condition, giveFeedback, activityFactor,
+         totalCorrect, totalIntrusors)
+
+datHardFeed %<>% mutate_at(., vars(activityFactor, giveFeedback, condition),
+                           as.factor)
+```
+
+Again, we'll first fit the MANOVA model:
+
+```{r manovaInteraction}
+manovaModelInter <- manova(cbind(totalCorrect, totalIntrusors) ~
+                             activityFactor * giveFeedback,
+                           data = datHardFeed)
+manovaModelInter %>% Anova(., type = '3')
+```
+
+As was already established in the paper, we find only an effect of the type of
+interpolated activity. Let's fit the LDA model for this effect:
+
+```{r ldaCandisc2}
+. <- candisc(manovaModelInter, term = 'activityFactor', type = '3')
+.
+cat('Class means')
+.$means
+cat('Raw coefficients')
+.$coeffs.raw
+cat('Standardized coefficients')
+.$coeffs.std
+```
+
+Since there are only two groups in this analysis, the LDA results aren't particularly
+more informative than the MANOVA output. It is interesting to notice, however, that
+the standardized structure coefficient for the total number of correct answers
+is quite larger than the coefficient for the total number of intrusors.
+Let's take a look at the LOOCV prediction accuracy fort this model:
+
+```{r ldaCVTotal2}
+ldaCVTotal <- lda(activityFactor ~ totalCorrect + totalIntrusors,
+                  data = datHardFeed, CV = T)
+confTotal <- caret::confusionMatrix(ldaCVTotal$class,
+                                   datHardFeed$activityFactor %>% as.factor,
+                                   mode = 'everything')
+confTotal
+```
+
+Again, we find that the prediction accuracy is somewhat above the no information rate.
+Let's try to tease out which of the two predictors is more important for predicting
+group membership. To do that, we'll fit a model with only the total number of correct
+answers as the predictor:
+
+```{r ldaCVcorrect2}
+ldaCVcorrect <- lda(activityFactor ~ totalCorrect,
+                    data = datHardFeed, CV = T)
+confCorrect <- caret::confusionMatrix(ldaCVcorrect$class,
+                                      as.factor(datHardFeed$activityFactor),
+                                      mode = 'everything')
+confCorrect
+```
+
+As was the case in the previous section, we find that the prediction accuracy
+after excluding the total number of chosen intrusors is virtually unchanged.
+Given all the results above, we may presume that, in our study, different types
+of interpolated activities caused differences in the total number of correct
+answers, but we do not find evidence of an effect on the total number of
+intrusive distractors chosen.
+
+# Notes
+
+LDA cross-validation done using `MASS` \citep{venablesModernAppliedStatistics2002}.
+`viridis` \citep{garnierViridisDefaultColor2018} used for color scale.
+Labelling in plot done with the help of `ggrepel` \citep{slowikowskiGgrepelAutomaticallyPosition2018}.
 
 \setstretch{1}
 \bibliographystyle{apacite}

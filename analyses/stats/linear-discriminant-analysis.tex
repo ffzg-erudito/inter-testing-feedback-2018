@@ -101,7 +101,7 @@
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
-\usepackage{bookman}
+\usepackage{lmodern}
 \usepackage{multirow}
 \usepackage{array}
 \usepackage[htt]{hyphenat}
@@ -157,13 +157,13 @@ positives. Furthermore, deleting a set of outliers and rerunning the
 analysis can reveal yet another set of outliers --- without a clear-cut
 and absolute criterion, exclusions are somewhat arbitrary. Finally,
 cases were excluded based on criteria that are more or less
-substantivelly meaningful in the context of the conducted study. Given
+substantively meaningful in the context of the conducted study. Given
 the above, no statistical criteria is used for exclusion at this point.
 
 \hypertarget{manova}{%
 \subsection{MANOVA}\label{manova}}
 
-Here's the otuput of \texttt{R}'s \texttt{manova} function:
+Here's the output of \texttt{R}'s \texttt{manova} function:
 
 \begin{verbatim}
 ## 
@@ -197,23 +197,6 @@ As can be seen from the resulting output, Pillai's V indicates that the
 three groups differ significantly along the linear combination of the
 two DVs. The other three reported statistics point to the same
 conclusion. Therefore, we'll proceed with conducting a linear
-discriminant analyis.
-
-We can look at \(1 - \Lambda\) as an extension to the univariate
-\(\eta^2\) \citep{hubertyAppliedMANOVADiscriminant2006}. In our case,
-the multivariate \(\eta^2\) is 0.125, which represents the proportion of
-total variance associated with the activity type IV. Further, we can
-calculate the effect size index \(\xi^2\), which is based on Pillai's
-test statistic, and represents the mean squared canonical correlation
-\citep{hubertyAppliedMANOVADiscriminant2006}: \[\xi^2 = \frac{U}{r},\]
-where \(r\) is the number of variates (2, in our case). Therefore,
-\(\xi^2 = 0.063\). Finally, we will calculate Tatsuoka's
-\citep[1970; according to][]{hubertyAppliedMANOVADiscriminant2006}
-extension of the \(\omega^2\) to the multivariate case. In this case,
-\(\omega^2_{mult} = 0.109\). The adjusted value of the \(\xi^2\)
-statistic is \(\xi^2_{adj} = 0.047\)
-
-Now, let's take a closer look at the nature of our effect, using linear
 discriminant analysis.
 
 \hypertarget{linear-discriminant-analysis}{%
@@ -282,7 +265,7 @@ Looking at the structure scores, we can see that both the total number
 of correct answers and the total number of intrusive distractors chosen
 share a lot of variance with the first variate. The first variate is
 almost completely defined by the total number of correct answers, but
-the contribution of the number of chosen intrusors in also considerable.
+the contribution of the number of chosen intrusors is also considerable.
 This could be due to the relatively high correlation between those two
 variables.
 
@@ -292,8 +275,8 @@ variables.
 
 To assess the ability of the LDA model to discriminate group membership
 based on the number of correct answers to the questions and the number
-of chosen instrusive distractors, we'll re-train the model and evaluate
-it's error rate using the leave-one-out cross-validation technique.
+of chosen intrusive distractors, we'll re-train the model and evaluate
+its error rate using the leave-one-out cross-validation technique:
 
 \begin{verbatim}
 ## Confusion Matrix and Statistics
@@ -334,9 +317,10 @@ As can be seen from the table, the total LOOCV accuracy is 0.459, which
 is significantly above the no information rate (which is taken to be the
 largest class percentage in the data). According to the Landis \& Koch
 \citep[1977; as reported in][]{salkindEncyclopediaMeasurementStatistics2007}
-guidlines, this represents only a slight agreement between the predicted
-and actual classes. Next, we'll drill into the individual predictors to
-see which are useful for discriminating between different groups.
+guidelines, this represents only a slight agreement between the
+predicted and actual classes. Next, we'll drill into the individual
+predictors to see which are useful for discriminating between different
+groups.
 
 \hypertarget{evaluating-individual-predictors}{%
 \subsection{Evaluating individual
@@ -348,7 +332,7 @@ one-by-one, and the improvement in classification accuracy is monitored.
 Therefore, we'll fit an LDA model containing only the number of correct
 answers as a predictor. Then, we will compare this model's LOOCV
 accuracy to that of the full model (reported at the end of the previous
-section).
+section). Here are the results for the total-correct-only model:
 
 \begin{verbatim}
 ## Confusion Matrix and Statistics
@@ -481,7 +465,7 @@ statistic is \(\xi^2_{adj} = 0.035\)
 Again, to further investigate the nature of the difference between the
 content and general knowledge test group, we'll conduct a linear
 discriminant analysis to try and find the variate that best
-discriminates these two groups.
+discriminates these two groups. Here's the MANOVA model:
 
 \begin{verbatim}
 ## 
@@ -491,6 +475,8 @@ discriminates these two groups.
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
+
+And the LDA:
 
 \begin{verbatim}
 ## 
@@ -516,7 +502,7 @@ discriminates these two groups.
 
 Again, we see that both predictors are highly correlated with the
 discriminant function, albeit with different signs. Let's look at the
-LOOCV prediction accuracy.
+LOOCV prediction accuracy:
 
 \begin{verbatim}
 ## Confusion Matrix and Statistics
@@ -547,8 +533,9 @@ LOOCV prediction accuracy.
 ## 
 \end{verbatim}
 
-With both predictors, the prediction accuracy is significantlly above
-the no information rate.
+As can be seen from the above output, with both predictors, the
+prediction accuracy is significantly above the no information rate. Here
+is the model with the total number of intrusive distractors dropped:
 
 \begin{verbatim}
 ## Confusion Matrix and Statistics
@@ -579,8 +566,164 @@ the no information rate.
 ## 
 \end{verbatim}
 
-Furthermore, the prediction accuracy doesn't drop significantly when we
-omit the total number of intrusors.
+As can be seen, the prediction accuracy doesn't drop significantly when
+we omit the total number of intrusors.
+
+\hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
+\section{The interaction between feedback and interpolated activity
+type}\label{the-interaction-between-feedback-and-interpolated-activity-type}}
+
+Again, we'll first fit the MANOVA model:
+
+\begin{verbatim}
+## 
+## Type III MANOVA Tests: Pillai test statistic
+##                             Df test stat approx F num Df den Df Pr(>F)    
+## (Intercept)                  1     0.940     1229      2    158 <2e-16 ***
+## activityFactor               1     0.071        6      2    158  0.003 ** 
+## giveFeedback                 1     0.003        0      2    158  0.800    
+## activityFactor:giveFeedback  1     0.001        0      2    158  0.941    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+As was already established in the paper, we find only an effect of the
+type of interpolated activity. Let's fit the LDA model for this effect:
+
+\begin{verbatim}
+## 
+## Canonical Discriminant Analysis for activityFactor:
+## 
+##   CanRsq Eigenvalue Difference Percent Cumulative
+## 1  0.071     0.0765                100        100
+## 
+## Test of H0: The canonical correlations in the 
+## current row and all that follow are zero
+## 
+##   LR test stat approx F numDF denDF Pr(> F)
+## 1        0.929              2
+\end{verbatim}
+
+\begin{verbatim}
+## Class means
+\end{verbatim}
+
+\begin{verbatim}
+## [1]  0.365 -0.379
+\end{verbatim}
+
+\begin{verbatim}
+## Raw coefficients
+\end{verbatim}
+
+\begin{verbatim}
+##                  Can1
+## totalCorrect    0.222
+## totalIntrusors -0.216
+\end{verbatim}
+
+\begin{verbatim}
+## Standardized coefficients
+\end{verbatim}
+
+\begin{verbatim}
+##                  Can1
+## totalCorrect    0.693
+## totalIntrusors -0.388
+\end{verbatim}
+
+Since there are only two groups in this analysis, the LDA results aren't
+particularly more informative than the MANOVA output. It is interesting
+to notice, however, that the standardized structure coefficient for the
+total number of correct answers is quite larger than the coefficient for
+the total number of intrusors. Let's take a look at the LOOCV prediction
+accuracy fort this model:
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction content general
+##    content      57      33
+##    general      26      47
+##                                         
+##                Accuracy : 0.638         
+##                  95% CI : (0.559, 0.712)
+##     No Information Rate : 0.509         
+##     P-Value [Acc > NIR] : 0.000614      
+##                                         
+##                   Kappa : 0.275         
+##  Mcnemar's Test P-Value : 0.434724      
+##                                         
+##             Sensitivity : 0.687         
+##             Specificity : 0.588         
+##          Pos Pred Value : 0.633         
+##          Neg Pred Value : 0.644         
+##               Precision : 0.633         
+##                  Recall : 0.687         
+##                      F1 : 0.659         
+##              Prevalence : 0.509         
+##          Detection Rate : 0.350         
+##    Detection Prevalence : 0.552         
+##       Balanced Accuracy : 0.637         
+##                                         
+##        'Positive' Class : content       
+## 
+\end{verbatim}
+
+Again, we find that the prediction accuracy is somewhat above the no
+information rate. Let's try to tease out which of the two predictors is
+more important for predicting group membership. To do that, we'll fit a
+model with only the total number of correct answers as the predictor:
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction content general
+##    content      60      33
+##    general      23      47
+##                                         
+##                Accuracy : 0.656         
+##                  95% CI : (0.578, 0.729)
+##     No Information Rate : 0.509         
+##     P-Value [Acc > NIR] : 0.000103      
+##                                         
+##                   Kappa : 0.311         
+##  Mcnemar's Test P-Value : 0.229102      
+##                                         
+##             Sensitivity : 0.723         
+##             Specificity : 0.588         
+##          Pos Pred Value : 0.645         
+##          Neg Pred Value : 0.671         
+##               Precision : 0.645         
+##                  Recall : 0.723         
+##                      F1 : 0.682         
+##              Prevalence : 0.509         
+##          Detection Rate : 0.368         
+##    Detection Prevalence : 0.571         
+##       Balanced Accuracy : 0.655         
+##                                         
+##        'Positive' Class : content       
+## 
+\end{verbatim}
+
+As was the case in the previous section, we find that the prediction
+accuracy after excluding the total number of chosen intrusors is
+virtually unchanged. Given all the results above, we may presume that,
+in our study, different types of interpolated activities caused
+differences in the total number of correct answers, but we do not find
+evidence of an effect on the total number of intrusive distractors
+chosen.
+
+\hypertarget{notes}{%
+\section{Notes}\label{notes}}
+
+LDA cross-validation done using \texttt{MASS}
+\citep{venablesModernAppliedStatistics2002}. \texttt{viridis}
+\citep{garnierViridisDefaultColor2018} used for color scale. Labelling
+in plot done with the help of \texttt{ggrepel}
+\citep{slowikowskiGgrepelAutomaticallyPosition2018}.
 
 \setstretch{1}
 \bibliographystyle{apacite}
