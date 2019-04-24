@@ -78,38 +78,15 @@ Starting from the second ten-question-set, the distractor options were chosen so
 (a) two distractors were plausible, but unrelated to the text, and
 (b) one distractor was a term or concept mentioned in the previous part of the
 text --- this was considered to be the "intrusive" option.
-
-An example question is:
-\begin{quotation}
-\noindent Compared to younger weeds, older weeds:
-\begin{enumerate}[label = (\alph*)]
-\item have a stronger allelopathic effect
-\item contain more phytotoxins
-\item \label{optCorr} \textbf{contain less inhibitory matter}
-\item \label{optIntr} \textit{show greater plasticity.}
-\end{enumerate}
-\end{quotation}
-Option \ref{optCorr} is the correct answer, and option \ref{optIntr} is the
-intrusive distractor.
-
 Further, twenty-four general knowledge questions were generated. These questions were
 presented to participants in the general knowledge test condition, after the first
-two parts of the text. An example general knowledge question is:
-\begin{quotation}
-\noindent The name of Kurt Vonnegut's famous anti-war novel is:
-\begin{enumerate}[label = (\alph*)]
-\item \textbf{Slaughterhouse Five}
-\item All Quiet on the Western Front
-\item A Farewell to Arms
-\item Journey to the End of the Night.
-\end{enumerate}
-\end{quotation}
+two parts of the text.
 
 At the beginning of the session, participants' ID, age and sex information was
 collected. At the end of the session, participants were asked to estimate how
 much of each text they have read.
 The texts and questions were presented on a personal computer, in an application
-constructed using the open source `oTree` framework
+constructed using the open source \textit{oTree} framework
 \citep[version 2.1.35,][]{chenOTreeOpensourcePlatform2016}
 for the Python programming language (version 3.6.4, October 20, 2018).
 
@@ -117,8 +94,8 @@ for the Python programming language (version 3.6.4, October 20, 2018).
 
 Participants were first given a brief introduction to the study, and were
 encouraged to carefully read and follow the written instructions.
-Then, they were led to one of six compartments containing a computer, which was
-running a fullscreen instance of the `oTree` application with
+Then, they were led to a computer, which was
+running a fullscreen instance of the \textit{oTree} application with
 a randomly chosen experimental condition. There, participants read the informed consent
 form and, in case there were no questions, started the experiment.
 
@@ -127,10 +104,9 @@ instructions for their first task, which was to read the practice text at a spee
 that comes naturally to them. They were to click a button at the bottom of the text
 when they have finished reading it. Unbeknownst to the participants, the
 time they took to read the practice text was recorded, and used as the basis
-for determining the reading time limits for the remaining texts. Results of a pilot
-study using different participants have shown that most participants found 4 minutes
-to be too short, and 9 minutes too long, so we have set the lowest possible limit
-to 5 minutes, and the longest to 8 minutes.
+for determining the reading time limits for the remaining texts.
+However, the lowest possible time limit was set to 5 minutes,
+and the longest to 8 minutes.
 
 Next, participants were familiarised with the interpolated activity they were
 going to perform during the main part of the procedure. The rereading group
@@ -152,10 +128,10 @@ questions, the participant's answers, and the correct answers in a tabular forma
 Incorrectly answered questions were highlighted in red, and correctly answered
 questions in green. After 40 seconds
 elapsed, a "Next" button appeared, allowing participants to proceed to the next
-text. By setting this cooldown period and by emphasising that there would be a cumulative test,
-we wanted to encourage our participants to carefully examine the feedback.
-The feedback was presented for maximally 60 seconds, after which the application
-proceeded to the next text.
+text. By setting this cooldown period, by emphasising that there would be a cumulative test,
+and through written instructions, we wanted to encourage our participants to
+carefully examine the feedback. The feedback was presented for maximally 60 seconds,
+after which the application proceeded to the next text.
 
 After the practice round, participants proceeded to the main texts, engaging
 in the interpolated activities they were assigned. After the third text, all
