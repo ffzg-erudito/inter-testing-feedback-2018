@@ -21,7 +21,7 @@
 \usepackage{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[margin=1.8cm]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdfborder={0 0 0},
@@ -99,6 +99,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
 \usepackage{lmodern}
+\usepackage{microtype}
 \usepackage{multirow}
 \usepackage[inline]{enumitem}
 \usepackage{array}
@@ -106,9 +107,16 @@
 \usepackage{booktabs}
 \usepackage[euler]{textgreek}
 \usepackage{float}
-\usepackage[onehalfspacing]{setspace}
+\usepackage[doublespacing]{setspace}
+\usepackage{fancyhdr}
 \captionsetup[table]{width=\textwidth}
+\fancyhf{}
+\fancyhead[RH]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
 \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
+\DeclareCaptionFormat{apa}{#1#2\\#3}
+\captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
 
 \begin{document}
 
@@ -159,7 +167,7 @@ asked to estimate how much of each text they have read. The texts and
 questions were presented on a personal computer, in an application
 constructed using the open source \textit{oTree} framework
 \citep[version 2.1.35,][]{chenOTreeOpensourcePlatform2016} for the
-Python programming language (version 3.6.4, October 20, 2018).
+\textit{Python} programming language (version 3.6.4, October 20, 2018).
 
 \hypertarget{procedure}{%
 \subsubsection{Procedure}\label{procedure}}
@@ -189,7 +197,7 @@ questions based on the practice text.
 
 Subjects in the rereading and general knowledge conditions also answered
 the four questions related to the practice text, so as to familiarise
-themselves with the scope and specificity level of questions that they
+themselves with the scope and specificity level of the questions they
 will receive after reading the final text. All participants were told
 that there would be a cumulative test after the final text, examining
 their knowledge of the three texts following the practice text. In
@@ -208,13 +216,15 @@ examine the feedback. The feedback was presented for maximally 60
 seconds, after which the application proceeded to the next text.
 
 After the practice round, participants proceeded to the main texts,
-engaging in the interpolated activities they were assigned. After the
-third text, all participants were presented with twenty questions
-examining their knowledge of the third text. The computer recorded
-whether a participant correctly answered a question and whether the
-participant chose an intrusive distractor. This allowed us to compute
-our dependent variables --- the total number of correct answers and the
-total number of intrusive distractors chosen.
+engaging in the interpolated activities they were assigned. Depending on
+the condition they were assigned to, they also received feedback after
+every interpolated test, except for the last one. After the third text,
+all participants were presented with twenty questions examining their
+knowledge of the third text. The computer recorded whether a participant
+correctly answered a question and whether the participant chose an
+intrusive distractor. This allowed us to compute our dependent variables
+--- the total number of correct answers and the total number of
+intrusive distractors chosen.
 
 \hypertarget{results}{%
 \subsection{Results}\label{results}}
@@ -224,7 +234,7 @@ total number of intrusive distractors chosen.
 
 \begin{table*}[t]
 
-\caption{\label{tab:descTable}\label{descTable} Descriptive statistics for the
+\caption{\label{tab:descTable}\label{descTable}Descriptive statistics for the
                      number of correct answers and chosen intrusors broken down
                      by experimental condition.}
 \centering
@@ -339,11 +349,11 @@ type}\label{the-interaction-between-feedback-and-interpolated-activity-type}}
 The remaining hypotheses deal with the effect of feedback on the total
 number of correct answers and the total number of intrusors. Therefore,
 these analyses are carried out only on the data from participants in the
-general and content related test conditions (\(n\) = 163). Boxplots for
-these groups are shown in Figure \ref{box2}. To test these hypotheses,
-we first conducted a two-way MANOVA with interpolated activity and
-feedback as independent variables, and total number of correct answers
-and total number of intrusors as the dependent variables.
+general and content related test conditions (\(n\) = 163). To test these
+hypotheses, we first conducted a two-way MANOVA with interpolated
+activity and feedback as independent variables, and total number of
+correct answers and total number of intrusors as the dependent
+variables.
 
 Pillai's V for the interpolated activity effect (calculated with type
 III sums of squares) is .071, \(p = .003\) (Wilks' \(\Lambda\) = .929,
@@ -388,29 +398,29 @@ type of interpolated activity ceases to be a relevant predictor
 
 \begin{table*}[t]
 
-\caption{\label{tab:rb2Table}Full ANOVA and ANCOVA models for the second Roy-Bargmann
-                     stepdown analysis.\label{rb2-table}}
+\caption{\label{tab:rb2Table}\label{rb2-table}Full ANOVA and ANCOVA models for the second Roy-Bargmann
+                     stepdown analysis.}
 \centering
-\begin{tabular}{lrrrl}
+\begin{tabular}{lrrrr}
 \toprule
-\multicolumn{1}{r}{Term} & \multicolumn{1}{r}{$SS$} & \multicolumn{1}{r}{$df$} & \multicolumn{1}{r}{$F$} & \multicolumn{1}{r}{$p$}\\
+Term & $SS$ & $df$ & $F$ & $p$\\
 \midrule
 \addlinespace[0.3em]
 \multicolumn{5}{l}{\textbf{ANOVA}}\\
-\hspace{1em}Activity & 109.393 & 1 & 11.200 & \multicolumn{1}{r}{.001}\\
-\hspace{1em}Feedback & 3.904 & 1 & 0.400 & \multicolumn{1}{r}{.528}\\
-\hspace{1em}Activity x Feedback & 0.045 & 1 & 0.005 & \multicolumn{1}{r}{.946}\\
-\hspace{1em}Residuals & 1553.046 & 159 &  & \multicolumn{1}{r}{}\\
+\hspace{1em}Activity & 109.393 & 1 & 11.200 & .001\\
+\hspace{1em}Feedback & 3.904 & 1 & 0.400 & .528\\
+\hspace{1em}Activity x Feedback & 0.045 & 1 & 0.005 & .946\\
+\hspace{1em}Residuals & 1553.046 & 159 &  & \\
 \addlinespace[0.3em]
 \multicolumn{5}{l}{\textbf{ANCOVA}}\\
-\hspace{1em}Activity & 0.301 & 1 & 0.175 & \multicolumn{1}{r}{.676}\\
-\hspace{1em}Feedback & 0.173 & 1 & 0.100 & \multicolumn{1}{r}{.752}\\
-\hspace{1em}Total correct & 63.216 & 1 & 36.760 & \multicolumn{1}{r}{< .0001}\\
-\hspace{1em}Activity x Feedback & 0.813 & 1 & 0.473 & \multicolumn{1}{r}{.493}\\
-\hspace{1em}Activity x Total correct & 0.862 & 1 & 0.501 & \multicolumn{1}{r}{.480}\\
-\hspace{1em}Feedback x Total correct & 0.130 & 1 & 0.075 & \multicolumn{1}{r}{.784}\\
-\hspace{1em}Activity x Feedback x Total correct & 1.229 & 1 & 0.715 & \multicolumn{1}{r}{.399}\\
-\hspace{1em}Residuals & 266.551 & 155 &  & \multicolumn{1}{r}{}\\
+\hspace{1em}Activity & 0.301 & 1 & 0.175 & .676\\
+\hspace{1em}Feedback & 0.173 & 1 & 0.100 & .752\\
+\hspace{1em}Total correct & 63.216 & 1 & 36.760 & < .0001\\
+\hspace{1em}Activity x Feedback & 0.813 & 1 & 0.473 & .493\\
+\hspace{1em}Activity x Total correct & 0.862 & 1 & 0.501 & .480\\
+\hspace{1em}Feedback x Total correct & 0.130 & 1 & 0.075 & .784\\
+\hspace{1em}Activity x Feedback x Total correct & 1.229 & 1 & 0.715 & .399\\
+\hspace{1em}Residuals & 266.551 & 155 &  & \\
 \bottomrule
 \end{tabular}
 \end{table*}

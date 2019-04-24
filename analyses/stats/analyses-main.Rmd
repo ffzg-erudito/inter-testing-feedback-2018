@@ -91,7 +91,7 @@ rbind(.a, .b) %>%
         Condition = rep(c("Content, feedback", "Content, no feedback",
                           "General, feedback", "General, no feedback",
                           "Rereading")), .) %>% 
-  kable(., caption = '\\label{descTable} Descriptive statistics for the
+  kable(., caption = '\\label{descTable}Descriptive statistics for the
                      number of correct answers and chosen intrusors broken down
                      by experimental condition.',
         format = 'latex', booktabs = T, table.env = 'table*',
@@ -297,8 +297,7 @@ datHardFeed %<>% mutate_at(., vars(activityFactor, giveFeedback, condition),
 The remaining hypotheses deal with the effect of feedback on the total number of
 correct answers and the total number of intrusors. Therefore, these analyses are
 carried out only on the data from participants in the general and content related
-test conditions (\(n\) = `r nrow(datHardFeed)`). Boxplots for these groups are 
-shown in Figure \ref{box2}.
+test conditions (\(n\) = `r nrow(datHardFeed)`). 
 To test these hypotheses, we first
 conducted a two-way MANOVA with interpolated activity and feedback as independent
 variables, and total number of correct answers and total number of intrusors as
@@ -498,8 +497,8 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
             }) %>%
   rename('Term' = term, '$SS$' = sumsq, '$df$' = df,
               '$F$' = statistic, '$p$' = p.value) %>%
-  kable(., caption = 'Full ANOVA and ANCOVA models for the second Roy-Bargmann
-                     stepdown analysis.\\label{rb2-table}',
+  kable(., caption = '\\label{rb2-table}Full ANOVA and ANCOVA models for the second Roy-Bargmann
+                     stepdown analysis.',
         format = 'latex', booktabs = T, table.env = 'table*',
         digits = 3, escape = F, align = c('l', rep('r', 4))) %>%
   kable_styling(., latex_options = c('hold_position')) %>%
