@@ -8,7 +8,7 @@ output:
 header-includes: |
     \usepackage[natbibapa, sectionbib, tocbib]{apacite}
     \usepackage[utf8]{inputenc}
-    \usepackage{caption}
+    \usepackage[singlelinecheck = off]{caption}
     \usepackage{lmodern}
     \usepackage{microtype}
     \usepackage{multirow}
@@ -21,13 +21,15 @@ header-includes: |
     \usepackage[doublespacing]{setspace}
     \usepackage{fancyhdr}
     \captionsetup[table]{width=\textwidth}
+    \setlength{\parindent}{2em}
     \fancyhf{}
     \fancyhead[RH]{\thepage}
     \renewcommand{\headrulewidth}{0pt}
     \pagestyle{fancy}
     \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
-    \DeclareCaptionFormat{apa}{#1#2\\#3}
+    \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
     \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
+    \captionsetup*[figure]{labelsep = period, labelfont = it, position = below, skip = -10pt}
 ---
 
 ```{r set, echo = F, include = F}

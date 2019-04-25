@@ -92,12 +92,19 @@ for the \textit{Python} programming language (version 3.6.4, October 20, 2018).
 
 ### Procedure
 
+\begin{figure}
+  \includegraphics[width = \textwidth, keepaspectratio, trim = 135 0 135 90]{../images/flowchart/procedure.pdf}
+  \caption{A flowchart depicting the experimental procedure.}
+  \label{flowchart}
+\end{figure}
+
 Participants were first given a brief introduction to the study, and were
 encouraged to carefully read and follow the written instructions.
 Then, they were led to a computer, which was
 running a fullscreen instance of the \textit{oTree} application with
 a randomly chosen experimental condition. There, participants read the informed consent
 form and, in case there were no questions, started the experiment.
+A flowchart for the experiment is displayed in Figure \ref{flowchart}.
 
 After entering their personal information, participants were presented with
 instructions for their first task, which was to read the practice text at a speed

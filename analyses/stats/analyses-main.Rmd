@@ -91,8 +91,7 @@ rbind(.a, .b) %>%
         Condition = rep(c("Content, feedback", "Content, no feedback",
                           "General, feedback", "General, no feedback",
                           "Rereading")), .) %>% 
-  kable(., caption = '\\label{descTable}Descriptive statistics for the
-                     number of correct answers and chosen intrusors broken down
+  kable(., caption = '\\label{descTable}Descriptive statistics for the DVs broken down
                      by experimental condition.',
         format = 'latex', booktabs = T, table.env = 'table*',
         digits = 3, escape = F) %>% 
@@ -497,8 +496,8 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
             }) %>%
   rename('Term' = term, '$SS$' = sumsq, '$df$' = df,
               '$F$' = statistic, '$p$' = p.value) %>%
-  kable(., caption = '\\label{rb2-table}Full ANOVA and ANCOVA models for the second Roy-Bargmann
-                     stepdown analysis.',
+  kable(., caption = '\\label{rb2-table}ANOVA and ANCOVA models for the second Roy-Bargmann
+                     procedure.',
         format = 'latex', booktabs = T, table.env = 'table*',
         digits = 3, escape = F, align = c('l', rep('r', 4))) %>%
   kable_styling(., latex_options = c('hold_position')) %>%

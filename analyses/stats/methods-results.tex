@@ -97,7 +97,7 @@
 
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
 \usepackage[utf8]{inputenc}
-\usepackage{caption}
+\usepackage[singlelinecheck = off]{caption}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{multirow}
@@ -110,13 +110,15 @@
 \usepackage[doublespacing]{setspace}
 \usepackage{fancyhdr}
 \captionsetup[table]{width=\textwidth}
+\setlength{\parindent}{2em}
 \fancyhf{}
 \fancyhead[RH]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 \pagestyle{fancy}
 \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
-\DeclareCaptionFormat{apa}{#1#2\\#3}
+\DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
 \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
+\captionsetup*[figure]{labelsep = period, labelfont = it, position = below, skip = -10pt}
 
 \begin{document}
 
@@ -172,12 +174,19 @@ constructed using the open source \textit{oTree} framework
 \hypertarget{procedure}{%
 \subsubsection{Procedure}\label{procedure}}
 
+\begin{figure}
+  \includegraphics[width = \textwidth, keepaspectratio, trim = 135 0 135 90]{../images/flowchart/procedure.pdf}
+  \caption{A flowchart depicting the experimental procedure.}
+  \label{flowchart}
+\end{figure}
+
 Participants were first given a brief introduction to the study, and
 were encouraged to carefully read and follow the written instructions.
 Then, they were led to a computer, which was running a fullscreen
 instance of the \textit{oTree} application with a randomly chosen
 experimental condition. There, participants read the informed consent
-form and, in case there were no questions, started the experiment.
+form and, in case there were no questions, started the experiment. A
+flowchart for the experiment is displayed in Figure \ref{flowchart}.
 
 After entering their personal information, participants were presented
 with instructions for their first task, which was to read the practice
@@ -234,8 +243,7 @@ intrusive distractors chosen.
 
 \begin{table*}[t]
 
-\caption{\label{tab:descTable}\label{descTable}Descriptive statistics for the
-                     number of correct answers and chosen intrusors broken down
+\caption{\label{tab:descTable}\label{descTable}Descriptive statistics for the DVs broken down
                      by experimental condition.}
 \centering
 \begin{tabular}{llrrrrrr}
@@ -398,8 +406,8 @@ type of interpolated activity ceases to be a relevant predictor
 
 \begin{table*}[t]
 
-\caption{\label{tab:rb2Table}\label{rb2-table}Full ANOVA and ANCOVA models for the second Roy-Bargmann
-                     stepdown analysis.}
+\caption{\label{tab:rb2Table}\label{rb2-table}ANOVA and ANCOVA models for the second Roy-Bargmann
+                     procedure.}
 \centering
 \begin{tabular}{lrrrr}
 \toprule
