@@ -128,8 +128,9 @@ there would be a cumulative test after the final text, examining their knowledge
 of the three texts following the practice text. In reality, the final test examined
 only the knowledge of the final text.
 
-Participants assigned to the feedback condition also received feedback on their practice
-test achievement. Feedback was presented on a separate screen, which listed the
+Participants assigned to the feedback condition also received feedback on their
+interpolated activity practice test achievement.
+Feedback was presented on a separate screen, which listed the
 questions, the participant's answers, and the correct answers in a tabular format.
 Incorrectly answered questions were highlighted in red, and correctly answered
 questions in green. After 40 seconds
