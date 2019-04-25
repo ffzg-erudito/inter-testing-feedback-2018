@@ -118,7 +118,7 @@
 \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
 \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
 \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
-\captionsetup*[figure]{labelsep = period, labelfont = it, position = below, skip = -10pt}
+\captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
 
 \begin{document}
 
@@ -178,8 +178,9 @@ through written instructions, we wanted to encourage our participants to
 carefully examine the feedback. The feedback was presented for maximally
 60 seconds, after which the application proceeded to the next text.
 
-\begin{figure}
-  \includegraphics[width = \textwidth, keepaspectratio, trim = 135 0 135 90]{../images/flowchart/procedure.pdf}
+\begin{figure}[p]
+  \centering
+  \includegraphics[width = 1.3\textwidth, keepaspectratio, angle = 90, trim = 0 0 0 0]{../images/flowchart/procedure.pdf}
   \caption{A flowchart depicting the experimental procedure.}
   \label{flowchart}
 \end{figure}

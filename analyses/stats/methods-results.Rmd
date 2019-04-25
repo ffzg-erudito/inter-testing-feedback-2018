@@ -25,7 +25,7 @@ header-includes: |
   \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
   \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
   \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
-  \captionsetup*[figure]{labelsep = period, labelfont = it, position = below, skip = -10pt}
+  \captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
 output:
   pdf_document:
     keep_tex: yes
