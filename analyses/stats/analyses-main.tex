@@ -121,36 +121,36 @@
 
 \begin{table*}[t]
 
-\caption{\label{tab:descTable}\label{descTable} Descriptive statistics for the
+\caption{\label{tab:descTable}\label{descTable}
+                     Descriptive statistics for the
                      number of correct answers and chosen intrusors broken down
                      by experimental condition.}
 \centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}{llrrrrrrrr}
+\begin{tabular}{llrrrrrr}
 \toprule
-Measure & Condition & $n$ & $M$ & $SE$ & $SD$ & min & max & skew & kurtosis\\
+Measure & Condition & $n$ & $M$ & $SE_M$ & $SD$ & min & max\\
 \midrule
- & Content, feedback & 41 & 13.22 & 0.508 & 3.25 & 2 & 19 & -0.800 & 1.503\\
+ & Content, feedback & 41 & 13.22 & 0.508 & 3.25 & 2 & 19\\
 
- & Content, no feedback & 42 & 12.79 & 0.465 & 3.02 & 7 & 19 & 0.039 & -0.775\\
+ & Content, no feedback & 42 & 12.79 & 0.465 & 3.02 & 7 & 19\\
 
- & General, feedback & 40 & 10.97 & 0.533 & 3.37 & 1 & 17 & -0.481 & 0.462\\
+ & General, feedback & 40 & 10.97 & 0.533 & 3.37 & 1 & 17\\
 
- & General, no feedback & 40 & 10.47 & 0.449 & 2.84 & 5 & 16 & -0.053 & -0.986\\
+ & General, no feedback & 40 & 10.47 & 0.449 & 2.84 & 5 & 16\\
 
-\multirow{-5}{*}{\raggedright\arraybackslash Total correct} & Rereading & 40 & 10.88 & 0.443 & 2.80 & 4 & 17 & -0.141 & -0.253\\
-\cmidrule{1-10}
- & Content, feedback & 41 & 3.15 & 0.258 & 1.65 & 0 & 7 & 0.292 & -0.351\\
+\multirow{-5}{*}{\raggedright\arraybackslash Total correct} & Rereading & 40 & 10.88 & 0.443 & 2.80 & 4 & 17\\
+\cmidrule{1-8}
+ & Content, feedback & 41 & 3.15 & 0.258 & 1.65 & 0 & 7\\
 
- & Content, no feedback & 42 & 3.38 & 0.257 & 1.67 & 0 & 7 & 0.203 & -0.385\\
+ & Content, no feedback & 42 & 3.38 & 0.257 & 1.67 & 0 & 7\\
 
- & General, feedback & 40 & 4.17 & 0.318 & 2.01 & 0 & 8 & 0.024 & -1.124\\
+ & General, feedback & 40 & 4.17 & 0.318 & 2.01 & 0 & 8\\
 
- & General, no feedback & 40 & 4.58 & 0.288 & 1.82 & 1 & 9 & 0.328 & -0.484\\
+ & General, no feedback & 40 & 4.58 & 0.288 & 1.82 & 1 & 9\\
 
-\multirow{-5}{*}{\raggedright\arraybackslash Total intrusors} & Rereading & 40 & 4.62 & 0.350 & 2.21 & 1 & 10 & 0.272 & -0.537\\
+\multirow{-5}{*}{\raggedright\arraybackslash Total intrusors} & Rereading & 40 & 4.62 & 0.350 & 2.21 & 1 & 10\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table*}
 
 Prior to analysing the data, we have excluded participants based on a
@@ -163,7 +163,7 @@ with a total sample of 203 participants. The descriptives for the sample
 are shown in Table \ref{descTable}. There is another set of exclusion
 criteria based on the number of times the participants have read each of
 the three texts. These are used in robustness check analyses (see
-suplementary materials).
+supplementary materials).
 
 \hypertarget{interpolated-activity-effect}{%
 \subsubsection{Interpolated activity
@@ -172,67 +172,62 @@ effect}\label{interpolated-activity-effect}}
 Our first two hypotheses are concerned with the effects of different
 interpolated activities on the total number of correct answers and total
 number of intrusive distractors chosen. To test these hypotheses, we
-have focused only on the groups which have not received feedback, since
-there was no feedback option for the rereading group (\(n\) = 122). We
+have focused only on the groups which have not received feedback (\(n\)
+= 122). This was done because there was no feedback option for the
+rereading group, and we did not want to treat the feedback and
+no-feedback general-knowledge and content-related testing groups as
+equivalent without strong evidence supporting that assumption. We
 conducted a one-way MANOVA with interpolated activity as the independent
 variable and the total number of correct and intrusive options chosen as
 dependent variables. The correlation between our DVs calculated on the
-whole sample is -0.71 (95\% CI: {[}-0.77, -0.63{]}, \(p\) =
-\(4.793\times 10^{-32}\)). Boxplots for the groups in this analysis are
-shown in Figure \ref{box1}.
+whole sample is \(r =\) -.707 (95\% CI: {[}-.77, -.63{]}, \(p\)
+\textless{} .0001).
 
-\begin{figure*}[h]
-
-{\centering \includegraphics{analyses-main_files/figure-latex/boxPlot-1} 
-
-}
-
-\caption{\label{box1} Boxplots broken down by experimental conditions included in the first MANOVA, and dependent variable, with overlayed raw scores.}\label{fig:boxPlot}
-\end{figure*}
-
-Pillai's V for the analysis is 0.126, \(p = 0.004\) (Wilks' \(\Lambda\)
-= 0.875, \(p = 0.003\); Hotelling-Lawley's trace = 0.142, \(p = 0.003\);
-Roy's largest root = 0.137, \(p = 4.912\times 10^{-4}\)). The effect
-size, calculated as \(\omega^2_{mult} = 0.109\) (bootstrap
+Pillai's V for the analysis is .126, \(p = .004\) (Wilks' \(\Lambda\) =
+.875, \(p = .003\)). The effect size, calculated as
+\(\omega^2_{mult} = .109\) (bootstrap
 median\footnote{All bootstrap estimates taken from 10000 replications.}
-= 0.132, \(BC_\alpha\) 95\% CI = {[}0.012, 0.201{]}). To further inspect
+= .132, \(BC_\alpha\) 95\% CI = {[}.012, .201{]}). To further inspect
 the relationship of the interpolated activities with our dependent
 variables, we have conducted a Roy-Bargmann stepdown analysis, as
 suggested by \citeauthor{tabachnickUsingMultivariateStatistics2012}
 (\citeyear{tabachnickUsingMultivariateStatistics2012}; a linear
 discriminant analysis with the same aim is available in the
 supplementary materials). The total number of correct answers was a
-priori chosen to be the higher priority variable. Therefore, we first
-conducted an ANOVA with interpolated activity type as the indepedent
-variable and the total number of correct answers as the dependent
-variable.
+priori chosen to be the higher priority variable. According to
+\citet{tabachnickUsingMultivariateStatistics2012}, the higher priority
+variable can be chosen based on theoretical or practical grounds. Since,
+the total number of correct answers is the criterion that determines a
+student's success in a testing context, we have chosen this dependent
+variable as the higher priority one. Therefore, we first conducted an
+ANOVA with interpolated activity type as the independent variable and
+the total number of correct answers as the dependent variable.
 
 As could be expected, the ANOVA points to an interpolated activity
-effect, with \(F(2, 119)\) = 7.541, \(p = 8.254\times 10^{-4}\).
-Following the ANOVA, we conducted an ANCOVA, with the total number of
-correct answers as the covariate, and the total number of intrusors as
-the dependent variable. The results imply a main effect of the total
-number of correct answers (\(F(1, 118)\) = 79.674,
-\(p = 6.873\times 10^{-15}\)), but after taking into acount the number
-of correct answers, there is no evidence for an effect of interpolated
-activity on the total number of chosen intrusors (\(F (2, 118)\) =
-0.844, \(p = 0.433\). For now, we may claim that we do not have any
-evidence to support our second hypothesis that the type of interpolated
-activity will have an effect on the number of intrusors.
+effect, with \(F(2, 119)\) = 7.541, \(p = .001\). Following the ANOVA,
+we conducted an ANCOVA, with the total number of correct answers as the
+covariate, and the total number of intrusors as the dependent variable.
+The results imply a main effect of the total number of correct answers
+(\(F(1, 118)\) = 79.674, \(p < .0001\)), but after taking into account
+the number of correct answers, there is no evidence for an effect of
+interpolated activity on the total number of chosen intrusors
+(\(F (2, 118)\) = 0.844, \(p = .433\)). For now, we may claim that we do
+not have any evidence to support our second hypothesis that the type of
+interpolated activity will have an effect on the number of intrusors.
 
 In order to test our first hypothesis, we have contrasted (i) the
 rereading group with the two test groups, and (ii) the two test groups
 with each other, taking only the total number of correct answers as the
 DV. The first contrast finds no evidence of a difference between the
-rereading group and the two test groups (\(t\) = 1.355, \(p = 0.178\),
-\(g_s\) = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohens's \(U_{3, g_s}\) =
+rereading group and the two test groups (\(t\) = 1.355, \(p = .178\),
+\(g_s\) = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohen's \(U_{3, g_s}\) =
 57.6\%, probability of superiority = 55.39\%). However, there is a
-difference between the two test groups (\(t\) = 3.62,
-\(p = 4.34\times 10^{-4}\), \(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]},
-Cohens's \(U_{3, g_s}\) = 74.43\%, probability of superiority =
-67.88\%). Participants in the content related test group scored higher
-on the final test than participants in the general knowledge test
-condition. These two findings are not in line with our predictions.
+difference between the two test groups (\(t\) = 3.62, \(p = .0004\),
+\(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]}, Cohen's \(U_{3, g_s}\) =
+74.43\%, probability of superiority = 67.88\%). Participants in the
+content related test group scored higher on the final test than
+participants in the general knowledge test condition. These two findings
+are not in line with our predictions.
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
 \subsubsection{The interaction between feedback and interpolated
@@ -242,44 +237,33 @@ type}\label{the-interaction-between-feedback-and-interpolated-activity-type}}
 The remaining hypotheses deal with the effect of feedback on the total
 number of correct answers and the total number of intrusors. Therefore,
 these analyses are carried out only on the data from participants in the
-general and content related test conditions (\(n\) = 163). Boxplots for
-these groups are shown in Figure \ref{box2}. To test these hypotheses,
-we first conducted a two-way MANOVA with interpolated activity and
-feedback as independent variables, and total number of correct answers
-and total number of intrusors as the dependent variables.
-
-\begin{figure*}[h]
-
-{\centering \includegraphics{analyses-main_files/figure-latex/boxPlot2-1} 
-
-}
-
-\caption{\label{box2} Boxplots broken down by experimental conditions included in the second MANOVA, and dependent variable, with overlayed raw scores.}\label{fig:boxPlot2}
-\end{figure*}
+general and content related test conditions (\(n\) = 163). To test these
+hypotheses, we first conducted a two-way MANOVA with interpolated
+activity and feedback as independent variables, and total number of
+correct answers and total number of intrusors as the dependent
+variables.
 
 Pillai's V for the interpolated activity effect (calculated with type
-III sums of squares) is 0.071, \(p = 0.003\) (Wilks' \(\Lambda\) =
-0.929, \(p = 0.003\); Hotelling-Lawley's trace = 0.08, \(p = 0.003\);
-Roy's largest root = 0.08, \(p = 0.003\)) confirming the main effect of
-interpolated activity type. The effect size \(\omega^2_{mult}\) = 0.065
-(bootstrap median = 0.072, \(BC_\alpha\) 95\% CI = {[}0.007, 0.139{]}).
+III sums of squares) is .071, \(p = .003\) (Wilks' \(\Lambda\) = .929,
+\(p = .003\)) confirming the main effect of interpolated activity type.
+The effect size \(\omega^2_{mult}\) = .065 (bootstrap median = .072,
+\(BC_\alpha\) 95\% CI = {[}.007, .139{]}).
 
 On the other hand, we find no evidence for an effect of giving feedback
 on the linear combination of our two dependent variables --- Pillai's V
-= 0.003, \(p = 0.8\) (Wilks' \(\Lambda\) = 0.997, \(p = 0.8\);
-Hotelling-Lawley's trace \(\approx\) 0, \(p = 0.8\); Roy's largest root
-\(\approx\) 0, \(p = 0.8\)). The effect size is \(\omega^2_{mult}\) =
--0.003 (bootstrap median = 0.003\footnote{
-The \(BC_\alpha\) 95\% CI for this estimate is \([-0.006, 0.004]\).
+= .003, \(p = .800\) (Wilks' \(\Lambda\) = .997, \(p = .800\)). The
+effect size is \(\omega^2_{mult}\) = -.003 (bootstrap median =
+.003\footnote{
+The \(BC_\alpha\) 95\% CI for this estimate is \([-.006,
+.004]\).
 \label{bca-ref}}).
 
 Furthermore, we find no evidence for an interaction effect between
-activity type and feedback --- Pillai's V = 0.001, \(p = 0.941\) (Wilks'
-\(\Lambda\) = 0.999, \(p = 0.941\); Hotelling-Lawley's trace \(\approx\)
-0, \(p = 0.941\); Roy's largest root \(\approx\) 0, \(p = 0.941\)). The
-effect size \(\omega^2_{mult}\) = -0.005 (bootstrap median =
-0.003\footnote{
-The \(BC_\alpha\) 95\% CI = \([-0.006, -0.005]\).
+activity type and feedback --- Pillai's V = .001, \(p = .941\) (Wilks'
+\(\Lambda\) = .999, \(p = .941\)). The effect size \(\omega^2_{mult}\) =
+-.005 (bootstrap median = .003\footnote{
+The \(BC_\alpha\) 95\% CI = \([-.006,
+-.005]\).
 Our guess is that this odd result is due to the fact that most of the density is concentrated
 around 0, causing an unreliable estimate. The same could be said for the CI in
 footnote \ref{bca-ref}.}). Both the feedback and the interaction
@@ -290,14 +274,14 @@ Again, we have conducted a follow-up Roy-Bargmann stepdown analysis. In
 the ANOVA model with the total number of correct answers as the
 dependent variable and the type of interpolated activity, feedback and
 their interaction as predictors, only the type of activity seems to be
-relevant (\(F(1, 159) = 11.2, p = 0.001\)). This result also shows that
+relevant (\(F(1, 159) = 11.2, p = .001\)). This result also shows that
 participants in the content related test condition scored higher on the
 final test than the participants in the general knowledge test
-condition, which should be no suprise given the results of the first
+condition, which should be no surprise given the results of the first
 stepdown analysis. In the second step, we fit an ANCOVA model with the
 total number of correct answers as the covariate. In this model, the
 type of interpolated activity ceases to be a relevant predictor
-(\(F(1, 155) = 0.175, p = 0.676\)). The full models are shown in Table
+(\(F(1, 155) = 0.175, p = .676\)). The full models are shown in Table
 \ref{rb2-table}.
 
 \begin{table*}[t]
@@ -311,19 +295,19 @@ Term & $SS$ & $df$ & $F$ & $p$\\
 \midrule
 \addlinespace[0.3em]
 \multicolumn{5}{l}{\textbf{ANOVA}}\\
-\hspace{1em}Activity & 109.393 & 1 & 11.200 & 0.001\\
-\hspace{1em}Feedback & 3.904 & 1 & 0.400 & 0.528\\
-\hspace{1em}Activity x Feedback & 0.045 & 1 & 0.005 & 0.946\\
+\hspace{1em}Activity & 109.393 & 1 & 11.200 & .001\\
+\hspace{1em}Feedback & 3.904 & 1 & 0.400 & .528\\
+\hspace{1em}Activity x Feedback & 0.045 & 1 & 0.005 & .946\\
 \hspace{1em}Residuals & 1553.046 & 159 &  & \\
 \addlinespace[0.3em]
 \multicolumn{5}{l}{\textbf{ANCOVA}}\\
-\hspace{1em}Activity & 0.301 & 1 & 0.175 & 0.676\\
-\hspace{1em}Feedback & 0.173 & 1 & 0.100 & 0.752\\
-\hspace{1em}Total correct & 63.216 & 1 & 36.760 & 0.000\\
-\hspace{1em}Activity x Feedback & 0.813 & 1 & 0.473 & 0.493\\
-\hspace{1em}Activity x Total correct & 0.862 & 1 & 0.501 & 0.480\\
-\hspace{1em}Feedback x Total correct & 0.130 & 1 & 0.075 & 0.784\\
-\hspace{1em}Activity x Feedback x Total correct & 1.229 & 1 & 0.715 & 0.399\\
+\hspace{1em}Activity & 0.301 & 1 & 0.175 & .676\\
+\hspace{1em}Feedback & 0.173 & 1 & 0.100 & .752\\
+\hspace{1em}Total correct & 63.216 & 1 & 36.760 & < .0001\\
+\hspace{1em}Activity x Feedback & 0.813 & 1 & 0.473 & .493\\
+\hspace{1em}Activity x Total correct & 0.862 & 1 & 0.501 & .480\\
+\hspace{1em}Feedback x Total correct & 0.130 & 1 & 0.075 & .784\\
+\hspace{1em}Activity x Feedback x Total correct & 1.229 & 1 & 0.715 & .399\\
 \hspace{1em}Residuals & 266.551 & 155 &  & \\
 \bottomrule
 \end{tabular}
@@ -337,8 +321,8 @@ for no difference between certain conditions, or no effect of certain
 manipulations, we have conducted a Bayesian reanalysis of the two
 Roy-Bargmann stepdown procedures. Since these analyses were not planned,
 we have decided to use the default priors provided in the
-\texttt{BayesFactor} \citep{moreyBayesFactorComputationBayes2018}
-package. \footnote{All posteriors obtained from 6000 simulations.}
+\textit{BayesFactor} \citep{moreyBayesFactorComputationBayes2018}
+package.\footnote{All posteriors obtained from 6000 simulations.}
 
 \hypertarget{bayesian-reanalysis-of-the-first-roy-bargmann-procedure}{%
 \subsubsection{Bayesian reanalysis of the first Roy-Bargmann
@@ -349,17 +333,17 @@ model with the total number of correct answers as the dependent
 variable, and the type of interpolated activity as the predictor. The
 mean of the posterior intercept distribution is 11.381 (95\% highest
 density interval (HDI) = {[}10.863, 11.888{]}). The estimated mean of
-the \(b\) coefficient associated with the content-test condition is
-1.254 (95\% HDI = {[}0.553, 2.005{]}). The 95\% highest density interval
-for the posterior indicates that there is a fair amount of uncertainty
-around the exact effect of content-related testing. However, most of the
-probability density is quite far above the null value, implying that we
-can be certain that there really is a positive effect (given the used
-priors, of course). The means of the posterior distributions for the
+the effect of content related testing is 1.254 (95\% HDI = {[}0.553,
+2.005{]}). The 95\% highest density interval for the posterior indicates
+that there is a fair amount of uncertainty around the exact magnitude of
+the effect of content-related testing. However, most of the probability
+density is quite far above the null value, implying that we can be
+certain that there really is a positive effect (given the used priors,
+of course). The means of the posterior distributions for the
 general-knowledge-test and rereading conditions \(b\)s are -0.805 (95\%
 HDI = {[}-1.549, -0.116{]}) and -0.449, (95\% HDI = {[}-1.125, 0.257{]})
 respectively. Most of the posterior distribution for the effect of
-general-knowledge testing lies below the null value. However, the
+general knowledge testing lies below the null value, although the
 distance is not as marked as in the content-related condition. On the
 other hand, there is a lot of uncertainty about the effect of rereading,
 compared to the other two estimates (89.8\% of the posterior lies below
@@ -368,7 +352,7 @@ compared to the other two estimates (89.8\% of the posterior lies below
 Furthermore, we wanted to explore the difference between the rereading
 and general-knowledge-test conditions, given their somewhat similar
 coefficient and HDI estimates. To do this, we conducted a Bayesian
-t-test, again with the \texttt{BayesFactor} package's default priors.
+t-test, again with the \textit{BayesFactor} package's default priors.
 The estimated posterior mean of the difference in the total number of
 correct answers between the general-knowledge-test and rereading groups
 is -0.362 (95\% HDI = {[}-1.49, 0.856{]}). As can be seen from the HDI,
@@ -381,7 +365,7 @@ with the total number of correct answers as the covariate and the total
 number of intrusive options chosen as the dependent variable. The mean
 of the posterior intercept distribution is 4.193 (95\% HDI = {[}3.92,
 4.473{]}). There is uncertainty around the estimates of the effects of
-the different experimental conditions --- content-related testing \(b\)
+the different experimental conditions --- content related testing \(b\)
 = -0.214 (95\% HDI = {[}-0.583, 0.146{]}), general-knowledge testing
 \(b\) = 0.072 (95\% HDI = {[}-0.288, 0.424{]}), rereading \(b\) = 0.142
 (95\% HDI = {[}-0.216, 0.494{]}). The HDIs show that the effects could
@@ -427,40 +411,60 @@ interaction effect. According to the collected data and the priors, we
 could claim that the effect is practically equivalent to zero if we were
 not interested in a half-point increase or decrease in the average
 scores (i.e.~defining a region of practical equivalence (ROPE) between
-{[}-0.5, 0.5{]}). However, greater precision would require further data
-collection.
+{[}-0.5, 0.5{]}). However, greater precision, which would require
+further data collection, is desired.
 
 We continue with the ANCOVA model, taking the total number of correct
 answers as the covariate. The estimate of the model intercept is 3.821
 (95\% HDI = {[}3.6, 4.03{]}). The estimate for the effect of content
 related testing on the total number of intrusive distractors chosen is
-\(b\) = -0.118 (95\% HDI = {[}-0.325, 0.092{]}). There is some evidence
-for a slight decrease in the number of intrusive distractors chosen in
-the content related testing condition. However, an increase is also
-possible, but less likely and negligibly small. The estimate for the
-effect of receiving feedback is -0.091 (95\% HDI = {[}-0.302, 0.121{]}).
+\(b\) = -0.118 (95\% HDI = {[}-0.325, 0.092{]}), compared to general
+knowledge testing. There is some evidence for a slight decrease in the
+number of intrusive distractors chosen in the content related testing
+condition. However, an increase is also possible, but less likely and
+negligibly small. The estimate for the effect of receiving feedback is
+-0.091 (95\% HDI = {[}-0.302, 0.121{]}). Although the mean of the
+posterior is close to zero, the lower bound of the HDI shows that values
+which may be considered non-negligible are still somewhat probable.
+Therefore, we shall refrain from making a judgement regarding the effect
+of feedback on choosing intrusive distractors. Finally, the estimate of
+the interaction effect is \(b\) = 0.047 (95\% HDI = {[}-0.153,
+0.244{]}). The mean of the posterior is close to zero, and we could
+declare the effect to be practically equivalent to zero with a ROPE of
+approximately {[}-0.25, 0.25{]}.
+
+As previously stated, all these analyses were not planned a priori. This
+warrants certain caveats. The \textit{BayesFactor} package's default
+priors were used. The appropriateness of these priors should certainly
+be questioned. However, we have decided to use them because we did not
+want to choose priors after already seeing the data. Further, the
+statements about effects made in this section are noncommittal. Whether
+a 0.5 increase or decrease in the total number of correct answers is
+practically equivalent to zero or not is left to the reader. We conclude
+by reminding the reader that the data is available online, at {[}URL{]}.
 
 \hypertarget{notes}{%
 \subsection{Notes}\label{notes}}
 
-Analyses conducted using the \texttt{R} language
+Analyses conducted using the \textit{R} language
 \citep{rcoreteamLanguageEnvironmentStatistical2019}. Plots created using
-\texttt{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap
-conducted using the \texttt{boot} package
+\textit{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap
+conducted using the \textit{boot} package
 \citep{cantyBootBootstrapSPlus2017}. Methods and analyses written using
-\texttt{rmarkdown} \citep{allaireRmarkdownDynamicDocuments2019} and
-\texttt{knitr} \citep{xieKnitrGeneralPurposePackage2019}. The package
-\texttt{car} \citep{foxCompanionAppliedRegression2011} was used to
-obtain type III sums of squares. \texttt{compute.es}
+\textit{rmarkdown} \citep{allaireRmarkdownDynamicDocuments2019} and
+\textit{knitr} \citep{xieKnitrGeneralPurposePackage2019}. The package
+\textit{car} \citep{foxCompanionAppliedRegression2011} was used to
+obtain type III sums of squares. \textit{compute.es}
 \citep{reComputeEsCompute2013} was used to obtain effect sizes for
-contrasts. \texttt{kableExtra} was used to help generate tables
+contrasts. \textit{kableExtra} was used to help generate tables
 \citep{zhuKableExtraConstructComplex2019}. Other utilities used are
-\texttt{tidyverse} \citep{wickhamTidyverseEasilyInstall2017},
-\texttt{magrittr} \citep{bacheMagrittrForwardPipeOperator2014},
-\texttt{here} \citep{mullerHereSimplerWay2017}, \texttt{conflicted}
-\citep{wickhamConflictedAlternativeConflict2018}, \texttt{psych}
+\textit{tidyverse} \citep{wickhamTidyverseEasilyInstall2017},
+\textit{magrittr} \citep{bacheMagrittrForwardPipeOperator2014},
+\textit{here} \citep{mullerHereSimplerWay2017}, \textit{conflicted}
+\citep{wickhamConflictedAlternativeConflict2018}, \textit{psych}
 \citep{revellePsychProceduresPsychological2018}. Highest density
-intervals obtained using \citep{meredithHDIntervalHighestPosterior2018}.
+intervals obtained using \textit{HDInterval}
+\citep{meredithHDIntervalHighestPosterior2018}.
 
 
 \end{document}

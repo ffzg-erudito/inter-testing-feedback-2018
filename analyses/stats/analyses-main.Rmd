@@ -26,7 +26,7 @@ header-includes: |
 ```{r setup, echo = F, include = F}
 library(knitr)
 opts_chunk$set(dpi = 600, dev = 'tikz', echo = F, include = F)
-options(digits = 3, scipen = 0, knitr.kable.NA = '')
+options(digits = 3, scipen = 12, knitr.kable.NA = '')
 
 library(here)
 # NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
@@ -57,6 +57,19 @@ theme_set(theme_minimal())
 
 # source helper functions
 source(here('helpers', 'manova-helpers.R'))
+
+apaPrint <- function(number, pvalue = F, digits = 3,
+                     limit = .0001, replacement = '.0001') {
+  if (pvalue & number < limit) {
+    replacement
+  } else {
+    strCandidate <- round(number, digits = digits) %>%
+    {str_replace(as.character(.), '(?<=[-+]?)0(?=\\.)', '')}
+    if (str_length(strCandidate) < digits + 1) {
+      str_pad(strCandidate, 'right', pad = '0', width = digits + 1)
+    } else strCandidate
+  }
+}
 ```
 
 ## Results
@@ -66,25 +79,24 @@ source(here('helpers', 'manova-helpers.R'))
 ```{r descTable, results = 'asis', include = T}
 .a <- by(datHard$totalCorrect, datHard$condition, describe) %>%
   map_dfr(., rbind) %>%
-  select(., n, mean, se, sd, min, max, skew, kurtosis)
+  select(., n, mean, se, sd, min, max)
   
 .b <- by(datHard$totalIntrusors, datHard$condition, describe) %>%
   map_dfr(., rbind) %>%
-  select(., n, mean, se, sd, min, max, skew, kurtosis)
+  select(., n, mean, se, sd, min, max)
   
 rbind(.a, .b) %>%
-  rename(., '$n$' = n, '$M$' = mean, '$SE$' = se, '$SD$' = sd) %>%
+  rename(., '$n$' = n, '$M$' = mean, '$SE_M$' = se, '$SD$' = sd) %>%
   cbind(Measure = c(rep('Total correct', 5), rep('Total intrusors', 5)),
         Condition = rep(c("Content, feedback", "Content, no feedback",
                           "General, feedback", "General, no feedback",
                           "Rereading")), .) %>% 
-  kable(., caption = '\\label{descTable} Descriptive statistics for the
-                     number of correct answers and chosen intrusors broken down
+  kable(., caption = '\\label{descTable}Descriptive statistics for the DVs broken down
                      by experimental condition.',
         format = 'latex', booktabs = T, table.env = 'table*',
         digits = 3, escape = F) %>% 
   collapse_rows(., columns = 1, latex_hline = 'major') %>% 
-  kable_styling(latex_options = c('scale_down', 'hold_position'))
+  kable_styling(latex_options = c('hold_position'))
 ```
 
 Prior to analysing the data, we have excluded participants based on a priori
@@ -117,40 +129,21 @@ datHardNofeed$activityFactor %<>% as.factor(.)
 Our first two hypotheses are concerned with the effects of different interpolated
 activities on the total number of correct answers and total number of intrusive
 distractors chosen. To test these hypotheses, we have focused only on the groups
-which have not received feedback, since there was no feedback option for the
-rereading group (\(n\) = `r nrow(datHardNofeed)`).
+which have not received feedback (\(n\) = `r nrow(datHardNofeed)`).
+This was done because there was no feedback option for the rereading group, and
+we did not want to treat the feedback and no-feedback general-knowledge and
+content-related testing groups as equivalent without strong evidence supporting
+that assumption.
 We conducted a one-way MANOVA with interpolated activity as
 the independent variable and the total number of correct and intrusive options
 chosen as dependent variables. The correlation between our DVs calculated on the
-whole sample is
+whole sample is \(r =\)
 `r datHard %>% select(totalCorrect, totalIntrusors) %>% corr.test(.) -> .;
-pluck(., 'r') %>% .[1,2] %>% round(., 2)`
-(95% CI: [`r pluck(., 'ci') %>% pull(lower) %>% round(., 2)`,
-`r pluck(., 'ci') %>% pull(upper) %>% round(., 2)`],
-\(p\) = \(`r datHard %>% select(totalCorrect, totalIntrusors) %>% corr.test(.) -> .;
-pluck(., 'p') %>% .[1,2]`\)). Boxplots for the groups in this analysis are shown
-in Figure \ref{box1}.
-
-```{r boxPlot, include = T, fig.align = 'center', fig.cap = '\\label{box1} Boxplots broken down by experimental conditions included in the first MANOVA, and dependent variable, with overlayed raw scores.', fig.env = 'figure*', message = F, fig.pos = 'h'}
-datHardNofeed %>%
-  mutate_at(vars(activityFactor), fct_relevel,
-            'rereading', 'general', 'content') %>%
-  mutate_at(vars(activityFactor), fct_recode,
-            'Rereading' = 'rereading', 'General' = 'general',
-            'Content' = 'content') %>%
-  gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
-         value = 'score') %>%
-  ggplot(., aes(x = activityFactor, y = score)) +
-  geom_boxplot(alpha = .5) + geom_dotplot(mapping = aes(y = score),
-                                          binaxis = 'y',
-                                stackdir = 'centerwhole', dotsize = .5,
-                                fill = 'black', color = 'black') +
-  xlab('Condition') + ylab('Score') +
-  facet_grid(dependentVar~.,
-             labeller = as_labeller(c('totalCorrect' = 'Total correct',
-                                      'totalIntrusors' = 'Total intrusors'))) +
-  theme(panel.spacing.y = unit(2, 'line'))
-```
+pluck(., 'r') %>% .[1,2] %>% apaPrint(.)`
+(95% CI: [`r pluck(., 'ci') %>% pull(lower) %>% apaPrint(.)`,
+`r pluck(., 'ci') %>% pull(upper) %>% apaPrint(.)`],
+\(p\) < `r datHard %>% select(totalCorrect, totalIntrusors) %>% corr.test(.) -> .;
+pluck(., 'p') %>% .[1,2] %>% apaPrint(., pvalue = T)`).
 
 ```{r manovaInterpActivity}
 manovaModel <- manova(data = datHardNofeed,
@@ -182,29 +175,32 @@ ciOut <- boot.ci(bootOut, index = 1)
 ```
 
 Pillai's V for the analysis is
-`r summary(manovaModel) %>% pluck(., 'stats') %>% .[1, 'Pillai']`,
-\(p = `r summary(manovaModel) %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`\)
+`r summary(manovaModel) %>% pluck(., 'stats') %>% .[1, 'Pillai'] %>% apaPrint(.)`,
+\(p = `r summary(manovaModel) %>% pluck(., 'stats') %>% .[1, 'Pr(>F)'] %>%
+apaPrint(., pvalue = T)`\)
 (Wilks' \(\Lambda\) =
-`r summary(manovaModel, test = 'Wilks') %>% pluck(., 'stats') %>% .[1, 'Wilks']`,
-\(p = `r summary(manovaModel, test = 'Wilks') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`\);
-Hotelling-Lawley's trace =
-`r summary(manovaModel, test = 'Hotelling-Lawley') %>% pluck(., 'stats') %>% .[1, 'Hotelling-Lawley']`,
-\(p = `r summary(manovaModel, test = 'Hotelling-Lawley') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`\);
-Roy's largest root =
-`r summary(manovaModel, test = 'Roy') %>% pluck(., 'stats') %>% .[1, 'Roy']`,
-\(p = `r summary(manovaModel, test = 'Roy') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)']`\)).
+`r summary(manovaModel, test = 'Wilks') %>% pluck(., 'stats') %>% .[1, 'Wilks'] %>%
+apaPrint(.)`,
+\(p = `r summary(manovaModel, test = 'Wilks') %>% pluck(., 'stats') %>% .[1, 'Pr(>F)'] %>%
+apaPrint(., pvalue = T)`\)).
 The effect size, calculated as
 \(\omega^2_{mult} = `r summary(manovaModel, test = 'Wilks') -> .;
-omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])`\)
-(bootstrap median\footnote{All bootstrap estimates taken from 10000 replications.} = `r bootOut$t %>% median(.)`, \(BC_\alpha\) 95% CI =
-[`r ciOut$bca[4]`, `r ciOut$bca[5]`]).
+omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df']) %>%
+apaPrint(.)`\)
+(bootstrap median\footnote{All bootstrap estimates taken from 10000 replications.} = `r bootOut$t %>% median(.) %>% apaPrint(.)`, \(BC_\alpha\) 95% CI =
+[`r ciOut$bca[4] %>% apaPrint(.)`, `r ciOut$bca[5] %>% apaPrint(.)`]).
 To further inspect the relationship of the interpolated activities with our
 dependent variables, we have conducted a Roy-Bargmann stepdown analysis, as
 suggested by \citeauthor{tabachnickUsingMultivariateStatistics2012}
 (\citeyear{tabachnickUsingMultivariateStatistics2012};
 a linear discriminant analysis with the same aim is available in the supplementary
 materials). The total number of correct answers was a priori chosen to be the
-higher priority variable. Therefore, we first conducted an ANOVA with interpolated
+higher priority variable. According to \citet{tabachnickUsingMultivariateStatistics2012},
+the higher priority variable can be chosen based on theoretical or practical grounds.
+Since, the total number of correct answers is the criterion that determines a
+student's success in a testing context, we have chosen this dependent variable
+as the higher priority one.
+Therefore, we first conducted an ANOVA with interpolated
 activity type as the independent variable and the total number of correct answers
 as the dependent variable.
 
@@ -222,7 +218,7 @@ As could be expected, the ANOVA points to an interpolated activity effect, with
 \(F(`r anovaRB %>% filter(., term == 'activityFactor') %>% pull(., df)`,
 `r anovaRB %>% filter(., term == 'Residuals') %>% pull(., df)`)\) =
 `r anovaRB %>% select(., statistic) %>% slice(1)`,
-\(p = `r anovaRB %>% select(., p.value) %>% slice(1)`\).
+\(p = `r anovaRB %>% select(., p.value) %>% slice(1) %>% apaPrint(., pvalue = T)`\).
 Following the ANOVA, we conducted an ANCOVA, with
 the total number of correct answers as the covariate, and the total number of intrusors
 as the dependent variable. The results imply a main effect
@@ -230,14 +226,16 @@ of the total number of correct answers
 (\(F(`r (.) %>% filter(., term == 'totalCorrect') %>% pull(df)`,
 `r (.) %>% filter(., term == 'Residuals') %>% pull(df)`)\) =
 `r (.) %>% filter(., term == 'totalCorrect') %>% pull(statistic)`,
-\(p = `r (.) %>% filter(., term == 'totalCorrect') %>% pull(p.value)`\)),
+\(p < `r (.) %>% filter(., term == 'totalCorrect') %>% pull(p.value) %>%
+apaPrint(., pvalue = T)`\)),
 but after taking into account the number of correct
 answers, there is no evidence for an effect of interpolated activity on the total
 number of chosen intrusors
 (\(F (`r (.) %>% filter(., term == 'activityFactor') %>% pull(df)`,
 `r (.) %>% filter(., term == 'Residuals') %>% pull(df)`)\) =
 `r (.) %>% filter(., term == 'activityFactor') %>% pull(statistic)`,
-\(p = `r (.) %>% filter(., term == 'activityFactor') %>% pull(p.value)`\).
+\(p = `r (.) %>% filter(., term == 'activityFactor') %>% pull(p.value) %>%
+apaPrint(., pvalue = T)`\)).
 For now, we may claim that we do not have any evidence to support our second hypothesis
 that the type of interpolated activity will have an effect on the number of
 intrusors.
@@ -270,13 +268,13 @@ each other, taking only the total number of correct answers as the DV.
 The first contrast finds no evidence of a difference between the rereading group
 and the two test groups
 (\(t\) = `r (.) %>% select(statistic) %>% slice(2)`,
-\(p = `r (.) %>% select(p.value) %>% slice(2)`\),
+\(p = `r (.) %>% select(p.value) %>% slice(2) %>% apaPrint(., pvalue = T)`\),
 \(g_s\) = `r esCont1$g`, 95% CI = [`r esCont1$l.g`, `r esCont1$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont1$U3.g`%,
 probability of superiority = `r esCont1$cl.g`%).
 However, there is a difference between the two test groups
 (\(t\) = `r (.) %>% select(statistic) %>% slice(3)`,
-\(p = `r (.) %>% select(p.value) %>% slice(3)`\),
+\(p = `r (.) %>% select(p.value) %>% slice(3) %>% apaPrint(., pvalue = T, digits = 4)`\),
 \(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
 probability of superiority = `r esCont2$cl.g`%).
@@ -298,35 +296,11 @@ datHardFeed %<>% mutate_at(., vars(activityFactor, giveFeedback, condition),
 The remaining hypotheses deal with the effect of feedback on the total number of
 correct answers and the total number of intrusors. Therefore, these analyses are
 carried out only on the data from participants in the general and content related
-test conditions (\(n\) = `r nrow(datHardFeed)`). Boxplots for these groups are 
-shown in Figure \ref{box2}.
+test conditions (\(n\) = `r nrow(datHardFeed)`). 
 To test these hypotheses, we first
 conducted a two-way MANOVA with interpolated activity and feedback as independent
 variables, and total number of correct answers and total number of intrusors as
 the dependent variables.
-
-```{r boxPlot2, include = T, fig.align = 'center', fig.cap = '\\label{box2} Boxplots broken down by experimental conditions included in the second MANOVA, and dependent variable, with overlayed raw scores.', fig.env = 'figure*', message = F, fig.pos = 'h'}
-datHardFeed %>%
-  gather(., totalCorrect, totalIntrusors, key = 'dependentVar',
-         value = 'score') %>%
-  mutate_at(., vars(condition), fct_relevel,
-            'general_feedback', 'general_noFeedback') %>%
-  mutate_at(., vars(condition), fct_recode,
-            'Content, feedback' = 'content_feedback',
-            'Content, no feedback' = "content_noFeedback", 
-            'General, feedback' = "general_feedback",
-            'General, no feedback' = "general_noFeedback") %>%
-  ggplot(., aes(x = condition, y = score)) +
-  geom_boxplot(alpha = .5) + geom_dotplot(mapping = aes(y = score),
-                                          binaxis = 'y',
-                                stackdir = 'centerwhole', dotsize = .5,
-                                fill = 'black', color = 'black') +
-  xlab('Condition') + ylab('Score') +
-  facet_grid(dependentVar ~ .,
-             labeller = as_labeller(c('totalCorrect' = 'Total correct',
-                                      'totalIntrusors' = 'Total intrusors'))) +
-  theme(panel.spacing.y = unit(2, 'line'))
-```
 
 ```{r manovaInteraction}
 manovaModelInter <- manova(cbind(totalCorrect, totalIntrusors) ~
@@ -362,24 +336,22 @@ ciOutActivity <- boot.ci(bootOutActivity, index = 1)
 
 Pillai's V for the interpolated activity effect (calculated with type III sums of
 squares) is 
-`r manovaStats(manovaModelInter, 'test', '^activityFactor ')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor ')`\)
+`r manovaStats(manovaModelInter, 'test', '^activityFactor ') %>% apaPrint(.)`,
+\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor ') %>% apaPrint(., pvalue = T)`\)
 (Wilks' \(\Lambda\) =
-`r manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Wilks')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor ', test = 'Wilks')`\);
-Hotelling-Lawley's trace =
-`r manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Hotelling-Lawley')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor ', test = 'Hotelling-Lawley')`\);
-Roy's largest root =
-`r manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Roy')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor ', test = 'Roy')`\))
+`r manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Wilks') %>%
+apaPrint(.)`,
+\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor ', test = 'Wilks') %>%
+apaPrint(., pvalue = T)`\))
 confirming the main effect of interpolated activity type.
 The effect size
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^activityFactor ', test = 'Wilks'),
-manovaStats(manovaModelInter, 'df', '^activityFactor ', test = 'Wilks'))`
-(bootstrap median = `r bootOutActivity$t %>% median(.)`, \(BC_\alpha\) 95% CI =
-[`r ciOutActivity$bca[4]`, `r ciOutActivity$bca[5]`]).
+manovaStats(manovaModelInter, 'df', '^activityFactor ', test = 'Wilks')) %>%
+apaPrint(.)`
+(bootstrap median = `r bootOutActivity$t %>% median(.) %>% apaPrint(.)`,
+\(BC_\alpha\) 95% CI = [`r ciOutActivity$bca[4] %>% apaPrint(.)`,
+`r ciOutActivity$bca[5] %>% apaPrint(.)`]).
 
 ```{r manovaBootFeed, cache = T}
 set.seed(1171017)
@@ -409,23 +381,21 @@ ciOutFeed <- boot.ci(bootOutFeed, index = 1)
 
 On the other hand, we find no evidence for an effect of giving feedback on the linear combination of
 our two dependent variables --- Pillai's V =
-`r manovaStats(manovaModelInter, 'test', '^giveFeedback ')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ')`\)
+`r manovaStats(manovaModelInter, 'test', '^giveFeedback ') %>% apaPrint(.)`,
+\(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ') %>% apaPrint(., pvalue = T)`\)
 (Wilks' \(\Lambda\) =
-`r manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Wilks')`\);
-Hotelling-Lawley's trace \(\approx\)
-`r manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Hotelling-Lawley')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Hotelling-Lawley')`\);
-Roy's largest root \(\approx\)
-`r manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Roy')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Roy')`\)).
+`r manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks') %>%
+apaPrint(.)`,
+\(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Wilks') %>%
+apaPrint(., pvalue = T)`\)).
 The effect size is
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks'),
-manovaStats(manovaModelInter, 'df', '^giveFeedback ', test = 'Wilks'))`
-(bootstrap median = `r bootOutFeed$t %>% median(.)`\footnote{
-The \(BC_\alpha\) 95\% CI for this estimate is \([`r ciOutFeed$bca[4]`, `r ciOutFeed$bca[5]`]\).
+manovaStats(manovaModelInter, 'df', '^giveFeedback ', test = 'Wilks')) %>%
+apaPrint(.)`
+(bootstrap median = `r bootOutFeed$t %>% median(.) %>% apaPrint(.)`\footnote{
+The \(BC_\alpha\) 95\% CI for this estimate is \([`r ciOutFeed$bca[4] %>% apaPrint(.)`,
+`r ciOutFeed$bca[5] %>% apaPrint(.)`]\).
 \label{bca-ref}}).
 
 ```{r manovaBootInt, cache = T}
@@ -456,23 +426,22 @@ ciOutInt <- boot.ci(bootOutInt, index = 1)
 
 Furthermore, we find no evidence for an interaction effect between activity type
 and feedback --- Pillai's V =
-`r manovaStats(manovaModelInter, 'test', '^activityFactor:')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:')`\)
+`r manovaStats(manovaModelInter, 'test', '^activityFactor:') %>% apaPrint(.)`,
+\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:') %>%
+apaPrint(., pvalue = T)`\)
 (Wilks' \(\Lambda\) =
-`r manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Wilks')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:', test = 'Wilks')`\);
-Hotelling-Lawley's trace \(\approx\)
-`r manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Hotelling-Lawley')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:', test = 'Hotelling-Lawley')`\);
-Roy's largest root \(\approx\)
-`r manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Roy')`,
-\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:', test = 'Roy')`\)).
+`r manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Wilks') %>%
+apaPrint(.)`,
+\(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:', test = 'Wilks') %>%
+apaPrint(., pvalue = T)`\)).
 The effect size
 \(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
 manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Wilks'),
-manovaStats(manovaModelInter, 'df', '^activityFactor:', test = 'Wilks'))`
-(bootstrap median = `r bootOutInt$t %>% median(.)`\footnote{
-The \(BC_\alpha\) 95\% CI = \([`r ciOutInt$bca[4]`, `r ciOutInt$bca[5]`]\).
+manovaStats(manovaModelInter, 'df', '^activityFactor:', test = 'Wilks')) %>%
+apaPrint(.)`
+(bootstrap median = `r bootOutInt$t %>% median(.) %>% apaPrint(.)`\footnote{
+The \(BC_\alpha\) 95\% CI = \([`r ciOutInt$bca[4] %>% apaPrint(.)`,
+`r ciOutInt$bca[5] %>% apaPrint(.)`]\).
 Our guess is that this odd result is due to the fact that most of the density is concentrated
 around 0, causing an unreliable estimate. The same could be said for the CI in
 footnote \ref{bca-ref}.}). Both the feedback and the interaction
@@ -497,7 +466,7 @@ only the type of activity seems to be relevant
 (\(F(`r rbAnova2 %>% slice(2) %>% pull(df)`,
 `r rbAnova2 %>% slice(5) %>% pull(df)`) =
 `r rbAnova2 %>% slice(2) %>% pull(statistic)`, p =
-`r rbAnova2 %>% slice(2) %>% pull(p.value)`\)).
+`r rbAnova2 %>% slice(2) %>% pull(p.value) %>% apaPrint(., pvalue = T)`\)).
 This result also shows that participants in the content related test condition
 scored higher on the final test than the participants in the general knowledge test
 condition, which should be no surprise given the results of the first stepdown analysis.
@@ -507,7 +476,7 @@ a relevant predictor
 (\(F(`r rbAncova2 %>% slice(2) %>% pull(df)`,
 `r rbAncova2 %>% slice(9) %>% pull(df)`) =
 `r rbAncova2 %>% slice(2) %>% pull(statistic)`, p
-= `r rbAncova2 %>% slice(2) %>% pull(p.value)`\)).
+= `r rbAncova2 %>% slice(2) %>% pull(p.value) %>% apaPrint(., pvalue = T)`\)).
 The full models are shown in Table \ref{rb2-table}.
 
 ```{r rb2Table, results = 'asis', include = T}
@@ -520,12 +489,17 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
             'totalCorrect', 'Total correct') %>%
   mutate_at(., vars(term), str_replace_all,
             ':', ' x ') %>%
+  modify_at(., 'p.value', map_chr,
+            function(x) {
+              ifelse(is.na(x), '', apaPrint(x, pvalue = T,
+                                           replacement = '< .0001'))
+            }) %>%
   rename('Term' = term, '$SS$' = sumsq, '$df$' = df,
               '$F$' = statistic, '$p$' = p.value) %>%
-  kable(., caption = 'Full ANOVA and ANCOVA models for the second Roy-Bargmann
-                     stepdown analysis.\\label{rb2-table}',
+  kable(., caption = '\\label{rb2-table}ANOVA and ANCOVA models for the second Roy-Bargmann
+                     procedure.',
         format = 'latex', booktabs = T, table.env = 'table*',
-        digits = 3, escape = F) %>%
+        digits = 3, escape = F, align = c('l', rep('r', 4))) %>%
   kable_styling(., latex_options = c('hold_position')) %>%
   pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
 ```
@@ -536,7 +510,7 @@ Because it is theoretically interesting to see whether there is evidence for no
 difference between certain conditions, or no effect of certain manipulations, we
 have conducted a Bayesian reanalysis of the two Roy-Bargmann stepdown procedures.
 Since these analyses were not planned, we have decided to use the default priors
-provided in the `BayesFactor`
+provided in the \textit{BayesFactor}
 \citep{moreyBayesFactorComputationBayes2018} package.\footnote{All posteriors obtained from 6000 simulations.}
 
 ```{r bfOpts}
@@ -605,7 +579,7 @@ hdi(contReadGen) -> contReadGenHDI
 Furthermore, we wanted to explore the difference between the rereading and
 general-knowledge-test conditions, given their somewhat similar coefficient
 and HDI estimates. To do this, we conducted a Bayesian t-test, again with the
-`BayesFactor` package's default priors. The estimated posterior mean of the difference in
+\textit{BayesFactor} package's default priors. The estimated posterior mean of the difference in
 the total number of correct answers between the general-knowledge-test and
 rereading groups is `r summary(contReadGen)$statistics[2, 'Mean']`
 (95% HDI = [`r contReadGenHDI[1, 'beta (general - rereading)']`,
@@ -766,7 +740,7 @@ The mean of the posterior is close to zero, and we could declare the effect to b
 practically equivalent to zero with a ROPE of approximately [-0.25, 0.25].
 
 As previously stated, all these analyses were not planned a priori. This warrants
-certain caveats. The `BayesFactor` package's default priors were used.
+certain caveats. The \textit{BayesFactor} package's default priors were used.
 The appropriateness of these priors should certainly be questioned. However, we have decided
 to use them because we did not want to choose priors after already seeing the data.
 Further, the statements about effects made in this section are noncommittal.
@@ -776,18 +750,18 @@ We conclude by reminding the reader that the data is available online, at [URL].
 
 ## Notes
 
-Analyses conducted using the `R` language \citep{rcoreteamLanguageEnvironmentStatistical2019}.
-Plots created using `ggplot2` \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap conducted
-using the `boot` package \citep{cantyBootBootstrapSPlus2017}. Methods and analyses written
-using `rmarkdown` \citep{allaireRmarkdownDynamicDocuments2019} and
-`knitr` \citep{xieKnitrGeneralPurposePackage2019}. The package `car`
+Analyses conducted using the \textit{R} language \citep{rcoreteamLanguageEnvironmentStatistical2019}.
+Plots created using \textit{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap conducted
+using the \textit{boot} package \citep{cantyBootBootstrapSPlus2017}. Methods and analyses written
+using \textit{rmarkdown} \citep{allaireRmarkdownDynamicDocuments2019} and
+\textit{knitr} \citep{xieKnitrGeneralPurposePackage2019}. The package \textit{car}
 \citep{foxCompanionAppliedRegression2011} was used to obtain type III sums of
-squares. `compute.es` \citep{reComputeEsCompute2013}
+squares. \textit{compute.es} \citep{reComputeEsCompute2013}
 was used to obtain effect sizes for contrasts.
-`kableExtra` was used to help generate tables \citep{zhuKableExtraConstructComplex2019}.
-Other utilities used are `tidyverse` \citep{wickhamTidyverseEasilyInstall2017},
-`magrittr` \citep{bacheMagrittrForwardPipeOperator2014}, `here`
+\textit{kableExtra} was used to help generate tables \citep{zhuKableExtraConstructComplex2019}.
+Other utilities used are \textit{tidyverse} \citep{wickhamTidyverseEasilyInstall2017},
+\textit{magrittr} \citep{bacheMagrittrForwardPipeOperator2014}, \textit{here}
 \citep{mullerHereSimplerWay2017},
-`conflicted` \citep{wickhamConflictedAlternativeConflict2018},
-`psych` \citep{revellePsychProceduresPsychological2018}.
-Highest density intervals obtained using `HDInterval` \citep{meredithHDIntervalHighestPosterior2018}.
+\textit{conflicted} \citep{wickhamConflictedAlternativeConflict2018},
+\textit{psych} \citep{revellePsychProceduresPsychological2018}.
+Highest density intervals obtained using \textit{HDInterval} \citep{meredithHDIntervalHighestPosterior2018}.
