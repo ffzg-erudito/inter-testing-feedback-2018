@@ -20,6 +20,7 @@ paper/sections/*
 
 !paper/*.tex
 !paper/*.pdf
+!paper/Makefile
 
 analyses/.Rhistory
 analyses/stats/*tikzDictionary
