@@ -118,7 +118,7 @@
 \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
 \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
 \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
-\captionsetup*[figure]{labelsep = period, labelfont = it, position = below, skip = -10pt}
+\captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
 
 \begin{document}
 
@@ -178,8 +178,9 @@ through written instructions, we wanted to encourage our participants to
 carefully examine the feedback. The feedback was presented for maximally
 60 seconds, after which the application proceeded to the next text.
 
-\begin{figure}
-  \includegraphics[width = \textwidth, keepaspectratio, trim = 135 0 135 90]{../images/flowchart/procedure.pdf}
+\begin{figure}[p]
+  \centering
+  \includegraphics[width = 1.3\textwidth, keepaspectratio, angle = 90, trim = 0 0 0 0]{../images/flowchart/procedure.pdf}
   \caption{A flowchart depicting the experimental procedure.}
   \label{flowchart}
 \end{figure}
@@ -195,12 +196,11 @@ the experiment is displayed in Figure \ref{flowchart}.
 
 After entering their personal information, participants were presented
 with the instructions for their first task, which was to read the
-practice text at a speed that comes naturally to them. They were to
-click a button at the bottom of the text when they have finished reading
-it. Unbeknownst to the participants, the time they took to read the
-practice text was recorded, and used as the basis for determining the
-reading time limits for the remaining texts. However, the lowest
-possible time limit was set to 5 minutes, and the longest to 8 minutes.
+practice text at a speed that comes naturally to them. Unbeknownst to
+the participants, the time they took to read the practice text was
+recorded, and used as the basis for determining the reading time limits
+for the remaining texts. However, the lowest possible time limit was set
+to 5 minutes, and the longest to 8 minutes.
 
 Next, participants were familiarised with the interpolated activity they
 were going to perform during the main part of the procedure. The
@@ -229,8 +229,7 @@ test, irrespective of the experimental condition. The computer recorded
 whether a participant correctly answered a question and whether the
 participant chose an intrusive distractor. This allowed us to compute
 our dependent variables --- the total number of correct answers and the
-total number of intrusive distractors chosen. We will now describe the
-test questions.
+total number of intrusive distractors chosen.
 
 In total, forty-four content related questions with four response
 options were generated from the presented parts of the text. Four
@@ -312,7 +311,7 @@ equivalent without strong evidence supporting that assumption. We
 conducted a one-way MANOVA with interpolated activity as the independent
 variable and the total number of correct and intrusive options chosen as
 dependent variables. The correlation between our DVs calculated on the
-whole sample is \(r =\) -.707 (95\% CI: {[}-.77, -.63{]}, \(p\)
+whole sample is \(r(201) =\) -.707 (95\% CI: {[}-.77, -.63{]}, \(p\)
 \textless{} .0001).
 
 Pillai's V for the analysis is .126, \(p = .004\) (Wilks' \(\Lambda\) =
@@ -351,15 +350,15 @@ In order to test our first hypothesis, we have contrasted (i) the
 rereading group with the two test groups, and (ii) the two test groups
 with each other, taking only the total number of correct answers as the
 DV. The first contrast finds no evidence of a difference between the
-rereading group and the two test groups (\(t\) = 1.355, \(p = .178\),
-\(g_s\) = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohen's \(U_{3, g_s}\) =
-57.6\%, probability of superiority = 55.39\%). However, there is a
-difference between the two test groups (\(t\) = 3.62, \(p = .0004\),
-\(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]}, Cohen's \(U_{3, g_s}\) =
-74.43\%, probability of superiority = 67.88\%). Participants in the
-content related test group scored higher on the final test than
-participants in the general knowledge test condition. These two findings
-are not in line with our predictions.
+rereading group and the two test groups (\(t(119)\) = 1.355,
+\(p = .178\), \(g_s\) = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohen's
+\(U_{3, g_s}\) = 57.6\%, probability of superiority = 55.39\%). However,
+there is a difference between the two test groups (\(t(119)\) = 3.62,
+\(p = .0004\), \(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]}, Cohen's
+\(U_{3, g_s}\) = 74.43\%, probability of superiority = 67.88\%).
+Participants in the content related test group scored higher on the
+final test than participants in the general knowledge test condition.
+These two findings are not in line with our predictions.
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
 \subsubsection{The interaction between feedback and interpolated

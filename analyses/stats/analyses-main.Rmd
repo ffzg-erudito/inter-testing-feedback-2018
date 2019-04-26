@@ -137,7 +137,7 @@ that assumption.
 We conducted a one-way MANOVA with interpolated activity as
 the independent variable and the total number of correct and intrusive options
 chosen as dependent variables. The correlation between our DVs calculated on the
-whole sample is \(r =\)
+whole sample is \(r(`r nrow(datHard) - 2`) =\)
 `r datHard %>% select(totalCorrect, totalIntrusors) %>% corr.test(.) -> .;
 pluck(., 'r') %>% .[1,2] %>% apaPrint(.)`
 (95% CI: [`r pluck(., 'ci') %>% pull(lower) %>% apaPrint(.)`,
@@ -267,13 +267,15 @@ In order to test our first hypothesis, we have contrasted
 each other, taking only the total number of correct answers as the DV.
 The first contrast finds no evidence of a difference between the rereading group
 and the two test groups
-(\(t\) = `r (.) %>% select(statistic) %>% slice(2)`,
+(\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
+`r (.) %>% select(statistic) %>% slice(2)`,
 \(p = `r (.) %>% select(p.value) %>% slice(2) %>% apaPrint(., pvalue = T)`\),
 \(g_s\) = `r esCont1$g`, 95% CI = [`r esCont1$l.g`, `r esCont1$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont1$U3.g`%,
 probability of superiority = `r esCont1$cl.g`%).
 However, there is a difference between the two test groups
-(\(t\) = `r (.) %>% select(statistic) %>% slice(3)`,
+(\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
+`r (.) %>% select(statistic) %>% slice(3)`,
 \(p = `r (.) %>% select(p.value) %>% slice(3) %>% apaPrint(., pvalue = T, digits = 4)`\),
 \(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
