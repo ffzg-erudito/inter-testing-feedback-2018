@@ -1,8 +1,13 @@
-.PHONY: all
+.PHONY: all ../images/flowchart/flowchart.pdf
 
 sections=../../paper/sections/
 
 all: $(sections)methods.tex $(sections)analyses-main.tex
+
+methods.Rmd: ../images/flowchart/flowchart.pdf
+
+methods.tex: methods.Rmd
+	Rscript -e 'rmarkdown::render("$<")'
 
 $(sections)methods.tex: methods.tex
 	python tex-strip.py $<
