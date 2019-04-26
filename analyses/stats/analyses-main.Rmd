@@ -81,9 +81,7 @@ apaPrint <- function(number, pvalue = F, digits = 3,
 }
 ```
 
-## Results
-
-### Exclusion criteria
+## Exclusion criteria
 
 ```{r descTable, results = 'asis', include = T}
 .a <- by(datHard$totalCorrect, datHard$condition, describe) %>%
@@ -127,7 +125,7 @@ There is another set of exclusion criteria
 based on the number of times the participants have read each of the three texts.
 These are used in robustness check analyses (see supplementary materials).
 
-### Interpolated activity effect
+## Interpolated activity effect
 
 ```{r datHardNofeedFilter}
 datHardNofeed <- datHard %>% filter(., giveFeedback == F) %>%
@@ -293,7 +291,7 @@ Participants in the content related test group scored higher on the final test
 than participants in the general knowledge test condition.
 These two findings are not in line with our predictions.
 
-### The interaction between feedback and interpolated activity type
+## The interaction between feedback and interpolated activity type
 
 ```{r datHardFeedFilter}
 datHardFeed <- datHard %>% filter(., condition != 'rereading') %>%
@@ -758,21 +756,3 @@ Further, the statements about effects made in this section are noncommittal.
 Whether a 0.5 increase or decrease in the total number of correct answers is
 practically equivalent to zero or not is left to the reader.
 We conclude by reminding the reader that the data is available online, at [URL].
-
-## Notes
-
-Analyses conducted using the \textit{R} language \citep{rcoreteamLanguageEnvironmentStatistical2019}.
-Plots created using \textit{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap conducted
-using the \textit{boot} package \citep{cantyBootBootstrapSPlus2017}. Methods and analyses written
-using \textit{rmarkdown} \citep{allaireRmarkdownDynamicDocuments2019} and
-\textit{knitr} \citep{xieKnitrGeneralPurposePackage2019}. The package \textit{car}
-\citep{foxCompanionAppliedRegression2011} was used to obtain type III sums of
-squares. \textit{compute.es} \citep{reComputeEsCompute2013}
-was used to obtain effect sizes for contrasts.
-\textit{kableExtra} was used to help generate tables \citep{zhuKableExtraConstructComplex2019}.
-Other utilities used are \textit{tidyverse} \citep{wickhamTidyverseEasilyInstall2017},
-\textit{magrittr} \citep{bacheMagrittrForwardPipeOperator2014}, \textit{here}
-\citep{mullerHereSimplerWay2017},
-\textit{conflicted} \citep{wickhamConflictedAlternativeConflict2018},
-\textit{psych} \citep{revellePsychProceduresPsychological2018}.
-Highest density intervals obtained using \textit{HDInterval} \citep{meredithHDIntervalHighestPosterior2018}.
