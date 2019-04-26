@@ -7,20 +7,29 @@ output:
     toc: false
 header-includes: |
     \usepackage[natbibapa, sectionbib, tocbib]{apacite}
-    \usepackage{microtype}
     \usepackage[utf8]{inputenc}
-    \usepackage{caption}
+    \usepackage[singlelinecheck = off]{caption}
     \usepackage{lmodern}
+    \usepackage{microtype}
     \usepackage{multirow}
+    \usepackage[inline]{enumitem}
     \usepackage{array}
-    \usepackage{float}
     \usepackage[htt]{hyphenat}
     \usepackage{booktabs}
     \usepackage[euler]{textgreek}
     \usepackage{float}
-    \usepackage[onehalfspacing]{setspace}
+    \usepackage[doublespacing]{setspace}
+    \usepackage{fancyhdr}
     \captionsetup[table]{width=\textwidth}
-    \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
+    \setlength{\parindent}{2em}
+    \fancyhf{}
+    \fancyhead[RH]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \pagestyle{fancy}
+    \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
+    \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
+    \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
+    \captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
 ---
 
 ```{r setup, echo = F, include = F}

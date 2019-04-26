@@ -1,30 +1,66 @@
 \documentclass[12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{url}
+\usepackage[margin=1in]{geometry}
+\usepackage[doublespacing]{setspace}
 \usepackage[english]{babel}
+\usepackage[euler]{textgreek}
+\usepackage[htt]{hyphenat}
+\usepackage[inline]{enumitem}
+\usepackage[natbibapa, sectionbib, tocbib]{apacite}
+\usepackage[normalem]{ulem}
+\usepackage[page, toc]{appendix}
+\usepackage[singlelinecheck = off]{caption}
+\usepackage[utf8]{inputenc}
+\usepackage{afterpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{environ}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage{float}
 \usepackage{gensymb}
 \usepackage{graphicx}
-\usepackage{titletoc}
-\usepackage{longtable}
-\usepackage[page, toc]{appendix}
-\usepackage{afterpage}
-\usepackage{microtype}
-\usepackage[euler]{textgreek}
-\usepackage{booktabs}
-\usepackage[left=2cm, right=2cm, top=2cm, bottom=3cm]{geometry}
-\usepackage[natbibapa, sectionbib, tocbib]{apacite}
-\usepackage{enumitem}
+\usepackage{ifxetex,ifluatex}
 \usepackage{lmodern}
-\usepackage{caption}
+\usepackage{longtable}
 \usepackage{lscape}
-\usepackage{amsmath}
+\usepackage{makecell}
+\usepackage{microtype}
+\usepackage{multirow}
+\usepackage{pdflscape}
 \usepackage{subfiles}
-\usepackage[onehalfspacing]{setspace}
+\usepackage{tabu}
 \usepackage{textcomp}
+\usepackage{threeparttablex}
+\usepackage{threeparttable}
+\usepackage{titletoc}
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{grffile}
+%\usepackage{parskip}
+%%% Change title format to be more compact
+\usepackage{titling}
+\usepackage{hyperref}
+
+\setlength{\parskip}{0.38em}
+\renewcommand{\baselinestretch}{1.5}
+\setlength{\parindent}{2em}
+
+\fancyhf{}
+\fancyhead[RH]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
+
+\DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
+\captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
+\captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
 
 %%%%%%%%%%%%%%%%%%%%%%% remove url's and date if there's a doi
-\usepackage{etoolbox}
-\usepackage{environ}
 
 \newtoggle{bibdoi}
 \newtoggle{biburl}
@@ -48,16 +84,9 @@
 		\togglefalse{bibdoi}\togglefalse{biburl}%
 	}{}{}
 }
-%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%
 
-\setlength{\parindent}{2em}
-\setlength{\parskip}{0.38em}
-\renewcommand{\baselinestretch}{1.5}
-
-\DeclareCaptionFormat{myformat}{\fontsize{11}{13}\selectfont #1#2\\#3}
-
-\captionsetup*[figure]{labelsep = period, labelfont = it, justification =
-	justified, position = bottom, font = {singlespacing}}
 
 \renewcommand{\APACrefYearMonthDay}[3]{\APACrefYear{#1}}
 
@@ -73,22 +102,117 @@
 
 \def\biblio{\bibliographystyle{apacite}\bibliography{../reference.bib}}
 
+% rmarkdown preamble
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+% Create subtitle command for use in maketitle
+% \providecommand{\subtitle}[1]{
+%   \posttitle{
+%     \begin{center}\large#1\end{center}
+%     }
+% }
+% 
+% \setlength{\droptitle}{-2em}
+% 
+%  \title{}
+%    \pretitle{\vspace{\droptitle}}
+%  \posttitle{}
+%    \author{}
+%    \preauthor{}\postauthor{}
+%    \date{}
+%    \predate{}\postdate{}
+
 \begin{document}
 
 \def\biblio{}
 
-\section{Introduction}
+\hypertarget{introduction}{%
+\section{Introduction}}
+
 \subfile{sections/intro.tex}
 
-\section{Methods}
+\hypertarget{methods}{%
+\section{Methods}}
+
 \subfile{sections/methods.tex}
 
-\clearpage
-\bibliographystyle{apacite}
+\hypertarget{results}{%
+\section{Results}}
 
-{
-    \setstretch{1}
-    \bibliography{reference.bib}
-}
+\subfile{sections/analyses-main.tex}
+
+\hypertarget{discussion}{%
+\section{Discussion}}
+
+\section{Notes}
+
+Analyses conducted using the \textit{R} language
+\citep{rcoreteamLanguageEnvironmentStatistical2019}. Plots created using
+\textit{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}. Bootstrap
+conducted using the \textit{boot} package
+\citep{cantyBootBootstrapSPlus2017}. Methods and analyses written using
+\textit{rmarkdown} \citep{allaireRmarkdownDynamicDocuments2019} and
+\textit{knitr} \citep{xieKnitrGeneralPurposePackage2019}. The package
+\textit{car} \citep{foxCompanionAppliedRegression2011} was used to
+obtain type III sums of squares. \textit{compute.es}
+\citep{reComputeEsCompute2013} was used to obtain effect sizes for
+contrasts. \textit{kableExtra} was used to help generate tables
+\citep{zhuKableExtraConstructComplex2019}. Other utilities used are
+\textit{tidyverse} \citep{wickhamTidyverseEasilyInstall2017},
+\textit{magrittr} \citep{bacheMagrittrForwardPipeOperator2014},
+\textit{here} \citep{mullerHereSimplerWay2017}, \textit{conflicted}
+\citep{wickhamConflictedAlternativeConflict2018}, \textit{psych}
+\citep{revellePsychProceduresPsychological2018}. Highest density
+intervals obtained using \textit{HDInterval}
+\citep{meredithHDIntervalHighestPosterior2018}.
+\clearpage
+
+\bibliographystyle{apacite}
+\bibliography{reference.bib}
 
 \end{document}

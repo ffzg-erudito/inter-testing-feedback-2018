@@ -97,8 +97,9 @@
 
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
 \usepackage[utf8]{inputenc}
-\usepackage{caption}
+\usepackage[singlelinecheck = off]{caption}
 \usepackage{lmodern}
+\usepackage{microtype}
 \usepackage{multirow}
 \usepackage[inline]{enumitem}
 \usepackage{array}
@@ -106,9 +107,18 @@
 \usepackage{booktabs}
 \usepackage[euler]{textgreek}
 \usepackage{float}
-\usepackage[onehalfspacing]{setspace}
+\usepackage[doublespacing]{setspace}
+\usepackage{fancyhdr}
 \captionsetup[table]{width=\textwidth}
-\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = red}
+\setlength{\parindent}{2em}
+\fancyhf{}
+\fancyhead[RH]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy}
+\hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
+\DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
+\captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
+\captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
 
 \begin{document}
 
@@ -186,12 +196,11 @@ the experiment is displayed in Figure \ref{flowchart}.
 
 After entering their personal information, participants were presented
 with the instructions for their first task, which was to read the
-practice text at a speed that comes naturally to them. They were to
-click a button at the bottom of the text when they have finished reading
-it. Unbeknownst to the participants, the time they took to read the
-practice text was recorded, and used as the basis for determining the
-reading time limits for the remaining texts. However, the lowest
-possible time limit was set to 5 minutes, and the longest to 8 minutes.
+practice text at a speed that comes naturally to them. Unbeknownst to
+the participants, the time they took to read the practice text was
+recorded, and used as the basis for determining the reading time limits
+for the remaining texts. However, the lowest possible time limit was set
+to 5 minutes, and the longest to 8 minutes.
 
 Next, participants were familiarised with the interpolated activity they
 were going to perform during the main part of the procedure. The
@@ -220,8 +229,7 @@ test, irrespective of the experimental condition. The computer recorded
 whether a participant correctly answered a question and whether the
 participant chose an intrusive distractor. This allowed us to compute
 our dependent variables --- the total number of correct answers and the
-total number of intrusive distractors chosen. We will now describe the
-test questions.
+total number of intrusive distractors chosen.
 
 In total, forty-four content related questions with four response
 options were generated from the presented parts of the text. Four
