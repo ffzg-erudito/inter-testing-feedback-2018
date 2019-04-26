@@ -23,10 +23,8 @@ Allaire, J\BPBI J.%
 \newblock
 \APACrefYear{2019}.
 \newblock
-\APACrefbtitle {rmarkdown: {Dynamic} {Documents} for {R}} {rmarkdown: {Dynamic}
-  {Documents} for {R}}.
-\newblock
-\begin{APACrefURL} \url{https://rmarkdown.rstudio.com} \end{APACrefURL}
+\APACrefbtitle {Rmarkdown: {{Dynamic Documents}} for {{R}}} {Rmarkdown:
+  {{Dynamic Documents}} for {{R}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -49,11 +47,8 @@ Bache, S\BPBI M.%
 \newblock
 \APACrefYear{2014}.
 \newblock
-\APACrefbtitle {magrittr: {A} {Forward}-{Pipe} {Operator} for {R}} {magrittr:
-  {A} {Forward}-{Pipe} {Operator} for {R}}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=magrittr}
-  \end{APACrefURL}
+\APACrefbtitle {Magrittr: {{A Forward}}-{{Pipe Operator}} for {{R}}} {Magrittr:
+  {{A Forward}}-{{Pipe Operator}} for {{R}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -76,8 +71,8 @@ Canty, A.%
 \newblock
 \APACrefYear{2017}.
 \newblock
-\APACrefbtitle {boot: {Bootstrap} {R} ({S}-{Plus}) {Functions}} {boot:
-  {Bootstrap} {R} ({S}-{Plus}) {Functions}}.
+\APACrefbtitle {Boot: {{Bootstrap R}} ({{S}}-{{Plus}}) {{Functions}}} {Boot:
+  {{Bootstrap R}} ({{S}}-{{Plus}}) {{Functions}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -101,12 +96,12 @@ Chen, D\BPBI L.%
 \newblock
 \APACrefYearMonthDay{2016}{}{}.
 \newblock
-{\BBOQ}\APACrefatitle {{oTree}{\textemdash}{An} open-source platform for
-  laboratory, online, and field experiments} {{oTree}{\textemdash}{An}
+{\BBOQ}\APACrefatitle {{{oTree}}\textemdash{{An}} Open-Source Platform for
+  Laboratory, Online, and Field Experiments} {{{oTree}}\textemdash{{An}}
   open-source platform for laboratory, online, and field experiments}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{Journal of Behavioral and Experimental
-  Finance}{9}{}{88--97}.
+  Finance}{9}{}{88-97}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -129,13 +124,10 @@ Fox, J.%
 \newblock
 \APACrefYear{2011}.
 \newblock
-\APACrefbtitle {An {R} {Companion} to {Applied} {Regression}} {An {R}
-  {Companion} to {Applied} {Regression}}\ (\PrintOrdinal{Second}\ \BEd).
+\APACrefbtitle {An {{R Companion}} to {{Applied Regression}}} {An {{R
+  Companion}} to {{Applied Regression}}}\ (\PrintOrdinal{Second}\ \BEd).
 \newblock
-\APACaddressPublisher{Thousand Oaks CA}{Sage}.
-\newblock
-\begin{APACrefURL} \url{http://socserv.socsci.mcmaster.ca/jfox/Books/Companion}
-  \end{APACrefURL}
+\APACaddressPublisher{Thousand Oaks CA}{{Sage}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -158,11 +150,9 @@ Meredith, M.%
 \newblock
 \APACrefYear{2018}.
 \newblock
-\APACrefbtitle {{HDInterval}: {Highest} ({Posterior}) {Density} {Intervals}}
-  {{HDInterval}: {Highest} ({Posterior}) {Density} {Intervals}}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=HDInterval}
-  \end{APACrefURL}
+\APACrefbtitle {{{HDInterval}}: {{Highest}} ({{Posterior}}) {{Density
+  Intervals}}} {{{HDInterval}}: {{Highest}} ({{Posterior}}) {{Density
+  Intervals}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -185,18 +175,15 @@ Morey, R\BPBI D.%
 \newblock
 \APACrefYear{2018}.
 \newblock
-\APACrefbtitle {{BayesFactor}: {Computation} of {Bayes} {Factors} for {Common}
-  {Designs}} {{BayesFactor}: {Computation} of {Bayes} {Factors} for {Common}
-  {Designs}}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=BayesFactor}
-  \end{APACrefURL}
+\APACrefbtitle {{{BayesFactor}}: {{Computation}} of {{Bayes Factors}} for
+  {{Common Designs}}} {{{BayesFactor}}: {{Computation}} of {{Bayes Factors}}
+  for {{Common Designs}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-M{\"u}ller%
+M\"uller%
 }{%
-M{\"u}ller%
+M\"uller%
 }{%
 {\protect \APACyear {2017}}%
 }]{%
@@ -204,17 +191,14 @@ mullerHereSimplerWay2017}
 \APACinsertmetastar {%
 mullerHereSimplerWay2017}%
 \begin{APACrefauthors}%
-M{\"u}ller, K.%
+M\"uller, K.%
 \end{APACrefauthors}%
 \unskip\
 \newblock
 \APACrefYear{2017}.
 \newblock
-\APACrefbtitle {here: {A} {Simpler} {Way} to {Find} {Your} {Files}} {here: {A}
-  {Simpler} {Way} to {Find} {Your} {Files}}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=here}
-  \end{APACrefURL}
+\APACrefbtitle {Here: {{A Simpler Way}} to {{Find Your Files}}} {Here: {{A
+  Simpler Way}} to {{Find Your Files}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -234,13 +218,12 @@ rcoreteamLanguageEnvironmentStatistical2019}%
 \newblock
 \APACrefYear{2019}.
 \newblock
-\APACrefbtitle {R: {A} {Language} and {Environment} for {Statistical}
-  {Computing}} {R: {A} {Language} and {Environment} for {Statistical}
-  {Computing}}.
+\APACrefbtitle {R: {{A Language}} and {{Environment}} for {{Statistical
+  Computing}}} {R: {{A Language}} and {{Environment}} for {{Statistical
+  Computing}}}.
 \newblock
-\APACaddressPublisher{Vienna, Austria}{R Foundation for Statistical Computing}.
-\newblock
-\begin{APACrefURL} \url{https://www.R-project.org/} \end{APACrefURL}
+\APACaddressPublisher{Vienna, Austria}{{R Foundation for Statistical
+  Computing}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -260,11 +243,8 @@ Re, A\BPBI C\BPBI D.%
 \newblock
 \APACrefYear{2013}.
 \newblock
-\APACrefbtitle {compute.es: {Compute} {Effect} {Sizes}} {compute.es: {Compute}
-  {Effect} {Sizes}}.
-\newblock
-\begin{APACrefURL} \url{http://cran.r-project.org/web/packages/compute.es}
-  \end{APACrefURL}
+\APACrefbtitle {Compute.Es: {{Compute Effect Sizes}}} {Compute.es: {{Compute
+  Effect Sizes}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -284,14 +264,11 @@ Revelle, W.%
 \newblock
 \APACrefYear{2018}.
 \newblock
-\APACrefbtitle {psych: {Procedures} for {Psychological}, {Psychometric}, and
-  {Personality} {Research}} {psych: {Procedures} for {Psychological},
-  {Psychometric}, and {Personality} {Research}}.
+\APACrefbtitle {Psych: {{Procedures}} for {{Psychological}}, {{Psychometric}},
+  and {{Personality Research}}} {Psych: {{Procedures}} for {{Psychological}},
+  {{Psychometric}}, and {{Personality Research}}}.
 \newblock
-\APACaddressPublisher{Evanston, Illinois}{Northwestern University}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=psych}
-  \end{APACrefURL}
+\APACaddressPublisher{Evanston, Illinois}{{Northwestern University}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -314,10 +291,10 @@ Tabachnick, B\BPBI G.%
 \newblock
 \APACrefYear{2012}.
 \newblock
-\APACrefbtitle {Using {Multivariate} {Statistics}} {Using {Multivariate}
-  {Statistics}}.
+\APACrefbtitle {Using {{Multivariate Statistics}}} {Using {{Multivariate
+  Statistics}}}.
 \newblock
-\APACaddressPublisher{}{Pearson}.
+\APACaddressPublisher{}{{Pearson}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -337,12 +314,10 @@ Wickham, H.%
 \newblock
 \APACrefYear{2016}.
 \newblock
-\APACrefbtitle {ggplot2: {Elegant} {Graphics} for {Data} {Analysis}} {ggplot2:
-  {Elegant} {Graphics} for {Data} {Analysis}}.
+\APACrefbtitle {Ggplot2: {{Elegant Graphics}} for {{Data Analysis}}} {Ggplot2:
+  {{Elegant Graphics}} for {{Data Analysis}}}.
 \newblock
-\APACaddressPublisher{}{Springer-Verlag New York}.
-\newblock
-\begin{APACrefURL} \url{http://ggplot2.org} \end{APACrefURL}
+\APACaddressPublisher{}{{Springer-Verlag New York}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -362,11 +337,8 @@ Wickham, H.%
 \newblock
 \APACrefYear{2017}.
 \newblock
-\APACrefbtitle {tidyverse: {Easily} {Install} and {Load} the '{Tidyverse}'}
-  {tidyverse: {Easily} {Install} and {Load} the '{Tidyverse}'}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=tidyverse}
-  \end{APACrefURL}
+\APACrefbtitle {Tidyverse: {{Easily Install}} and {{Load}} the '{{Tidyverse}}'}
+  {Tidyverse: {{Easily Install}} and {{Load}} the '{{Tidyverse}}'}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -386,12 +358,8 @@ Wickham, H.%
 \newblock
 \APACrefYear{2018}.
 \newblock
-\APACrefbtitle {conflicted: {An} {Alternative} {Conflict} {Resolution}
-  {Strategy}} {conflicted: {An} {Alternative} {Conflict} {Resolution}
-  {Strategy}}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=conflicted}
-  \end{APACrefURL}
+\APACrefbtitle {Conflicted: {{An Alternative Conflict Resolution Strategy}}}
+  {Conflicted: {{An Alternative Conflict Resolution Strategy}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -411,11 +379,9 @@ Xie, Y.%
 \newblock
 \APACrefYear{2019}.
 \newblock
-\APACrefbtitle {knitr: {A} {General}-{Purpose} {Package} for {Dynamic} {Report}
-  {Generation} in {R}} {knitr: {A} {General}-{Purpose} {Package} for {Dynamic}
-  {Report} {Generation} in {R}}.
-\newblock
-\begin{APACrefURL} \url{https://yihui.name/knitr/} \end{APACrefURL}
+\APACrefbtitle {Knitr: {{A General}}-{{Purpose Package}} for {{Dynamic Report
+  Generation}} in {{R}}} {Knitr: {{A General}}-{{Purpose Package}} for
+  {{Dynamic Report Generation}} in {{R}}}.
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -435,12 +401,9 @@ Zhu, H.%
 \newblock
 \APACrefYear{2019}.
 \newblock
-\APACrefbtitle {{kableExtra}: {Construct} {Complex} {Table} with 'kable' and
-  {Pipe} {Syntax}} {{kableExtra}: {Construct} {Complex} {Table} with 'kable'
-  and {Pipe} {Syntax}}.
-\newblock
-\begin{APACrefURL} \url{https://CRAN.R-project.org/package=kableExtra}
-  \end{APACrefURL}
+\APACrefbtitle {{{kableExtra}}: {{Construct Complex Table}} with 'kable' and
+  {{Pipe Syntax}}} {{{kableExtra}}: {{Construct Complex Table}} with 'kable'
+  and {{Pipe Syntax}}}.
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
