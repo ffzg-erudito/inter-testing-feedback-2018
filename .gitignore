@@ -17,7 +17,7 @@ paper/*
 paper/sections/*
 !paper/sections/*.tex
 !paper/sections/*.pdf
-
+!paper/images/
 !paper/*.tex
 !paper/*.pdf
 !paper/Makefile
