@@ -121,9 +121,6 @@ deficits
 readingDeficits == 'NE')%>% nrow(.)}` exclusions). This left us with a total sample
 of `r nrow(datHard)` participants. The descriptives for the sample are shown
 in Table \ref{descTable}.
-There is another set of exclusion criteria
-based on the number of times the participants have read each of the three texts.
-These are used in robustness check analyses (see supplementary materials).
 
 ## Interpolated activity effect
 
@@ -515,8 +512,8 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
 
 ## Additional analyses
 
-Because it is theoretically interesting to see whether there is evidence for no
-difference between certain conditions, or no effect of certain manipulations, we
+Because it is theoretically interesting to see whether there is evidence for
+absence of a difference between certain conditions, or no effect of certain manipulations, we
 have conducted a Bayesian reanalysis of the two Roy-Bargmann stepdown procedures.
 Since these analyses were not planned, we have decided to use the default priors
 provided in the \textit{BayesFactor}
@@ -543,18 +540,18 @@ anovaBfRb1HDI <- hdi(anovaBfRb1Posterior)
 
 As was earlier done in a frequentist setting, we first fit an ANOVA model with the
 total number of correct answers as the dependent variable, and the type of interpolated
-activity as the predictor. The mean of the posterior intercept distribution is
-`r anovaBfRb1Summary %>% pluck('statistics') %>% .[1, 'Mean']`
-(95% highest density interval (HDI) =
-[`r anovaBfRb1HDI[1, 'mu']`, `r anovaBfRb1HDI[2, 'mu']`]). The estimated mean of the
+activity as the predictor.
+All effects are expressed as deviations from the estimated posterior subsample mean of
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[1, 'Mean']`.
+The estimated mean of the
 effect of content related testing is
 `r anovaBfRb1Summary %>% pluck('statistics') %>% .[2, 'Mean']`
 (95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-content']`,
 `r anovaBfRb1HDI[2, 'activityFactor-content']`]). The 95% highest
-density interval for the posterior indicates that there is a fair amount of uncertainty around
+density interval of the posterior indicates that there is a fair amount of uncertainty around
 the exact magnitude of the effect of content-related testing. However, most of the probability density
-is quite far above the null value, implying that we can be certain that there really
-is a positive effect (given the used priors, of course). The means of the posterior
+is quite far above zero, implying that there really
+is a positive effect. The means of the posterior
 distributions for the general-knowledge-test and rereading conditions \(b\)s are
 `r anovaBfRb1Summary %>% pluck('statistics') %>% .[3, 'Mean']`
 (95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-general']`,
@@ -564,14 +561,17 @@ and
 (95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-rereading']`,
 `r anovaBfRb1HDI[2, 'activityFactor-rereading']`])
 respectively. Most of the posterior distribution for the effect of general knowledge
-testing lies below the null value, although the distance is not as marked as in the
+testing lies below zero, pointing to a negative effect on the total number of
+correct answers, although the distance is not as marked as in the
 content-related condition. On the other hand, there is a lot of uncertainty
-about the effect of rereading, compared to the other two estimates
-(`r anovaBfRb1Posterior %>% as.data.frame(.) %>%
+about the effect of rereading, compared to the other two estimates.
+However, 
+`r anovaBfRb1Posterior %>% as.data.frame(.) %>%
 janitor::clean_names(.) %>%
 select('activity_factor_rereading') %>%
 filter(., activity_factor_rereading < 0) %>% nrow(.) / numIter * 100`% 
-of the posterior lies below 0).
+of the posterior lies below zero, leading us to believe that the effect is most
+likely negative.
 
 ```{r bfRb1contrast, cache = T}
 set.seed(9429)
@@ -587,15 +587,14 @@ hdi(contReadGen) -> contReadGenHDI
 
 Furthermore, we wanted to explore the difference between the rereading and
 general-knowledge-test conditions, given their somewhat similar coefficient
-and HDI estimates. To do this, we conducted a Bayesian t-test, again with the
+and HDI estimates, as well as sample means. To do this, we conducted a Bayesian t-test, again with the
 \textit{BayesFactor} package's default priors. The estimated posterior mean of the difference in
-the total number of correct answers between the general-knowledge-test and
-rereading groups is `r summary(contReadGen)$statistics[2, 'Mean']`
+the total number of correct answers between the two
+groups is `r summary(contReadGen)$statistics[2, 'Mean']`
 (95% HDI = [`r contReadGenHDI[1, 'beta (general - rereading)']`,
 `r contReadGenHDI[2, 'beta (general - rereading)']`]). As can be seen from the
-HDI, there is a lot of uncertainty around the estimate of the difference.
-This points to a lack of evidence either for or against a difference between the
-two conditions.
+HDI, there is a lot of uncertainty around the estimate of the difference,
+which points to a lack of evidence for any claim regarding the effect.
 
 ```{r, bfAncovaRB1, cache = T}
 set.seed(171918)
@@ -615,10 +614,9 @@ ancovaBfRb1Frame <- as.data.frame(ancovaBfRb1Posterior) %>%
  
 In the second step of the Roy-Bargmann procedure, we fit an ANCOVA model with
 the total number of correct answers as the covariate and the total number
-of intrusive options chosen as the dependent variable. The mean of the posterior
-intercept distribution is `r ancovaBfRb1Summary$statistics[1, 'Mean']`
-(95% HDI = [`r ancovaBfRb1HDI[1, 'mu']`,
-`r ancovaBfRb1HDI[2, 'mu']`]). 
+of intrusive options chosen as the dependent variable. Effects are again
+expressed relative to the estimated posterior subsample mean of
+`r ancovaBfRb1Summary$statistics[1, 'Mean']`.
 There is uncertainty around the estimates of the effects of the
 different experimental conditions --- content related testing \(b\) =
 `r ancovaBfRb1Summary$statistics[2, 'Mean']`
@@ -632,25 +630,25 @@ rereading \(b\) =
 `r ancovaBfRb1Summary$statistics[4, 'Mean']`
 (95% HDI = [`r ancovaBfRb1HDI[1, 'activityFactor-rereading']`,
 `r ancovaBfRb1HDI[2, 'activityFactor-rereading']`]).
-The HDIs show that the effects could be either slightly positive (decreasing the
-number of intrusors) or slightly negative (increasing the number of intrusors),
+The HDIs show that there could be either a slight increase or a slight
+decrease in the number of intrusors,
 preventing us from making a conclusion about the nature of the effects.
 However, given the current data and priors, we find the following ---
 `r ancovaBfRb1Frame %>% select(., activity_factor_content) %>%
-filter(., activity_factor_content < 0) %>% nrow() / numIter * 100`% of the
+filter(., activity_factor_content < 0) %>% {round(nrow(.) / numIter * 100, 2)}`% of the
 posterior for the effect of content related testing falls below zero;
 `r ancovaBfRb1Frame %>% select(., activity_factor_general) %>%
-filter(., activity_factor_general > 0) %>% nrow() / numIter * 100`% 
+filter(., activity_factor_general > 0) %>% {round(nrow(.) / numIter * 100, 2)}`% 
 of the posterior for the effect of general knowledge testing falls
 above zero; `r ancovaBfRb1Frame %>% select(., activity_factor_rereading) %>%
-filter(., activity_factor_rereading > 0) %>% nrow() / numIter * 100`% of
+filter(., activity_factor_rereading > 0) %>% {round(nrow(.) / numIter * 100, 2)}`% of
 the posterior for the effect of rereading falls above zero.
 Given the stated, there is some evidence implying that content related testing
 decreases the number of intrusors chosen, after controlling for the effect of
 the total number of correct answers. Further, there is some, albeit weaker evidence
 that rereading leads to an increase in the number of chosen intrusive distractors.
 Lastly, the posterior of the general knowledge testing effect points to no particular
-direction.
+direction. A stronger test of these claims is desired.
 
 ### Bayesian reanalysis of the second Roy-Bargmann procedure
 
@@ -673,15 +671,14 @@ anovaBfRb2Summary <- summary(anovaBfRb2Posterior)
 anovaBfRb2HDI <- hdi(anovaBfRb2Posterior)
 ```
 
-The mean of the posterior distribution of the intercept is
-`r anovaBfRb2Summary$statistics[1, 'Mean']`
-(95% HDI = [`r anovaBfRb2HDI[1, 'mu']`,
-`r anovaBfRb2HDI[2, 'mu']`]). We find that being in the content-related-testing
-condition leads to an increase in the total number of correct answers,
+Effects are expressed relative to the estimated posterior subsample mean of
+`r anovaBfRb2Summary$statistics[1, 'Mean']`.
+We find that content related testing
+leads to an increase in the total number of correct answers,
 \(b\) = `r anovaBfRb2Summary$statistics[4, 'Mean']`
 (95% HDI = [`r anovaBfRb2HDI[1, 'activityFactor-content']`,
-`r anovaBfRb2HDI[2, 'activityFactor-content']`]), compared to the general-knowledge-testing
-condition. This is aligned with the finding obtained in the frequentist setting.
+`r anovaBfRb2HDI[2, 'activityFactor-content']`]), compared to the general knowledge testing.
+This is aligned with the finding obtained in the frequentist setting.
 The mean of the posterior for the effect of receiving feedback is
 `r anovaBfRb2Summary$statistics[3, 'Mean']`
 (95% HDI = [`r anovaBfRb2HDI[1, 'giveFeedback-TRUE']`,
@@ -691,7 +688,7 @@ However, we will mention that
 `r anovaBfRb2Posterior %>% as.data.frame() %>% janitor::clean_names() %>%
 select(give_feedback_true) %>%
 filter(give_feedback_true > 0) %>% nrow() / numIter * 100`% of the
-posterior lies above zero.
+posterior lies above zero, implying a positive effect on learning.
 Finally, the estimate for the interaction effect (being in the content condition
 and receiving feedback) is
 `r anovaBfRb2Summary$statistics[8, 'Mean']`
