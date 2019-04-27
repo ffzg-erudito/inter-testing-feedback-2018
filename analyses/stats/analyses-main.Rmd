@@ -485,6 +485,13 @@ a relevant predictor
 = `r rbAncova2 %>% slice(2) %>% pull(p.value) %>% apaPrint(., pvalue = T)`\)).
 The full models are shown in Table \ref{rb2-table}.
 
+Contrary to our expectations, we find no evidence of an effect of feedback on the
+total number of correctly answered questions (\ref{h3}). Also, we found
+no evidence for an interaction effect of feedback and type of interpolated
+activity on the total number of correct answers (\ref{h4}).
+The same findings apply to the predictions regarding the total number of
+intrusors chosen (\ref{h5} and \ref{h6}).
+
 ```{r rb2Table, results = 'asis', include = T}
 rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
   mutate_at(., vars(term), str_replace_all,
@@ -753,4 +760,5 @@ which would have been more problematic.
 Further, the statements about effects made in this section are noncommittal.
 Whether a 0.5 increase or decrease in the total number of correct answers is
 practically equivalent to zero or not is left to the reader.
-We conclude by reminding the reader that the data is available online, at [URL].
+We conclude by reminding the reader that the data is available online, at
+\url{REF}.
