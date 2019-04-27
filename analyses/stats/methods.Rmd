@@ -68,7 +68,7 @@ Participants read an expository text about weeds, drawn from a chapter in a
 university-level textbook. Some sentences and passages were slightly modified,
 so as to avoid odd language constructions; terms from the binomial nomenclature
 were translated, and, taking into account the characteristics of the target 
-participant population, some plants were removed from the text to make it more 
+participant population, some plant names were removed from the text to make it more 
 approachable. The text was divided into three interrelated parts (874, 754, and 
 835 words) constituting an integrated body of knowledge. Additionally, a practice 
 text (768 words), not directly related to any of the other three parts, was 
