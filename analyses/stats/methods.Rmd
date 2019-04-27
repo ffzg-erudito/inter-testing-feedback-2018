@@ -64,6 +64,8 @@ as a comparison interpolated activity, which was given to an additional
 control group. In total, this amounts to five separate groups, to which 
 the participants were randomly assigned.
 
+## Materials and procedure
+
 Participants read an expository text about weeds, drawn from a chapter in a
 university-level textbook. Some sentences and passages were slightly modified,
 so as to avoid odd language constructions; terms from the binomial nomenclature
@@ -85,9 +87,7 @@ general-knowledge testing) or (iii) reread the same part of the text they have
 previously read.
 
 Further, we have manipulated whether or not participants received
-feedback on their accomplishment on the interpolated tests. Obviously, this
-manipulation applies only to the participants in the general-knowledge and
-content-related testing conditions.
+feedback on their accomplishment on the interpolated tests.
 Feedback was presented on a separate screen which listed the
 questions, the participant's answers, and the correct answers in a tabular format.
 Incorrectly answered questions were highlighted in red, and correctly answered
