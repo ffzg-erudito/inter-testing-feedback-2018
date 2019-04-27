@@ -6,7 +6,7 @@ all: $(sections)methods.tex $(sections)analyses-main.tex
 
 methods.Rmd: ../images/flowchart/flowchart.pdf
 
-methods.tex: methods.Rmd
+%.tex: %.Rmd
 	Rscript -e 'rmarkdown::render("$<")'
 
 $(sections)methods.tex: methods.tex
