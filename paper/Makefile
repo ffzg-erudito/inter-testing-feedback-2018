@@ -1,8 +1,12 @@
-.PHONY: all
-
-all: main.pdf
+.PHONY: all bib
 
 rmds = sections/methods.tex sections/analyses-main.tex
+
+all: bib main.pdf
+
+bib:
+	sed -Ee '/month ?=/d' reference.bib > tmp
+	mv tmp reference.bib
 
 $(rmds): ../analyses/stats/methods.tex ../analyses/stats/analyses-main.tex
 	make -C ../analyses/stats/
