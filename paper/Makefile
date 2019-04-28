@@ -7,6 +7,8 @@ all: bib main.pdf
 bib: reference.bib
 	sed -Ee '/month ?=/d' reference.bib > tmp
 	mv tmp reference.bib
+	sed -f refs.sed reference.bib > tmp
+	mv tmp reference.bib
 
 $(rmds): ../analyses/stats/methods.tex ../analyses/stats/analyses-main.tex
 	make -C ../analyses/stats/
