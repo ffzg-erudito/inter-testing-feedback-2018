@@ -86,7 +86,7 @@ general knowledge multiple choice questions (semantic recall, hereafter referred
 general-knowledge testing) or (iii) reread the same part of the text they have
 previously read.
 
-Further, we have manipulated whether or not participants received
+Further, we manipulated whether or not participants received
 feedback on their accomplishment on the interpolated tests.
 Feedback was presented on a separate screen which listed the
 questions, the participant's answers, and the correct answers in a tabular format.
