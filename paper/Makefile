@@ -4,7 +4,7 @@ rmds = sections/methods.tex sections/analyses-main.tex
 
 all: bib main.pdf
 
-bib:
+bib: reference.bib
 	sed -Ee '/month ?=/d' reference.bib > tmp
 	mv tmp reference.bib
 
