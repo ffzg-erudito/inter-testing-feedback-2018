@@ -21,6 +21,7 @@ paper/sections/*
 !paper/*.tex
 !paper/*.pdf
 !paper/Makefile
+!paper/*sed
 
 analyses/.Rhistory
 analyses/stats/*tikzDictionary
