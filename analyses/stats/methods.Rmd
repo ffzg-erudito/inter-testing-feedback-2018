@@ -91,12 +91,12 @@ feedback on their accomplishment on the interpolated tests.
 Feedback was presented on a separate screen which listed the
 questions, the participant's answers, and the correct answers in a tabular format.
 Incorrectly answered questions were highlighted in red, and correctly answered
-questions in green. After 40 seconds
-elapsed, a "Next" button appeared, allowing participants to proceed to the next
-part. By setting this cooldown period, by emphasising that there would be a cumulative test,
-and through written instructions, we wanted to encourage our participants to
-carefully examine the feedback. The feedback was presented for maximally 60 seconds,
-after which the application proceeded to the next part.
+questions in green. After 40 seconds elapsed, a "Next" button appeared, allowing
+participants to proceed with reading the next part of the text. By setting this 
+cooldown period, by emphasising that there would be a cumulative test,
+and by explicitely asking through written instructions, we wanted to encourage 
+our participants to carefully examine the feedback. The feedback was presented 
+for maximally 60 seconds, after which the application proceeded to the next part.
 
 \begin{figure}[p]
   \centering
@@ -159,7 +159,7 @@ Starting from the second ten-question-set, the distractor options were chosen so
 (a) two distractors were plausible, but unrelated to the text, and
 (b) one distractor was a term or concept mentioned in the previous part of the
 text --- this was considered to be the "intrusive" distractor
-(sometimes reffered to as the "intrusor" in the rest of this article).
+(sometimes referred to as the "intrusor" in the rest of this article).
 Further, twenty-four general knowledge questions were generated. These questions were
 presented to participants in the general-knowledge test condition, after the first
 two parts of the text and after the practice text.
