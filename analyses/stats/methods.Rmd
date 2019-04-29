@@ -138,7 +138,7 @@ engaging in the interpolated activities they were assigned.
 Depending on the condition they were assigned to, they also received feedback
 after every interpolated test.
 
-All participants were told that
+All participants were forewarned through initial instructions that
 there would be a cumulative test after the final part of the text,
 examining their knowledge of all three parts.
 In reality, the final test examined only the knowledge of the final part.
