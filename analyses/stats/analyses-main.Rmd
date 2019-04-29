@@ -761,7 +761,7 @@ Further, the statements about effects made in this section are noncommittal.
 Whether a 0.5 increase or decrease in the total number of correct answers is
 practically equivalent to zero or not is left to the reader.
 We conclude by reminding the reader that the data is available online, at
-\url{REF}.
+\url{https://osf.io/gk9a3/?view_only=33f2a1207acf4e2093d489e46063b6e0}.
 
 ## Deviations from the preregistered analysis plan
 

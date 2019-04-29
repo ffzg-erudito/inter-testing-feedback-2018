@@ -62,29 +62,29 @@
 
 %%%%%%%%%%%%%%%%%%%%%%% remove url's and date if there's a doi
 
-\newtoggle{bibdoi}
-\newtoggle{biburl}
-\makeatletter
+% \newtoggle{bibdoi}
+% \newtoggle{biburl}
+% \makeatletter
 
-\undef{\APACrefURL}
-\undef{\endAPACrefURL}
-\undef{\APACrefDOI}
-\undef{\endAPACrefDOI}
-
-\long\def\collect@url#1{\global\def\bib@url{#1}}
-\long\def\collect@doi#1{\global\def\bib@doi{#1}}
-\newenvironment{APACrefURL}{\global\toggletrue{biburl}\Collect@Body\collect@url}{\unskip\unskip}
-\newenvironment{APACrefDOI}{\global\toggletrue{bibdoi}\Collect@Body\collect@doi}{}
-
-\AtBeginEnvironment{thebibliography}{
-	\pretocmd{\PrintBackRefs}{%
-		\iftoggle{bibdoi}
-		{\iftoggle{biburl}{\unskip\unskip doi:\bib@doi}{}}
-		{\iftoggle{biburl}{Retrieved from\bib@url}{}}
-		\togglefalse{bibdoi}\togglefalse{biburl}%
-	}{}{}
-}
-\makeatother
+% \undef{\APACrefURL}
+% \undef{\endAPACrefURL}
+% \undef{\APACrefDOI}
+% \undef{\endAPACrefDOI}
+% 
+% \long\def\collect@url#1{\global\def\bib@url{#1}}
+% \long\def\collect@doi#1{\global\def\bib@doi{#1}}
+% \newenvironment{APACrefURL}{\global\toggletrue{biburl}\Collect@Body\collect@url}{\unskip\unskip}
+% \newenvironment{APACrefDOI}{\global\toggletrue{bibdoi}\Collect@Body\collect@doi}{}
+% 
+% \AtBeginEnvironment{thebibliography}{
+% 	\pretocmd{\PrintBackRefs}{%
+% 		\iftoggle{bibdoi}
+% 		{\iftoggle{biburl}{\unskip\unskip doi:\bib@doi}{}}
+% 		{\iftoggle{biburl}{Retrieved from\bib@url}{}}
+% 		\togglefalse{bibdoi}\togglefalse{biburl}%
+% 	}{}{}
+% }
+% \makeatother
 %%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -169,7 +169,64 @@
 
 \begin{document}
 
+\begin{titlepage}
+    \begin{center}
+
+        \vspace*{\fill}
+
+        \Large
+        \textbf{The effects of episodic and semantic retrieval, and feedback on new learning}
+        \normalsize
+
+        \bigskip
+        Matej Pavlić, Denis Vlašiček \& Dragutin Ivanec
+
+        University of Zagreb, Faculty of Humanities and Social Sciences,
+        Department of Psychology
+
+        \bigskip
+
+        \raggedright
+        Corresponding author:
+
+        Denis Vlašiček
+
+        Ivana Lučića 3, 10000 Zagreb, Croatia
+
+        dvlasice@ffzg.hr
+
+        \vspace*{\fill}
+
+    \end{center}
+\end{titlepage}
+
 \def\biblio{}
+
+\hypertarget{abstract}{%
+\section{Abstract}}
+
+This study explored the effects of episodic and semantic retrieval, and
+feedback presentation, on learning of new complex material. Participants
+read a text divided into three parts, between which they engaged in
+(i) content-related (episodic retrieval) or (ii) general-knowledge testing
+(semantic retrieval), or (iii) reread the previous part. Some participants in
+the two retrieval conditions were assigned to receive feedback on their
+interpolated test achievement. We have measured learning through a multiple
+choice test, but also tried to capture proactive interference by designing the
+distractors in a specific way. Planned analyses have shown that participants in
+the episodic retrieval condition scored higher on the final test than
+participants in the other two groups. We found no evidence for an effect of
+feedback, nor for an interaction effect of interpolated activity type and
+feedback. Also, no effect of either independent variable on the number of
+proactive intrusions was found, although the existence of an effect cannot be
+rejected, which is reflected in exploratory Bayesian analyses.
+
+\bigskip
+
+\noindent Keywords: test-potentiated new learning, interpolated activity, feedback,
+semantic retrieval, episodic retrieval
+
+\clearpage
 
 \hypertarget{introduction}{%
 \section{Introduction}}
@@ -181,7 +238,7 @@
 
 The analysis plan was preregistered on GitHub, which also serves all project
 materials, data and analyses scripts, together with the whole project history.
-The repository can be found at \url{[URL]}.
+The repository can be found at \url{https://osf.io/gk9a3/?view_only=33f2a1207acf4e2093d489e46063b6e0}.
 
 \subfile{sections/methods.tex}
 
