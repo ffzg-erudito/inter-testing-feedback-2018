@@ -1,0 +1,344 @@
+---
+fontsize: 11pt
+geometry: margin=1.8cm
+output:
+  pdf_document:
+    keep_tex: true
+    toc: false
+header-includes: |
+    \usepackage[natbibapa, sectionbib, tocbib]{apacite}
+    \usepackage[utf8]{inputenc}
+    \usepackage[singlelinecheck = off]{caption}
+    \usepackage{lmodern}
+    \usepackage{microtype}
+    \usepackage{multirow}
+    \usepackage[inline]{enumitem}
+    \usepackage{array}
+    \usepackage[htt]{hyphenat}
+    \usepackage{booktabs}
+    \usepackage[euler]{textgreek}
+    \usepackage{float}
+    \usepackage[doublespacing]{setspace}
+    \usepackage{fancyhdr}
+    \captionsetup[table]{width=\textwidth}
+    \setlength{\parindent}{2em}
+    \fancyhf{}
+    \fancyhead[RH]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \pagestyle{fancy}
+    \hypersetup{colorlinks = true, linkcolor = blue, urlcolor = black, citecolor = blue}
+    \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
+    \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
+    \captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
+---
+
+```{r setup, echo = F, include = F}
+library(knitr)
+opts_chunk$set(dpi = 600, dev = 'tikz', echo = F, include = F)
+options(digits = 3, scipen = 12, knitr.kable.NA = '')
+
+library(here)
+# NOTE: this will load {magrittr}, {here}, {conflicted} and {tidyverse}. also,
+# `conflict_prefer`s filter from {dplyr}
+# furthermore, it loads 3 data.frames: (1) `dat` which contains the pooled data run
+# through `2-wrangling-main.R`, (2) `datHard` which is `dat` with all the hard
+# exclusion criteria applied (as described in `analysis-plan.md`), and (3)
+# `datSoft` which is `datHard` with the soft exclusion criteria applied (as
+# described in `analysis-plan.md`)
+source(here('wrangling', '3-exclusion-criteria.R'))
+# for different sums of squares
+library(car)
+# for tables
+library(kableExtra)
+# for effect sizes
+library(compute.es)
+# for bootstrapping
+library(boot)
+# for Bayesian analyses
+library(BayesFactor)
+# for extracting HDIs
+library(HDInterval)
+
+library(psych)
+
+conflict_prefer('select', 'dplyr')
+theme_set(theme_minimal())
+
+# source helper functions
+source(here('helpers', 'manova-helpers.R'))
+
+apaPrint <- function(number, pvalue = F, digits = 3,
+                     limit = .0001, replacement = '.0001') {
+  if (pvalue & number < limit) {
+    replacement
+  } else {
+    strCandidate <- round(number, digits = digits) %>%
+    {str_replace(as.character(.), '(?<=[-+]?)0(?=\\.)', '')}
+    if (str_length(strCandidate) < digits + 1) {
+      str_pad(strCandidate, 'right', pad = '0', width = digits + 1)
+    } else strCandidate
+  }
+}
+```
+
+```{r datHardNofeedFilter}
+datHardNofeed <- datHard %>% filter(., giveFeedback == F) %>%
+  select(., activityFactor, totalCorrect, totalIntrusors)
+datHardNofeed$activityFactor %<>% as.factor(.)
+```
+
+```{r datHardFeedFilter}
+datHardFeed <- datHard %>% filter(., condition != 'rereading') %>%
+  select(., condition, giveFeedback, activityFactor,
+         totalCorrect, totalIntrusors)
+
+datHardFeed %<>% mutate_at(., vars(activityFactor, giveFeedback, condition),
+                           as.factor)
+```
+
+## Additional analyses
+
+Because it is theoretically interesting to see whether there is evidence for
+absence of a difference between certain conditions, or no effect of certain manipulations, we
+conducted a Bayesian reanalysis of the two Roy-Bargmann stepdown procedures.
+Since these analyses had not been planned, we decided to use the default priors
+provided in the \textit{BayesFactor}
+\citep{moreyBayesFactorComputationBayes2018} package.\footnote{All posteriors obtained from 6000 simulations.}
+
+```{r bfOpts}
+numIter <- 6000
+```
+
+### Bayesian reanalysis of the first Roy-Bargmann procedure
+
+```{r bfAnovaRB1, cache = T}
+set.seed(1108)
+
+anovaBfRb1 <- anovaBF(data = datHardNofeed,
+                     totalCorrect ~ activityFactor)
+
+anovaBfRb1Posterior <- posterior(anovaBfRb1, iterations = numIter)
+
+anovaBfRb1Summary <- summary(anovaBfRb1Posterior)
+
+anovaBfRb1HDI <- hdi(anovaBfRb1Posterior)
+```
+
+As was earlier done in a frequentist setting, we first fit an ANOVA model with the
+total number of correct answers as the dependent variable, and the type of interpolated
+activity as the predictor.
+All effects are expressed as deviations from the estimated posterior subsample mean of
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[1, 'Mean']`.
+The estimated mean of the
+effect of content related testing is
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[2, 'Mean']`
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-content']`,
+`r anovaBfRb1HDI[2, 'activityFactor-content']`]). The 95% highest
+density interval of the posterior indicates that there is a fair amount of uncertainty around
+the exact magnitude of the effect of content-related testing. However, most of the probability density
+is quite far above zero, implying that there really
+is a positive effect. The means of the posterior
+distributions for the general-knowledge-test and rereading conditions \(b\)s are
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[3, 'Mean']`
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-general']`,
+`r anovaBfRb1HDI[2, 'activityFactor-general']`])
+and
+`r anovaBfRb1Summary %>% pluck('statistics') %>% .[4, 'Mean']`,
+(95% HDI = [`r anovaBfRb1HDI[1, 'activityFactor-rereading']`,
+`r anovaBfRb1HDI[2, 'activityFactor-rereading']`])
+respectively. Most of the posterior distribution for the effect of general knowledge
+testing lies below zero, pointing to a negative effect on the total number of
+correct answers, although the distance is not as marked as in the
+content-related condition. On the other hand, there is a lot of uncertainty
+about the effect of rereading, compared to the other two estimates.
+Still, 
+`r anovaBfRb1Posterior %>% as.data.frame(.) %>%
+janitor::clean_names(.) %>%
+select('activity_factor_rereading') %>%
+filter(., activity_factor_rereading < 0) %>% nrow(.) / numIter * 100`% 
+of the posterior lies below zero, which lead us to believe that the effect is most
+likely negative.
+
+```{r bfRb1contrast, cache = T}
+set.seed(9429)
+
+datHardNofeed %>% filter(activityFactor != 'content') %>%
+  ttestBF(data = .,
+          formula = totalCorrect ~ activityFactor,
+          posterior = T,
+          iterations = numIter) -> contReadGen
+
+hdi(contReadGen) -> contReadGenHDI
+```
+
+Furthermore, we wanted to explore the difference between the rereading and
+general-knowledge-test conditions, given their somewhat similar coefficient
+and HDI estimates, as well as sample means. To do this, we conducted a Bayesian t-test, again with the
+\textit{BayesFactor} package's default priors. The estimated posterior mean of the difference in
+the total number of correct answers between the two
+groups is `r summary(contReadGen)$statistics[2, 'Mean']`
+(95% HDI = [`r contReadGenHDI[1, 'beta (general - rereading)']`,
+`r contReadGenHDI[2, 'beta (general - rereading)']`]). As can be seen from the
+HDI, there is a lot of uncertainty around the estimate of the difference,
+which points to a lack of evidence for any claim regarding the effect.
+
+```{r, bfAncovaRB1, cache = T}
+set.seed(171918)
+
+ancovaBfRb1 <- lmBF(data = datHardNofeed,
+                     totalIntrusors ~ activityFactor * totalCorrect)
+
+ancovaBfRb1Posterior <- posterior(ancovaBfRb1, iterations = numIter)
+
+ancovaBfRb1Summary <- summary(ancovaBfRb1Posterior)
+
+ancovaBfRb1HDI <- hdi(ancovaBfRb1Posterior)
+
+ancovaBfRb1Frame <- as.data.frame(ancovaBfRb1Posterior) %>%
+  janitor::clean_names(.)
+```
+ 
+In the second step of the Roy-Bargmann procedure, we fit an ANCOVA model with
+the total number of correct answers as the covariate and the total number
+of intrusive options chosen as the dependent variable. Effects are again
+expressed relative to the estimated posterior subsample mean of
+`r ancovaBfRb1Summary$statistics[1, 'Mean']`.
+There is uncertainty around the estimates of the effects of the
+different experimental conditions --- content related testing \(b\) =
+`r ancovaBfRb1Summary$statistics[2, 'Mean']`
+(95% HDI = [`r ancovaBfRb1HDI[1, 'activityFactor-content']`,
+`r ancovaBfRb1HDI[2, 'activityFactor-content']`]),
+general-knowledge testing \(b\) =
+`r ancovaBfRb1Summary$statistics[3, 'Mean']`
+(95% HDI = [`r ancovaBfRb1HDI[1, 'activityFactor-general']`,
+`r ancovaBfRb1HDI[2, 'activityFactor-general']`]),
+rereading \(b\) =
+`r ancovaBfRb1Summary$statistics[4, 'Mean']`
+(95% HDI = [`r ancovaBfRb1HDI[1, 'activityFactor-rereading']`,
+`r ancovaBfRb1HDI[2, 'activityFactor-rereading']`]).
+The HDIs show that there could be either a slight increase or a slight
+decrease in the number of intrusors, which
+prevented us from making a conclusion about the nature of the effects.
+However, given the current data and priors, we find the following ---
+`r ancovaBfRb1Frame %>% select(., activity_factor_content) %>%
+filter(., activity_factor_content < 0) %>% {round(nrow(.) / numIter * 100, 2)}`% of the
+posterior for the effect of content related testing falls below zero;
+`r ancovaBfRb1Frame %>% select(., activity_factor_general) %>%
+filter(., activity_factor_general > 0) %>% {round(nrow(.) / numIter * 100, 2)}`% 
+of the posterior for the effect of general knowledge testing falls
+above zero; `r ancovaBfRb1Frame %>% select(., activity_factor_rereading) %>%
+filter(., activity_factor_rereading > 0) %>% {round(nrow(.) / numIter * 100, 2)}`% of
+the posterior for the effect of rereading falls above zero.
+Given the stated, there is some evidence implying that content related testing
+decreases the number of intrusors chosen, after controlling for the effect of
+the total number of correct answers. Further, there is some, albeit weaker evidence
+that rereading leads to an increase in the number of chosen intrusive distractors.
+Lastly, the posterior of the general knowledge testing effect points to no particular
+direction. A stronger test of these claims is desired.
+
+### Bayesian reanalysis of the second Roy-Bargmann procedure
+
+In the second Roy-Bargmann analysis, we wanted to test whether there is an effect
+of the type of interpolated activity, receiving feedback, and their interaction
+on the total number of correct answers and chosen intrusors. Again, we first fit
+an ANOVA model with the two predictors and the total number of correct answers
+as the dependent variable.
+
+```{r bfAnovaRB2, cache = T}
+set.seed(750363)
+
+anovaBfRb2 <- anovaBF(data = datHardFeed,
+                     totalCorrect ~ activityFactor * giveFeedback)
+
+anovaBfRb2Posterior <- posterior(anovaBfRb2, iterations = numIter, index = 4)
+
+anovaBfRb2Summary <- summary(anovaBfRb2Posterior)
+
+anovaBfRb2HDI <- hdi(anovaBfRb2Posterior)
+```
+
+Effects are expressed relative to the estimated posterior subsample mean of
+`r anovaBfRb2Summary$statistics[1, 'Mean']`.
+We found that content related testing
+leads to an increase in the total number of correct answers,
+\(b\) = `r anovaBfRb2Summary$statistics[4, 'Mean']`
+(95% HDI = [`r anovaBfRb2HDI[1, 'activityFactor-content']`,
+`r anovaBfRb2HDI[2, 'activityFactor-content']`]), compared to the general knowledge testing.
+This is aligned with the finding obtained in the frequentist setting.
+The mean of the posterior for the effect of receiving feedback is
+`r anovaBfRb2Summary$statistics[3, 'Mean']`
+(95% HDI = [`r anovaBfRb2HDI[1, 'giveFeedback-TRUE']`,
+`r anovaBfRb2HDI[2, 'giveFeedback-TRUE']`]). The HDI around the estimate precludes
+any firm conclusions regarding the effect of receiving feedback.
+However, we will mention that 
+`r anovaBfRb2Posterior %>% as.data.frame() %>% janitor::clean_names() %>%
+select(give_feedback_true) %>%
+filter(give_feedback_true > 0) %>% nrow() / numIter * 100`% of the
+posterior lies above zero, implying a possible positive effect on learning.
+Finally, the estimate for the interaction effect (being in the content condition
+and receiving feedback) is
+`r anovaBfRb2Summary$statistics[8, 'Mean']`
+(95% HDI = [`r anovaBfRb2HDI[1, 'giveFeedback:activityFactor-TRUE.&.content']`,
+`r anovaBfRb2HDI[2, 'giveFeedback:activityFactor-TRUE.&.content']`]). This could
+point to there not being a relevant interaction effect. According to the collected
+data and the priors, we could claim that the effect is practically equivalent to
+zero if we were not interested in a half-point increase or decrease in the
+average scores (i.e. defining a region of practical equivalence (ROPE) between [-0.5, 0.5]).
+Still, greater precision, which would require further data collection, is
+desired.
+
+```{r bfAncovaRB2, cache = T}
+set.seed(174017)
+
+ancovaBfRb2Posterior <- lmBF(data = datHardFeed,
+                             totalIntrusors ~ activityFactor * totalCorrect *
+                               giveFeedback,
+                             posterior = T, iterations = numIter)
+
+ancovaBfRb2Summary <- summary(ancovaBfRb2Posterior)
+
+ancovaBfRb2HDI <- hdi(ancovaBfRb2Posterior)
+
+ancovaBfRb2Frame <- as.data.frame(ancovaBfRb2Posterior) %>%
+  janitor::clean_names(.)
+
+```
+
+We continue with the ANCOVA model, taking the total number of correct answers
+as the covariate. The estimate of the intercept is
+`r ancovaBfRb2Summary$statistics[1, 'Mean']`
+(95% HDI = [`r ancovaBfRb2HDI[1, 'mu']`, `r ancovaBfRb2HDI[2, 'mu']`]).
+The estimate for the effect of content related testing on the total number
+of intrusive distractors chosen is \(b\) = `r ancovaBfRb2Summary$statistics[2, 'Mean']`
+(95% HDI = [`r ancovaBfRb2HDI[1, 'activityFactor-content']`,
+`r ancovaBfRb2HDI[2, 'activityFactor-content']`]), compared to general knowledge
+testing. There is some evidence for a
+slight decrease in the number of intrusive distractors chosen in the
+content related testing condition. However, an increase is
+also possible, but less likely and negligibly small.
+The estimate for the effect of receiving feedback is
+`r ancovaBfRb2Summary$statistics[6, 'Mean']`
+(95% HDI = [`r ancovaBfRb2HDI[1, 'giveFeedback-TRUE']`,
+`r ancovaBfRb2HDI[2, 'giveFeedback-TRUE']`]).
+Although the mean of the posterior is close to zero, the lower bound of the HDI
+shows that values which may be considered non-negligible are still somewhat
+probable. Therefore, we shall refrain from making a judgement regarding the effect
+of feedback on choosing intrusive distractors.
+Finally, the estimate of the interaction effect is \(b\) =
+`r ancovaBfRb2Summary$statistics[10, 'Mean']`
+(95% HDI = [`r ancovaBfRb2HDI[1, 'activityFactor:giveFeedback-content.&.TRUE']`,
+`r ancovaBfRb2HDI[2, 'activityFactor:giveFeedback-content.&.TRUE']`]).
+The mean of the posterior is close to zero, and we could declare the effect to be
+practically equivalent to zero with a ROPE of approximately [-0.25, 0.25].
+
+As previously stated, all these analyses were not planned a priori. This warrants
+certain caveats. The \textit{BayesFactor} package's default priors were used.
+The appropriateness of these priors should certainly be questioned. However, we decided
+to use them because we did not want to choose priors after already seeing the data,
+which would have been more problematic.
+Further, the statements about effects made in this section are noncommittal.
+Whether a 0.5 increase or decrease in the total number of correct answers is
+practically equivalent to zero or not is left to the reader.
+
+\bibliographystyle{apacite}
+\bibliography{../../paper/reference}
