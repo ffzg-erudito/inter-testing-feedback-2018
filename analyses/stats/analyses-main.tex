@@ -186,16 +186,22 @@ we have decided to conduct a one-way MANOVA. According to
 \citet{tabachnickUsingMultivariateStatistics2012}, conducting a MANOVA
 instead of multiple ANOVAs increases the chance of discovering the
 effects of different treatments. Furthermore conducting a MANOVA guards
-against the inflation of type 1 errors due to multiple tests of
+against the inflation of Type 1 errors due to multiple tests of
 correlated dependent variables
 \citep{tabachnickUsingMultivariateStatistics2012,fieldDiscoveringStatisticsUsing2012}.
 Finally, conducting separate ANOVAs would disregard the correlation
 between our two dependent variables
-\citep{fieldDiscoveringStatisticsUsing2012}.
+\citep{fieldDiscoveringStatisticsUsing2012}. Therefore, we conducted a
+one-way MANOVA with interpolated activity as the independent variable
+and the total number of correct and intrusive options chosen as
+dependent variables.
 
-We conducted a one-way MANOVA with interpolated activity as the
-independent variable and the total number of correct and intrusive
-options chosen as dependent variables.
+A power analysis conducted prior to analyzing the data
+\citep[using the G*Power software by][]{faulStatisticalPowerAnalyses2009}
+has shown that we should have above 80\% power to detect effects which
+fall between small and medium (Cohen's \(f^2\ \gtrsim 0.6\)), with an
+\(\alpha\) level of .025. Note that larger effects are expected based on
+prior studies.
 
 Pillai's V for the analysis is .126, \(p = .004\) (Wilks' \(\Lambda\) =
 .875, \(p = .003\)). The effect size, calculated as
@@ -218,31 +224,30 @@ interpolated activity type as the independent variable and the total
 number of correct answers as the dependent variable.
 
 As could be expected, the ANOVA points to an interpolated activity
-effect, with \(F(2, 119)\) = 7.54055154877773, \(p = .001\). Following
-the ANOVA, we conducted an ANCOVA, with the total number of correct
-answers as the covariate, and the total number of intrusors as the
-dependent variable. The results imply a main effect of the total number
-of correct answers (\(F(1, 118)\) = 79.674, \(p < .0001\)), but after we
-took into account the number of correct answers, we found no evidence
-for an effect of interpolated activity on the total number of chosen
-intrusors (\(F (2, 118)\) = 0.844, \(p = .433\)). Thus far, results
-point to a lack of evidence to support our second hypothesis that the
-type of interpolated activity will have an effect on the number of
-intrusors.
+effect, with \(F(2, 119)\) = 7.541, \(p = .001\). Following the ANOVA,
+we conducted an ANCOVA, with the total number of correct answers as the
+covariate, and the total number of intrusors as the dependent variable.
+The results imply a main effect of the total number of correct answers
+(\(F(1, 118)\) = 79.674, \(p < .0001\)), but after we took into account
+the number of correct answers, we found no evidence for an effect of
+interpolated activity on the total number of chosen intrusors
+(\(F (2, 118)\) = 0.844, \(p = .433\)). Thus far, results point to a
+lack of evidence to support our second hypothesis that the type of
+interpolated activity will have an effect on the number of intrusors.
 
 In order to test our first hypothesis, we contrasted (i) the rereading
 group with the two test groups, and (ii) the two test groups with each
 other, taking only the total number of correct answers as the DV. The
 first contrast found no evidence of a difference between the rereading
-group and the two test groups (\(t(119)\) = 1.35541938139668,
-\(p = .178\), \(g_s\) = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohen's
-\(U_{3, g_s}\) = 57.6\%, probability of superiority = 55.39\%). However,
-there was a difference between the two test groups (\(t(119)\) =
-3.6199342538897, \(p = .0004\), \(g_s\) = 0.66, 95\% CI = {[}0.21,
-1.1{]}, Cohen's \(U_{3, g_s}\) = 74.43\%, probability of superiority =
-67.88\%). Participants in the content related test group scored higher
-on the final test than participants in the general knowledge test
-condition. These two findings are not in line with our predictions.
+group and the two test groups (\(t(119)\) = 1.355, \(p = .178\), \(g_s\)
+= 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohen's \(U_{3, g_s}\) = 57.6\%,
+probability of superiority = 55.39\%). However, there was a difference
+between the two test groups (\(t(119)\) = 3.62, \(p = .0004\), \(g_s\) =
+0.66, 95\% CI = {[}0.21, 1.1{]}, Cohen's \(U_{3, g_s}\) = 74.43\%,
+probability of superiority = 67.88\%). Participants in the content
+related test group scored higher on the final test than participants in
+the general knowledge test condition. These two findings are not in line
+with our predictions.
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
 \subsection{The interaction between feedback and interpolated activity
@@ -255,7 +260,10 @@ general and content related test conditions only (\(n\) = 163). To test
 these hypotheses, we first conducted a two-way MANOVA with interpolated
 activity and feedback as independent variables, and total number of
 correct answers and total number of intrusors as the dependent
-variables.
+variables. Again, a power analysis conducted before analysing the data
+has shown that we should have above 80\% power to detect effects which
+fall between small and medium (Cohen's \(f^2\ \gtrsim 0.5\)), with an
+\(\alpha\) level of .025.
 
 Pillai's V for the interpolated activity effect (calculated with type
 III sums of squares) is .071, \(p = .003\) (Wilks' \(\Lambda\) = .929,

@@ -160,6 +160,12 @@ Therefore, we conducted a one-way MANOVA with interpolated activity as
 the independent variable and the total number of correct and intrusive options
 chosen as dependent variables. 
 
+A power analysis conducted prior to analyzing the data
+\citep[using the G*Power software by][]{faulStatisticalPowerAnalyses2009}
+has shown that we should have above 80% power to detect effects which fall
+between small and medium (Cohen's \(f^2\ \gtrsim 0.6\)), with an \(\alpha\) level
+of .025. Note that larger effects are expected based on prior studies.
+
 ```{r manovaInterpActivity}
 manovaModel <- manova(data = datHardNofeed,
                       cbind(totalCorrect, totalIntrusors) ~ activityFactor)
@@ -232,7 +238,7 @@ ancovaRB %>% Anova(., type = '3') %>% broom::tidy(.) -> .
 As could be expected, the ANOVA points to an interpolated activity effect, with
 \(F(`r anovaRB %>% filter(., term == 'activityFactor') %>% pull(., df)`,
 `r anovaRB %>% filter(., term == 'Residuals') %>% pull(., df)`)\) =
-`r anovaRB %>% select(., statistic) %>% slice(1)`,
+`r anovaRB %>% select(., statistic) %>% slice(1) %>% apaPrint(.)`,
 \(p = `r anovaRB %>% select(., p.value) %>% slice(1) %>% apaPrint(., pvalue = T)`\).
 Following the ANOVA, we conducted an ANCOVA, with
 the total number of correct answers as the covariate, and the total number of intrusors
@@ -283,14 +289,14 @@ each other, taking only the total number of correct answers as the DV.
 The first contrast found no evidence of a difference between the rereading group
 and the two test groups
 (\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
-`r (.) %>% select(statistic) %>% slice(2)`,
+`r (.) %>% select(statistic) %>% slice(2) %>% apaPrint(.)`,
 \(p = `r (.) %>% select(p.value) %>% slice(2) %>% apaPrint(., pvalue = T)`\),
 \(g_s\) = `r esCont1$g`, 95% CI = [`r esCont1$l.g`, `r esCont1$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont1$U3.g`%,
 probability of superiority = `r esCont1$cl.g`%).
 However, there was a difference between the two test groups
 (\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
-`r (.) %>% select(statistic) %>% slice(3)`,
+`r (.) %>% select(statistic) %>% slice(3) %>% apaPrint(.)`,
 \(p = `r (.) %>% select(p.value) %>% slice(3) %>% apaPrint(., pvalue = T, digits = 4)`\),
 \(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
@@ -317,7 +323,10 @@ test conditions only (\(n\) = `r nrow(datHardFeed)`).
 To test these hypotheses, we first
 conducted a two-way MANOVA with interpolated activity and feedback as independent
 variables, and total number of correct answers and total number of intrusors as
-the dependent variables.
+the dependent variables. Again, a power analysis conducted before analysing the
+data has shown that we should have above 80% power to detect effects which fall
+between small and medium (Cohen's \(f^2\ \gtrsim 0.5\)), with an \(\alpha\)
+level of .025.
 
 ```{r manovaInteraction}
 manovaModelInter <- manova(cbind(totalCorrect, totalIntrusors) ~

@@ -1,5 +1,6 @@
 ---
 fontsize: 11pt
+title: 'Additional analyses'
 geometry: margin=1.8cm
 output:
   pdf_document:
@@ -95,8 +96,6 @@ datHardFeed <- datHard %>% filter(., condition != 'rereading') %>%
 datHardFeed %<>% mutate_at(., vars(activityFactor, giveFeedback, condition),
                            as.factor)
 ```
-
-## Additional analyses
 
 Because it is theoretically interesting to see whether there is evidence for
 absence of a difference between certain conditions, or no effect of certain manipulations, we
