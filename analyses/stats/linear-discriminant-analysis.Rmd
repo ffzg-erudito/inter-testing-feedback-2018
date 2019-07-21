@@ -9,6 +9,7 @@ output:
         toc_depth: 4
 geometry: margin=1.3cm
 header-includes: |
+    \usepackage{tikz}
     \usepackage[natbibapa, sectionbib, tocbib]{apacite}
     \usepackage[utf8]{inputenc}
     \usepackage{caption}
@@ -139,7 +140,7 @@ defined by the total number of correct answers, but the contribution of the numb
 of chosen intrusors is also considerable. This could be due to the relatively high
 correlation between those two variables.
 
-```{r ldaPlot, fig.env='figure*', fig.cap='\\label{ldaPlot1}Plot showing the cases\' location on the two variates. Group means on the variates are marked by crosses. The vertical line marks the 0 on the first variate.'}
+```{r ldaPlot, fig.env='figure*', fig.cap='\\label{ldaPlot1}Plot showing the cases\' location on the two variates. Group means on the variates are marked by crosses. The vertical line marks the 0 on the first variate.', external = F}
 .$scores %>% cbind(datHardNofeed, .) %>%
   ggplot(., aes(x = Can1, y = Can2, color = activityFactor)) +
   geom_point() + geom_vline(aes(xintercept = 0)) +
@@ -384,6 +385,8 @@ intrusive distractors chosen.
 LDA cross-validation done using `MASS` \citep{venablesModernAppliedStatistics2002}.
 `viridis` \citep{garnierViridisDefaultColor2018} used for color scale.
 Labelling in plot done with the help of `ggrepel` \citep{slowikowskiGgrepelAutomaticallyPosition2018}.
+Plots created using
+\texttt{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}.
 
 \setstretch{1}
 \bibliographystyle{apacite}
