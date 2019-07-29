@@ -98,6 +98,7 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 
+\usepackage{tikz}
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
 \usepackage[utf8]{inputenc}
 \usepackage{caption}
@@ -270,7 +271,7 @@ This could be due to the relatively high correlation between those two
 variables.
 
 \begin{figure*}
-\includegraphics{linear-discriminant-analysis_files/figure-latex/ldaPlot-1} \caption{\label{ldaPlot1}Plot showing the cases' location on the two variates. Group means on the variates are marked by crosses. The vertical line marks the 0 on the first variate.}\label{fig:ldaPlot}
+\input{linear-discriminant-analysis_files/figure-latex/ldaPlot-1.tex}\caption[\label{ldaPlot1}Plot showing the cases' location on the two variates]{\label{ldaPlot1}Plot showing the cases' location on the two variates. Group means on the variates are marked by crosses. The vertical line marks the 0 on the first variate.}\label{fig:ldaPlot}
 \end{figure*}
 
 To assess the ability of the LDA model to discriminate group membership
@@ -295,6 +296,7 @@ its error rate using the leave-one-out cross-validation technique:
 ##     P-Value [Acc > NIR] : 0.00572       
 ##                                         
 ##                   Kappa : 0.185         
+##                                         
 ##  Mcnemar's Test P-Value : 0.00577       
 ## 
 ## Statistics by Class:
@@ -351,6 +353,7 @@ section). Here are the results for the total-correct-only model:
 ##     P-Value [Acc > NIR] : 0.00334      
 ##                                        
 ##                   Kappa : 0.198        
+##                                        
 ##  Mcnemar's Test P-Value : 5.87e-05     
 ## 
 ## Statistics by Class:
@@ -518,6 +521,7 @@ LOOCV prediction accuracy:
 ##     P-Value [Acc > NIR] : 0.0175       
 ##                                        
 ##                   Kappa : 0.267        
+##                                        
 ##  Mcnemar's Test P-Value : 0.8551       
 ##                                        
 ##             Sensitivity : 0.667        
@@ -551,6 +555,7 @@ is the model with the total number of intrusive distractors dropped:
 ##     P-Value [Acc > NIR] : 0.00523      
 ##                                        
 ##                   Kappa : 0.316        
+##                                        
 ##  Mcnemar's Test P-Value : 0.85011      
 ##                                        
 ##             Sensitivity : 0.690        
@@ -653,6 +658,7 @@ accuracy fort this model:
 ##     P-Value [Acc > NIR] : 0.000614      
 ##                                         
 ##                   Kappa : 0.275         
+##                                         
 ##  Mcnemar's Test P-Value : 0.434724      
 ##                                         
 ##             Sensitivity : 0.687         
@@ -690,6 +696,7 @@ model with only the total number of correct answers as the predictor:
 ##     P-Value [Acc > NIR] : 0.000103      
 ##                                         
 ##                   Kappa : 0.311         
+##                                         
 ##  Mcnemar's Test P-Value : 0.229102      
 ##                                         
 ##             Sensitivity : 0.723         
@@ -723,7 +730,8 @@ LDA cross-validation done using \texttt{MASS}
 \citep{venablesModernAppliedStatistics2002}. \texttt{viridis}
 \citep{garnierViridisDefaultColor2018} used for color scale. Labelling
 in plot done with the help of \texttt{ggrepel}
-\citep{slowikowskiGgrepelAutomaticallyPosition2018}.
+\citep{slowikowskiGgrepelAutomaticallyPosition2018}. Plots created using
+\texttt{ggplot2} \citep{wickhamGgplot2ElegantGraphics2016}.
 
 \setstretch{1}
 \bibliographystyle{apacite}
