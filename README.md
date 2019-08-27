@@ -2,6 +2,8 @@
 ![](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0 1.0 Universal")
 ![](https://www.gnu.org/graphics/gplv3-127x51.png "GNU General Public License v3")
 
+See `LICENSE.md` for details on licensing.
+
 # Interpolated testing and feedback
 
 October 2018
