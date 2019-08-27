@@ -1,3 +1,7 @@
+![](https://i.creativecommons.org/l/by/4.0/88x31.png "Creative Commons Attribution 4.0 International")
+![](http://i.creativecommons.org/p/zero/1.0/88x31.png "CC0 1.0 Universal")
+![](https://www.gnu.org/graphics/gplv3-127x51.png "GNU General Public License v3")
+
 # Interpolated testing and feedback
 
 October 2018
