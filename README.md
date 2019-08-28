@@ -11,7 +11,7 @@ The manuscript and related materials (.tex and .pdf files in /paper/ and subfold
 
 The rest of the materials is licensed under the GPLv3 license (https://www.gnu.org/licenses/gpl-3.0.txt).
 
-Please cite the preprint as: Pavlić, M., Vlašiček, D., & Ivanec, D. (2019, August 28). The role of retrieval type and feedback in test-potentiated new learning. Retrieved from https://www.github.com/ffzg-erudito/inter-testing-feedback-2018.
+Please cite the preprint as: Pavlić, M., Vlašiček, D., & Ivanec, D. (2019). The role of retrieval type and feedback in test-potentiated new learning. Retrieved from https://www.github.com/ffzg-erudito/inter-testing-feedback-2018.
 
 Please cite the data as: Pavlić, M., Vlašiček, D., & Ivanec, D.
 (2019). The role of retrieval type and feedback in test-potentiated new
