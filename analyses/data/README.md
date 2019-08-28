@@ -2,6 +2,9 @@
 
 This is the file which contains the raw data used in the analyses.
 
+All missing values stem from the experimental design - the participants have not seen those questions and
+were not supposed to see them.
+
 Variables are:
 - `when` - timestamp
 - `giveFeedback` - whether the participant received feedback on the interpolated
@@ -34,7 +37,7 @@ Variables are:
 - `readingDifficultiesThisExp` - whether they've had reading difficulties in
     this experiment particularly
 - `practiceForActivity_<N>` | `practiceForFinal_<N>` - answers to practice Qs
-    for the interpolated activity and final test, respectively
+    for the interpolated activity and final test, respectively; correct/incorrect (0/1)
 - `genKnowledge_<N>_<M>` - answers to general knowledge questions;
     correct/incorrect (1/0)
 - `content_<N>_<M>` - same as above but for content related questions.
