@@ -163,8 +163,9 @@ chosen as dependent variables.
 A power analysis conducted prior to analyzing the data
 \citep[using the G*Power software by][]{faulStatisticalPowerAnalyses2009}
 has shown that we should have above 80% power to detect effects which fall
-between small and medium (Cohen's \(f^2\ \gtrsim 0.6\)), with an \(\alpha\) level
-of .025. Note that larger effects are expected based on prior studies.
+between small and medium (Cohen's \(f^2\ \gtrsim 0.06\)), at an \(\alpha\) level
+of .025, with a sample size of 110 participants.
+Note that larger effects are expected based on prior studies.
 
 ```{r manovaInterpActivity}
 manovaModel <- manova(data = datHardNofeed,
@@ -215,8 +216,8 @@ dependent variables, we conducted a Roy-Bargmann stepdown analysis, as
 suggested by \citeauthor{tabachnickUsingMultivariateStatistics2012}
 (\citeyear{tabachnickUsingMultivariateStatistics2012};
 a linear discriminant analysis with the same aim is available in the supplementary
-materials). The total number of correct answers was a priori chosen to be the
-higher priority variable. According to \citet{tabachnickUsingMultivariateStatistics2012},
+materials).
+According to \citet{tabachnickUsingMultivariateStatistics2012},
 the higher priority variable can be chosen based on theoretical or practical grounds.
 Since the total number of correct answers is the criterion that determines a
 student's success in a testing context, we chose this dependent variable
@@ -235,7 +236,8 @@ ancovaRB <- aov(totalIntrusors ~ totalCorrect + activityFactor, datHardNofeed)
 ancovaRB %>% Anova(., type = '3') %>% broom::tidy(.) -> .
 ```
 
-As could be expected, the ANOVA points to an interpolated activity effect, with
+As could be expected, the ANOVA points to a differential effect of our
+conditions on the total number of correct answers, with
 \(F(`r anovaRB %>% filter(., term == 'activityFactor') %>% pull(., df)`,
 `r anovaRB %>% filter(., term == 'Residuals') %>% pull(., df)`)\) =
 `r anovaRB %>% select(., statistic) %>% slice(1) %>% apaPrint(.)`,
@@ -250,8 +252,8 @@ of the total number of correct answers
 \(p < `r (.) %>% filter(., term == 'totalCorrect') %>% pull(p.value) %>%
 apaPrint(., pvalue = T)`\)),
 but after we took into account the number of correct
-answers, we found no evidence for an effect of interpolated activity on the total
-number of chosen intrusors
+answers, we found no evidence for an effect of interpolated activity type
+on the total number of chosen intrusors
 (\(F (`r (.) %>% filter(., term == 'activityFactor') %>% pull(df)`,
 `r (.) %>% filter(., term == 'Residuals') %>% pull(df)`)\) =
 `r (.) %>% filter(., term == 'activityFactor') %>% pull(statistic)`,
@@ -294,6 +296,9 @@ and the two test groups
 \(g_s\) = `r esCont1$g`, 95% CI = [`r esCont1$l.g`, `r esCont1$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont1$U3.g`%,
 probability of superiority = `r esCont1$cl.g`%).
+Therefore, we cannot conclude that being in the rereading condition, as
+opposed to being in one of the two test groups, leads to different learning
+outcomes.
 However, there was a difference between the two test groups
 (\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
 `r (.) %>% select(statistic) %>% slice(3) %>% apaPrint(.)`,
@@ -325,8 +330,8 @@ conducted a two-way MANOVA with interpolated activity and feedback as independen
 variables, and total number of correct answers and total number of intrusors as
 the dependent variables. Again, a power analysis conducted before analysing the
 data has shown that we should have above 80% power to detect effects which fall
-between small and medium (Cohen's \(f^2\ \gtrsim 0.5\)), with an \(\alpha\)
-level of .025.
+between small and medium (Cohen's \(f^2\ \gtrsim 0.05\)), at an \(\alpha\)
+level of .025, with a sample size of 145 participants.
 
 ```{r manovaInteraction}
 manovaModelInter <- manova(cbind(totalCorrect, totalIntrusors) ~
