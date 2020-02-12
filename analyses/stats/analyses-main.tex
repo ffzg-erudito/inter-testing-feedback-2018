@@ -1,33 +1,47 @@
-\documentclass[11pt,]{article}
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
-% use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=1.8cm]{geometry}
-\usepackage{hyperref}
-\hypersetup{unicode=true,
-            pdfborder={0 0 0},
-            breaklinks=true}
-\urlstyle{same}  % don't use monospace font for urls
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -36,65 +50,14 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{0}
-% Redefines (sub)paragraphs to behave more like sections
-\ifx\paragraph\undefined\else
-\let\oldparagraph\paragraph
-\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-\fi
-\ifx\subparagraph\undefined\else
-\let\oldsubparagraph\subparagraph
-\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-\fi
-
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
-
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{}
-    \pretitle{\vspace{\droptitle}}
-  \posttitle{}
-    \author{}
-    \preauthor{}\postauthor{}
-    \date{}
-    \predate{}\postdate{}
-  
-\usepackage{booktabs}
-\usepackage{longtable}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{wrapfig}
-\usepackage{float}
-\usepackage{colortbl}
-\usepackage{pdflscape}
-\usepackage{tabu}
-\usepackage{threeparttable}
-\usepackage{threeparttablex}
-\usepackage[normalem]{ulem}
-\usepackage{makecell}
-\usepackage{xcolor}
-
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage[natbibapa, sectionbib, tocbib]{apacite}
 \usepackage[utf8]{inputenc}
 \usepackage[singlelinecheck = off]{caption}
@@ -119,18 +82,35 @@
 \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
 \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
 \captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+
+\author{}
+\date{\vspace{-2.5em}}
 
 \begin{document}
 
 \hypertarget{exclusion-criteria}{%
 \subsection{Exclusion criteria}\label{exclusion-criteria}}
 
-\begin{table*}[t]
+\begin{table*}
 
 \caption{\label{tab:descTable}\label{descTable}Descriptive statistics for the DVs broken down
                      by experimental condition.}
 \centering
-\begin{tabular}{llrrrrrr}
+\begin{tabular}[t]{llrrrrrr}
 \toprule
 Measure & Condition & $n$ & $M$ & $SE_M$ & $SD$ & min & max\\
 \midrule
@@ -199,22 +179,24 @@ dependent variables.
 A power analysis conducted prior to analyzing the data
 \citep[using the G*Power software by][]{faulStatisticalPowerAnalyses2009}
 has shown that we should have above 80\% power to detect effects which
-fall between small and medium (Cohen's \(f^2\ \gtrsim 0.6\)), with an
-\(\alpha\) level of .025. Note that larger effects are expected based on
-prior studies.
+fall between small and medium (Cohen's \(f^2\ \gtrsim 0.06\)), at an
+\(\alpha\) level of .025, with a sample size of 110 participants. Note
+that larger effects are expected based on prior studies.
 
 Pillai's V for the analysis is .126, \(p = .004\) (Wilks' \(\Lambda\) =
 .875, \(p = .003\)). The effect size, calculated as
 \(\omega^2_{mult} = .109\) (bootstrap
 median\footnote{All bootstrap estimates taken from 10000 replications.}
-= .132, \(BC_\alpha\) 95\% CI = {[}.011, .202{]}). To further inspect
-the relationship of the interpolated activities with our dependent
-variables, we conducted a Roy-Bargmann stepdown analysis, as suggested
-by \citeauthor{tabachnickUsingMultivariateStatistics2012}
+= .132, \(BC_\alpha\) 95\% CI = {[}.011, .202{]})\footnote{
+Cohen's \(f^2 = 0.051\) (calculated according to Equation 12 in
+\citealp{steynjrEstimatingEffectSize2009}).
+}. To further inspect the relationship of the interpolated activities
+with our dependent variables, we conducted a Roy-Bargmann stepdown
+analysis, as suggested by
+\citeauthor{tabachnickUsingMultivariateStatistics2012}
 (\citeyear{tabachnickUsingMultivariateStatistics2012}; a linear
 discriminant analysis with the same aim is available in the
-supplementary materials). The total number of correct answers was a
-priori chosen to be the higher priority variable. According to
+supplementary materials). According to
 \citet{tabachnickUsingMultivariateStatistics2012}, the higher priority
 variable can be chosen based on theoretical or practical grounds. Since
 the total number of correct answers is the criterion that determines a
@@ -223,17 +205,18 @@ as the higher priority one. Therefore, we first conducted an ANOVA with
 interpolated activity type as the independent variable and the total
 number of correct answers as the dependent variable.
 
-As could be expected, the ANOVA points to an interpolated activity
-effect, with \(F(2, 119)\) = 7.541, \(p = .001\). Following the ANOVA,
-we conducted an ANCOVA, with the total number of correct answers as the
-covariate, and the total number of intrusors as the dependent variable.
-The results imply a main effect of the total number of correct answers
-(\(F(1, 118)\) = 79.674, \(p < .0001\)), but after we took into account
-the number of correct answers, we found no evidence for an effect of
-interpolated activity on the total number of chosen intrusors
-(\(F (2, 118)\) = 0.844, \(p = .433\)). Thus far, results point to a
-lack of evidence to support our second hypothesis that the type of
-interpolated activity will have an effect on the number of intrusors.
+As could be expected, the ANOVA points to a differential effect of our
+conditions on the total number of correct answers, with \(F(2, 119)\) =
+7.541, \(p = .001\). Following the ANOVA, we conducted an ANCOVA, with
+the total number of correct answers as the covariate, and the total
+number of intrusors as the dependent variable. The results imply a main
+effect of the total number of correct answers (\(F(1, 118)\) = 79.674,
+\(p < .0001\)), but after we took into account the number of correct
+answers, we found no evidence for an effect of interpolated activity
+type on the total number of chosen intrusors (\(F (2, 118)\) = 0.844,
+\(p = .433\)). Thus far, results point to a lack of evidence to support
+our second hypothesis that the type of interpolated activity will have
+an effect on the number of intrusors.
 
 In order to test our first hypothesis, we contrasted (i) the rereading
 group with the two test groups, and (ii) the two test groups with each
@@ -241,13 +224,15 @@ other, taking only the total number of correct answers as the DV. The
 first contrast found no evidence of a difference between the rereading
 group and the two test groups (\(t(119)\) = 1.355, \(p = .178\), \(g_s\)
 = 0.19, 95\% CI = {[}-0.19, 0.57{]}, Cohen's \(U_{3, g_s}\) = 57.6\%,
-probability of superiority = 55.39\%). However, there was a difference
-between the two test groups (\(t(119)\) = 3.62, \(p = .0004\), \(g_s\) =
-0.66, 95\% CI = {[}0.21, 1.1{]}, Cohen's \(U_{3, g_s}\) = 74.43\%,
-probability of superiority = 67.88\%). Participants in the content
-related test group scored higher on the final test than participants in
-the general knowledge test condition. These two findings are not in line
-with our predictions.
+probability of superiority = 55.39\%). Therefore, we cannot conclude
+that being in the rereading condition, as opposed to being in one of the
+two test groups, leads to different learning outcomes. However, there
+was a difference between the two test groups (\(t(119)\) = 3.62,
+\(p = .0004\), \(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]}, Cohen's
+\(U_{3, g_s}\) = 74.43\%, probability of superiority = 67.88\%).
+Participants in the content related test group scored higher on the
+final test than participants in the general knowledge test condition.
+These two findings are not in line with our predictions.
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
 \subsection{The interaction between feedback and interpolated activity
@@ -262,8 +247,8 @@ activity and feedback as independent variables, and total number of
 correct answers and total number of intrusors as the dependent
 variables. Again, a power analysis conducted before analysing the data
 has shown that we should have above 80\% power to detect effects which
-fall between small and medium (Cohen's \(f^2\ \gtrsim 0.5\)), with an
-\(\alpha\) level of .025.
+fall between small and medium (Cohen's \(f^2\ \gtrsim 0.05\)), at an
+\(\alpha\) level of .025, with a sample size of 145 participants.
 
 Pillai's V for the interpolated activity effect (calculated with type
 III sums of squares) is .071, \(p = .003\) (Wilks' \(\Lambda\) = .929,
@@ -313,12 +298,12 @@ type of interpolated activity on the total number of correct answers.
 The same findings apply to the predictions regarding the total number of
 intrusors chosen.
 
-\begin{table*}[t]
+\begin{table*}
 
 \caption{\label{tab:rb2Table}\label{rb2-table}ANOVA and ANCOVA models for the second Roy-Bargmann
                      procedure.}
 \centering
-\begin{tabular}{lrrrr}
+\begin{tabular}[t]{lrrrr}
 \toprule
 Term & $SS$ & $df$ & $F$ & $p$\\
 \midrule
@@ -358,6 +343,5 @@ difference between the content-related and general-knowledge testing
 groups. This analysis was not conducted because we did find a
 difference. A Bayesian t-test was also considered for the same
 comparison, but was dropped early on due to some conceptual concerns.
-
 
 \end{document}

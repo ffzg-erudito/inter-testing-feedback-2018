@@ -194,6 +194,19 @@ bootOut <- boot(datHardNofeed, statistic = bootOmega, R = 10000,
                 parallel = 'multicore', ncpus = parallel::detectCores() - 1)
 
 ciOut <- boot.ci(bootOut, index = 1)
+
+cohensF2r <- sqrt((2^2 * (3 - 1)^2 - 4) / (2^2 + (3 - 1)^2 - 5))
+
+cohensF2u <- 2 * (3 - 1)
+
+cohensF2w <- nrow(datHardNofeed) - (2 + 3) / 2 - 1
+
+cohensF2v <- cohensF2w * cohensF2r + 1 - cohensF2u / 2
+
+cohensF2 <- manovaStats(manovaModel, 'test',
+                        '^activityFactor ',
+                        test = 'Wilks')^(-1 / cohensF2r) *
+                          (cohensF2v / (cohensF2v + cohensF2u)) - 1
 ```
 
 Pillai's V for the analysis is
@@ -210,7 +223,10 @@ The effect size, calculated as
 omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df']) %>%
 apaPrint(.)`\)
 (bootstrap median\footnote{All bootstrap estimates taken from 10000 replications.} = `r bootOut$t %>% median(.) %>% apaPrint(.)`, \(BC_\alpha\) 95% CI =
-[`r ciOut$bca[4] %>% apaPrint(.)`, `r ciOut$bca[5] %>% apaPrint(.)`]).
+[`r ciOut$bca[4] %>% apaPrint(.)`, `r ciOut$bca[5] %>% apaPrint(.)`])\footnote{
+Cohen's \(f^2 = `r cohensF2`\) (calculated according to Equation 12 in
+\citealp{steynjrEstimatingEffectSize2009}).
+}.
 To further inspect the relationship of the interpolated activities with our
 dependent variables, we conducted a Roy-Bargmann stepdown analysis, as
 suggested by \citeauthor{tabachnickUsingMultivariateStatistics2012}
@@ -359,8 +375,8 @@ bootOmegaActivity <- function(data, i) {
 }
 
 bootOutActivity <- boot(datHardFeed, statistic = bootOmegaActivity,
-                           R = 10000, parallel = 'multicore',
-                           ncpus = parallel::detectCores() - 1)
+                        R = 10000, parallel = 'multicore',
+                        ncpus = parallel::detectCores() - 1)
 
 ciOutActivity <- boot.ci(bootOutActivity, index = 1)
 ```
