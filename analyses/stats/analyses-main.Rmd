@@ -379,6 +379,104 @@ bootOutActivity <- boot(datHardFeed, statistic = bootOmegaActivity,
                         ncpus = parallel::detectCores() - 1)
 
 ciOutActivity <- boot.ci(bootOutActivity, index = 1)
+
+##### cohen's f2 #####
+# r2full
+Xfull <- model.matrix(totalCorrect ~ activityFactor * giveFeedback,
+                       datHardFeed)
+
+Xfull <- Xfull[, -1]
+
+Y <- as.matrix(datHardFeed[, c('totalCorrect', 'totalIntrusors')])
+
+YXfull <- cbind(Y, Xfull)
+
+detYX <- det(cor(YXfull))
+
+detX <- det(cor(Xfull))
+
+detY <- det(cor(Y))
+
+r2full <- 1 - (detYX / (detX * detY))
+
+# r2activity
+X <- model.matrix(totalCorrect ~ activityFactor,
+                  datHardFeed)
+
+X <- X[, -1]
+
+cancorYX <- cancor(x = X, y = Y)
+
+r2activity <- 1 - (1 - cancorYX$cor^2)
+
+lW <- 1 - r2activity
+
+# f2activity
+f2u <- 2
+
+f2s <- 1
+
+f2m <- nrow(datHardFeed) - 3 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f12activity <- lW^(-1/f2s) * (f2v / (f2v + f2u)) - 1
+
+g <- (1 - r2full) / (1 - r2activity)
+
+f22activity <- f12activity / g
+
+# r2feedback
+X <- model.matrix(totalCorrect ~ giveFeedback,
+                  datHardFeed)
+
+X <- X[, -1]
+
+cancorYX <- cancor(x = X, y = Y)
+
+r2feedback <- 1 - (1 - cancorYX$cor^2)
+
+lW <- 1 - r2feedback
+
+# f2feedback
+f2u <- 2
+
+f2s <- 1
+
+f2m <- nrow(datHardFeed) - 3 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f12feedback <- lW^(-1/f2s) * (f2v / (f2v + f2u)) - 1
+
+g <- (1 - r2full) / (1 - r2feedback)
+
+f22feedback <- f12feedback / g
+
+# r2inter
+Xab <- model.matrix(totalCorrect ~ giveFeedback + activityFactor,
+                    datHardFeed)
+
+Xab <- Xab[, -1]
+
+detXab <- det(cor(Xab))
+
+detYXab <- det(cor(cbind(Y, Xab)))
+
+r2ab <- 1 - detYXab / (detY * detXab)
+
+r2abPartial <- (r2full - r2ab) / (1 - r2ab)
+
+lW <- 1 - r2abPartial
+
+# f2inter
+f2u <- 1
+
+f2m <- nrow(datHardFeed) - 2 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f12inter <- lW^(-1/f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 Pillai's V for the interpolated activity effect (calculated with type III sums of
