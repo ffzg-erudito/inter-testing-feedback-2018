@@ -195,18 +195,16 @@ bootOut <- boot(datHardNofeed, statistic = bootOmega, R = 10000,
 
 ciOut <- boot.ci(bootOut, index = 1)
 
-cohensF2r <- sqrt((2^2 * (3 - 1)^2 - 4) / (2^2 + (3 - 1)^2 - 5))
+f2s <- sqrt((2^2 * 2^2 - 4) / (2^2 + 2^2 - 5))
 
-cohensF2u <- 2 * (3 - 1)
+f2u <- 2 * 2
 
-cohensF2w <- nrow(datHardNofeed) - (2 + 3) / 2 - 1
+f2m <- nrow(datHardNofeed) - (2 + 2 + 3) * .5
 
-cohensF2v <- cohensF2w * cohensF2r + 1 - cohensF2u / 2
+f2v <- f2m * f2s + 1 - f2u / 2
 
-cohensF2 <- manovaStats(manovaModel, 'test',
-                        '^activityFactor ',
-                        test = 'Wilks')^(-1 / cohensF2r) *
-                          (cohensF2v / (cohensF2v + cohensF2u)) - 1
+f2 <- manovaStats(manovaModel, 'test', '^activityFactor ',
+                  test = 'Wilks')^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 Pillai's V for the analysis is
@@ -224,7 +222,7 @@ omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])
 apaPrint(.)`\)
 (bootstrap median\footnote{All bootstrap estimates taken from 10000 replications.} = `r bootOut$t %>% median(.) %>% apaPrint(.)`, \(BC_\alpha\) 95% CI =
 [`r ciOut$bca[4] %>% apaPrint(.)`, `r ciOut$bca[5] %>% apaPrint(.)`])\footnote{
-Cohen's \(f^2 = `r cohensF2`\) (calculated according to Equation 12 in
+Cohen's \(f^2 = `r f2`\) (calculated according to Equation 12 in
 \citealp{steynjrEstimatingEffectSize2009}).
 }.
 To further inspect the relationship of the interpolated activities with our
@@ -383,7 +381,7 @@ ciOutActivity <- boot.ci(bootOutActivity, index = 1)
 ##### cohen's f2 #####
 # r2full
 Xfull <- model.matrix(totalCorrect ~ activityFactor * giveFeedback,
-                       datHardFeed)
+                      datHardFeed)
 
 Xfull <- Xfull[, -1]
 
@@ -399,84 +397,19 @@ detY <- det(cor(Y))
 
 r2full <- 1 - (detYX / (detX * detY))
 
-# r2activity
-X <- model.matrix(totalCorrect ~ activityFactor,
-                  datHardFeed)
-
-X <- X[, -1]
-
-cancorYX <- cancor(x = X, y = Y)
-
-r2activity <- 1 - (1 - cancorYX$cor^2)
-
-lW <- 1 - r2activity
-
 # f2activity
+lW <- manovaStats(manovaModelInter, type = 3, test = 'Wilks',
+                  statistic = 'test', effect = '^activityFactor ')
+
 f2u <- 2
 
 f2s <- 1
-
-f2m <- nrow(datHardFeed) - 3 - (2 + 1 + 3) * .5
-
-f2v <- f2m * f2s + 1 - f2u / 2
-
-f12activity <- lW^(-1/f2s) * (f2v / (f2v + f2u)) - 1
-
-g <- (1 - r2full) / (1 - r2activity)
-
-f22activity <- f12activity / g
-
-# r2feedback
-X <- model.matrix(totalCorrect ~ giveFeedback,
-                  datHardFeed)
-
-X <- X[, -1]
-
-cancorYX <- cancor(x = X, y = Y)
-
-r2feedback <- 1 - (1 - cancorYX$cor^2)
-
-lW <- 1 - r2feedback
-
-# f2feedback
-f2u <- 2
-
-f2s <- 1
-
-f2m <- nrow(datHardFeed) - 3 - (2 + 1 + 3) * .5
-
-f2v <- f2m * f2s + 1 - f2u / 2
-
-f12feedback <- lW^(-1/f2s) * (f2v / (f2v + f2u)) - 1
-
-g <- (1 - r2full) / (1 - r2feedback)
-
-f22feedback <- f12feedback / g
-
-# r2inter
-Xab <- model.matrix(totalCorrect ~ giveFeedback + activityFactor,
-                    datHardFeed)
-
-Xab <- Xab[, -1]
-
-detXab <- det(cor(Xab))
-
-detYXab <- det(cor(cbind(Y, Xab)))
-
-r2ab <- 1 - detYXab / (detY * detXab)
-
-r2abPartial <- (r2full - r2ab) / (1 - r2ab)
-
-lW <- 1 - r2abPartial
-
-# f2inter
-f2u <- 1
 
 f2m <- nrow(datHardFeed) - 2 - (2 + 1 + 3) * .5
 
 f2v <- f2m * f2s + 1 - f2u / 2
 
-f12inter <- lW^(-1/f2s) * (f2v / (f2v + f2u)) - 1
+f2activity <- lW^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 Pillai's V for the interpolated activity effect (calculated with type III sums of
@@ -496,7 +429,10 @@ manovaStats(manovaModelInter, 'df', '^activityFactor ', test = 'Wilks')) %>%
 apaPrint(.)`
 (bootstrap median = `r bootOutActivity$t %>% median(.) %>% apaPrint(.)`,
 \(BC_\alpha\) 95% CI = [`r ciOutActivity$bca[4] %>% apaPrint(.)`,
-`r ciOutActivity$bca[5] %>% apaPrint(.)`]).
+`r ciOutActivity$bca[5] %>% apaPrint(.)`])\footnote{
+Cohen's \(f^2 = `r f2activity`\), using Equation 12 from
+\citet{steynjrEstimatingEffectSize2009}.
+}.
 
 ```{r manovaBootFeed, cache = T}
 set.seed(1171017)
@@ -522,6 +458,20 @@ bootOutFeed <- boot(datHardFeed, statistic = bootOmegaFeed,
                            ncpus = parallel::detectCores() - 1)
 
 ciOutFeed <- boot.ci(bootOutFeed, index = 1)
+
+# f2feedback
+lW <- manovaStats(manovaModelInter, type = 3, test = 'Wilks',
+                  statistic = 'test', effect = '^giveFeedback ')
+
+f2u <- 2
+
+f2s <- 1
+
+f2m <- nrow(datHardFeed) - 2 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f2feedback <- lW^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 On the other hand, we found no evidence for an effect of giving feedback on the linear combination of
@@ -533,15 +483,7 @@ our two dependent variables --- Pillai's V =
 apaPrint(.)`,
 \(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Wilks') %>%
 apaPrint(., pvalue = T)`\)).
-The effect size is
-\(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
-manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks'),
-manovaStats(manovaModelInter, 'df', '^giveFeedback ', test = 'Wilks')) %>%
-apaPrint(.)`
-(bootstrap median = `r bootOutFeed$t %>% median(.) %>% apaPrint(.)`\footnote{
-The \(BC_\alpha\) 95\% CI for this estimate is \([`r ciOutFeed$bca[4] %>% apaPrint(.)`,
-`r ciOutFeed$bca[5] %>% apaPrint(.)`]\).
-\label{bca-ref}}).
+The estimated effect size is \(\omega^2_{mult}\) = 0.
 
 ```{r manovaBootInt, cache = T}
 set.seed(1171717)
@@ -567,6 +509,19 @@ bootOutInt <- boot(datHardFeed, statistic = bootOmegaInt,
                            ncpus = parallel::detectCores() - 1)
 
 ciOutInt <- boot.ci(bootOutInt, index = 1)
+
+# f2inter
+lW <- manovaStats(manovaModelInter, type = 3, test = 'Wilks',
+                  statistic = 'test',
+                  effect = '^activity.*Feedback')
+
+f2u <- 1
+
+f2m <- nrow(datHardFeed) - 2 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f2inter <- lW^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 Furthermore, we found no evidence for an interaction effect between activity type
@@ -579,18 +534,8 @@ apaPrint(., pvalue = T)`\)
 apaPrint(.)`,
 \(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:', test = 'Wilks') %>%
 apaPrint(., pvalue = T)`\)).
-The effect size
-\(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
-manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Wilks'),
-manovaStats(manovaModelInter, 'df', '^activityFactor:', test = 'Wilks')) %>%
-apaPrint(.)`
-(bootstrap median = `r bootOutInt$t %>% median(.) %>% apaPrint(.)`\footnote{
-The \(BC_\alpha\) 95\% CI = \([`r ciOutInt$bca[4] %>% apaPrint(.)`,
-`r ciOutInt$bca[5] %>% apaPrint(.)`]\).
-Our guess is that this odd result is due to the fact that most of the density is concentrated
-around 0, causing an unreliable estimate. The same could be said for the CI in
-footnote \ref{bca-ref}.}). Both the feedback and the interaction
-estimates of \(\omega^2_{mult}\) are to be considered to be zero, given their negative values.
+The estimated effect size
+\(\omega^2_{mult}\) = 0.
 
 ```{r royBargmann2}
 anovaRB2 <- aov(totalCorrect ~ activityFactor * giveFeedback,

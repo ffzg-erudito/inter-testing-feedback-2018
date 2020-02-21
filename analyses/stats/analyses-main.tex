@@ -82,6 +82,22 @@
 \DeclareCaptionFormat{apa}{#1#2\\[1em]#3}
 \captionsetup*[table]{labelsep = none, textfont = it, format = apa, width = .8\textwidth}
 \captionsetup*[figure]{labelsep = period, labelfont = it, position = below}
+% https://github.com/rstudio/rmarkdown/issues/337
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+% https://github.com/rstudio/rmarkdown/pull/252
+\usepackage{titling}
+\setlength{\droptitle}{-2em}
+
+\pretitle{\vspace{\droptitle}\centering\huge}
+\posttitle{\par}
+
+\preauthor{\centering\large\emph}
+\postauthor{\par}
+
+\predate{\centering\large\emph}
+\postdate{\par}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -97,8 +113,7 @@
 \usepackage{makecell}
 \usepackage{xcolor}
 
-\author{}
-\date{\vspace{-2.5em}}
+\date{}
 
 \begin{document}
 
@@ -254,28 +269,20 @@ Pillai's V for the interpolated activity effect (calculated with type
 III sums of squares) is .071, \(p = .003\) (Wilks' \(\Lambda\) = .929,
 \(p = .003\)) confirming the main effect of interpolated activity type.
 The effect size \(\omega^2_{mult}\) = .065 (bootstrap median = .072,
-\(BC_\alpha\) 95\% CI = {[}.008, .140{]}).
+\(BC_\alpha\) 95\% CI = {[}.008, .140{]})\footnote{
+Cohen's \(f^2 = 0.063\), using Equation 12 from
+\citet{steynjrEstimatingEffectSize2009}.
+}.
 
 On the other hand, we found no evidence for an effect of giving feedback
 on the linear combination of our two dependent variables --- Pillai's V
 = .003, \(p = .800\) (Wilks' \(\Lambda\) = .997, \(p = .800\)). The
-effect size is \(\omega^2_{mult}\) = -.003 (bootstrap median =
-.003\footnote{
-The \(BC_\alpha\) 95\% CI for this estimate is \([-.006,
-.004]\).
-\label{bca-ref}}).
+estimated effect size is \(\omega^2_{mult}\) = 0.
 
 Furthermore, we found no evidence for an interaction effect between
 activity type and feedback --- Pillai's V = .001, \(p = .941\) (Wilks'
-\(\Lambda\) = .999, \(p = .941\)). The effect size \(\omega^2_{mult}\) =
--.005 (bootstrap median = .003\footnote{
-The \(BC_\alpha\) 95\% CI = \([-.006,
--.005]\).
-Our guess is that this odd result is due to the fact that most of the density is concentrated
-around 0, causing an unreliable estimate. The same could be said for the CI in
-footnote \ref{bca-ref}.}). Both the feedback and the interaction
-estimates of \(\omega^2_{mult}\) are to be considered to be zero, given
-their negative values.
+\(\Lambda\) = .999, \(p = .941\)). The estimated effect size
+\(\omega^2_{mult}\) = 0.
 
 Again, we conducted a follow-up Roy-Bargmann stepdown analysis. In the
 ANOVA model with the total number of correct answers as the dependent
