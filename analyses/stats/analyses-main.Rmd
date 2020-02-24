@@ -122,6 +122,61 @@ readingDeficits == 'NE')%>% nrow(.)}` exclusions). This left us with a total sam
 of `r nrow(datHard)` participants. The descriptives for the sample are shown
 in Table \ref{descTable}.
 
+```{r descFig, resize.width='\\textwidth', resize.heigth='.5\\textheight', include=T, fig.width=11, fig.height=6.19}
+datHard %>%
+    select(.,
+           totalCorrect, totalIntrusors, condition) %>%
+    add_column(.,
+               subId = 1:nrow(.), .before = 1) %>%
+    pivot_longer(.,
+                 cols = c('totalCorrect', 'totalIntrusors'),
+                 values_to = 'score',
+                 names_to = 'scoreType') %>%
+    group_by(.,
+             condition, scoreType) %>%
+    summarise(., m = mean(score),
+              sem = sd(score) / sqrt(n()),
+              grpN = n(),
+              mLo = m + qt(.025, df = n() - 1) * sem,
+              mHi = m + qt(.985, df = n() - 1) * sem) %>%
+    ungroup(.) %>%
+    mutate_at(.,
+              vars(condition),
+              str_to_title) %>%
+    mutate_at(.,
+              vars(condition),
+              str_replace, '_', ', ') %>%
+    mutate_at(.,
+              vars(condition),
+              str_replace, 'nofee', 'no fee') %>%
+    ggplot(.,
+           aes(x = condition, y = m)) +
+    geom_point(size = 3) +
+    geom_errorbar(aes(ymax = mHi, ymin = mLo),
+                  width = .1, size = 1) +
+    geom_path(aes(group = scoreType),
+              size = 1) +
+    scale_y_continuous(breaks = function(x) {
+                           lo <- floor(x[1] - 1)
+                           hi <- ceiling(x[2] + 1)
+                           return(seq(lo, hi, by = 2))
+              },
+                       limits = function(x) {
+                           lo <- x[1] - .5
+                           hi <- x[2] + .5
+                           return(c(lo, hi))
+              }) +
+    facet_grid(scoreType ~ .,
+               scales = 'free_y',
+               labeller = as_labeller(c('totalCorrect' = 'Total correct',
+                                        'totalIntrusors' = 'Total intrusors'))) +
+    theme(panel.spacing.y = unit(3, 'lines'),
+          axis.text = element_text(size = 14),
+          axis.title = element_text(size = 16),
+          strip.text = element_text(size = 14)) +
+    labs(y = 'Score', x = 'Condition')
+```
+
 ## Interpolated activity effect
 
 ```{r datHardNofeedFilter}
@@ -320,8 +375,8 @@ However, there was a difference between the two test groups
 \(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
 probability of superiority = `r esCont2$cl.g`%).
-Participants in the content related test group scored higher on the final test
-than participants in the general knowledge test condition.
+Students in the content-related-test condition score higher on the final test
+than students in the general-knowledge-test condition.
 These two findings are not in line with our predictions.
 
 ## The interaction between feedback and interpolated activity type
@@ -557,8 +612,8 @@ only the type of activity seems to be relevant
 `r rbAnova2 %>% slice(5) %>% pull(df)`) =
 `r rbAnova2 %>% slice(2) %>% pull(statistic)`, p =
 `r rbAnova2 %>% slice(2) %>% pull(p.value) %>% apaPrint(., pvalue = T)`\)).
-This result also shows that participants in the content related test condition
-scored higher on the final test than the participants in the general knowledge test
+This result also shows that students in the content-related-test condition
+score higher on the final test than students in the general-knowledge-test
 condition, which should be no surprise given the results of the first stepdown analysis.
 In the second step, we fit an ANCOVA model with the total number of correct answers
 as the covariate. In this model, the type of interpolated activity ceases to be
@@ -567,6 +622,8 @@ a relevant predictor
 `r rbAncova2 %>% slice(9) %>% pull(df)`) =
 `r rbAncova2 %>% slice(2) %>% pull(statistic)`, p
 = `r rbAncova2 %>% slice(2) %>% pull(p.value) %>% apaPrint(., pvalue = T)`\)).
+Therefore, we find no evidence for an effect of the type of interpolated activity
+nor of feedback on the number of intrusive distractors chosen.
 The full models are shown in Table \ref{rb2-table}.
 
 To summarise, contrary to our expectations, we find no evidence of an effect of
@@ -599,6 +656,8 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
   kable_styling(., latex_options = c('hold_position')) %>%
   pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
 ```
+
+## Constraints on generality
 
 ## Deviations from the preregistered analysis plan
 

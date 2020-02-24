@@ -56,7 +56,7 @@ theme_set(theme_minimal())
 ## Participants and design
 
 Undergraduate and graduate phonetics and psychology students (80.8% female,
-median age = 21, IQR = 3, range = [18, 31], total \(N\) = `r nrow(dat)`)
+median age = 21, range = [18, 31], total \(N\) = `r nrow(dat)`)
 participated in the study in exchange for course credit.
 We employed a 2 (interpolated activity: episodic vs semantic recall) x 2
 (feedback: given vs not given) between-subjects design. Rereading served
