@@ -122,7 +122,7 @@ readingDeficits == 'NE')%>% nrow(.)}` exclusions). This left us with a total sam
 of `r nrow(datHard)` participants. The descriptives for the sample are shown
 in Table \ref{descTable}.
 
-```{r descFig, resize.width='\\textwidth', resize.heigth='.5\\textheight', include=T, fig.width=11, fig.height=6.19}
+```{r descFig, resize.width='\\textwidth', resize.heigth='.5\\textheight', include=T, fig.width=11, fig.height=6.19, fig.cap='Mean number of correct answers and mean number of intrusive distractors chosen, broken down by experimental condition. Error bars show the 95\\% confidence intervals around the means.'}
 datHard %>%
     select(.,
            totalCorrect, totalIntrusors, condition) %>%
@@ -658,6 +658,16 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
 ```
 
 ## Constraints on generality
+
+- problemi
+    - samo jedan tip materijala
+    - samo studenti
+
+- nisu problemi
+    - generalizacija na situacije u kojima učenici trebaju savladati gradivo koje
+      im je većinom nepoznato
+    - nemamo konkretan razlog za vjerovati da bi sadržaj materijala imao ikakvog relevantnog
+      efekta, odnosno da se efekt ne bi javio s drugim sadržajem
 
 ## Deviations from the preregistered analysis plan
 
