@@ -122,6 +122,61 @@ readingDeficits == 'NE')%>% nrow(.)}` exclusions). This left us with a total sam
 of `r nrow(datHard)` participants. The descriptives for the sample are shown
 in Table \ref{descTable}.
 
+```{r descFig, resize.width='\\textwidth', resize.heigth='.5\\textheight', include=T, fig.width=11, fig.height=6.19, fig.cap='Mean number of correct answers and mean number of intrusive distractors chosen, broken down by experimental condition. Error bars show the 95\\% confidence intervals around the means.'}
+datHard %>%
+    select(.,
+           totalCorrect, totalIntrusors, condition) %>%
+    add_column(.,
+               subId = 1:nrow(.), .before = 1) %>%
+    pivot_longer(.,
+                 cols = c('totalCorrect', 'totalIntrusors'),
+                 values_to = 'score',
+                 names_to = 'scoreType') %>%
+    group_by(.,
+             condition, scoreType) %>%
+    summarise(., m = mean(score),
+              sem = sd(score) / sqrt(n()),
+              grpN = n(),
+              mLo = m + qt(.025, df = n() - 1) * sem,
+              mHi = m + qt(.985, df = n() - 1) * sem) %>%
+    ungroup(.) %>%
+    mutate_at(.,
+              vars(condition),
+              str_to_title) %>%
+    mutate_at(.,
+              vars(condition),
+              str_replace, '_', ', ') %>%
+    mutate_at(.,
+              vars(condition),
+              str_replace, 'nofee', 'no fee') %>%
+    ggplot(.,
+           aes(x = condition, y = m)) +
+    geom_point(size = 3) +
+    geom_errorbar(aes(ymax = mHi, ymin = mLo),
+                  width = .1, size = 1) +
+    geom_path(aes(group = scoreType),
+              size = 1) +
+    scale_y_continuous(breaks = function(x) {
+                           lo <- floor(x[1] - 1)
+                           hi <- ceiling(x[2] + 1)
+                           return(seq(lo, hi, by = 2))
+              },
+                       limits = function(x) {
+                           lo <- x[1] - .5
+                           hi <- x[2] + .5
+                           return(c(lo, hi))
+              }) +
+    facet_grid(scoreType ~ .,
+               scales = 'free_y',
+               labeller = as_labeller(c('totalCorrect' = 'Total correct',
+                                        'totalIntrusors' = 'Total intrusors'))) +
+    theme(panel.spacing.y = unit(3, 'lines'),
+          axis.text = element_text(size = 14),
+          axis.title = element_text(size = 16),
+          strip.text = element_text(size = 14)) +
+    labs(y = 'Score', x = 'Condition')
+```
+
 ## Interpolated activity effect
 
 ```{r datHardNofeedFilter}
@@ -195,18 +250,16 @@ bootOut <- boot(datHardNofeed, statistic = bootOmega, R = 10000,
 
 ciOut <- boot.ci(bootOut, index = 1)
 
-cohensF2r <- sqrt((2^2 * (3 - 1)^2 - 4) / (2^2 + (3 - 1)^2 - 5))
+f2s <- sqrt((2^2 * 2^2 - 4) / (2^2 + 2^2 - 5))
 
-cohensF2u <- 2 * (3 - 1)
+f2u <- 2 * 2
 
-cohensF2w <- nrow(datHardNofeed) - (2 + 3) / 2 - 1
+f2m <- nrow(datHardNofeed) - (2 + 2 + 3) * .5
 
-cohensF2v <- cohensF2w * cohensF2r + 1 - cohensF2u / 2
+f2v <- f2m * f2s + 1 - f2u / 2
 
-cohensF2 <- manovaStats(manovaModel, 'test',
-                        '^activityFactor ',
-                        test = 'Wilks')^(-1 / cohensF2r) *
-                          (cohensF2v / (cohensF2v + cohensF2u)) - 1
+f2 <- manovaStats(manovaModel, 'test', '^activityFactor ',
+                  test = 'Wilks')^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 Pillai's V for the analysis is
@@ -224,7 +277,7 @@ omegaSquared(nrow(manovaModel$residuals), .$stats[1, 'Wilks'], .$stats[1, 'Df'])
 apaPrint(.)`\)
 (bootstrap median\footnote{All bootstrap estimates taken from 10000 replications.} = `r bootOut$t %>% median(.) %>% apaPrint(.)`, \(BC_\alpha\) 95% CI =
 [`r ciOut$bca[4] %>% apaPrint(.)`, `r ciOut$bca[5] %>% apaPrint(.)`])\footnote{
-Cohen's \(f^2 = `r cohensF2`\) (calculated according to Equation 12 in
+Cohen's \(f^2 = `r f2`\) (calculated according to Equation 12 in
 \citealp{steynjrEstimatingEffectSize2009}).
 }.
 To further inspect the relationship of the interpolated activities with our
@@ -322,8 +375,8 @@ However, there was a difference between the two test groups
 \(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
 Cohen's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
 probability of superiority = `r esCont2$cl.g`%).
-Participants in the content related test group scored higher on the final test
-than participants in the general knowledge test condition.
+Students in the content-related-test condition score higher on the final test
+than students in the general-knowledge-test condition.
 These two findings are not in line with our predictions.
 
 ## The interaction between feedback and interpolated activity type
@@ -379,6 +432,39 @@ bootOutActivity <- boot(datHardFeed, statistic = bootOmegaActivity,
                         ncpus = parallel::detectCores() - 1)
 
 ciOutActivity <- boot.ci(bootOutActivity, index = 1)
+
+##### cohen's f2 #####
+# r2full
+Xfull <- model.matrix(totalCorrect ~ activityFactor * giveFeedback,
+                      datHardFeed)
+
+Xfull <- Xfull[, -1]
+
+Y <- as.matrix(datHardFeed[, c('totalCorrect', 'totalIntrusors')])
+
+YXfull <- cbind(Y, Xfull)
+
+detYX <- det(cor(YXfull))
+
+detX <- det(cor(Xfull))
+
+detY <- det(cor(Y))
+
+r2full <- 1 - (detYX / (detX * detY))
+
+# f2activity
+lW <- manovaStats(manovaModelInter, type = 3, test = 'Wilks',
+                  statistic = 'test', effect = '^activityFactor ')
+
+f2u <- 2
+
+f2s <- 1
+
+f2m <- nrow(datHardFeed) - 2 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f2activity <- lW^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 Pillai's V for the interpolated activity effect (calculated with type III sums of
@@ -398,7 +484,10 @@ manovaStats(manovaModelInter, 'df', '^activityFactor ', test = 'Wilks')) %>%
 apaPrint(.)`
 (bootstrap median = `r bootOutActivity$t %>% median(.) %>% apaPrint(.)`,
 \(BC_\alpha\) 95% CI = [`r ciOutActivity$bca[4] %>% apaPrint(.)`,
-`r ciOutActivity$bca[5] %>% apaPrint(.)`]).
+`r ciOutActivity$bca[5] %>% apaPrint(.)`])\footnote{
+Cohen's \(f^2 = `r f2activity`\), using Equation 12 from
+\citet{steynjrEstimatingEffectSize2009}.
+}.
 
 ```{r manovaBootFeed, cache = T}
 set.seed(1171017)
@@ -424,6 +513,20 @@ bootOutFeed <- boot(datHardFeed, statistic = bootOmegaFeed,
                            ncpus = parallel::detectCores() - 1)
 
 ciOutFeed <- boot.ci(bootOutFeed, index = 1)
+
+# f2feedback
+lW <- manovaStats(manovaModelInter, type = 3, test = 'Wilks',
+                  statistic = 'test', effect = '^giveFeedback ')
+
+f2u <- 2
+
+f2s <- 1
+
+f2m <- nrow(datHardFeed) - 2 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f2feedback <- lW^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 On the other hand, we found no evidence for an effect of giving feedback on the linear combination of
@@ -435,15 +538,7 @@ our two dependent variables --- Pillai's V =
 apaPrint(.)`,
 \(p = `r manovaStats(manovaModelInter, 'p', '^giveFeedback ', test = 'Wilks') %>%
 apaPrint(., pvalue = T)`\)).
-The effect size is
-\(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
-manovaStats(manovaModelInter, 'test', '^giveFeedback ', test = 'Wilks'),
-manovaStats(manovaModelInter, 'df', '^giveFeedback ', test = 'Wilks')) %>%
-apaPrint(.)`
-(bootstrap median = `r bootOutFeed$t %>% median(.) %>% apaPrint(.)`\footnote{
-The \(BC_\alpha\) 95\% CI for this estimate is \([`r ciOutFeed$bca[4] %>% apaPrint(.)`,
-`r ciOutFeed$bca[5] %>% apaPrint(.)`]\).
-\label{bca-ref}}).
+The estimated effect size is \(\omega^2_{mult}\) = 0.
 
 ```{r manovaBootInt, cache = T}
 set.seed(1171717)
@@ -469,6 +564,19 @@ bootOutInt <- boot(datHardFeed, statistic = bootOmegaInt,
                            ncpus = parallel::detectCores() - 1)
 
 ciOutInt <- boot.ci(bootOutInt, index = 1)
+
+# f2inter
+lW <- manovaStats(manovaModelInter, type = 3, test = 'Wilks',
+                  statistic = 'test',
+                  effect = '^activity.*Feedback')
+
+f2u <- 1
+
+f2m <- nrow(datHardFeed) - 2 - (2 + 1 + 3) * .5
+
+f2v <- f2m * f2s + 1 - f2u / 2
+
+f2inter <- lW^(-1 / f2s) * (f2v / (f2v + f2u)) - 1
 ```
 
 Furthermore, we found no evidence for an interaction effect between activity type
@@ -481,18 +589,8 @@ apaPrint(., pvalue = T)`\)
 apaPrint(.)`,
 \(p = `r manovaStats(manovaModelInter, 'p', '^activityFactor:', test = 'Wilks') %>%
 apaPrint(., pvalue = T)`\)).
-The effect size
-\(\omega^2_{mult}\) = `r omegaSquared(nrow(manovaModelInter$residuals),
-manovaStats(manovaModelInter, 'test', '^activityFactor:', test = 'Wilks'),
-manovaStats(manovaModelInter, 'df', '^activityFactor:', test = 'Wilks')) %>%
-apaPrint(.)`
-(bootstrap median = `r bootOutInt$t %>% median(.) %>% apaPrint(.)`\footnote{
-The \(BC_\alpha\) 95\% CI = \([`r ciOutInt$bca[4] %>% apaPrint(.)`,
-`r ciOutInt$bca[5] %>% apaPrint(.)`]\).
-Our guess is that this odd result is due to the fact that most of the density is concentrated
-around 0, causing an unreliable estimate. The same could be said for the CI in
-footnote \ref{bca-ref}.}). Both the feedback and the interaction
-estimates of \(\omega^2_{mult}\) are to be considered to be zero, given their negative values.
+The estimated effect size
+\(\omega^2_{mult}\) = 0.
 
 ```{r royBargmann2}
 anovaRB2 <- aov(totalCorrect ~ activityFactor * giveFeedback,
@@ -514,8 +612,8 @@ only the type of activity seems to be relevant
 `r rbAnova2 %>% slice(5) %>% pull(df)`) =
 `r rbAnova2 %>% slice(2) %>% pull(statistic)`, p =
 `r rbAnova2 %>% slice(2) %>% pull(p.value) %>% apaPrint(., pvalue = T)`\)).
-This result also shows that participants in the content related test condition
-scored higher on the final test than the participants in the general knowledge test
+This result also shows that students in the content-related-test condition
+score higher on the final test than students in the general-knowledge-test
 condition, which should be no surprise given the results of the first stepdown analysis.
 In the second step, we fit an ANCOVA model with the total number of correct answers
 as the covariate. In this model, the type of interpolated activity ceases to be
@@ -524,6 +622,8 @@ a relevant predictor
 `r rbAncova2 %>% slice(9) %>% pull(df)`) =
 `r rbAncova2 %>% slice(2) %>% pull(statistic)`, p
 = `r rbAncova2 %>% slice(2) %>% pull(p.value) %>% apaPrint(., pvalue = T)`\)).
+Therefore, we find no evidence for an effect of the type of interpolated activity
+nor of feedback on the number of intrusive distractors chosen.
 The full models are shown in Table \ref{rb2-table}.
 
 To summarise, contrary to our expectations, we find no evidence of an effect of
@@ -556,6 +656,18 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
   kable_styling(., latex_options = c('hold_position')) %>%
   pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
 ```
+
+## Constraints on generality
+
+- problemi
+    - samo jedan tip materijala
+    - samo studenti
+
+- nisu problemi
+    - generalizacija na situacije u kojima učenici trebaju savladati gradivo koje
+      im je većinom nepoznato
+    - nemamo konkretan razlog za vjerovati da bi sadržaj materijala imao ikakvog relevantnog
+      efekta, odnosno da se efekt ne bi javio s drugim sadržajem
 
 ## Deviations from the preregistered analysis plan
 
