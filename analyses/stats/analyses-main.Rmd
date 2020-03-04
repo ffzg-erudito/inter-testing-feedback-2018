@@ -169,12 +169,14 @@ datHard %>%
     facet_grid(scoreType ~ .,
                scales = 'free_y',
                labeller = as_labeller(c('totalCorrect' = 'Total correct',
-                                        'totalIntrusors' = 'Total intrusors'))) +
+                                        'totalIntrusors' = 'Total intrusors')),
+               switch = 'y') +
     theme(panel.spacing.y = unit(3, 'lines'),
           axis.text = element_text(size = 14),
           axis.title = element_text(size = 16),
-          strip.text = element_text(size = 14)) +
-    labs(y = 'Score', x = 'Condition')
+          strip.text = element_text(size = 14),
+          strip.placement = 'outside') +
+    labs(y = NULL, x = 'Condition')
 ```
 
 ## Interpolated activity effect
