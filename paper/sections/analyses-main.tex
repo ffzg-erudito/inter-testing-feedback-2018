@@ -68,20 +68,15 @@ without strong evidence supporting that assumption.
 
 The correlation between our DVs calculated on the whole sample is
 \(r(201) =\) -.707 (95\% CI: {[}-.77, -.63{]}, \(p\) \textless{} .0001).
-Given that we have two dependent variables, which are highly correlated,
-we have decided to conduct a one-way MANOVA. According to
-\citet{tabachnickUsingMultivariateStatistics2012}, conducting a MANOVA
-instead of multiple ANOVAs increases the chance of discovering the
-effects of different treatments. Furthermore conducting a MANOVA guards
-against the inflation of Type 1 errors due to multiple tests of
-correlated dependent variables
-\citep{tabachnickUsingMultivariateStatistics2012,fieldDiscoveringStatisticsUsing2012}.
-Finally, conducting separate ANOVAs would disregard the correlation
-between our two dependent variables
-\citep{fieldDiscoveringStatisticsUsing2012}. Therefore, we conducted a
-one-way MANOVA with interpolated activity as the independent variable
-and the total number of correct and intrusive options chosen as
-dependent variables.
+Given this fact, we ran a one-way MANOVA with interpolated activity as the 
+independent variable and the total number of correct and intrusive options 
+chosen as dependent variables. Conducting a MANOVA guards against an 
+inflation of Type 1 errors that running multiple ANOVAs on highly correlated 
+dependent variables is prone to
+\citep{tabachnickUsingMultivariateStatistics2012, 
+fieldDiscoveringStatisticsUsing2012}
+Further, running a single MANOVA increases the chance of discovering effects 
+of different treatments \citep{tabachnickUsingMultivariateStatistics2012}.
 
 A power analysis conducted prior to analyzing the data
 \citep[using the G*Power software by][]{faulStatisticalPowerAnalyses2009}
@@ -108,9 +103,9 @@ supplementary materials). According to
 variable can be chosen based on theoretical or practical grounds. Since
 the total number of correct answers is the criterion that determines a
 student's success in a testing context, we chose this dependent variable
-as the higher priority one. Therefore, we first conducted an ANOVA with
-interpolated activity type as the independent variable and the total
-number of correct answers as the dependent variable.
+as the higher priority one. We first conducted an ANOVA with interpolated 
+activity type as the independent variable and the total number of correct 
+answers as the dependent variable.
 
 As could be expected, the ANOVA points to a differential effect of our
 conditions on the total number of correct answers, with \(F(2, 119)\) =
@@ -118,12 +113,10 @@ conditions on the total number of correct answers, with \(F(2, 119)\) =
 the total number of correct answers as the covariate, and the total
 number of intrusors as the dependent variable. The results imply a main
 effect of the total number of correct answers (\(F(1, 118)\) = 79.674,
-\(p < .0001\)), but after we took into account the number of correct
+\(p < .0001\)), but after controlling for the number of correct
 answers, we found no evidence for an effect of interpolated activity
 type on the total number of chosen intrusors (\(F (2, 118)\) = 0.844,
-\(p = .433\)). So far, our analyses show a lack of evidence in support
-of our second hypothesis that the type of interpolated activity will
-have an effect on the number of intrusors.
+\(p = .433\)).
 
 In order to test our first hypothesis, we contrasted (i) the rereading
 group with the two test groups, and (ii) the two test groups with each
@@ -137,8 +130,8 @@ two test groups, leads to different learning outcomes. However, there
 was a difference between the two test groups (\(t(119)\) = 3.62,
 \(p = .0004\), \(g_s\) = 0.66, 95\% CI = {[}0.21, 1.1{]}, Cohen's
 \(U_{3, g_s}\) = 74.43\%, probability of superiority = 67.88\%).
-Students in the content-related-test condition score higher on the final
-test than students in the general-knowledge-test condition. These two
+Subjects in the content-related-test condition score higher on the final
+test than those in the general-knowledge-test condition. These two
 findings are not in line with our predictions.
 
 \hypertarget{the-interaction-between-feedback-and-interpolated-activity-type}{%
@@ -164,16 +157,13 @@ The effect size \(\omega^2_{mult}\) = .065 (bootstrap median = .072,
 \(BC_\alpha\) 95\% CI = {[}.008, .140{]})\footnote{
 Cohen's \(f^2 = 0.063\), using Equation 12 from
 \citet{steynjrEstimatingEffectSize2009}.
-}.
-
-On the other hand, we found no evidence for an effect of giving feedback
+}. On the other hand, we found no evidence for an effect of giving feedback
 on the linear combination of our two dependent variables --- Pillai's V
 = .003, \(p = .800\) (Wilks' \(\Lambda\) = .997, \(p = .800\)). The
-estimated effect size is \(\omega^2_{mult}\) = 0.
-
-Furthermore, we found no evidence for an interaction effect between
-activity type and feedback --- Pillai's V = .001, \(p = .941\) (Wilks'
-\(\Lambda\) = .999, \(p = .941\)). The estimated effect size
+estimated effect size is \(\omega^2_{mult}\) = 0. Furthermore, we found no 
+evidence for an interaction effect between activity type and feedback --- 
+Pillai's V = .001, \(p = .941\) (Wilks' \(\Lambda\) = .999, \(p = .941\)). 
+The estimated effect size
 \(\omega^2_{mult}\) = 0.
 
 Again, we conducted a follow-up Roy-Bargmann stepdown analysis. In the
@@ -181,8 +171,8 @@ ANOVA model with the total number of correct answers as the dependent
 variable and the type of interpolated activity, feedback and their
 interaction as predictors, only the type of activity seems to be
 relevant (\(F(1, 159) = 11.2, p = .001\)). This result also shows that
-students in the content-related-test condition score higher on the final
-test than students in the general-knowledge-test condition, which should
+subjects in the content-related-test condition score higher on the final
+test than those in the general-knowledge-test condition, which should
 be no surprise given the results of the first stepdown analysis. In the
 second step, we fit an ANCOVA model with the total number of correct
 answers as the covariate. In this model, the type of interpolated
