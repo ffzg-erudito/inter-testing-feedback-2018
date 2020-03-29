@@ -330,7 +330,7 @@ on the total number of chosen intrusors
 `r (.) %>% filter(., term == 'activityFactor') %>% pull(statistic)`,
 \(p = `r (.) %>% filter(., term == 'activityFactor') %>% pull(p.value) %>%
 apaPrint(., pvalue = T)`\)).
-Thus far, results point to a lack of evidence to support our second hypothesis
+So far, our analyses show a lack of evidence in support of our second hypothesis
 that the type of interpolated activity will have an effect on the number of
 intrusors.
 
