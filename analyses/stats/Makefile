@@ -15,7 +15,9 @@ $(sections)methods.tex: methods.tex
 
 $(sections)analyses-main.tex: analyses-main.tex
 	python tex-strip.py $<
-	sed -Ee 's@analyses-main_files/figure-latex/descFig-1.pdf@../analyses/images/descFig-1.pdf@' $<
+	sed -i -Ee\
+	    's@analyses-main_files/figure-latex/descFig-1.pdf@../analyses/images/descFig-1.pdf@'\
+	    tmp-$<
 	mv tmp-$< $@
 
 ../../paper/images/flowchart.pdf: ../images/flowchart/flowchart.pdf

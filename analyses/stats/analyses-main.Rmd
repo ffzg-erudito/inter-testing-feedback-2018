@@ -357,9 +357,19 @@ esCont2 <- tes((.) %>% select(., statistic) %>% slice(3) %>% as.integer(.),
 ```
 
 In order to test our first hypothesis, we contrasted
-(i) the rereading group with the two test groups, and (ii) the two test groups with
-each other, taking only the total number of correct answers as the DV.
-The first contrast found no evidence of a difference between the rereading group
+(i) the two test groups with each other, and
+(ii) the rereading group with the two test groups,
+taking only the total number of correct answers as the DV.
+We found a difference between the two test groups
+(\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
+`r (.) %>% select(statistic) %>% slice(3) %>% apaPrint(.)`,
+\(p = `r (.) %>% select(p.value) %>% slice(3) %>% apaPrint(., pvalue = T, digits = 4)`\),
+\(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
+Cohen's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
+probability of superiority = `r esCont2$cl.g`%).
+Students in the content-related-test condition score higher on the final test
+than students in the general-knowledge-test condition.
+The second contrast shows no evidence of a difference between the rereading group
 and the two test groups
 (\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
 `r (.) %>% select(statistic) %>% slice(2) %>% apaPrint(.)`,
@@ -369,16 +379,13 @@ Cohen's \(U_{3, g_s}\) = `r esCont1$U3.g`%,
 probability of superiority = `r esCont1$cl.g`%).
 Therefore, we cannot conclude that being in the rereading condition, as
 opposed to being in one of the two test groups, leads to different learning
-outcomes.
-However, there was a difference between the two test groups
-(\(t(`r summary.lm(anovaContrastH1) %>% pluck('df') %>% .[2]`)\) =
-`r (.) %>% select(statistic) %>% slice(3) %>% apaPrint(.)`,
-\(p = `r (.) %>% select(p.value) %>% slice(3) %>% apaPrint(., pvalue = T, digits = 4)`\),
-\(g_s\) = `r esCont2$g`, 95% CI = [`r esCont2$l.g`, `r esCont2$u.g`],
-Cohen's \(U_{3, g_s}\) = `r esCont2$U3.g`%,
-probability of superiority = `r esCont2$cl.g`%).
-Students in the content-related-test condition score higher on the final test
-than students in the general-knowledge-test condition.
+outcomes. However, we believe this is due to the rereading and
+general-knowledge-testing groups having very similar mean numbers of
+correct answers
+(\(M = `r . <- datHardNofeed %>% group_by(activityFactor) %>%
+summarise(m = mean(totalCorrect));
+round(.[.$activityFactor == 'rereading', 'm'], 2)`\) and
+\(`r round(.[.$activityFactor == 'general', 'm'], 2)`\), respectively)
 These two findings are not in line with our predictions.
 
 ## The interaction between feedback and interpolated activity type
@@ -658,18 +665,6 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
   kable_styling(., latex_options = c('hold_position')) %>%
   pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
 ```
-
-## Constraints on generality
-
-- problemi
-    - samo jedan tip materijala
-    - samo studenti
-
-- nisu problemi
-    - generalizacija na situacije u kojima učenici trebaju savladati gradivo koje
-      im je većinom nepoznato
-    - nemamo konkretan razlog za vjerovati da bi sadržaj materijala imao ikakvog relevantnog
-      efekta, odnosno da se efekt ne bi javio s drugim sadržajem
 
 ## Deviations from the preregistered analysis plan
 
