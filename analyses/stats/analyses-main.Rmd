@@ -149,6 +149,13 @@ datHard %>%
     mutate_at(.,
               vars(condition),
               str_replace, 'nofee', 'no fee') %>%
+    mutate_at(.,
+              vars(condition),
+              as.factor) %>%
+    mutate_at(.,
+              vars(condition),
+              fct_relevel, 'Rereading', 'General, no feedback',
+              'General, feedback', 'Content, no feedback') %>%
     ggplot(.,
            aes(x = condition, y = m)) +
     geom_point(size = 3) +
