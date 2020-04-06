@@ -45,6 +45,7 @@
 %%% Change title format to be more compact
 \usepackage{titling}
 \usepackage{hyperref}
+\usepackage{censor}
 
 \setlength{\parskip}{0.38em}
 \renewcommand{\baselinestretch}{1.5}
@@ -302,10 +303,10 @@ first commit of analysis plan: \texttt{b101f42}; final relevant commit:
 \texttt{b101f42}; final commit: \texttt{dd0f863}).  The repository also serves all
 project materials, data and analyses scripts, together with the whole project
 history. It can be found at
-\texttt{https://github.com/ffzg-erudito/inter-testing-feedback-2018}.
-Materials are also available through \texttt{https://osf.io/gk9a3/}. The data
+\censor{https://github.com/ffzg-erudito/inter-testing-feedback-2018}.
+Materials are also available through \censor{https://osf.io/gk9a3/}. The data
 is also hosted on
-\url{https://dataverse.ffzg.unizg.hr/dataset.xhtml?persistentId=doi:10.23669/JVNVNR}.
+\censor{https://dataverse.ffzg.unizg.hr/dataset.xhtml?persistentId=doi:10.23669/JVNVNR}.
 
 There were certain deviations from the original analysis plan.
 Initially, we had planned to do a robustness check of our findings using
@@ -379,5 +380,6 @@ Term & $SS$ & $df$ & $F$ & $p$\\
     \item Mean number of correct answers and mean number of intrusive
         distractors chosen, broken down by experimental condition. Error bars
         show the 95\% confidence intervals around the means.
+\end{enumerate}
 
 \end{document}
