@@ -83,29 +83,6 @@ apaPrint <- function(number, pvalue = F, digits = 3,
 
 ## Exclusion criteria
 
-```{r descTable, results = 'asis', include = T}
-.a <- by(datHard$totalCorrect, datHard$condition, describe) %>%
-  map_dfr(., rbind) %>%
-  select(., n, mean, se, sd, min, max)
-  
-.b <- by(datHard$totalIntrusors, datHard$condition, describe) %>%
-  map_dfr(., rbind) %>%
-  select(., n, mean, se, sd, min, max)
-  
-rbind(.a, .b) %>%
-  rename(., '$n$' = n, '$M$' = mean, '$SE_M$' = se, '$SD$' = sd) %>%
-  cbind(Measure = c(rep('Total correct', 5), rep('Total intrusors', 5)),
-        Condition = rep(c("Content, feedback", "Content, no feedback",
-                          "General, feedback", "General, no feedback",
-                          "Rereading")), .) %>% 
-  kable(., caption = '\\label{descTable}Descriptive statistics for the DVs broken down
-                     by experimental condition.',
-        format = 'latex', booktabs = T, table.env = 'table*',
-        digits = 3, escape = F) %>% 
-  collapse_rows(., columns = 1, latex_hline = 'major') %>% 
-  kable_styling(latex_options = c('hold_position'))
-```
-
 Prior to analysing the data, we excluded participants based on a priori
 set criteria. Participants who spent less than or equal to 90 seconds
 on the practice text were excluded
@@ -119,8 +96,7 @@ deficits
 (`r dat %>% filter(., readingTime > 90 & totalCorrect > 0) %>% nrow(.) -
 {dat %>% filter(., readingTime > 90 & totalCorrect > 0 &
 readingDeficits == 'NE')%>% nrow(.)}` exclusions). This left us with a total sample
-of `r nrow(datHard)` participants. The descriptives for the sample are shown
-in Table \ref{descTable}.
+of `r nrow(datHard)` participants.
 
 ```{r descFig, resize.width='\\textwidth', resize.heigth='.5\\textheight', include=T, fig.width=11, fig.height=6.19, fig.cap='Mean number of correct answers and mean number of intrusive distractors chosen, broken down by experimental condition. Error bars show the 95\\% confidence intervals around the means.'}
 datHard %>%
@@ -672,17 +648,3 @@ rbind(rbAnova2, rbAncova2) %>% filter(., !str_detect(term, 'Intercept')) %>%
   kable_styling(., latex_options = c('hold_position')) %>%
   pack_rows(index = c('ANOVA' = 4, 'ANCOVA' = 8))
 ```
-
-## Deviations from the preregistered analysis plan
-
-Initially, we had planned to do a robustness check of our findings using
-data with an additional exclusion criterion, based on the number of times
-each participant had read each of the three parts of the main text. This analysis
-was never conducted because (i) applying this criterion would have lead to
-unacceptably low power and (ii) the participants' estimates of the number
-of times they had read each part were similarly distributed across all conditions.
-Further, we had planned to conduct a TOST procedure to test whether there is
-no difference between the content-related and general-knowledge testing
-groups. This analysis was not conducted because we did find a difference.
-A Bayesian t-test was also considered for the same comparison, but was dropped
-early on due to some conceptual concerns.
